@@ -4,7 +4,9 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
@@ -173,5 +175,33 @@ public class Graphics {
 		text.setFill(color);
 		text.setFont(font);
 		text.setId(id);
+	}
+	
+	/**
+	 * Creates a BorderPane object
+	 * 
+	 * @param root
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public BorderPane createBorderPane(Group root, int width, int height) {
+		BorderPane border = new BorderPane();
+		border.setPrefWidth(width * 1.95);
+		border.setPrefHeight(height);
+		root.getChildren().add(border);
+		return border;
+	}
+	
+	public Rectangle createBorderCell(double x, double y, double width, double height, double topMargin, Color stroke,
+			Color fill) {
+		Rectangle r = new Rectangle();
+		r.setX(x * width);
+		r.setY(y * height + topMargin);
+		r.setWidth(width);
+		r.setHeight(height);
+		r.setStroke(Color.BLACK);
+		r.setFill(Color.WHITE);
+		return r;
 	}
 }
