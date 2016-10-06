@@ -1,21 +1,20 @@
 package slogo_team16;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	public static final int WIDTH = 1000;
-	public static final int HEIGHT = 700;
+	public static final double WIDTH = SLogoInterface.WIDTH * 1.5;
+	public static final double HEIGHT = SLogoInterface.HEIGHT * 1.4;
 	public static final String title = "Slogo";
 	private SLogoInterface slogo;
 
-	/**
-	 * Set things up at the beginning.
-	 */
 	@Override
-	public void start(Stage s) {
+	public void start(Stage s){
 
 		slogo = new SLogoInterface();
 		s.setTitle(title);

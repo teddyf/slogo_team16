@@ -2,6 +2,7 @@ package slogo_team16;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -204,4 +205,5 @@ public class Graphics {
 		r.setStroke(stroke);
 		return r;
 	}
+	
 }
