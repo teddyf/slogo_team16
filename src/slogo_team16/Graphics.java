@@ -193,15 +193,15 @@ public class Graphics {
 		return border;
 	}
 	
-	public Rectangle createBorderCell(double x, double y, double width, double height, double topMargin, Color stroke,
+	public Rectangle createRectCell(int x,int y, double width, double height, Color stroke,
 			Color fill) {
 		Rectangle r = new Rectangle();
 		r.setX(x * width);
-		r.setY(y * height + topMargin);
+		r.setY(y * height);
 		r.setWidth(width);
 		r.setHeight(height);
-		r.setStroke(Color.BLACK);
-		r.setFill(Color.WHITE);
+		r.setFill(fill);
+		r.setStroke(stroke);
 		return r;
 	}
 }

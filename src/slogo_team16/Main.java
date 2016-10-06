@@ -6,8 +6,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	public static final int WIDTH = 700;
-	public static final int HEIGHT = 500;
+	public static final int WIDTH = 1000;
+	public static final int HEIGHT = 700;
 	public static final String title = "Slogo";
 	private SLogoInterface slogo;
 
