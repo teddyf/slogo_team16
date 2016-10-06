@@ -40,9 +40,9 @@ public class SLogoInterface {
 		shapesOnGrid = new ArrayList<Rectangle>();
 	}
 
-	public Scene init(double width, double height) {
+	public Scene init() {
 		Group root = new Group();
-		myScene = new Scene(root, width, height, Color.WHITE);
+		myScene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
 		turtle = new Turtle(TURTLE_X, TURTLE_Y);
 		populateGrid(root, COLUMNS, ROWS);
 		createConsole();
