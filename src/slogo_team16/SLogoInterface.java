@@ -32,6 +32,8 @@ public class SLogoInterface {
 	
 	private BorderPane mainPane;
 	private ArrayList<Rectangle> shapesOnGrid;
+	private Turtle turtle;
+
 
 	public SLogoInterface() {
 		graphic = new Graphics();
@@ -41,6 +43,7 @@ public class SLogoInterface {
 	public Scene init(double width, double height) {
 		Group root = new Group();
 		myScene = new Scene(root, width, height, Color.WHITE);
+		turtle = new Turtle(TURTLE_X, TURTLE_Y);
 		populateGrid(root, COLUMNS, ROWS);
 		createConsole();
 		return myScene;
@@ -53,9 +56,7 @@ public class SLogoInterface {
 			for (int j = 0; j < rows; j++) {
 				Rectangle s = graphic.createRectCell(i, j, cellWidth, cellHeight, Color.BLACK, Color.WHITE);
 				if (okToPlaceTurtle(i, j)) {
-					System.out.println("Turtle: ");
 					Image turtle = graphic.createImage("turtleLogo.png");
-					System.out.println(turtle);
 					ImagePattern turtlePattern = new ImagePattern(turtle);
 					s.setFill(turtlePattern);
 				}
@@ -67,7 +68,7 @@ public class SLogoInterface {
 	}
 
 	private boolean okToPlaceTurtle(int x, int y) {
-		return (x == TURTLE_X && y == TURTLE_Y);
+		return (x == turtle.getX() && y == turtle.getY());
 	}
 
 	private void populateMainPane(Group root) {
