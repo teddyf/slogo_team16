@@ -2,29 +2,19 @@ package slogo_team16;
 
 import java.util.ArrayList;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 public class SLogoInterface {
 	private Scene myScene;
 	private Graphics graphic;
-	public static final int WIDTH = 700;
-	public static final int HEIGHT = 600;
-	public static final int TURTLE_X = 5;
-	public static final int TURTLE_Y = 5;
 	private BorderPane mainPane;
 	private ArrayList<Rectangle> shapesOnGrid;
 
@@ -41,8 +31,8 @@ public class SLogoInterface {
 	}
 
 	private void populateGrid(Group root, int rows, int cols) {
-		double cellWidth = WIDTH / cols;
-		double cellHeight = HEIGHT / rows;
+		double cellWidth = Dimension.SCENE_WIDTH.getValue() / cols;
+		double cellHeight = Dimension.SCENE_HEIGHT.getValue() / rows;
 		for (int i = 0; i < cols; i++) {
 			for (int j = 0; j < rows; j++) {
 				Rectangle s = graphic.createRectCell(i, j, cellWidth, cellHeight, Color.BLACK, Color.WHITE);
@@ -61,13 +51,13 @@ public class SLogoInterface {
 	}
 
 	private boolean okToPlaceTurtle(int x, int y) {
-		return (x == TURTLE_X && y == TURTLE_Y);
+		return (x == TurtleEnumChangeThisName.TURTLE_X.getValue() && y == TurtleEnumChangeThisName.TURTLE_Y.getValue());
 	}
 
 	private void populateMainPane(Group root) {
 		Pane pane = new Pane();
 		pane.getChildren().addAll(shapesOnGrid);
-		mainPane = graphic.createBorderPane(root, WIDTH, HEIGHT);
+		mainPane = graphic.createBorderPane(root, Dimension.SCENE_WIDTH.getValue(), Dimension.SCENE_HEIGHT.getValue());
 		BorderPane.setAlignment(root, Pos.CENTER);
 		mainPane.setLeft(pane);
 		mainPane.getLeft().setId("grid");
