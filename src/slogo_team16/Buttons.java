@@ -26,7 +26,8 @@ public class Buttons {
 			//this is just printing the parse input
 			String input = console.getInput();
 			System.out.println(input);
-			HashMap map = parse.parseInput(input);
+			Map map = parse.parseInput(input);
+			parse.checkForPrintCommand("print", console);
 
 		});
 	}

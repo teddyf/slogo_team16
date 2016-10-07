@@ -25,7 +25,7 @@ public class SLogoInterface {
 	private Scene myScene;
 	private Graphics graphic;
 	public static final int WIDTH = 600;
-	public static final int HEIGHT = 500;
+	public static final int HEIGHT = 400;
 	public static final int TURTLE_X = 5;
 	public static final int TURTLE_Y = 5;
 	public static final int COLUMNS =  10;
