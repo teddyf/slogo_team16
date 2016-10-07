@@ -12,6 +12,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
+/**
+ * Graphics library
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class Graphics {
 	/**
 	 * Creates an image object for an image file name
@@ -204,6 +211,15 @@ public class Graphics {
 		r.setFill(fill);
 		r.setStroke(stroke);
 		return r;
+	}
+	
+	public TextArea createConsoleTextArea(double width, double height, BorderPane mainPane){
+		TextArea consoleArea = new TextArea();
+		consoleArea.setMaxHeight(height/3);
+		consoleArea.setTranslateY(height/2.5);
+		consoleArea.setMaxWidth(width);
+		mainPane.setBottom(consoleArea);
+		return consoleArea;
 	}
 	
 }

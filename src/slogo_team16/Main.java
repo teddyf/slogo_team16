@@ -6,6 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+/**
+ * Main class
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class Main extends Application {
 
 	public static final double WIDTH = SLogoInterface.WIDTH * 1.7;

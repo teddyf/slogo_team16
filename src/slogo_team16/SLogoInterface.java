@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -13,11 +14,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Main SLogo interface
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class SLogoInterface {
 	private Scene myScene;
 	private Graphics graphic;
-	public static final int WIDTH = 500;
-	public static final int HEIGHT = 400;
+	public static final int WIDTH = 600;
+	public static final int HEIGHT = 500;
 	public static final int TURTLE_X = 5;
 	public static final int TURTLE_Y = 5;
 	public static final int COLUMNS =  10;
@@ -77,10 +85,7 @@ public class SLogoInterface {
 	}
 	
 	private TextArea createConsole(){
-		TextArea consoleArea = new TextArea();
-		consoleArea.setMaxHeight(HEIGHT/3);
-		consoleArea.setTranslateY(HEIGHT/2.5);
-		mainPane.setBottom(consoleArea);
+		TextArea consoleArea = graphic.createConsoleTextArea(WIDTH, HEIGHT, mainPane);
 		console = new Console(consoleArea);
 		console.writeToConsole("Hihihihi");
 		return consoleArea;

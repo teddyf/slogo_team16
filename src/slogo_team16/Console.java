@@ -2,6 +2,14 @@ package slogo_team16;
 
 import javafx.scene.control.TextArea;
 
+
+/**
+ * Creates the console
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class Console{
 	private TextArea console;
 

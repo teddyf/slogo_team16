@@ -3,7 +3,13 @@ import Animals.Turtle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
-
+/**
+ * Handles animation
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class Animate {
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;

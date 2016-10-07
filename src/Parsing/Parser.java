@@ -4,6 +4,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Handles parsing input
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class Parser {
 	
 	public Parser(){

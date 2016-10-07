@@ -9,6 +9,13 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import Parsing.Parser;
 
+/**
+ * Handles buttons
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class Buttons {
 	private Graphics graphic = new Graphics();
 	private Parser parse = new Parser();
