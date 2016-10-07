@@ -12,5 +12,9 @@ public class Console{
 	public void writeToConsole(String text){
 		console.appendText(text);
 	}
+	
+	public String getInput(){
+		return console.getText();
+	}
 
 }

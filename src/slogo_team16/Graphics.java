@@ -120,7 +120,7 @@ public class Graphics {
 	 *            The Group to add the button to
 	 * @return Button the button object
 	 */
-	public Button createButton(String label, int x, int y, Group root) {
+	public Button createButton(String label, double x, double y, Group root) {
 		Button button = new Button(label);
 		button.setLayoutX(x);
 		button.setLayoutY(y);

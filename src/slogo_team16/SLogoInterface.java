@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextAreaBuilder;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -33,11 +32,13 @@ public class SLogoInterface {
 	private BorderPane mainPane;
 	private ArrayList<Rectangle> shapesOnGrid;
 	private Turtle turtle;
-
+	private Buttons buttons;
+	private Console console; 
 
 	public SLogoInterface() {
 		graphic = new Graphics();
 		shapesOnGrid = new ArrayList<Rectangle>();
+		buttons = new Buttons();
 	}
 
 	public Scene init() {
@@ -46,6 +47,7 @@ public class SLogoInterface {
 		turtle = new Turtle(TURTLE_X, TURTLE_Y);
 		populateGrid(root, COLUMNS, ROWS);
 		createConsole();
+		initButtons(root, console);
 		return myScene;
 	}
 
@@ -80,15 +82,18 @@ public class SLogoInterface {
 		mainPane.getLeft().setId("grid");
 	}
 	
-	private void createConsole(){
+	private TextArea createConsole(){
 		TextArea consoleArea = new TextArea();
 		consoleArea.setMaxHeight(HEIGHT/3);
 		consoleArea.setTranslateY(HEIGHT/2.5);
 		mainPane.setBottom(consoleArea);
-		//mainPane.getBottom().setTranslateY(HEIGHT/2.5);
-		Console console = new Console(consoleArea);
+		console = new Console(consoleArea);
 		console.writeToConsole("Hihihihi");
-		
+		return consoleArea;
+	}
+	
+	private void initButtons(Group root, Console console){
+		buttons.createConsoleInputButton(root, console);
 	}
 
 }
