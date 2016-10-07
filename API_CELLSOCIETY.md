@@ -78,7 +78,7 @@ public void translateCommand(String[] command) : translates the command
 animateTurtle(): Updates the turtle on  the grid
 
 ###CRC Cards:
-![alt text](https://git.cs.duke.edu/CompSci308_2016Fall/slogo_team16/blob/master/CRCs.JPG)
+![CRC Cards](https://git.cs.duke.edu/CompSci308_2016Fall/slogo_team16/blob/master/CRCs.JPG)
 
 This section serves as a map of your design for other programmers to gain a general understanding of how and why the program was divided up, and how the individual parts work together to provide the desired functionality. Describe the four APIs you intend to create (their purpose with regards to the program's functionality, and how they collaborate with each other) focusing specifically on the behavior, not the internal state. Include a picture of how the components are related (these pictures can be hand drawn and scanned in, created with a standard drawing program, or screen shots from a UML design program). Discuss specific classes, methods, and data structures, but not individual lines of code.
 User Interface
