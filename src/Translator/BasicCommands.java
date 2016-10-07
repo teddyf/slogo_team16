@@ -1,13 +1,10 @@
 package Translator;
-import java.lang.reflect.*;
 
-/**
- * Responsible for Slogo commands that have iteration functionality
- * @author Lucy Zhang
- *
- */
-public class Iterator {
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
+public class BasicCommands {
+	
 	/**
 	 * Responsible for "repeat" command
 	 * @param numTimes Number of times to iterate
@@ -28,4 +25,5 @@ public class Iterator {
 			m.invoke(Class.forName(className).newInstance());
 		}
 	}
+
 }
