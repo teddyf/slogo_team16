@@ -1,9 +1,10 @@
+###Members
 Lucy Zhang
 Teddy Franceschi
 Aninda Manocha
 Jordan Frazier
 
-Categories:
+###Categories:
 the method should not be part of the API (i.e., it should not be public)
 public BorderPane createBorderPane(Group root, int width, int height) 
 public String readFileForTag(String tagName)
@@ -16,17 +17,15 @@ public void updateView(Group root, int width, int height, Map<Integer, Color> st
 
 Once you have classified the primary methods in the project, try to write a simplified (i.e., less than one page) description of the six APIs in the project (internal and external for each sub-part: simulation, configuration, and visualization).
 
-
-Simulation
+###Simulation
 Overall, well organized.  Some vestigial code was there but all methods seemed to be appropriately encapsulated.  Most methods were valid to be public.  The ones not are listed above.
 
-Configuration
+###Configuration
 Similar to above, well organized.  API looked extendible but not too detailed.  Allowed a lot of functionality but simple enough where there aren’t too many methods.  The ones that are not necessary are listed above.
 
-Visualization
+###Visualization
 Extendible, well organized but not too detailed.  Allowed functionality but not too complicated.  The ones that are not are listed above.
 
- 
 ______________________
 SLogo: http://www.calormen.com/jslogo/
 
@@ -49,24 +48,24 @@ Introduction
 
 The goal of the project is to create a compiler and graphical interface for the SLogo language. The project must be capable of accepting user input nad displaying the graphical result of an algorithm coded in SLogo.
 
-Design Overview
+###Design Overview
 
-Classes: (Aninda & Teddy & later Lucy hopefully)
-Syntax Package: Translation/Mapping class, maps commands to another command that is comprehensible by our project
-Translator: Translates parsed input into 
-Parser: Parses the user input line by line and returns an array of the words
+###Classes: (Aninda & Teddy & later Lucy hopefully)
+Syntax Package - Translation/Mapping class, maps commands to another command that is comprehensible by our project
+Translator - translates parsed input into 
+Parser - parses the user input line by line and returns an array of the words
 Turtle - stores information about the turtle (position, orientation, color, etc.)
 UpdateTurtle - master class: updates properties of the turtle
 MoveTurtle - extends UpdateTurtle and contains methods to update the position and orientation of a turtle 
-SLogoLanguage - Creates the object that represents the language (handles strings, ints, and special characters) 
+SLogoLanguage - creates the object that represents the language (handles strings, ints, and special characters) 
 
-FrontEnd: (Lucy) (Jordan)
+###FrontEnd: (Lucy) (Jordan)
 DisplayTurtle - displays turtle image in UI
 TurtleInterface - contract to define turtle behavior
 Animate - move the turtle graphically
 Listener
 
-APIs:
+###APIs:
 public void updateTurtle(String command): Updates the turtle based on command
 public String[] parseCommand(String command): Parses the command into a HashMap of the lines
 Ie. 
@@ -75,7 +74,7 @@ Ie.
 
 public void translateCommand(String[] command) : translates the command
 
-Front end:
+###Front end:
 animateTurtle(): Updates the turtle on  the grid
 
 
