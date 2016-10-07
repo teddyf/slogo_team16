@@ -7,6 +7,7 @@ import java.util.Map;
 import javafx.event.ActionEvent;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import Parsing.Parser;
 
 public class Buttons {
 	private Graphics graphic = new Graphics();

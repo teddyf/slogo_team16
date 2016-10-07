@@ -1,5 +1,5 @@
-package slogo_team16;
-
+package Animals;
+import slogo_team16.Graphics;
 import javafx.scene.image.Image;
 
 public class Turtle {
