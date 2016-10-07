@@ -24,5 +24,9 @@ public class Console{
 	public String getInput(){
 		return console.getText();
 	}
+	
+	public void clearConsole(){
+		console.clear();
+	}
 
 }

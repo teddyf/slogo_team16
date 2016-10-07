@@ -3,8 +3,13 @@ package Translator;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import slogo_team16.Console;
+
 public class BasicCommands {
-	
+
+	public BasicCommands(){
+		
+	}
 	/**
 	 * Responsible for "repeat" command
 	 * @param numTimes Number of times to iterate
@@ -24,6 +29,11 @@ public class BasicCommands {
 			Method m = Class.forName(className).getMethod(methodName);
 			m.invoke(Class.forName(className).newInstance());
 		}
+	}
+	
+	public void print(String text, Console console){
+		console.clearConsole();
+		console.writeToConsole(text);
 	}
 
 }
