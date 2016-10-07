@@ -1,4 +1,4 @@
-package slogo_team16;
+package Parsing;
 
 import java.util.Arrays;
 import java.util.HashMap;
