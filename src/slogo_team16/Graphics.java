@@ -2,6 +2,7 @@ package slogo_team16;
 
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -11,6 +12,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 
+/**
+ * Graphics library
+ */
+/**
+ * @author Lucy Zhang
+ *
+ */
 public class Graphics {
 	/**
 	 * Creates an image object for an image file name
@@ -119,7 +127,7 @@ public class Graphics {
 	 *            The Group to add the button to
 	 * @return Button the button object
 	 */
-	public Button createButton(String label, int x, int y, Group root) {
+	public Button createButton(String label, double x, double y, Group root) {
 		Button button = new Button(label);
 		button.setLayoutX(x);
 		button.setLayoutY(y);
@@ -204,4 +212,14 @@ public class Graphics {
 		r.setStroke(stroke);
 		return r;
 	}
+	
+	public TextArea createConsoleTextArea(double width, double height, BorderPane mainPane){
+		TextArea consoleArea = new TextArea();
+		consoleArea.setMaxHeight(height/3);
+		consoleArea.setTranslateY(height/2.5);
+		consoleArea.setMaxWidth(width);
+		mainPane.setBottom(consoleArea);
+		return consoleArea;
+	}
+	
 }
