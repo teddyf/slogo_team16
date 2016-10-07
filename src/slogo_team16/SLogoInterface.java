@@ -87,7 +87,7 @@ public class SLogoInterface {
 	private TextArea createConsole(){
 		TextArea consoleArea = graphic.createConsoleTextArea(WIDTH, HEIGHT, mainPane);
 		console = new Console(consoleArea);
-		console.writeToConsole("Hihihihi");
+		console.initConsole();
 		return consoleArea;
 	}
 	
