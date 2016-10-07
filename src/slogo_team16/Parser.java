@@ -1,5 +1,6 @@
 package slogo_team16;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,13 +8,19 @@ public class Parser {
 	
 	public Parser(){
 		
+	
 	}
 	
-	public HashMap<Integer, List<String>> parseInput(String input){
-		HashMap<Integer, List<String>> parsedData = new HashMap<Integer, List<String>>();)
-		String[] lines = input.split("[\\r\\n]+");
+	public HashMap<Integer, String[]> parseInput(String input){
+		HashMap<Integer, String[]> parsedData = new HashMap<Integer, String[]>();
+		String[] lines = (String[]) input.split("[\\r\\n]+");
+		System.out.print(lines);
+		System.out.println("Split lines: ");
 		for (int i=0; i<lines.length; i++){
-			parsedData.put(i, lines[i].split("\\s"));
+			String[] splitLine =  lines[i].split(" ?(?<!\\G)((?<=[^\\p{Punct}])(?=\\p{Punct})|\\b) ?");
+			
+			System.out.println(Arrays.toString(splitLine));
+			parsedData.put(i, splitLine);
 		}
 		
 		return parsedData;
