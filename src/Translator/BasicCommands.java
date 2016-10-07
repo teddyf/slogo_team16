@@ -39,6 +39,7 @@ public class BasicCommands {
 	}
 
 	public void print(String text, Console console) {
+		//doesn't print evaluated expressions or stuff in between quotes or anything yet
 		console.clearConsole();
 		console.writeToConsole(text);
 	}

@@ -27,7 +27,7 @@ public class Buttons {
 			String input = console.getInput();
 			System.out.println(input);
 			Map map = parse.parseInput(input);
-			parse.checkForPrintCommand("print", console);
+			parse.checkForPrintCommand("print", console); //testing the print command
 
 		});
 	}
