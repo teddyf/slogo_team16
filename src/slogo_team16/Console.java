@@ -28,5 +28,7 @@ public class Console{
 	public void clearConsole(){
 		console.clear();
 	}
+	
+	
 
 }
