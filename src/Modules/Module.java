@@ -41,6 +41,14 @@ public abstract class Module {
         this.name = name;
     }
     
-
+    public boolean isNumber(int index){
+        try{
+            double val = Double.parseDouble(params[index]);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
     
 }
