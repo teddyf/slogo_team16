@@ -1,8 +1,8 @@
 package slogo_team16;
 
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 
 /**
@@ -20,8 +20,8 @@ public class Console {
 		this.console = area;
 		currentlyTypedWord = "";
 	}
-	
-	public void initConsole(){
+
+	public void initConsole() {
 		writeToConsole("Type your SLogo here");
 		addListener();
 	}
@@ -38,28 +38,39 @@ public class Console {
 		console.clear();
 	}
 
-	private void addListener(){
+	private void addListener() {
 		console.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(final ObservableValue<? extends String> observable, final String oldValue, final String newValue) {
-		        String[] words = newValue.split(" ?(?<!\\G)((?<=[^\\p{Punct}])(?=\\p{Punct})|\\b) ?");
-		    	if (!nextCharIsSpace(newValue)){
-		        	currentlyTypedWord = words[words.length-1];
-		        }else{
-		        	currentlyTypedWord = words[words.length-2];
-		        }
-		        System.out.println("Currently typed word: "+currentlyTypedWord);
-		        autoComplete(currentlyTypedWord);
-		    }
+			@Override
+			public void changed(final ObservableValue<? extends String> observable, final String oldValue,
+					final String newValue) {
+				String[] words = newValue.split(" ?(?<!\\G)((?<=[^\\p{Punct}])(?=\\p{Punct})|\\b) ?");
+				if (!nextCharIsSpace(newValue)) {
+					currentlyTypedWord = words[words.length - 1];
+				} else {
+					currentlyTypedWord = words[words.length - 2];
+				}
+				System.out.println("Currently typed word: " + currentlyTypedWord);
+				autoComplete(currentlyTypedWord);
+			}
 		});
 	}
-	
-	private boolean nextCharIsSpace(String value){
-		return value.charAt(value.length()-1)==' ';
+
+	private boolean nextCharIsSpace(String value) {
+		return value.charAt(value.length() - 1) == ' ';
+	}
+
+	private void autoComplete(String currentWord) { // GUYS I FORGOT HOW TO USE
+		String[] words = {"print","anime", "System.out.println"};											// TRIES
+		for (int i = 0; i < words.length; i++) {
+			if (currentWord.toLowerCase().contains(words[i].toLowerCase())){
+				System.out.println("Autocomplete time!" );
+			}
+		}
 	}
 	
-	private void autoComplete(String currentWord){
-		
+	private void createAutoCompleteOptions(String[] values){
+		//ComboBox selections = new ComboBox();
+		//selections.setItems(values);
 	}
 
 }
