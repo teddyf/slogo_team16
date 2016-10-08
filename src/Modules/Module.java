@@ -15,10 +15,10 @@ public abstract class Module {
     
     public abstract void logic(String[] params) throws InvalidParameterException;
     
-    protected int toInt(int index) throws InvalidParameterException{
+    protected int toInt(String a) throws InvalidParameterException{
         int val;
         try{
-            val = Integer.parseInt(params[index]);
+            val = Integer.parseInt(a);
             return val;
         }
         catch(Exception e){
@@ -26,10 +26,10 @@ public abstract class Module {
         }
     }
     
-    protected double toDouble(int index) throws InvalidParameterException{
+    protected double toDouble(String a) throws InvalidParameterException{
         double val;
         try{
-            val = Double.parseDouble(params[index]);
+            val = Double.parseDouble(a);
             return val;
         }
         catch(Exception e){
@@ -41,9 +41,9 @@ public abstract class Module {
         this.name = name;
     }
     
-    public boolean isNumber(int index){
+    public boolean isNumber(String a){
         try{
-            double val = Double.parseDouble(params[index]);
+            double val = Double.parseDouble(a);
             return true;
         }
         catch(Exception e){

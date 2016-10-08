@@ -33,8 +33,7 @@ public class Library {
             throw new ClassUndefinedException(className + " class does not exist");
         }
         /*
-         * this will be cleaned up but it should work as is.  Mr. Duval I'd prefer if you
-         * don't know code we both know is not finished.  Thanks.
+         * this will be cleaned up but it should work as is.
          */
         return null;
     }
