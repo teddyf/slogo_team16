@@ -32,12 +32,14 @@ import javafx.scene.text.Text;
 public class SLogoInterface {
 	private Scene myScene;
 	private Graphics graphic;
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 400;
+	public static final int SCENE_WIDTH = 1200;
+	public static final int SCENE_HEIGHT = 800;
+	private static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
 
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
-	private List<Animal> myAnimalList; // for later on, in case more animals show
+	private List<Animal> myAnimalList; // for later on, in case more animals
+										// show
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
@@ -51,7 +53,7 @@ public class SLogoInterface {
 
 	public Scene init() {
 		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, WIDTH, HEIGHT, Color.WHITE);
+		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateLeftPane();
 		populateGridWithAnimals(1);
 		return myScene;
@@ -70,7 +72,8 @@ public class SLogoInterface {
 
 	private VBox createLeftPane() {
 		VBox leftPane = new VBox(10);
-		leftPane.setPadding(new Insets(20, 20, 20, 50));
+		leftPane.setMaxWidth(LEFT_PANE_WIDTH);
+		leftPane.setPadding(new Insets(20));
 		return leftPane;
 	}
 
@@ -81,8 +84,8 @@ public class SLogoInterface {
 
 	private Pane createMainGrid() {
 		myAnimalPane = new Pane();
-		myAnimalPane.setPrefWidth(WIDTH);
-		myAnimalPane.setPrefHeight(HEIGHT);
+		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
+		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 6);
 		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
 		myAnimalPane.setStyle("-fx-background-color: white");
 		return myAnimalPane;
@@ -99,7 +102,7 @@ public class SLogoInterface {
 
 	private TextArea createConsoleArea() {
 		// TODO: Jordan - input correct width / height (doesn't matter)
-		TextArea consoleArea = graphic.createConsoleTextArea(WIDTH, HEIGHT);
+		TextArea consoleArea = graphic.createConsoleTextArea(LEFT_PANE_WIDTH - 100, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
 		console.initConsole();
 		return consoleArea;
@@ -112,18 +115,21 @@ public class SLogoInterface {
 		buttons.createConsoleInputButtons(container, console);
 		return container;
 	}
-	
-	// Maybe specific animal buttons that call this, which adds to animallist, then the list
+
+	// Maybe specific animal buttons that call this, which adds to animallist,
+	// then the list
 	// is completely rendered by calling populateGridWithAnimals()
 	private void addAnimal(Animal animal) {
 		myAnimalList.add(animal);
 	}
 
-	// This method needs to change, discuss if/how we would let a user define what animals
+	// This method needs to change, discuss if/how we would let a user define
+	// what animals
 	// they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Turtle turtle = new Turtle((myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2, (myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2, 15, 15);
+			Turtle turtle = new Turtle((myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
+					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2, 15, 15);
 			myAnimalList.add(turtle);
 		}
 	}
@@ -131,7 +137,7 @@ public class SLogoInterface {
 	private void populateGridWithAnimals(int numAnimals) {
 		fillAnimalList(numAnimals);
 		for (Animal animal : myAnimalList) {
-			// they're all turtles now so 
+			// they're all turtles now so
 			renderAnimal(animal);
 		}
 	}

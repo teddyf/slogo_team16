@@ -113,7 +113,7 @@ public class Graphics {
 
 	public TextArea createConsoleTextArea(double width, double height) {
 		TextArea consoleArea = new TextArea();
-		consoleArea.setPrefHeight(height / 3);
+		consoleArea.setPrefHeight(height);
 		consoleArea.setPrefWidth(width);
 		return consoleArea;
 	}
