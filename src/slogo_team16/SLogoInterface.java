@@ -1,18 +1,26 @@
 package slogo_team16;
-import Animals.Turtle;
-import java.util.ArrayList;
 
-import javafx.geometry.Pos;
-import javafx.scene.Group;
+import java.util.ArrayList;
+import java.util.List;
+
+import Animals.Animal;
+import Animals.Turtle;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 /**
  * Main SLogo interface
@@ -26,73 +34,123 @@ public class SLogoInterface {
 	private Graphics graphic;
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 400;
-	public static final int TURTLE_X = 5;
-	public static final int TURTLE_Y = 5;
-	public static final int COLUMNS =  10;
-	public static final int ROWS = 10;
-	
-	private BorderPane mainPane;
-	private ArrayList<Rectangle> shapesOnGrid;
-	private Turtle turtle;
+
+	private BorderPane myRoot;
+	private Pane myAnimalPane;
+	private List<Animal> myAnimalList; // for later on, in case more animals show
 	private Buttons buttons;
-	private Console console; 
+	private Console console;
+	private Animate animation;
 
 	public SLogoInterface() {
 		graphic = new Graphics();
-		shapesOnGrid = new ArrayList<Rectangle>();
 		buttons = new Buttons();
+		animation = new Animate();
+		myAnimalList = new ArrayList<>();
 	}
 
 	public Scene init() {
-		Group root = new Group();
-		myScene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
-		turtle = new Turtle(TURTLE_X, TURTLE_Y);
-		populateGrid(root, COLUMNS, ROWS);
-		createConsole();
-		initButtons(root, console);
+		myRoot = new BorderPane();
+		myScene = new Scene(myRoot, WIDTH, HEIGHT, Color.WHITE);
+		populateLeftPane();
+		populateGridWithAnimals(1);
 		return myScene;
 	}
 
-	private void populateGrid(Group root, int rows, int cols) {
-		double cellWidth = WIDTH / cols;
-		double cellHeight = HEIGHT / rows;
-		for (int i = 0; i < cols; i++) {
-			for (int j = 0; j < rows; j++) {
-				Rectangle s = graphic.createRectCell(i, j, cellWidth, cellHeight, Color.BLACK, Color.WHITE);
-				if (okToPlaceTurtle(i, j)) {
-					Image turtle = graphic.createImage("turtleLogo.png");
-					ImagePattern turtlePattern = new ImagePattern(turtle);
-					s.setFill(turtlePattern);
-				}
-				shapesOnGrid.add(s);
-
-			}
-		}
-		populateMainPane(root);
+	private void populateLeftPane() {
+		// Better to return object, or to pass in the leftpane and add inside
+		// method?
+		VBox leftPane = createLeftPane();
+		Text title = createTitle();
+		Pane grid = createMainGrid();
+		HBox container = createConsole();
+		leftPane.getChildren().addAll(title, grid, container);
+		myRoot.setLeft(leftPane);
 	}
 
-	private boolean okToPlaceTurtle(int x, int y) {
-		return (x == turtle.getX() && y == turtle.getY());
+	private VBox createLeftPane() {
+		VBox leftPane = new VBox(10);
+		leftPane.setPadding(new Insets(20, 20, 20, 50));
+		return leftPane;
 	}
 
-	private void populateMainPane(Group root) {
-		Pane pane = new Pane();
-		pane.getChildren().addAll(shapesOnGrid);
-		mainPane = graphic.createBorderPane(root, WIDTH, HEIGHT);
-		BorderPane.setAlignment(root, Pos.CENTER);
-		mainPane.setLeft(pane);
-		mainPane.getLeft().setId("grid");
+	public Text createTitle() {
+		Text title = new Text("Slogo");
+		return title;
 	}
-	
-	private TextArea createConsole(){
-		TextArea consoleArea = graphic.createConsoleTextArea(WIDTH, HEIGHT, mainPane);
+
+	private Pane createMainGrid() {
+		myAnimalPane = new Pane();
+		myAnimalPane.setPrefWidth(WIDTH);
+		myAnimalPane.setPrefHeight(HEIGHT);
+		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
+		myAnimalPane.setStyle("-fx-background-color: white");
+		return myAnimalPane;
+	}
+
+	private HBox createConsole() {
+		TextArea consoleArea = createConsoleArea();
+		VBox buttons = createButtons();
+
+		HBox consoleContainer = new HBox(5);
+		consoleContainer.getChildren().addAll(consoleArea, buttons);
+		return consoleContainer;
+	}
+
+	private TextArea createConsoleArea() {
+		// TODO: Jordan - input correct width / height (doesn't matter)
+		TextArea consoleArea = graphic.createConsoleTextArea(WIDTH, HEIGHT);
 		console = new Console(consoleArea);
 		console.initConsole();
 		return consoleArea;
 	}
+
+	private VBox createButtons() {
+		// TODO: Jordan - Is it better to pass in container, or to return a
+		// container created inside the other class?
+		VBox container = new VBox(5);
+		buttons.createConsoleInputButtons(container, console);
+		return container;
+	}
 	
-	private void initButtons(Group root, Console console){
-		buttons.createConsoleInputButton(root, console);
+	// Maybe specific animal buttons that call this, which adds to animallist, then the list
+	// is completely rendered by calling populateGridWithAnimals()
+	private void addAnimal(Animal animal) {
+		myAnimalList.add(animal);
+	}
+
+	// This method needs to change, discuss if/how we would let a user define what animals
+	// they want, or how many they want
+	private void fillAnimalList(int numAnimals) {
+		for (int i = 0; i < numAnimals; i++) {
+			Turtle turtle = new Turtle((myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2, (myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2, 15, 15);
+			myAnimalList.add(turtle);
+		}
+	}
+
+	private void populateGridWithAnimals(int numAnimals) {
+		fillAnimalList(numAnimals);
+		for (Animal animal : myAnimalList) {
+			// they're all turtles now so 
+			renderAnimal(animal);
+		}
+	}
+
+	private void renderAnimal(Animal animal) {
+		if (isValidLocation(animal.getX(), animal.getY())) {
+			Rectangle s = graphic.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
+					Color.WHITE, Color.WHITE);
+			Image turtle = graphic.createImage("turtleLogo.png");
+			ImagePattern turtlePattern = new ImagePattern(turtle);
+			s.setFill(turtlePattern);
+			myAnimalPane.getChildren().add(s);
+		} else {
+			// not valid location. error dialog
+		}
+	}
+
+	private boolean isValidLocation(double x, double y) {
+		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
 	}
 
 }
