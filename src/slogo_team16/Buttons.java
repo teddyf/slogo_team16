@@ -4,6 +4,7 @@ import java.util.Map;
 
 import Parsing.Parser;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 
 /**
@@ -18,18 +19,18 @@ public class Buttons {
 	private Graphics graphic = new Graphics();
 	private Parser parse = new Parser();
 	
-	public void createConsoleInputButtons(VBox container, Console console){
-		Button run = createRunButton(console);
+	public void createConsoleInputButtons(VBox container, Console console, ListView<String> history){
+		Button run = createRunButton(console, history);
 		Button clear = createClearButton(console);
 		container.getChildren().addAll(run, clear);
 	}
 	
-	private Button createRunButton(Console console) {
+	private Button createRunButton(Console console, ListView<String> history) {
 		Button run = graphic.createButton("Enter");
 		run.setOnAction(e -> {
 			String input = console.getInput();
 			System.out.println(input);
-			Map map = parse.parseInput(input);
+			Map<Integer, String[]> map = parse.parseInput(input);
 			parse.checkForPrintCommand("print", console); //testing the print command
 		});
 		return run;

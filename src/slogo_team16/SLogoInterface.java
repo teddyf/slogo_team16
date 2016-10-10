@@ -7,9 +7,11 @@ import Animals.Animal;
 import Animals.Turtle;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -36,11 +38,13 @@ public class SLogoInterface {
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 800;
 	private static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	private static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
 	private List<Animal> myAnimalList; // for later on, in case more animals
 										// show
+	private ListView<String> historyScroller;
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
@@ -56,6 +60,7 @@ public class SLogoInterface {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateLeftPane();
+		populateRightPane();
 		populateGridWithAnimals(1);
 		return myScene;
 	}
@@ -63,19 +68,43 @@ public class SLogoInterface {
 	private void populateLeftPane() {
 		// Better to return object, or to pass in the leftpane and add inside
 		// method?
-		VBox leftPane = createLeftPane();
+		VBox leftPane = createVBoxPane(LEFT_PANE_WIDTH);
 		Text title = createTitle();
 		Pane grid = createMainGrid();
 		HBox container = createConsole();
 		leftPane.getChildren().addAll(title, grid, container);
 		myRoot.setLeft(leftPane);
 	}
+	
+	private void populateRightPane() {
+		VBox rightPane = createVBoxPane(RIGHT_PANE_WIDTH);
+		Text history = createHistoryTitle();
+		createScrollPane();
+		rightPane.getChildren().addAll(history, historyScroller);
+		myRoot.setRight(rightPane);
+	}
+	
+	private Text createHistoryTitle() {
+		Text history = new Text("History");
+		return history;
+	}
 
-	private VBox createLeftPane() {
-		VBox leftPane = new VBox(10);
-		leftPane.setMaxWidth(LEFT_PANE_WIDTH);
-		leftPane.setPadding(new Insets(20));
-		return leftPane;
+	private VBox createVBoxPane(int width) {
+		VBox vbox = new VBox(10);
+		vbox.setMaxWidth(width);
+		vbox.setMinWidth(width);
+		vbox.setMinHeight(SCENE_HEIGHT - 30);
+		vbox.setPadding(new Insets(15));
+		return vbox;
+	}
+	
+	private void createScrollPane() {
+		historyScroller = new ListView<>();
+		historyScroller.getItems().add("First History Command");
+//		historyScroller.setHbarPolicy(ScrollBarPolicy.NEVER);
+//		historyScroller.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+//		historyScroller.setVmax(SCENE_HEIGHT - 30);
+		historyScroller.setStyle("-fx-background: white");
 	}
 
 	public Text createTitle() {
@@ -113,7 +142,7 @@ public class SLogoInterface {
 		// TODO: Jordan - Is it better to pass in container, or to return a
 		// container created inside the other class?
 		VBox container = new VBox(5);
-		buttons.createConsoleInputButtons(container, console);
+		buttons.createConsoleInputButtons(container, console, historyScroller);
 		return container;
 	}
 
