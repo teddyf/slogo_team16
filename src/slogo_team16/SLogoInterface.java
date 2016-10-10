@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
  */
 /**
  * @author Lucy Zhang
+ * @author Jordan Frazier
  *
  */
 public class SLogoInterface {
@@ -117,10 +118,10 @@ public class SLogoInterface {
 	}
 
 	// Maybe specific animal buttons that call this, which adds to animallist,
-	// then the list
-	// is completely rendered by calling populateGridWithAnimals()
+	// then the list is completely rendered by calling populateGridWithAnimals()
 	private void addAnimal(Animal animal) {
 		myAnimalList.add(animal);
+		fillAnimalGrid();
 	}
 
 	// This method needs to change, discuss if/how we would let a user define
@@ -136,25 +137,33 @@ public class SLogoInterface {
 
 	private void populateGridWithAnimals(int numAnimals) {
 		fillAnimalList(numAnimals);
+		fillAnimalGrid();
+	}
+	
+	private void fillAnimalGrid() {
 		for (Animal animal : myAnimalList) {
-			// they're all turtles now so
 			renderAnimal(animal);
 		}
 	}
 
 	private void renderAnimal(Animal animal) {
 		if (isValidLocation(animal.getX(), animal.getY())) {
-			Rectangle s = graphic.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
-					Color.WHITE, Color.WHITE);
-			Image turtle = graphic.createImage("turtleLogo.png");
-			ImagePattern turtlePattern = new ImagePattern(turtle);
-			s.setFill(turtlePattern);
-			myAnimalPane.getChildren().add(s);
+			addAnimalToGrid(animal);
 		} else {
-			// not valid location. error dialog
+			// not valid location. error dialog. or maybe not
 		}
 	}
 
+	private void addAnimalToGrid(Animal animal) {
+		Rectangle s = graphic.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
+				Color.WHITE, Color.WHITE);
+		Image turtle = graphic.createImage("turtleLogo.png");
+		ImagePattern turtlePattern = new ImagePattern(turtle);
+		s.setFill(turtlePattern);
+		myAnimalPane.getChildren().add(s);
+	}
+
+	// are we going to let turtle go off of the screen?
 	private boolean isValidLocation(double x, double y) {
 		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
 	}

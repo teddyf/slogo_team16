@@ -6,12 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+
 /**
- * Main class
- */
-/**
- * @author Lucy Zhang
- *
+ * @author Lucy Zhang, Jordan Frazier, Teddy Franceschi, Aninda Manocha
  */
 public class Main extends Application {
 
@@ -27,9 +24,6 @@ public class Main extends Application {
 		s.show();
 	}
 
-	/**
-	 * Start the program.
-	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
  * Handles buttons
  */
 /**
+ * @author Jordan Frazier
  * @author Lucy Zhang
  *
  */
