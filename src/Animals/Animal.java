@@ -5,13 +5,17 @@ package Animals;
  */
 
 public abstract class Animal {
+	private double width;
+	private double height;
 	private double x;
 	private double y;
 	private double heading;
 	private int pen; 
 	private int showing;
 
-	public Animal() {
+	public Animal(double width, double height) {
+		this.width = width;
+		this.height = height;
 		this.x = 0;
 		this.y = 0;
 		this.heading = 0;
@@ -19,7 +23,9 @@ public abstract class Animal {
 		this.showing = 1;
 	}
 	
-	public Animal(double x, double y) {
+	public Animal(double width, double height, double x, double y) {
+		this.width = width;
+		this.height = height;
 		this.x = x;
 		this.y = y;
 		this.heading = 0;
@@ -159,6 +165,14 @@ public abstract class Animal {
 	public abstract void update();
 	
 	/*****GETTERS*****/
+	
+	public double getWidth() {
+		return width;
+	}
+	
+	public double getHeight() {
+		return height;
+	}
 	
 	public double getX() {
 		return x;

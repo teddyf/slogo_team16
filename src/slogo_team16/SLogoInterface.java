@@ -138,7 +138,7 @@ public class SLogoInterface {
 
 	private void renderAnimal(Animal animal) {
 		if (isValidLocation(animal.getX(), animal.getY())) {
-			Rectangle s = graphic.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
+			Rectangle s = graphic.createRectCell(animal.getWidth(), animal.getHeight(), animal.getX(), animal.getY(),
 					Color.WHITE, Color.WHITE);
 			Image turtle = graphic.createImage("turtleLogo.png");
 			ImagePattern turtlePattern = new ImagePattern(turtle);
