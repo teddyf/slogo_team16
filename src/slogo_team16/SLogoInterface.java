@@ -46,7 +46,7 @@ public class SLogoInterface {
 	public Scene init() {
 		Group root = new Group();
 		myScene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
-		turtle = new Turtle(TURTLE_X, TURTLE_Y);
+		turtle = new Turtle();
 		populateGrid(root, COLUMNS, ROWS);
 		createConsole();
 		initButtons(root, console);
