@@ -14,7 +14,7 @@ public class Dictionary {
     private HashMap<String,Method> methods;
     
     public Dictionary(){
-        this.turtle = new Turtle(0,0);
+        this.turtle = new Turtle(0, 0);
         populateMethods(turtle);
     }
     
