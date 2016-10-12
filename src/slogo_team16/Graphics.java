@@ -121,8 +121,8 @@ public class Graphics {
 		return consoleArea;
 	}
 	
-	public ComboBox createComboBox(String[] languages){
-		ComboBox combo = new ComboBox();
+	public ComboBox<String> createComboBox(String[] languages){
+		ComboBox<String> combo = new ComboBox<>();
 		combo.getItems().addAll(languages);
 		return combo;
 		

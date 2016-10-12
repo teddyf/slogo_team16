@@ -43,7 +43,10 @@ public class SLogoInterface {
 	public static final int SCENE_HEIGHT = 700;
 	private static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
 	private static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
-
+	private static final int TURTLE_HEIGHT = 15;
+	private static final int TURTLE_WIDTH = 15;
+	
+	
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
 	private List<Animal> myAnimalList;
@@ -73,7 +76,6 @@ public class SLogoInterface {
 		// method?
 		VBox leftPane = createVBoxPane(LEFT_PANE_WIDTH);
 		Text title = createTitle();
-		Pane grid = createMainGrid();
 		HBox container = createConsole();
 		createAnimalPane();
 		leftPane.getChildren().addAll(title, myAnimalPane, container);
@@ -158,8 +160,8 @@ public class SLogoInterface {
 	// they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Turtle turtle = new Turtle((myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
-					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2, 15, 15);
+			Turtle turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT, (myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
+					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2);
 			myAnimalList.add(turtle);
 		}
 	}
@@ -201,7 +203,7 @@ public class SLogoInterface {
 	private void createLanguageChooser() {
 		String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
 				"Spanish" };
-		ComboBox language = graphic.createComboBox(languages);
+		ComboBox<String> language = graphic.createComboBox(languages);
 		language.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				System.out.println("combbox value is: " + newValue);
