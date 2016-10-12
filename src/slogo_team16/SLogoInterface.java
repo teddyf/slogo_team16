@@ -8,8 +8,6 @@ import Animals.Turtle;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
@@ -36,18 +34,17 @@ public class SLogoInterface {
 	private Scene myScene;
 	private Graphics graphic;
 	public static final int SCENE_WIDTH = 1200;
-	public static final int SCENE_HEIGHT = 800;
+	public static final int SCENE_HEIGHT = 700;
 	private static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
 	private static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
-	private List<Animal> myAnimalList; // for later on, in case more animals
-										// show
-	private ListView<String> historyScroller;
+	private List<Animal> myAnimalList;
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
+	private final ListView<String> historyScroller = new ListView<>();
 
 	public SLogoInterface() {
 		graphic = new Graphics();
@@ -70,20 +67,20 @@ public class SLogoInterface {
 		// method?
 		VBox leftPane = createVBoxPane(LEFT_PANE_WIDTH);
 		Text title = createTitle();
-		Pane grid = createMainGrid();
 		HBox container = createConsole();
-		leftPane.getChildren().addAll(title, grid, container);
+		createAnimalPane();
+		leftPane.getChildren().addAll(title, myAnimalPane, container);
 		myRoot.setLeft(leftPane);
 	}
-	
+
 	private void populateRightPane() {
 		VBox rightPane = createVBoxPane(RIGHT_PANE_WIDTH);
 		Text history = createHistoryTitle();
-		createScrollPane();
+		createHistoryPane();
 		rightPane.getChildren().addAll(history, historyScroller);
 		myRoot.setRight(rightPane);
 	}
-	
+
 	private Text createHistoryTitle() {
 		Text history = new Text("History");
 		return history;
@@ -97,13 +94,10 @@ public class SLogoInterface {
 		vbox.setPadding(new Insets(15));
 		return vbox;
 	}
-	
-	private void createScrollPane() {
-		historyScroller = new ListView<>();
-		historyScroller.getItems().add("First History Command");
-//		historyScroller.setHbarPolicy(ScrollBarPolicy.NEVER);
-//		historyScroller.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
-//		historyScroller.setVmax(SCENE_HEIGHT - 30);
+
+	private void createHistoryPane() {
+//		historyScroller.getItems().add(new TextArea("First history command"));
+		historyScroller.getItems().add("First history\nCommand\nyeah");
 		historyScroller.setStyle("-fx-background: white");
 	}
 
@@ -112,19 +106,17 @@ public class SLogoInterface {
 		return title;
 	}
 
-	private Pane createMainGrid() {
+	private void createAnimalPane() {
 		myAnimalPane = new Pane();
 		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
 		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 6);
 		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
 		myAnimalPane.setStyle("-fx-background-color: white");
-		return myAnimalPane;
 	}
 
 	private HBox createConsole() {
 		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
-
 		HBox consoleContainer = new HBox(5);
 		consoleContainer.getChildren().addAll(consoleArea, buttons);
 		return consoleContainer;
@@ -158,8 +150,7 @@ public class SLogoInterface {
 	// they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Turtle turtle = new Turtle((myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
-					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2, 15, 15);
+			Turtle turtle = new Turtle(15, 15, (LEFT_PANE_WIDTH) / 2, myAnimalPane.getPrefHeight() / 2);
 			myAnimalList.add(turtle);
 		}
 	}
@@ -168,7 +159,7 @@ public class SLogoInterface {
 		fillAnimalList(numAnimals);
 		fillAnimalGrid();
 	}
-	
+
 	private void fillAnimalGrid() {
 		for (Animal animal : myAnimalList) {
 			renderAnimal(animal);

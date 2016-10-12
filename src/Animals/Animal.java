@@ -161,9 +161,7 @@ public abstract class Animal {
 	public double clearScreen() {
 		return home();
 	}
-		
-	public abstract void update();
-	
+			
 	/*****GETTERS*****/
 	
 	public double getWidth() {
