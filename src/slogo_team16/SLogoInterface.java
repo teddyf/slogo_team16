@@ -1,15 +1,21 @@
 package slogo_team16;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import Animals.Animal;
 import Animals.Turtle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -67,10 +73,12 @@ public class SLogoInterface {
 		// method?
 		VBox leftPane = createVBoxPane(LEFT_PANE_WIDTH);
 		Text title = createTitle();
+		Pane grid = createMainGrid();
 		HBox container = createConsole();
 		createAnimalPane();
 		leftPane.getChildren().addAll(title, myAnimalPane, container);
 		myRoot.setLeft(leftPane);
+		createLanguageChooser();
 	}
 
 	private void populateRightPane() {
@@ -150,7 +158,8 @@ public class SLogoInterface {
 	// they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Turtle turtle = new Turtle(15, 15, (LEFT_PANE_WIDTH - 30) / 2, myAnimalPane.getPrefHeight() / 2);
+			Turtle turtle = new Turtle((myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
+					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2, 15, 15);
 			myAnimalList.add(turtle);
 		}
 	}
@@ -162,6 +171,7 @@ public class SLogoInterface {
 
 	private void fillAnimalGrid() {
 		for (Animal animal : myAnimalList) {
+			// they're all turtles now so
 			renderAnimal(animal);
 		}
 	}
@@ -186,6 +196,18 @@ public class SLogoInterface {
 	// are we going to let turtle go off of the screen?
 	private boolean isValidLocation(double x, double y) {
 		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
+	}
+
+	private void createLanguageChooser() {
+		String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
+				"Spanish" };
+		ComboBox language = graphic.createComboBox(languages);
+		language.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				System.out.println("combbox value is: " + newValue);
+			}
+		});
+		myRoot.setBottom(language);
 	}
 
 }

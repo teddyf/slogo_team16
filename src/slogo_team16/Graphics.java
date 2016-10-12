@@ -1,7 +1,10 @@
 package slogo_team16;
 
+import java.util.Collection;
+
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -116,6 +119,13 @@ public class Graphics {
 		consoleArea.setPrefHeight(height);
 		consoleArea.setPrefWidth(width);
 		return consoleArea;
+	}
+	
+	public ComboBox createComboBox(String[] languages){
+		ComboBox combo = new ComboBox();
+		combo.getItems().addAll(languages);
+		return combo;
+		
 	}
 
 }
