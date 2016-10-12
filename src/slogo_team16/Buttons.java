@@ -3,9 +3,11 @@ package slogo_team16;
 import java.util.Map;
 
 import Parsing.Parser;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -27,7 +29,7 @@ public class Buttons {
 	}
 	
 	private Button createRunButton(Console console, final ListView<String> history) {
-		Button run = graphic.createButton("Enter");
+		Button run = graphic.createButton("Run");
 		run.setOnAction(e -> {
 			String input = console.getInput();
 			System.out.println(input);
@@ -51,9 +53,16 @@ public class Buttons {
 	
 	private void addCommandToHistory(final ListView<String> history, String input) {
 		history.getItems().add(input);
-		history.setOnMouseClicked(e -> {
-			//TODO: Jordan - Add run functionality to clicking
-			System.out.println("clicked on " + history.getSelectionModel().getSelectedItem());
+		history.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			  public void handle(MouseEvent e) {
+		        if(e.getButton().equals(MouseButton.PRIMARY)){
+		            if(e.getClickCount() == 2){
+//		    			//TODO: Jordan - Add run functionality to clicking
+		    			System.out.println("clicked on " + history.getSelectionModel().getSelectedItem());
+		            }
+		        }
+		    }
 		});
 	}
 

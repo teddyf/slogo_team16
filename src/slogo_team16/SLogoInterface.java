@@ -109,7 +109,7 @@ public class SLogoInterface {
 	private void createAnimalPane() {
 		myAnimalPane = new Pane();
 		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
-		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 6);
+		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
 		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
 		myAnimalPane.setStyle("-fx-background-color: white");
 	}
@@ -150,7 +150,7 @@ public class SLogoInterface {
 	// they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Turtle turtle = new Turtle(15, 15, (LEFT_PANE_WIDTH) / 2, myAnimalPane.getPrefHeight() / 2);
+			Turtle turtle = new Turtle(15, 15, (LEFT_PANE_WIDTH - 30) / 2, myAnimalPane.getPrefHeight() / 2);
 			myAnimalList.add(turtle);
 		}
 	}
