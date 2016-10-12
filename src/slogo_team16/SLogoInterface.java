@@ -1,12 +1,15 @@
 package slogo_team16;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import Animals.Animal;
 import Animals.Turtle;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -66,6 +69,7 @@ public class SLogoInterface {
 		HBox container = createConsole();
 		leftPane.getChildren().addAll(title, grid, container);
 		myRoot.setLeft(leftPane);
+		createLanguageChooser();
 	}
 
 	private VBox createLeftPane() {
@@ -151,6 +155,12 @@ public class SLogoInterface {
 
 	private boolean isValidLocation(double x, double y) {
 		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
+	}
+	
+	private void createLanguageChooser(){
+		String[] languages = {"English", "Chinese","French","German","Italian","Portuguese","Russian","Spanish"};
+		ComboBox language = graphic.createComboBox(languages);
+		myRoot.setBottom(language);
 	}
 
 }
