@@ -36,7 +36,7 @@ Design Considerations
 This section describes any issues which need to be addressed or resolved before attempting to devise a complete design solution. Include any design decisions that the group discussed at length (include pros and cons from all sides of the discussion) as well as any ambiguities, assumptions, or dependencies regarding the program that impact the overall design.
 
 ## Team Responsibilities
-Aninda: Turtle  
-Teddy: Parser  
-Jordan: GUI  
-Lucy: GUI  
+Aninda: Back-End External
+Teddy: Back-End Internal  
+Jordan: Front-End 
+Lucy: Front-End
