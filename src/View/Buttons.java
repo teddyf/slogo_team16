@@ -22,16 +22,16 @@ import javafx.scene.layout.VBox;
 public class Buttons {
 	private Graphics graphic = new Graphics();
 	private Parser parse = new Parser();
-	
-	public VBox createConsoleInputButtons(Console console, GenericPane history){
+
+	public VBox createConsoleInputButtons(Console console, GenericPane pane) {
 		VBox container = new VBox(5);
-		Button run = createRunButton(console, history);
+		Button run = createRunButton(console, pane);
 		Button clear = createClearButton(console);
 		container.getChildren().addAll(run, clear);
 		return container;
 	}
-	
-	private Button createRunButton(Console console, final GenericPane history) {
+
+	private Button createRunButton(Console console, final GenericPane pane) {
 		Button run = graphic.createButton("Run");
 		run.setOnAction(e -> {
 			String input = console.getInput();
@@ -39,38 +39,28 @@ public class Buttons {
 			if (input.isEmpty()) {
 				return;
 			}
-			
+
 			System.out.println(input);
-			//Add command to history, move this to only after its been checked for errors
-			addCommandToHistory(history, input);
-			
+			// Add command to history, move this to only after its been checked
+			// for errors
+			addCommandToHistory(pane, input);
+
 			Map<Integer, String[]> map = parse.parseInput(input);
-			parse.checkForPrintCommand("print", console); //testing the print command
+			parse.checkForPrintCommand("print", console); // testing the print
+															// command
 		});
 		return run;
 	}
-	
+
 	private Button createClearButton(Console console) {
 		Button clear = graphic.createButton("Clear");
 		clear.setOnAction(e -> {
 			console.clearConsole();
-		});	
+		});
 		return clear;
 	}
-	
-	private void addCommandToHistory(final GenericPane history, String input) {
-		history.getItems().add(input);
-		history.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			  public void handle(MouseEvent e) {
-		        if(e.getButton().equals(MouseButton.PRIMARY)){
-		            if(e.getClickCount() == 2){
-//		    			//TODO: Jordan - Add run functionality to clicking
-		    			System.out.println("clicked on " + history.getSelectionModel().getSelectedItem());
-		            }
-		        }
-		    }
-		});
-	}
 
+	private void addCommandToHistory(final GenericPane pane, String input) {
+		pane.getAllItems().add(input);
+	}
 }

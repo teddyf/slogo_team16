@@ -8,10 +8,12 @@ import Animals.Turtle;
 import View.tab_panes.CommandHistoryPane;
 import View.tab_panes.ExampleCommandsPane;
 import View.tab_panes.GenericPane;
+import View.tab_panes.OptionsPane;
 import View.tab_panes.VariablesPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
@@ -96,13 +98,14 @@ public class SLogoView {
 		Tab examples = createExampleCommandsTab();
 		Tab variables = createVariablesTab();
 		Tab history = createHistoryTab();
-		tabPane.getTabs().addAll(history, examples, variables);
+		Tab options = createOptionsTab();
+		tabPane.getTabs().addAll(history, examples, variables, options);
 		return tabPane;
 	}
 	
 	private Tab createTab(GenericPane pane) {
 		Tab tab = new Tab();
-		tab.setContent(pane);
+		tab.setContent((Node) pane);
 		tab.setText(pane.getTabName());
 		tab.setClosable(false);
 		return tab;
@@ -124,7 +127,13 @@ public class SLogoView {
 		Tab tab = createTab(historyPane);
 		return tab;
 	}
-
+	
+	private Tab createOptionsTab() {
+		GenericPane pane = new OptionsPane();
+		Tab tab = createTab(pane);
+		return tab;
+	}
+	
 	private HBox createUpperPanel() {
 		HBox container = new HBox(20);
 		Text title = new Text("Slogo");
