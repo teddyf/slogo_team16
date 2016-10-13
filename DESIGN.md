@@ -9,7 +9,11 @@ Parser: Parses the user input line by line and returns an array of the words
 Turtle - stores information about the turtle (position, orientation, color, etc.)  
 UpdateTurtle - master class: updates properties of the turtle  
 MoveTurtle - extends UpdateTurtle and contains methods to update the position and orientation of a turtle   
-SLogoLanguage - Creates the object that represents the language (handles strings, ints, and special characters)   
+SLogoLanguage - Creates the object that represents the language (handles strings, ints, and special characters) 
+ExpressionTree -Takes in data from parser and stuffs it into a tree so we can perform a BFS to call a complete line command(s)
+Stack - Stores variable values which user declares/stores.  
+Memory - Stores prior positions, animations, etc so we can go back steps if this is an extension
+Library - Stores a list of all classes and all methods so there is easy interaction between external and internal back end
 ## User Interface
 DisplayTurtle - displays turtle image in UI  
 TurtleInterface - contract to define turtle behavior  
