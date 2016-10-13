@@ -5,4 +5,4 @@
  * @author theodorefranceschi
  *
  */
-package Animals;
+package animal;

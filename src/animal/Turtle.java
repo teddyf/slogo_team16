@@ -1,4 +1,4 @@
-package Animals;
+package animal;
 import slogo_team16.Graphics;
 import javafx.scene.image.Image;
 
