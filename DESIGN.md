@@ -21,6 +21,20 @@ Animate - move the turtle graphically
 Listener  
 
 ## API Details 
+Back-end Internal: As of now, this API will encompass parsing, parsing String values into classes and methods (reflection)
+and pushing these line calls into an expression tree.  I will need to possibly create the methods (may move to external) so
+the mapping is fine.  I will also handle the Stack which will store user stored variables.  The Parser and Tree will be 
+heavily based on the code provided, but I will build a platform which will store these individual bits into the tree and 
+also right the data structure that stores all of these variables. More specifc API details will be available in the sample.
+
+Back-end External: As of now, this API will handle turtle positioning.  There is a superclass for animals just in case we need
+to make other animals, but more importantly, this type will encompass positioning, drawing, etc.  A lot of this will be closely 
+tied with the front end via a handler.  Also may handle the controller because this is also connected with the front end (MVC)
+(remove or add to this if you want.  I really don't know much on this...)
+
+Front-end External: Handles the controll interface with backend (def add to this)
+
+Front-end Internal: Handles GUI and the View part of the MVC (def add to this)
 ```public void updateTurtle(String command)```: Updates the turtle based on command  
 ```public String[] parseCommand(String command)```: Parses the command into a HashMap of the lines  
 Ie. 
