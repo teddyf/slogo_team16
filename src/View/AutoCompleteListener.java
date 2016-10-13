@@ -1,4 +1,4 @@
-package slogo_team16;
+package View;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 

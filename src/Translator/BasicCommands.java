@@ -3,7 +3,7 @@ package Translator;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import slogo_team16.Console;
+import View.Console;
 
 public class BasicCommands {
 

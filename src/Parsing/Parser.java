@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import Translator.BasicCommands;
-import slogo_team16.Console;
+import View.Console;
 
 /**
  * Handles parsing input

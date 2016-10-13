@@ -1,8 +1,9 @@
-package slogo_team16;
+package View;
 
 import java.util.Map;
 
 import Parsing.Parser;
+import View.tab_panes.GenericPane;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -22,18 +23,24 @@ public class Buttons {
 	private Graphics graphic = new Graphics();
 	private Parser parse = new Parser();
 	
-	public void createConsoleInputButtons(VBox container, Console console, ListView<String> history){
+	public VBox createConsoleInputButtons(Console console, GenericPane history){
+		VBox container = new VBox(5);
 		Button run = createRunButton(console, history);
 		Button clear = createClearButton(console);
 		container.getChildren().addAll(run, clear);
+		return container;
 	}
 	
-	private Button createRunButton(Console console, final ListView<String> history) {
+	private Button createRunButton(Console console, final GenericPane history) {
 		Button run = graphic.createButton("Run");
 		run.setOnAction(e -> {
 			String input = console.getInput();
-			System.out.println(input);
+			// TODO: add more checks for empty input
+			if (input.isEmpty()) {
+				return;
+			}
 			
+			System.out.println(input);
 			//Add command to history, move this to only after its been checked for errors
 			addCommandToHistory(history, input);
 			
@@ -51,7 +58,7 @@ public class Buttons {
 		return clear;
 	}
 	
-	private void addCommandToHistory(final ListView<String> history, String input) {
+	private void addCommandToHistory(final GenericPane history, String input) {
 		history.getItems().add(input);
 		history.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override

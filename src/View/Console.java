@@ -1,4 +1,4 @@
-package slogo_team16;
+package View;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

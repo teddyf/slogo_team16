@@ -1,7 +1,8 @@
-package slogo_team16;
+package View;
 
 import java.util.Collection;
 
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -63,14 +64,6 @@ public class Graphics {
 		image.setY(y);
 	}
 
-	public Button createButton(String label, double x, double y, HBox container) {
-		Button button = new Button(label);
-		button.setLayoutX(x);
-		button.setLayoutY(y);
-		container.getChildren().add(button);
-		return button;
-	}
-	
 	public Button createButton(String label) {
 		Button button = new Button(label);
 		return button;
@@ -82,7 +75,21 @@ public class Graphics {
 		button.setLayoutY(y);
 		return button;
 	}
-
+	
+	public VBox createVBoxPane(int width, int height) {
+		VBox vbox = new VBox(10);
+		vbox.setMaxWidth(width);
+		vbox.setMinWidth(width);
+		vbox.setMinHeight(height - 30);
+		vbox.setPadding(new Insets(15));
+		return vbox;
+	}
+	
+	public VBox createVBoxPane(int width, int height, Insets insets) {
+		VBox vbox = createVBoxPane(width, height);
+		vbox.setPadding(insets);
+		return vbox;
+	}
 	public Text createText(Group root, double x, double y, String text) {
 		Text t = new Text(x, y, text);
 		root.getChildren().add(t);

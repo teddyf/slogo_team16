@@ -1,4 +1,4 @@
-package slogo_team16;
+package View;
 
 import Animals.Turtle;
 import javafx.animation.KeyFrame;
@@ -18,7 +18,7 @@ public class Animate {
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private Timeline animation = new Timeline();
 
-	public void handleTurtleAnimation(Turtle turtle, SLogoInterface slogo) {
+	public void handleTurtleAnimation(Turtle turtle, SLogoView slogo) {
 		KeyFrame frame1 = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> turtle.update());
 		KeyFrame[] frames = { frame1 };
 		initAnimation(animation, frames);

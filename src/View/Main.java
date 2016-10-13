@@ -1,4 +1,4 @@
-package slogo_team16;
+package View;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -13,11 +13,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	public static final String title = "Slogo";
-	private SLogoInterface slogo;
+	private SLogoView slogo;
 
 	@Override
 	public void start(Stage s){
-		slogo = new SLogoInterface();
+		slogo = new SLogoView();
 		Scene scene = slogo.init();
 		s.setTitle(title);
 		s.setScene(scene);

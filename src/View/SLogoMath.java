@@ -1,4 +1,4 @@
-package slogo_team16;
+package View;
 
 public class SLogoMath {
 	public SLogoMath() {
@@ -15,7 +15,7 @@ public class SLogoMath {
 	
 	public double product(double expression1, double expression2) {
 		return expression1*expression2;
-	}
+	} 
 	
 	public double quotient(double expression1, double expression2) {
 		return expression1/expression2;
