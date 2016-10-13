@@ -6,11 +6,11 @@ import java.lang.reflect.Method;
 
 public abstract class Module {
     String[] params;
-    private Library library;
+    protected Library library;
     String name;
     public Module(String[] params){
        this.params = params;
-       Library library = new Library();
+       library = new Library();
     }
     
     public abstract void logic(String[] params) throws InvalidParameterException;

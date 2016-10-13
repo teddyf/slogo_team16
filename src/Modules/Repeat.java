@@ -6,8 +6,6 @@ import ErrorHandling.*;
 
 public class Repeat extends Module {
 
-    Library library = new Library();
-
     public Repeat (String[] params) {
         super(params);
         setName("Repeat");
