@@ -10,7 +10,7 @@ public class Variable extends Module{
 	
 	public Variable(String[] params) {
 		super(params);
-		// TODO Auto-generated constructor stub
+		setName("VariableCreator");
 	}
 
 	public HashMap<String, String> getVariables() {
