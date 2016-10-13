@@ -1,12 +1,18 @@
 package slogo_team16;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import Animals.Animal;
 import Animals.Turtle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,20 +33,27 @@ import javafx.scene.text.Text;
  */
 /**
  * @author Lucy Zhang
+ * @author Jordan Frazier
  *
  */
 public class SLogoInterface {
 	private Scene myScene;
 	private Graphics graphic;
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 400;
-
+	public static final int SCENE_WIDTH = 1200;
+	public static final int SCENE_HEIGHT = 700;
+	private static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	private static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
+	private static final int TURTLE_HEIGHT = 15;
+	private static final int TURTLE_WIDTH = 15;
+	
+	
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
-	private List<Animal> myAnimalList; // for later on, in case more animals show
+	private List<Animal> myAnimalList;
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
+	private final ListView<String> historyScroller = new ListView<>();
 
 	public SLogoInterface() {
 		graphic = new Graphics();
@@ -51,8 +64,9 @@ public class SLogoInterface {
 
 	public Scene init() {
 		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, WIDTH, HEIGHT, Color.WHITE);
+		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateLeftPane();
+		populateRightPane();
 		populateGridWithAnimals(1);
 		return myScene;
 	}
@@ -60,18 +74,41 @@ public class SLogoInterface {
 	private void populateLeftPane() {
 		// Better to return object, or to pass in the leftpane and add inside
 		// method?
-		VBox leftPane = createLeftPane();
+		VBox leftPane = createVBoxPane(LEFT_PANE_WIDTH);
 		Text title = createTitle();
-		Pane grid = createMainGrid();
 		HBox container = createConsole();
-		leftPane.getChildren().addAll(title, grid, container);
+		createAnimalPane();
+		leftPane.getChildren().addAll(title, myAnimalPane, container);
 		myRoot.setLeft(leftPane);
+		createLanguageChooser();
 	}
 
-	private VBox createLeftPane() {
-		VBox leftPane = new VBox(10);
-		leftPane.setPadding(new Insets(20, 20, 20, 50));
-		return leftPane;
+	private void populateRightPane() {
+		VBox rightPane = createVBoxPane(RIGHT_PANE_WIDTH);
+		Text history = createHistoryTitle();
+		createHistoryPane();
+		rightPane.getChildren().addAll(history, historyScroller);
+		myRoot.setRight(rightPane);
+	}
+
+	private Text createHistoryTitle() {
+		Text history = new Text("History");
+		return history;
+	}
+
+	private VBox createVBoxPane(int width) {
+		VBox vbox = new VBox(10);
+		vbox.setMaxWidth(width);
+		vbox.setMinWidth(width);
+		vbox.setMinHeight(SCENE_HEIGHT - 30);
+		vbox.setPadding(new Insets(15));
+		return vbox;
+	}
+
+	private void createHistoryPane() {
+//		historyScroller.getItems().add(new TextArea("First history command"));
+		historyScroller.getItems().add("First history\nCommand\nyeah");
+		historyScroller.setStyle("-fx-background: white");
 	}
 
 	public Text createTitle() {
@@ -79,19 +116,17 @@ public class SLogoInterface {
 		return title;
 	}
 
-	private Pane createMainGrid() {
+	private void createAnimalPane() {
 		myAnimalPane = new Pane();
-		myAnimalPane.setPrefWidth(WIDTH);
-		myAnimalPane.setPrefHeight(HEIGHT);
+		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
+		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
 		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
 		myAnimalPane.setStyle("-fx-background-color: white");
-		return myAnimalPane;
 	}
 
 	private HBox createConsole() {
 		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
-
 		HBox consoleContainer = new HBox(5);
 		consoleContainer.getChildren().addAll(consoleArea, buttons);
 		return consoleContainer;
@@ -99,7 +134,7 @@ public class SLogoInterface {
 
 	private TextArea createConsoleArea() {
 		// TODO: Jordan - input correct width / height (doesn't matter)
-		TextArea consoleArea = graphic.createConsoleTextArea(WIDTH, HEIGHT);
+		TextArea consoleArea = graphic.createConsoleTextArea(LEFT_PANE_WIDTH - 100, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
 		console.initConsole();
 		return consoleArea;
@@ -109,48 +144,72 @@ public class SLogoInterface {
 		// TODO: Jordan - Is it better to pass in container, or to return a
 		// container created inside the other class?
 		VBox container = new VBox(5);
-		buttons.createConsoleInputButtons(container, console);
+		buttons.createConsoleInputButtons(container, console, historyScroller);
 		return container;
 	}
-	
-	// Maybe specific animal buttons that call this, which adds to animallist, then the list
-	// is completely rendered by calling populateGridWithAnimals()
+
+	// Maybe specific animal buttons that call this, which adds to animallist,
+	// then the list is completely rendered by calling populateGridWithAnimals()
 	private void addAnimal(Animal animal) {
 		myAnimalList.add(animal);
+		fillAnimalGrid();
 	}
 
-	// This method needs to change, discuss if/how we would let a user define what animals
+	// This method needs to change, discuss if/how we would let a user define
+	// what animals
 	// they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Turtle turtle = new Turtle((myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2, (myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2, 15, 15);
+			Turtle turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT, (myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
+					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2);
 			myAnimalList.add(turtle);
 		}
 	}
 
 	private void populateGridWithAnimals(int numAnimals) {
 		fillAnimalList(numAnimals);
+		fillAnimalGrid();
+	}
+
+	private void fillAnimalGrid() {
 		for (Animal animal : myAnimalList) {
-			// they're all turtles now so 
+			// they're all turtles now so
 			renderAnimal(animal);
 		}
 	}
 
 	private void renderAnimal(Animal animal) {
 		if (isValidLocation(animal.getX(), animal.getY())) {
-			Rectangle s = graphic.createRectCell(animal.getWidth(), animal.getHeight(), animal.getX(), animal.getY(),
-					Color.WHITE, Color.WHITE);
-			Image turtle = graphic.createImage("turtleLogo.png");
-			ImagePattern turtlePattern = new ImagePattern(turtle);
-			s.setFill(turtlePattern);
-			myAnimalPane.getChildren().add(s);
+			addAnimalToGrid(animal);
 		} else {
-			// not valid location. error dialog
+			// not valid location. error dialog. or maybe not
 		}
 	}
 
+	private void addAnimalToGrid(Animal animal) {
+		Rectangle s = graphic.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
+				Color.WHITE, Color.WHITE);
+		Image turtle = graphic.createImage("turtleLogo.png");
+		ImagePattern turtlePattern = new ImagePattern(turtle);
+		s.setFill(turtlePattern);
+		myAnimalPane.getChildren().add(s);
+	}
+
+	// are we going to let turtle go off of the screen?
 	private boolean isValidLocation(double x, double y) {
 		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
+	}
+
+	private void createLanguageChooser() {
+		String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
+				"Spanish" };
+		ComboBox<String> language = graphic.createComboBox(languages);
+		language.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				System.out.println("combbox value is: " + newValue);
+			}
+		});
+		myRoot.setBottom(language);
 	}
 
 }

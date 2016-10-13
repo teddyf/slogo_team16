@@ -24,6 +24,7 @@ public class Console {
 	public void initConsole() {
 		writeToConsole("Type your SLogo here");
 		addListener();
+		eraseTextOnInitialClick();
 	}
 
 	public void writeToConsole(String text) {
@@ -71,6 +72,15 @@ public class Console {
 	private void createAutoCompleteOptions(String[] values){
 		//ComboBox selections = new ComboBox();
 		//selections.setItems(values);
+	}
+	
+	private void eraseTextOnInitialClick() {
+		console.setOnMouseClicked(e -> {
+			console.clear();
+			console.setOnMouseClicked(event -> {
+				//do nothing after initial clear
+			});
+		});
 	}
 
 }

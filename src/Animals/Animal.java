@@ -161,9 +161,7 @@ public abstract class Animal {
 	public double clearScreen() {
 		return home();
 	}
-		
-	public abstract void update();
-	
+			
 	/*****GETTERS*****/
 	
 	public double getWidth() {
@@ -203,6 +201,14 @@ public abstract class Animal {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	
+	public void setWidth(double width) {
+		this.width = width;
+	}
 		
 	public void setPen(int pen) {
 		this.pen = pen;
@@ -211,4 +217,7 @@ public abstract class Animal {
 	public void setShowing(int showing) {
 		this.showing = showing;
 	}
+
+	public abstract void update();
+
 }
