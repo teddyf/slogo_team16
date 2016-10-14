@@ -1,6 +1,6 @@
 package animal;
 
-import slogo_team16.SLogoInterface;
+import View.SLogoView;
 
 /**
  * @author Aninda Manocha, Teddy Franceschi
@@ -18,8 +18,8 @@ public abstract class Animal {
 	public Animal(double width, double height) {
 		this.width = width;
 		this.height = height;
-		this.x = SLogoInterface.SCENE_WIDTH/2;
-		this.y = SLogoInterface.SCENE_HEIGHT/2;
+		this.x = SLogoView.SCENE_WIDTH/2;
+		this.y = SLogoView.SCENE_HEIGHT/2;
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -28,8 +28,8 @@ public abstract class Animal {
 	public Animal(double width, double height, double x, double y) {
 		this.width = width;
 		this.height = height;
-		this.x = x + SLogoInterface.SCENE_WIDTH/2;
-		this.y = SLogoInterface.SCENE_HEIGHT/2 - y;
+		this.x = x + SLogoView.SCENE_WIDTH/2;
+		this.y = SLogoView.SCENE_HEIGHT/2 - y;
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -104,8 +104,8 @@ public abstract class Animal {
 	 */
 	public double setXY(double x, double y) {
 		double distance = Math.sqrt(Math.pow(this.x-x, 2) + Math.pow(this.y-y, 2));
-		this.x = x + SLogoInterface.SCENE_WIDTH/2;
-		this.y = SLogoInterface.SCENE_HEIGHT/2 - y;
+		this.x = x + SLogoView.SCENE_WIDTH/2;
+		this.y = SLogoView.SCENE_HEIGHT/2 - y;
 		return distance;
 	}
 		
