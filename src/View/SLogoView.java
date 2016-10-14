@@ -3,23 +3,21 @@ package View;
 import java.util.ArrayList;
 import java.util.List;
 
+import View.tabs.CommandHistoryPane;
+import View.tabs.ExampleCommandsPane;
+import View.tabs.GenericPane;
+import View.tabs.OptionsPane;
+import View.tabs.VariablesPane;
 import animal.Animal;
 import animal.Turtle;
-import View.tab_panes.CommandHistoryPane;
-import View.tab_panes.ExampleCommandsPane;
-import View.tab_panes.GenericPane;
-import View.tab_panes.OptionsPane;
-import View.tab_panes.VariablesPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -34,16 +32,15 @@ import javafx.scene.text.Text;
 
 /**
  * Main SLogo interface
- */
-/**
+ *
  * @author Lucy Zhang
  * @author Jordan Frazier
  *
  */
-public class SLogoView extends AbstractSLogoView {
+public class SLogoView implements AbstractSLogoView {
 	private Scene myScene;
 	private Graphics graphics;
-
+	
 	private static final int TURTLE_HEIGHT = 15;
 	private static final int TURTLE_WIDTH = 15;
 	private static final int NUM_ANIMALS = 1;
@@ -68,7 +65,6 @@ public class SLogoView extends AbstractSLogoView {
 		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateLeftPane();
 		populateRightPane();
-		populateGridWithAnimals(NUM_ANIMALS);
 		return myScene;
 	}
 
@@ -76,8 +72,9 @@ public class SLogoView extends AbstractSLogoView {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);	
 		HBox upperPanel = createUpperPanel();
 		HBox container = createConsole();
-		createAnimalPane();
-		
+		createAnimalGrid();
+		populateGridWithAnimals();
+
 		leftPane.getChildren().addAll(upperPanel, myAnimalPane, container);
 		myRoot.setLeft(leftPane);
 	}
@@ -127,7 +124,9 @@ public class SLogoView extends AbstractSLogoView {
 	}
 	
 	private Tab createOptionsTab() {
-		GenericPane<HBox> pane = new OptionsPane();
+		// TODO: Jordan - only getting first animal now. eventually will possible have to ID each animal 
+		// and have different options for each animal ID
+		GenericPane<HBox> pane = new OptionsPane(myAnimalList.get(0));
 		Tab tab = createTab(pane);
 		return tab;
 	}
@@ -140,7 +139,8 @@ public class SLogoView extends AbstractSLogoView {
 		return container;
 	}
 
-	private void createAnimalPane() {
+	@Override
+	public void createAnimalGrid() {
 		myAnimalPane = new Pane();
 		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
 		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
@@ -148,7 +148,8 @@ public class SLogoView extends AbstractSLogoView {
 		myAnimalPane.setStyle("-fx-background-color: white");
 	}
 
-	private HBox createConsole() {
+	@Override
+	public HBox createConsole() {
 		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
 		HBox consoleContainer = new HBox(5);
@@ -156,7 +157,8 @@ public class SLogoView extends AbstractSLogoView {
 		return consoleContainer;
 	}
 
-	private TextArea createConsoleArea() {
+	@Override
+	public TextArea createConsoleArea() {
 		// TODO: Jordan - input correct width / height (doesn't matter)
 		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - 100, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
@@ -173,25 +175,27 @@ public class SLogoView extends AbstractSLogoView {
 	// then the list is completely rendered by calling populateGridWithAnimals()
 	private void addAnimal(Animal animal) {
 		myAnimalList.add(animal);
-		fillAnimalGrid();
+		renderAnimalGrid();
 	}
 
 	// This method needs to change, discuss if/how we would let a user define
 	// what animals they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT, (myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
+			Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT, (myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX() - 15) / 2,
 					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2);
 			myAnimalList.add(turtle);
 		}
 	}
 
-	private void populateGridWithAnimals(int numAnimals) {
-		fillAnimalList(numAnimals);
-		fillAnimalGrid();
+	@Override
+	public void populateGridWithAnimals() {
+		fillAnimalList(NUM_ANIMALS);
+		renderAnimalGrid();
 	}
 
-	private void fillAnimalGrid() {
+	@Override
+	public void renderAnimalGrid() {
 		for (Animal animal : myAnimalList) {
 			renderAnimal(animal);
 		}
@@ -201,25 +205,25 @@ public class SLogoView extends AbstractSLogoView {
 		if (isValidLocation(animal.getX(), animal.getY())) {
 			addAnimalToGrid(animal);
 		} else {
-			// not valid location. error dialog. or maybe not
+			System.out.println("NOT INSIDE ANIMAL PANE");
 		}
 	}
 
 	private void addAnimalToGrid(Animal animal) {
 		Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
 				Color.WHITE, Color.WHITE);
-		Image turtle = graphics.createImage("turtleLogo.png");
-		ImagePattern turtlePattern = new ImagePattern(turtle);
+		ImagePattern turtlePattern = new ImagePattern(animal.getImage());
 		s.setFill(turtlePattern);
 		myAnimalPane.getChildren().add(s);
 	}
 
 	// are we going to let turtle go off of the screen?
 	private boolean isValidLocation(double x, double y) {
-		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
+		return (x > myAnimalPane.getLayoutX()) && (y > myAnimalPane.getLayoutY()) && (x < myAnimalPane.getPrefWidth()) && (y < myAnimalPane.getPrefHeight());
 	}
 
-	private ComboBox<String> createLanguageChooser() {
+	@Override
+	public ComboBox<String> createLanguageChooser() {
 		String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
 				"Spanish" };
 		ComboBox<String> languageSelector = graphics.createComboBox(languages);

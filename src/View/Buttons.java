@@ -3,12 +3,8 @@ package View;
 import java.util.Map;
 
 import Parsing.Parser;
-import View.tab_panes.GenericPane;
-import javafx.event.EventHandler;
+import View.tabs.GenericPane;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /**
@@ -19,11 +15,15 @@ import javafx.scene.layout.VBox;
  * @author Lucy Zhang
  *
  */
+
+
+//TODO: Jordan - Bind the history to a data set of history commands instead of passing in the pane. 
+// also, add the commands to the input area instead of running them immediately on double click
 public class Buttons {
 	private Graphics graphic = new Graphics();
 	private Parser parse = new Parser();
 
-	public VBox createConsoleInputButtons(Console console, GenericPane pane) {
+	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
 		Button clear = createClearButton(console);
@@ -31,7 +31,7 @@ public class Buttons {
 		return container;
 	}
 
-	private Button createRunButton(Console console, final GenericPane pane) {
+	private Button createRunButton(Console console, final GenericPane<String> pane) {
 		Button run = graphic.createButton("Run");
 		run.setOnAction(e -> {
 			String input = console.getInput();
@@ -60,7 +60,7 @@ public class Buttons {
 		return clear;
 	}
 
-	private void addCommandToHistory(final GenericPane pane, String input) {
+	private void addCommandToHistory(final GenericPane<String> pane, String input) {
 		pane.getAllItems().add(input);
 	}
 }
