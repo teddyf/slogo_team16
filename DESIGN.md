@@ -18,7 +18,7 @@ Library - Stores a list of all classes and all methods so there is easy interact
 DisplayTurtle - displays turtle image in UI  
 TurtleInterface - contract to define turtle behavior  
 Animate - move the turtle graphically  
-Listener  
+Listener - binds parameters so view updates with model updates
 
 ## API Details 
 Back-end Internal: As of now, this API will encompass parsing, parsing String values into classes and methods (reflection)
@@ -69,7 +69,7 @@ handle rendering the turtle's movement, pen, etc. <br/>
 * How the user will set the turtle in the front end, and how this will be communicated to the backend
 
 ## Team Responsibilities
-Aninda: Back-End External
-Teddy: Back-End Internal/Back end integration  
-Jordan: Front-End
+Aninda: Back-End External<br/>
+Teddy: Back-End Internal/Back end integration  <br/>
+Jordan: Front-End<br/>
 Lucy: Front-End/Front End integration
