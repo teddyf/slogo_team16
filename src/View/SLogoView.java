@@ -3,17 +3,16 @@ package View;
 import java.util.ArrayList;
 import java.util.List;
 
+import View.tabs.CommandHistoryPane;
+import View.tabs.ExampleCommandsPane;
+import View.tabs.GenericPane;
+import View.tabs.OptionsPane;
+import View.tabs.VariablesPane;
 import animal.Animal;
 import animal.Turtle;
-import View.tab_panes.CommandHistoryPane;
-import View.tab_panes.ExampleCommandsPane;
-import View.tab_panes.GenericPane;
-import View.tab_panes.OptionsPane;
-import View.tab_panes.VariablesPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
@@ -34,16 +33,15 @@ import javafx.scene.text.Text;
 
 /**
  * Main SLogo interface
- */
-/**
+ *
  * @author Lucy Zhang
  * @author Jordan Frazier
  *
  */
-public class SLogoView extends AbstractSLogoView {
+public class SLogoView implements AbstractSLogoView {
 	private Scene myScene;
 	private Graphics graphics;
-
+	
 	private static final int TURTLE_HEIGHT = 15;
 	private static final int TURTLE_WIDTH = 15;
 	private static final int NUM_ANIMALS = 1;
@@ -68,7 +66,7 @@ public class SLogoView extends AbstractSLogoView {
 		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateLeftPane();
 		populateRightPane();
-		populateGridWithAnimals(NUM_ANIMALS);
+		populateGridWithAnimals();
 		return myScene;
 	}
 
@@ -76,7 +74,7 @@ public class SLogoView extends AbstractSLogoView {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);	
 		HBox upperPanel = createUpperPanel();
 		HBox container = createConsole();
-		createAnimalPane();
+		createAnimalGrid();
 		
 		leftPane.getChildren().addAll(upperPanel, myAnimalPane, container);
 		myRoot.setLeft(leftPane);
@@ -140,7 +138,8 @@ public class SLogoView extends AbstractSLogoView {
 		return container;
 	}
 
-	private void createAnimalPane() {
+	@Override
+	public void createAnimalGrid() {
 		myAnimalPane = new Pane();
 		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
 		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
@@ -148,7 +147,8 @@ public class SLogoView extends AbstractSLogoView {
 		myAnimalPane.setStyle("-fx-background-color: white");
 	}
 
-	private HBox createConsole() {
+	@Override
+	public HBox createConsole() {
 		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
 		HBox consoleContainer = new HBox(5);
@@ -156,7 +156,8 @@ public class SLogoView extends AbstractSLogoView {
 		return consoleContainer;
 	}
 
-	private TextArea createConsoleArea() {
+	@Override
+	public TextArea createConsoleArea() {
 		// TODO: Jordan - input correct width / height (doesn't matter)
 		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - 100, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
@@ -173,7 +174,7 @@ public class SLogoView extends AbstractSLogoView {
 	// then the list is completely rendered by calling populateGridWithAnimals()
 	private void addAnimal(Animal animal) {
 		myAnimalList.add(animal);
-		fillAnimalGrid();
+		renderAnimalGrid();
 	}
 
 	// This method needs to change, discuss if/how we would let a user define
@@ -186,12 +187,14 @@ public class SLogoView extends AbstractSLogoView {
 		}
 	}
 
-	private void populateGridWithAnimals(int numAnimals) {
-		fillAnimalList(numAnimals);
-		fillAnimalGrid();
+	@Override
+	public void populateGridWithAnimals() {
+		fillAnimalList(NUM_ANIMALS);
+		renderAnimalGrid();
 	}
 
-	private void fillAnimalGrid() {
+	@Override
+	public void renderAnimalGrid() {
 		for (Animal animal : myAnimalList) {
 			renderAnimal(animal);
 		}
@@ -219,7 +222,8 @@ public class SLogoView extends AbstractSLogoView {
 		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
 	}
 
-	private ComboBox<String> createLanguageChooser() {
+	@Override
+	public ComboBox<String> createLanguageChooser() {
 		String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
 				"Spanish" };
 		ComboBox<String> languageSelector = graphics.createComboBox(languages);

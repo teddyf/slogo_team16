@@ -1,4 +1,4 @@
-package View.tab_panes;
+package View.tabs;
 
 import View.Colors;
 import javafx.collections.FXCollections;

@@ -3,7 +3,7 @@ package View;
 import java.util.Map;
 
 import Parsing.Parser;
-import View.tab_panes.GenericPane;
+import View.tabs.GenericPane;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;

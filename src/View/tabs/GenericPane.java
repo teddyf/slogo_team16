@@ -1,4 +1,4 @@
-package View.tab_panes;
+package View.tabs;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;

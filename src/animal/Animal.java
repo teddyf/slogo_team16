@@ -221,5 +221,7 @@ public abstract class Animal {
 	}
 
 	public abstract void update();
+	
+	public abstract void setImagePath(String imagePath);
 
 }

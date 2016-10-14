@@ -1,6 +1,6 @@
-package View.tab_panes;
+package View.tabs;
 
-// maybe make this an abstract class that does things
+// TODO: Jordan - maybe make ListViewPane an abstract class that does things
 public interface ListViewPane {
 	
 	public void addItem(String value);
