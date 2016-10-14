@@ -1,0 +1,15 @@
+.root {
+	-fx-background-color: #6897b8;
+}
+
+.animal-pane {
+	-fx-background-color: white;
+	-fx-border-color: black;
+	-fx-border-width: 3.0;
+}
+
+.slogo-title {
+	-fx-font-size: 30;
+	-fx-stroke: black;
+	-fx-stroke-width: 1.5;
+}

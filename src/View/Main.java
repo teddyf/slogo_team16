@@ -17,6 +17,7 @@ public class Main extends Application {
 	public void start(Stage s){
 		slogo = new SLogoView();
 		Scene scene = slogo.init();
+		scene.getStylesheets().add(this.getClass().getResource("SLogoStyle.css").toString());
 		s.setTitle(title);
 		s.setScene(scene);
 		s.show();

@@ -74,7 +74,6 @@ public class SLogoView implements AbstractSLogoView {
 		HBox container = createConsole();
 		createAnimalGrid();
 		populateGridWithAnimals();
-
 		leftPane.getChildren().addAll(upperPanel, myAnimalPane, container);
 		myRoot.setLeft(leftPane);
 	}
@@ -133,7 +132,8 @@ public class SLogoView implements AbstractSLogoView {
 	
 	private HBox createUpperPanel() {
 		HBox container = new HBox(20);
-		Text title = new Text("Slogo");
+		Text title = new Text("SLogo");
+		title.getStyleClass().add("slogo-title");
 		ComboBox<String> languageComboBox = createLanguageChooser();
 		container.getChildren().addAll(title, languageComboBox);
 		return container;
@@ -144,8 +144,8 @@ public class SLogoView implements AbstractSLogoView {
 		myAnimalPane = new Pane();
 		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
 		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
-		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
-		myAnimalPane.setStyle("-fx-background-color: white");
+//		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
+		myAnimalPane.getStyleClass().add("animal-pane");
 	}
 
 	@Override
