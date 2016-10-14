@@ -63,6 +63,7 @@ public class SLogoView implements AbstractSLogoView {
 	public Scene init() {
 		myRoot = new BorderPane();
 		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
+		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
 		return myScene;
@@ -70,17 +71,19 @@ public class SLogoView implements AbstractSLogoView {
 
 	private void populateLeftPane() {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);	
-		HBox upperPanel = createUpperPanel();
+		leftPane.getStyleClass().add("left-pane");
 		HBox container = createConsole();
 		createAnimalGrid();
 		populateGridWithAnimals();
-		leftPane.getChildren().addAll(upperPanel, myAnimalPane, container);
+		leftPane.getChildren().addAll(myAnimalPane, container);
 		myRoot.setLeft(leftPane);
 	}
 
 	private void populateRightPane() {
 		// TODO: Jordan - inset magic numbers
-		VBox rightPane = graphics.createVBoxPane(RIGHT_PANE_WIDTH, SCENE_HEIGHT, new Insets(51, 45, 15, 0));
+		VBox rightPane = graphics.createVBoxPane(RIGHT_PANE_WIDTH, SCENE_HEIGHT);
+		rightPane.getStyleClass().add("right-pane");
+		
 		TabPane informationTabPane = createTabInfoPane();
 		
 		rightPane.getChildren().addAll(informationTabPane);
@@ -130,13 +133,18 @@ public class SLogoView implements AbstractSLogoView {
 		return tab;
 	}
 	
-	private HBox createUpperPanel() {
+	private void populateTopPane() {
 		HBox container = new HBox(20);
+		container.getStyleClass().add("top-pane");
+		
 		Text title = new Text("SLogo");
 		title.getStyleClass().add("slogo-title");
+		
 		ComboBox<String> languageComboBox = createLanguageChooser();
+		languageComboBox.getStyleClass().add("language-button");
+
 		container.getChildren().addAll(title, languageComboBox);
-		return container;
+		myRoot.setTop(container);
 	}
 
 	@Override
@@ -144,7 +152,6 @@ public class SLogoView implements AbstractSLogoView {
 		myAnimalPane = new Pane();
 		myAnimalPane.setPrefWidth(LEFT_PANE_WIDTH);
 		myAnimalPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
-//		myAnimalPane.setBorder(new Border(new BorderStroke(null, BorderStrokeStyle.SOLID, null, null)));
 		myAnimalPane.getStyleClass().add("animal-pane");
 	}
 
