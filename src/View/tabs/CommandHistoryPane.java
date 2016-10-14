@@ -33,6 +33,7 @@ public class CommandHistoryPane implements ListViewPane, GenericPane<String> {
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
 					//TODO: Jordan - Add run functionality to clicking
+					// Add command to text area instead of running actually
 					System.out.println("clicked on " + content.getSelectionModel().getSelectedItem());
 				}
 			}
