@@ -63,7 +63,7 @@ handle rendering the turtle's movement, pen, etc. <br/>
 
 ```
 
-Backend Internal
+**Backend Internal**
 * Math 
     * public double sum(double expression1, double expression2) 
     * public double difference(double expression1, double expression2) 
@@ -97,8 +97,8 @@ Backend Internal
     * public double toDouble(String a)
     * public void setName(String name)
     *public boolean isNumber(String a)
-* Parser
-Backend External
+* Parser </br>
+**Backend External**
 * Animal
     * public double forward(double pixels) 
     * public double back(double pixels) 
