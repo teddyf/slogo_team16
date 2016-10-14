@@ -30,31 +30,40 @@ also right the data structure that stores all of these variables. More specifc A
 Back-end External: As of now, this API will handle turtle positioning.  There is a superclass for animals just in case we need
 to make other animals, but more importantly, this type will encompass positioning, drawing, etc.  A lot of this will be closely 
 tied with the front end via a handler.  Also may handle the controller because this is also connected with the front end (MVC)
-(remove or add to this if you want.  I really don't know much on this...)
 
 Front-end External: Handles the controll interface with backend (def add to this)
 
 Front-end Internal: Handles GUI and the View part of the MVC (def add to this)
 ```public void updateTurtle(String command)```: Updates the turtle based on command  
 ```public String[] parseCommand(String command)```: Parses the command into a HashMap of the lines  
-Ie. 
-{1: [“To”, “RandomColor”],
-2: [“repeat”, “4”, “[“, “fd”, “:length”, “rt”, “90” ]]}
 
 ```public void translateCommand(String[] command)``` : translates the command
 
 
 ## API Example Code
-It is especially important in helping others understand how to use your APIs to provide example code. It should be clear from this code which objects are responsible for completing each part of the task, but you do not have to implement the called functions.
-Show actual "sequence of code" that implements the following use case: 
-The user types 'fd 50' in the command window, and sees the turtle move in the display window leaving a trail, and the command is added to the environment's history.
-Note, clearly show the flow of calls to public methods needed to complete this example, indicating which class contains each method called. It is not necessary to understand exactly how parsing works in order to complete this example, just what the result of parsing the command will be.
-Additionally, each member of the team should create one use case of their own (and example code) for the part of the project for which they intend to take responsibility. These can still be done as a group, but should represent a variety of areas of the overall project.
-Design Considerations 
-This section describes any issues which need to be addressed or resolved before attempting to devise a complete design solution. Include any design decisions that the group discussed at length (include pros and cons from all sides of the discussion) as well as any ambiguities, assumptions, or dependencies regarding the program that impact the overall design.
+```java
+//Example code for turtle movement 
+/**
+	 * Moves the animal forward in its current heading by a specified number of pixels
+	 * @param pixels - the specified number of pixels
+	 * @return the number of pixels
+	 */
+	public double forward(double pixels) {
+		double angle = 90 - heading;
+		this.x += Math.cos(angle)*pixels;
+		this.y -= Math.sin(angle)*pixels;
+		return pixels;
+	}
+
+```
+
+### Design Considerations 
+* The format/data structure of the method mappings
+* How the slogo code will be parsed into commands that correspond with the mapping
+* How the user will set the turtle in the front end, and how this will be communicated to the backend
 
 ## Team Responsibilities
 Aninda: Back-End External
-Teddy: Back-End Internal  
+Teddy: Back-End Internal/Back end integration  
 Jordan: Front-End 
-Lucy: Front-End
+Lucy: Front-End/Front End integration
