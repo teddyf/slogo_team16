@@ -40,15 +40,13 @@ import javafx.scene.text.Text;
  * @author Jordan Frazier
  *
  */
-public class SLogoView {
+public class SLogoView extends AbstractSLogoView {
 	private Scene myScene;
 	private Graphics graphics;
-	public static final int SCENE_WIDTH = 1200;
-	public static final int SCENE_HEIGHT = 700;
-	private static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
-	private static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
+
 	private static final int TURTLE_HEIGHT = 15;
 	private static final int TURTLE_WIDTH = 15;
+	private static final int NUM_ANIMALS = 1;
 	
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
@@ -56,7 +54,7 @@ public class SLogoView {
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
-	private final GenericPane historyPane = new CommandHistoryPane();
+	private final GenericPane<String> historyPane = new CommandHistoryPane();
 	
 	public SLogoView() {
 		graphics = new Graphics();
@@ -70,7 +68,7 @@ public class SLogoView {
 		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateLeftPane();
 		populateRightPane();
-		populateGridWithAnimals(1);
+		populateGridWithAnimals(NUM_ANIMALS);
 		return myScene;
 	}
 
@@ -85,7 +83,7 @@ public class SLogoView {
 	}
 
 	private void populateRightPane() {
-		// TODO: Jordan - something about insets? 
+		// TODO: Jordan - inset magic numbers
 		VBox rightPane = graphics.createVBoxPane(RIGHT_PANE_WIDTH, SCENE_HEIGHT, new Insets(51, 45, 15, 0));
 		TabPane informationTabPane = createTabInfoPane();
 		
@@ -103,22 +101,22 @@ public class SLogoView {
 		return tabPane;
 	}
 	
-	private Tab createTab(GenericPane pane) {
+	private <T> Tab createTab(GenericPane<T> pane) {
 		Tab tab = new Tab();
-		tab.setContent((Node) pane);
+		tab.setContent(pane.getTabContent());
 		tab.setText(pane.getTabName());
 		tab.setClosable(false);
 		return tab;
 	}
 	
 	private Tab createExampleCommandsTab() {
-		GenericPane pane = new ExampleCommandsPane();
+		GenericPane<String> pane = new ExampleCommandsPane();
 		Tab tab = createTab(pane);
 		return tab;
 	}
 	
 	private Tab createVariablesTab() {
-		GenericPane pane = new VariablesPane();
+		GenericPane<String> pane = new VariablesPane();
 		Tab tab = createTab(pane);
 		return tab;
 	}
@@ -129,7 +127,7 @@ public class SLogoView {
 	}
 	
 	private Tab createOptionsTab() {
-		GenericPane pane = new OptionsPane();
+		GenericPane<HBox> pane = new OptionsPane();
 		Tab tab = createTab(pane);
 		return tab;
 	}
