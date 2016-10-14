@@ -1,5 +1,5 @@
 ## Introduction
-The goal of the project is to create a compiler and graphical interface for the SLogo language. The project must be capable of accepting user input nad displaying the graphical result of an algorithm coded in SLogo.
+The goal of the project is to create a compiler and graphical interface for the SLogo language. The project must be capable of accepting user input and displaying the graphical result of an algorithm coded in SLogo.
 
 
 ## Design Overview
@@ -31,12 +31,18 @@ Back-end External: As of now, this API will handle turtle positioning.  There is
 to make other animals, but more importantly, this type will encompass positioning, drawing, etc.  A lot of this will be closely 
 tied with the front end via a handler.  Also may handle the controller because this is also connected with the front end (MVC)
 
-Front-end External: Handles the controll interface with backend (def add to this)
+Front-end External: Handles the control interface with backend. Handles binding with the model parameters so that the view will update.
+This API will encompass the 'controller', which exists as an intermediate between the front and back end. It is to be determined if the controller
+will exist more as a back or front end application. A console class will act as the text input area that sends the user's command to the 
+controller or parser, and then to the specific back end method. 
 
-Front-end Internal: Handles GUI and the View part of the MVC (def add to this)
-```public void updateTurtle(String command)```: Updates the turtle based on command  
-```public String[] parseCommand(String command)```: Parses the command into a HashMap of the lines  
-
+Front-end Internal: Handles GUI and the View part of the MVC:<br>
+There is a 'tab' package, that houses the available tabs for the tab pane. Extra tabs will easily be added by inheriting from a generic tab. 
+Internally, the tabs will be created and instantiated, with public methods to get their contained ListViews, Groups, etc. 
+Separate graphics and animate classes will be available with public methods to create any necessary Node for the view. The animate class will
+handle rendering the turtle's movement, pen, etc. 
+```public void updateTurtle(String command)```: Updates the turtle based on command  <br>
+```public String[] parseCommand(String command)```: Parses the command into a HashMap of the lines  <br>
 ```public void translateCommand(String[] command)``` : translates the command
 
 
@@ -65,5 +71,5 @@ Front-end Internal: Handles GUI and the View part of the MVC (def add to this)
 ## Team Responsibilities
 Aninda: Back-End External
 Teddy: Back-End Internal/Back end integration  
-Jordan: Front-End 
+Jordan: Front-End
 Lucy: Front-End/Front End integration
