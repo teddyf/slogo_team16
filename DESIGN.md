@@ -36,13 +36,13 @@ This API will encompass the 'controller', which exists as an intermediate betwee
 will exist more as a back or front end application. A console class will act as the text input area that sends the user's command to the 
 controller or parser, and then to the specific back end method. 
 
-Front-end Internal: Handles GUI and the View part of the MVC:<br>
+Front-end Internal: Handles GUI and the View part of the MVC:<br />
 There is a 'tab' package, that houses the available tabs for the tab pane. Extra tabs will easily be added by inheriting from a generic tab. 
 Internally, the tabs will be created and instantiated, with public methods to get their contained ListViews, Groups, etc. 
 Separate graphics and animate classes will be available with public methods to create any necessary Node for the view. The animate class will
-handle rendering the turtle's movement, pen, etc. 
-```public void updateTurtle(String command)```: Updates the turtle based on command  <br>
-```public String[] parseCommand(String command)```: Parses the command into a HashMap of the lines  <br>
+handle rendering the turtle's movement, pen, etc. <br/>
+```public void updateTurtle(String command)```: Updates the turtle based on command  <br/>
+```public String[] parseCommand(String command)```: Parses the command into a HashMap of the lines  <br/>
 ```public void translateCommand(String[] command)``` : translates the command
 
 
