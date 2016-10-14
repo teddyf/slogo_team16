@@ -97,8 +97,8 @@ handle rendering the turtle's movement, pen, etc. <br/>
     * public double toDouble(String a)
     * public void setName(String name)
     *public boolean isNumber(String a)
-* Parser </br>
-**Backend External**
+* Parser <br/>
+**Backend External** 
 * Animal
     * public double forward(double pixels) 
     * public double back(double pixels) 
