@@ -1,6 +1,9 @@
 package animal;
 
 import View.SLogoView;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
 /**
@@ -12,25 +15,31 @@ public abstract class Animal {
 	private double height;
 	private double x;
 	private double y;
+	private StringProperty xProperty;
+	private StringProperty yProperty;
 	private double heading;
 	private int pen; 
 	private int showing;
 
 	public Animal(double width, double height) {
+		xProperty = new SimpleStringProperty();
+		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		this.x = SLogoView.SCENE_WIDTH/2;
-		this.y = SLogoView.SCENE_HEIGHT/2;
+		setX(SLogoView.SCENE_WIDTH/2);
+		setY(SLogoView.SCENE_HEIGHT/2);
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
 	}
 	
 	public Animal(double width, double height, double x, double y) {
+		xProperty = new SimpleStringProperty();
+		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		this.x = x + SLogoView.SCENE_WIDTH/2;
-		this.y = SLogoView.SCENE_HEIGHT/2 - y;
+		setX(x);
+		setY(y);
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -43,8 +52,8 @@ public abstract class Animal {
 	 */
 	public double forward(double pixels) {
 		double angle = 90 - heading;
-		this.x += Math.cos(angle)*pixels;
-		this.y -= Math.sin(angle)*pixels;
+		setX(getX() + Math.cos(angle)*pixels);
+		setY(getY() - Math.sin(angle)*pixels);
 		return pixels;
 	}
 		
@@ -195,14 +204,24 @@ public abstract class Animal {
 		return showing;
 	}
 		
+	public StringProperty getXProperty() {
+		return xProperty;
+	}
+
+	public StringProperty getYProperty() {
+		return yProperty;
+	}
+
 	/*****SETTERS*****/
-		
+	
 	public void setX(double x) {
 		this.x = x;
+		this.xProperty.setValue(String.valueOf(x));
 	}
 
 	public void setY(double y) {
 		this.y = y;
+		this.yProperty.setValue(String.valueOf(y));
 	}
 	
 	public void setHeight(double height) {

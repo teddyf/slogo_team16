@@ -1,5 +1,6 @@
 package View;
 
+import animal.Animal;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -23,6 +24,10 @@ import javafx.stage.Screen;
  *
  */
 public class Graphics {
+	
+	public DisplayVariable createDisplayVariable(String label, Animal animal) {
+		return new DisplayVariable(label, animal);
+	}
 	
 	public Image createImage(String imageLocation) {
 		Image image = new Image(getClass().getClassLoader().getResourceAsStream(imageLocation));

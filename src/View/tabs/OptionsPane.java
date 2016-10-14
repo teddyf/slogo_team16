@@ -1,40 +1,50 @@
 package View.tabs;
 
 import View.Colors;
+import View.DisplayVariable;
+import View.Graphics;
+import animal.Animal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
+
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
 public class OptionsPane implements GenericPane<HBox> {
 
 	private String displayName = "Options";
 	private ListView<HBox> content;
+	private Graphics graphics;
+	private Animal animal;
 	
+	private static final String X_COORDINATE = "x: ";
 	private static final String PEN_COLOR = "Pen Color: ";
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 	
 	private static final String[] COLORS = {Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString()};
 
-	public OptionsPane() {
+	public OptionsPane(Animal animal) {
+		this.animal = animal;
+		graphics = new Graphics();
 		content = new ListView<>();
 		createAllOptions();
 	}
 	
 	private void createAllOptions() {
-//		VBox container = new VBox(10);
-		HBox penColor = createOption(PEN_COLOR, COLORS);
-		HBox backgroundColor = createOption(BACKGROUND_COLOR, COLORS);
-//		container.getChildren().addAll(penColor, backgroundColor);
-		content.getItems().addAll(penColor, backgroundColor);
+		HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
+		HBox backgroundColor = createComboBoxOption(BACKGROUND_COLOR, COLORS);
+		DisplayVariable displayX = graphics.createDisplayVariable(X_COORDINATE, animal);
+		content.getItems().addAll(penColor, backgroundColor, displayX.getContainer());
 	}
 
-	private HBox createOption(String name, String[] options) {
+	private HBox createComboBoxOption(String name, String[] options) {
 		HBox container = new HBox(10);
 		Label lbl = new Label(name);
 		

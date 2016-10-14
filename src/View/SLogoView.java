@@ -18,7 +18,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -66,7 +65,6 @@ public class SLogoView implements AbstractSLogoView {
 		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateLeftPane();
 		populateRightPane();
-		populateGridWithAnimals();
 		return myScene;
 	}
 
@@ -75,7 +73,8 @@ public class SLogoView implements AbstractSLogoView {
 		HBox upperPanel = createUpperPanel();
 		HBox container = createConsole();
 		createAnimalGrid();
-		
+		populateGridWithAnimals();
+
 		leftPane.getChildren().addAll(upperPanel, myAnimalPane, container);
 		myRoot.setLeft(leftPane);
 	}
@@ -125,7 +124,9 @@ public class SLogoView implements AbstractSLogoView {
 	}
 	
 	private Tab createOptionsTab() {
-		GenericPane<HBox> pane = new OptionsPane();
+		// TODO: Jordan - only getting first animal now. eventually will possible have to ID each animal 
+		// and have different options for each animal ID
+		GenericPane<HBox> pane = new OptionsPane(myAnimalList.get(0));
 		Tab tab = createTab(pane);
 		return tab;
 	}
@@ -181,7 +182,7 @@ public class SLogoView implements AbstractSLogoView {
 	// what animals they want, or how many they want
 	private void fillAnimalList(int numAnimals) {
 		for (int i = 0; i < numAnimals; i++) {
-			Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT, (myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX()) / 2,
+			Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT, (myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX() - 15) / 2,
 					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2);
 			myAnimalList.add(turtle);
 		}
@@ -204,7 +205,7 @@ public class SLogoView implements AbstractSLogoView {
 		if (isValidLocation(animal.getX(), animal.getY())) {
 			addAnimalToGrid(animal);
 		} else {
-			// not valid location. error dialog. or maybe not
+			System.out.println("NOT INSIDE ANIMAL PANE");
 		}
 	}
 
@@ -218,7 +219,7 @@ public class SLogoView implements AbstractSLogoView {
 
 	// are we going to let turtle go off of the screen?
 	private boolean isValidLocation(double x, double y) {
-		return (x > myScene.getX()) && (y > myScene.getY()) && (x < myScene.getWidth()) && (y < myScene.getHeight());
+		return (x > myAnimalPane.getLayoutX()) && (y > myAnimalPane.getLayoutY()) && (x < myAnimalPane.getPrefWidth()) && (y < myAnimalPane.getPrefHeight());
 	}
 
 	@Override

@@ -1,10 +1,13 @@
 package View.tabs;
 
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
-
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
 public class VariablesPane implements ListViewPane, GenericPane<String> {
 
 	private String displayName = "Variables";
