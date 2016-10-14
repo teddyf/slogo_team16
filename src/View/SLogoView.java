@@ -211,8 +211,7 @@ public class SLogoView implements AbstractSLogoView {
 	private void addAnimalToGrid(Animal animal) {
 		Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
 				Color.WHITE, Color.WHITE);
-		Image turtle = graphics.createImage("turtleLogo.png");
-		ImagePattern turtlePattern = new ImagePattern(turtle);
+		ImagePattern turtlePattern = new ImagePattern(animal.getImage());
 		s.setFill(turtlePattern);
 		myAnimalPane.getChildren().add(s);
 	}

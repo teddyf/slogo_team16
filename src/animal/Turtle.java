@@ -10,21 +10,24 @@ public class Turtle extends Animal {
 	
 	public Turtle(double width, double height) {
 		super(width, height);
+		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
 	}
 	
 	public Turtle(double width, double height, double x, double y) {
 		super(width, height, x, y);
+		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
 	}
 	
 	@Override
 	public void update() {
+		// TODO - update turtle
 		
 	}
 	
 	/*****GETTERS*****/
-	
+	@Override
 	public Image getImage() {
 		return turtleAppearance;
 	}

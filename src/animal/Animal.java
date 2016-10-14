@@ -1,6 +1,7 @@
 package animal;
 
 import View.SLogoView;
+import javafx.scene.image.Image;
 
 /**
  * @author Aninda Manocha, Teddy Franceschi
@@ -223,5 +224,7 @@ public abstract class Animal {
 	public abstract void update();
 	
 	public abstract void setImagePath(String imagePath);
+	
+	public abstract Image getImage();
 
 }
