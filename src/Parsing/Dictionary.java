@@ -1,7 +1,9 @@
 package Parsing;
 
-import Animals.*;
 import java.util.*;
+
+import animal.*;
+
 import java.lang.reflect.*;
 
 /**

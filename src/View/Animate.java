@@ -1,6 +1,6 @@
 package View;
 
-import Animals.Turtle;
+import animal.Turtle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;

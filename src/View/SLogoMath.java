@@ -44,4 +44,20 @@ public class SLogoMath {
 	public double tan(double degrees) {
 		return Math.tan(degrees*Math.PI/180);
 	}
+	
+	public double atan(double degrees) {
+		return Math.atan(degrees*Math.PI/180);
+	}
+	
+	public double log(double expression) {
+		return Math.log(expression);
+	}
+	
+	public double pow(double base, double exponent) {
+		return Math.pow(base, exponent);
+	}
+	
+	public double pi() {
+		return Math.PI;
+	}
 }

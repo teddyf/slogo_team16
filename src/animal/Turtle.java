@@ -1,4 +1,4 @@
-package Animals;
+package animal;
 import View.Graphics;
 import javafx.scene.image.Image;
 

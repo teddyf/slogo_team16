@@ -3,8 +3,8 @@ package View;
 import java.util.ArrayList;
 import java.util.List;
 
-import Animals.Animal;
-import Animals.Turtle;
+import animal.Animal;
+import animal.Turtle;
 import View.tab_panes.CommandHistoryPane;
 import View.tab_panes.ExampleCommandsPane;
 import View.tab_panes.GenericPane;
