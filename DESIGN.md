@@ -63,6 +63,70 @@ handle rendering the turtle's movement, pen, etc. <br/>
 
 ```
 
+Backend Internal
+* Math 
+    * public double sum(double expression1, double expression2) 
+    * public double difference(double expression1, double expression2) 
+    * public double product(double expression1, double expression2) 
+    * public double quotient(double expression1, double expression2) 
+    * public double remainder(double expression1, double expression2) 
+    * public double minus(double expression) 
+    * public double random(double max) 
+    * public double sin(double degrees) 
+    * public double cos(double degrees) 
+    * public double tan(double degrees) 
+    * public double atan(double degrees)
+    * public double log(double expression) 
+    * public double pow(double base, double exponent) 
+    * public double pi() 
+* Boolean 
+    * public int less(double expression1, double expression2) 
+    * public int greater(double expression1, double expression2) 
+    * public int equal(double expression1, double expression2) 
+    * public int notEqual(double expression1, double expression2) 
+    * public int and(int test1, int test2)	
+    * public int or(int test1, int test2)
+    * public int not(int test)
+* Library
+    * public void appendToClassSet(Class c)
+    * public Method getMethod(String className, String methodName)
+    * public HashMap<String, ArrayList<Class>> populateMethodToClass(HashSet<Class> classes)
+* Command (Make/Set, Repeat, DoTimes, For, If, If/Else, To)
+    * public void logic(String[] params)
+    * public int toInt(String a)
+    * public double toDouble(String a)
+    * public void setName(String name)
+    *public boolean isNumber(String a)
+* Parser
+Backend External
+* Animal
+    * public double forward(double pixels) 
+    * public double back(double pixels) 
+    * public double right(double degrees) 
+    * public double left(double degrees) 
+    * public double setHeading(double heading) 
+    * public double setXY(double x, double y) 
+    * public int penDown() 
+    * public int penUp() 
+    * public int showTurtle() 
+    * public int hideTurtle() 
+    * public double home() 
+    * public double clearScreen() 
+    * public double getWidth() 
+    * public double getHeight() 
+    * public double getX() 
+    * public double getY() 
+    * public double getHeading() 
+    * public int getPenDown() 
+    * public int getShowing() 
+    * public void setX(double x) 
+    * public void setY(double y) 
+    * public void setHeight(double height) 
+    * public void setWidth(double width) 
+    * public void setPen(int pen) 
+    * public void setShowing(int showing) 
+    *public abstract void update()
+
 ### Design Considerations 
 * The format/data structure of the method mappings
 * How the slogo code will be parsed into commands that correspond with the mapping
