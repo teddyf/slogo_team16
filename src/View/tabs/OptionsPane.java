@@ -25,6 +25,8 @@ public class OptionsPane implements GenericPane<HBox> {
 	private Animal animal;
 	
 	private static final String X_COORDINATE = "x: ";
+	private static final String Y_COORDINATE = "y: ";
+
 	private static final String PEN_COLOR = "Pen Color: ";
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 	
@@ -40,8 +42,10 @@ public class OptionsPane implements GenericPane<HBox> {
 	private void createAllOptions() {
 		HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		HBox backgroundColor = createComboBoxOption(BACKGROUND_COLOR, COLORS);
-		DisplayVariable displayX = graphics.createDisplayVariable(X_COORDINATE, animal);
-		content.getItems().addAll(penColor, backgroundColor, displayX.getContainer());
+		DisplayVariable displayX = graphics.createDisplayVariable(X_COORDINATE, animal.getXProperty());
+		DisplayVariable displayY = graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
+
+		content.getItems().addAll(penColor, backgroundColor, displayX.getContainer(), displayY.getContainer());
 	}
 
 	private HBox createComboBoxOption(String name, String[] options) {

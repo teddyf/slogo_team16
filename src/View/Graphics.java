@@ -1,6 +1,6 @@
 package View;
 
-import animal.Animal;
+import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -25,7 +25,7 @@ import javafx.stage.Screen;
  */
 public class Graphics {
 	
-	public DisplayVariable createDisplayVariable(String label, Animal animal) {
+	public DisplayVariable createDisplayVariable(String label, StringProperty animal) {
 		return new DisplayVariable(label, animal);
 	}
 	

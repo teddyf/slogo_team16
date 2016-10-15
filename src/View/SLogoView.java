@@ -2,6 +2,8 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
@@ -12,16 +14,12 @@ import animal.Animal;
 import animal.Turtle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -44,6 +42,8 @@ public class SLogoView implements AbstractSLogoView {
 	private static final int TURTLE_HEIGHT = 15;
 	private static final int TURTLE_WIDTH = 15;
 	private static final int NUM_ANIMALS = 1;
+	private static final String EN_RESRC_PATH = "resources/languages/English";
+	private static final String CHI_RESRC_PATH = "resources/languages/Chinese";
 	
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
@@ -51,6 +51,7 @@ public class SLogoView implements AbstractSLogoView {
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
+	private ResourceBundle myResources;
 	private final GenericPane<String> historyPane = new CommandHistoryPane();
 	
 	public SLogoView() {
@@ -58,6 +59,7 @@ public class SLogoView implements AbstractSLogoView {
 		buttons = new Buttons();
 		animation = new Animate();
 		myAnimalList = new ArrayList<>();
+		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
 	}
 
 	public Scene init() {
@@ -137,7 +139,7 @@ public class SLogoView implements AbstractSLogoView {
 		HBox container = new HBox(20);
 		container.getStyleClass().add("top-pane");
 		
-		Text title = new Text("SLogo");
+		Text title = new Text(myResources.getString("SLogo"));
 		title.getStyleClass().add("slogo-title");
 		
 		ComboBox<String> languageComboBox = createLanguageChooser();
@@ -237,8 +239,15 @@ public class SLogoView implements AbstractSLogoView {
 		languageSelector.setValue(languages[0]);
 		languageSelector.valueProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				System.out.println("combbox value is: " + newValue);
-				//TODO: change the language
+				System.out.println("combobox value is: " + newValue);
+				if (newValue.equals("Chinese")) {
+					myResources = ResourceBundle.getBundle(CHI_RESRC_PATH);
+				} else if (newValue.equals("English")) {
+					myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+				}
+				// etc
+				// Loop through a list of all Text Values that should be updated and update them? 
+//				currentText.setText(myResources.getString(currentText.getText()));
 			}
 		});
 		return languageSelector;
