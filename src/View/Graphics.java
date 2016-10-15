@@ -81,8 +81,8 @@ public class Graphics {
 		VBox vbox = new VBox(10);
 		vbox.setMaxWidth(width);
 		vbox.setMinWidth(width);
+		vbox.setMaxHeight(height);
 		vbox.setMinHeight(height - 30);
-		vbox.setPadding(new Insets(15));
 		return vbox;
 	}
 	
