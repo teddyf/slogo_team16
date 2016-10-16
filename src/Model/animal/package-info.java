@@ -5,4 +5,4 @@
  * @author theodorefranceschi
  *
  */
-package animal;
+package Model.animal;

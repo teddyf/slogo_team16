@@ -1,4 +1,4 @@
-package animal;
+package Model.animal;
 
 import java.util.Observable;
 

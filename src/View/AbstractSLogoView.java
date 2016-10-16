@@ -7,11 +7,6 @@ import javafx.scene.layout.HBox;
 
 public interface AbstractSLogoView {
 	
-	static final int SCENE_WIDTH = 1200;
-	static final int SCENE_HEIGHT = 700;
-	static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
-	static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
-	
 	public Scene init();
 	
 	//I have literally no idea what this does lol

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Model.animal.Animal;
+import Model.animal.Turtle;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
 import View.tabs.OptionsPane;
 import View.tabs.VariablesPane;
-import animal.Animal;
-import animal.Turtle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
@@ -38,15 +38,20 @@ public class SLogoView implements AbstractSLogoView {
 	private Scene myScene;
 	private Graphics graphics;
 	
+	
+	static final int SCENE_WIDTH = 1200;
+	static final int SCENE_HEIGHT = 700;
+	static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 	private static final int TURTLE_HEIGHT = 15;
 	private static final int TURTLE_WIDTH = 15;
-	private static final int NUM_ANIMALS = 1;
 	private static final String EN_RESRC_PATH = "resources/languages/English";
 	private static final String CHI_RESRC_PATH = "resources/languages/Chinese";
 	
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
 	private List<Animal> myAnimalList;
+	private int NUM_ANIMALS = 1;
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
