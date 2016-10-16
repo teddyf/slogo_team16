@@ -22,12 +22,14 @@ import javafx.scene.layout.VBox;
 public class Buttons {
 	private Graphics graphic = new Graphics();
 	private Parser parse = new Parser();
+	private HelpScreen helpPage = new HelpScreen();
 
 	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
 		Button clear = createClearButton(console);
-		container.getChildren().addAll(run, clear);
+		Button help = createHTMLHelpButton();
+		container.getChildren().addAll(run, clear, help);
 		return container;
 	}
 
@@ -60,6 +62,14 @@ public class Buttons {
 		return clear;
 	}
 
+	private Button createHTMLHelpButton() {
+		Button help = graphic.createButton("Help");
+		help.setOnAction(e -> {
+			helpPage.displayHelp();
+		});
+		return help;
+	}
+	
 	private void addCommandToHistory(final GenericPane<String> pane, String input) {
 		pane.getAllItems().add(input);
 	}
