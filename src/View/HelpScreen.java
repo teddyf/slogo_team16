@@ -11,6 +11,8 @@ public class HelpScreen {
 	//public static final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 
 	//private final ResourceBundle myResources;
+	public static final int HELP_WIDTH = 800;
+	public static final int HELP_HEIGHT = 600;
     private ClassLoader classLoader;
     private WebEngine webEngine;
     private WebView web;
@@ -25,7 +27,7 @@ public class HelpScreen {
     }
     
     public void displayHelp(){
-    	Group root= newScene.setupNewScene("Help page",500, 500); //TODO: replace with static variables
+    	Group root= newScene.setupNewScene("Help page",HELP_WIDTH, HELP_HEIGHT); //TODO: replace with static variables
     	createWeb();
     	root.getChildren().add(web);
     	
