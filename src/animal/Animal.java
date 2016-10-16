@@ -1,7 +1,8 @@
 package animal;
 
+import java.util.Observable;
+
 import View.SLogoView;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
@@ -10,7 +11,7 @@ import javafx.scene.image.Image;
  * @author Aninda Manocha, Teddy Franceschi
  */
 
-public abstract class Animal {
+public abstract class Animal extends Observable {
 	private double width;
 	private double height;
 	private double x;
@@ -217,11 +218,15 @@ public abstract class Animal {
 	public void setX(double x) {
 		this.x = x;
 		this.xProperty.setValue(String.valueOf(x));
+		setChanged();
+		notifyObservers();
 	}
 
 	public void setY(double y) {
 		this.y = y;
 		this.yProperty.setValue(String.valueOf(y));
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void setHeight(double height) {

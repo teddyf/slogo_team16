@@ -2,7 +2,6 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import View.tabs.CommandHistoryPane;
@@ -87,6 +86,7 @@ public class SLogoView implements AbstractSLogoView {
 		rightPane.getStyleClass().add("right-pane");
 		
 		TabPane informationTabPane = createTabInfoPane();
+		informationTabPane.getStyleClass().add("tab-pane");
 		
 		rightPane.getChildren().addAll(informationTabPane);
 		myRoot.setRight(rightPane);

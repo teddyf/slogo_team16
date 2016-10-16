@@ -1,5 +1,9 @@
 package View;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import animal.Animal;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -10,12 +14,13 @@ import javafx.scene.layout.HBox;
  * @author Jordan Frazier
  *
  */
-public class DisplayVariable {
+public class DisplayVariable implements Observer {
 
 	private Label label;
 	private TextField value;
 	private HBox container;
 	private StringProperty animalProperty;
+	private Animal animal;
 
 	public DisplayVariable(String label, StringProperty animalProperty) {
 		this.label = new Label(label);
@@ -70,6 +75,12 @@ public class DisplayVariable {
 
 	public void setValue(double value) {
 		this.value.setText(String.valueOf(value));
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO: UPDATE OBSERVABLE
+		
 	}
 
 }
