@@ -13,8 +13,15 @@ public class Main extends Application {
 	public static final String title = "Slogo";
 	private SLogoView slogo;
 
+	private Stage primaryStage;
+	
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
 	@Override
 	public void start(Stage s){
+		primaryStage = s;
 		slogo = new SLogoView();
 		Scene scene = slogo.init();
 		scene.getStylesheets().add(this.getClass().getResource("SLogoStyle.css").toExternalForm());
