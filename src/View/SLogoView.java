@@ -2,10 +2,13 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import Controller.AnimalController;
 import Controller.Controller;
+import Model.AnimalPane;
 import Model.animal.Animal;
 import Model.animal.Turtle;
 import View.helper.Animate;
@@ -41,7 +44,7 @@ import javafx.scene.text.Text;
  * @author Jordan Frazier
  *
  */
-public class SLogoView implements AbstractSLogoView {
+public class SLogoView implements AbstractSLogoView, Observer {
 	private Scene myScene;
 	private Graphics graphics;
 	
@@ -57,7 +60,7 @@ public class SLogoView implements AbstractSLogoView {
 	
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
-	private List<Animal> myAnimalList;
+	private List<AnimalPaneGUI> myAnimalGUIList;
 	private int NUM_ANIMALS = 1;
 	private Buttons buttons;
 	private Console console;
@@ -70,7 +73,7 @@ public class SLogoView implements AbstractSLogoView {
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
-		myAnimalList = new ArrayList<>();	
+		myAnimalGUIList = new ArrayList<>();	
 		myController = new AnimalController();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
 	}
@@ -146,7 +149,7 @@ public class SLogoView implements AbstractSLogoView {
 	private Tab createOptionsTab() {
 		// TODO: Jordan - only getting first animal now. eventually will possible have to ID each animal 
 		// and have different options for each animal ID
-		GenericPane<HBox> pane = new OptionsPane(myAnimalList.get(0));
+		GenericPane<HBox> pane = new OptionsPane(myAnimalGUIList.get(0));
 		Tab tab = createTab(pane);
 		return tab;
 	}
@@ -199,7 +202,7 @@ public class SLogoView implements AbstractSLogoView {
 	// Maybe specific animal buttons that call this, which adds to animallist,
 	// then the list is completely rendered by calling populateGridWithAnimals()
 	private void addAnimal(Animal animal) {
-		myAnimalList.add(animal);
+		myAnimalGUIList.add(animal);
 		renderAnimalGrid();
 	}
 
@@ -209,7 +212,7 @@ public class SLogoView implements AbstractSLogoView {
 		for (int i = 0; i < numAnimals; i++) {
 			Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT, (myAnimalPane.getPrefWidth() - myAnimalPane.getLayoutX() - 15) / 2,
 					(myAnimalPane.getPrefHeight() - myAnimalPane.getLayoutY()) / 2);
-			myAnimalList.add(turtle);
+			myAnimalGUIList.add(turtle);
 		}
 	}
 
@@ -221,7 +224,7 @@ public class SLogoView implements AbstractSLogoView {
 
 	@Override
 	public void renderAnimalGrid() {
-		for (Animal animal : myAnimalList) {
+		for (Animal animal : myAnimalGUIList) {
 			renderAnimal(animal);
 		}
 	}
@@ -267,6 +270,21 @@ public class SLogoView implements AbstractSLogoView {
 			}
 		});
 		return languageSelector;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		
+		if(o instanceof AnimalPane) {
+			for(AnimalPaneGUI animalGUI : myAnimalGUIList) {
+				if (animalGUI.getAnimalPane() == o) {
+//					for (int animalId : animalGUI.getAnimalPane().getMyAnimalMap().keySet()) {
+						animation.beginAnimation(animalGUI.getAnimalPane());
+//					}
+				}
+			}
+		}
+		
 	}
 
 }
