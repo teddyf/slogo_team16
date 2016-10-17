@@ -6,7 +6,6 @@ import View.SLogoView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * @author Aninda Manocha, Teddy Franceschi
@@ -272,7 +271,5 @@ public abstract class Animal extends Observable {
 	public abstract void setImagePath(String imagePath);
 	
 	public abstract Image getImage();
-	
-	public abstract ImageView getImageView();
 
 }

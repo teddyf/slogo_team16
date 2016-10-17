@@ -9,20 +9,17 @@ import java.util.Observer;
 
 import Model.animal.Animal;
 import View.helper.CoordinatePair;
-import javafx.geometry.Point2D;
 
 public class AnimalPane extends Observable implements Observer {
 
 	private Map<Integer, Animal> myAnimalMap = new HashMap<>();
-//	private List<Animal> myAnimalMap;
-	private List<String> myCommandHistory;
+	private List<String> myCommandHistory = new ArrayList<>();
 
 	// <string = name of variable, string/other? = value / expression>
-	private Map<String, String> myVariables;
+	private Map<String, String> myVariables = new HashMap<>();
 	
 	// Map of string ID to List of CoordinatePair<double x, double y>
-//	private Map<String, List<CoordinatePair>> coordinateMap;
-	private List<Point2D> coordinateMap;
+	private Map<String, List<CoordinatePair>> coordinateMap;
 
 	private int animalID;
 
@@ -31,7 +28,6 @@ public class AnimalPane extends Observable implements Observer {
 		animalID = 0;
 		// map of AnimalPane ID to Animal (for multiple animals on same pane)
 		myAnimalMap = new HashMap<Integer, Animal>();
-//		myAnimalMap = new ArrayList<Animal>();
 		
 		//Map of variable names and expressions
 		myVariables = new HashMap<String, String>();
@@ -39,10 +35,7 @@ public class AnimalPane extends Observable implements Observer {
 		//list of all executed commands
 		myCommandHistory = new ArrayList<String>();
 		//list of Animal ID and Coordinate Lists for translation rendering
-		// should this just be a list? 
-		coordinateMap = new ArrayList<Point2D>();
-//		coordinateMap = new HashMap<String, List<CoordinatePair>>();
-		
+		coordinateMap = new HashMap<String, List<CoordinatePair>>();
 		addAnimal(animal);
 	}
 	
@@ -80,52 +73,13 @@ public class AnimalPane extends Observable implements Observer {
 			}
 		}
 	}
-
-	public Map<Integer, Animal> getMyAnimalMap() {
-		return myAnimalMap;
-	}
-
-	public List<String> getMyCommandHistory() {
-		return myCommandHistory;
-	}
-
-	public Map<String, String> getMyVariables() {
-		return myVariables;
-	}
-
-//	public Map<String, List<CoordinatePair>> getCoordinateMap() {
-//		return coordinateMap;
-//	}
 	
-	public List<Point2D> getCoordinateMap() {
+	public void setCoordinates(Map<String, List<CoordinatePair>> coordinateMap) {
+		this.coordinateMap = coordinateMap;	
+	}
+	
+	public Map<String, List<CoordinatePair>> getCoordinates() {
 		return coordinateMap;
-	}
-
-	public int getAnimalID() {
-		return animalID;
-	}
-
-	public void setMyAnimalMap(Map<Integer, Animal> myAnimalMap) {
-		this.myAnimalMap = myAnimalMap;
-	}
-
-	public void setMyCommandHistory(List<String> myCommandHistory) {
-		this.myCommandHistory = myCommandHistory;
-	}
-
-	public void setMyVariables(Map<String, String> myVariables) {
-		this.myVariables = myVariables;
-	}
-
-//	public void setCoordinateMap(Map<String, List<CoordinatePair>> coordinateMap) {
-//		this.coordinateMap = coordinateMap;
-//	}
-	public void setCoordinateMap(List<Point2D> coordinateMap) {
-		this.coordinateMap = coordinateMap;
-	}
-
-	public void setAnimalID(int animalID) {
-		this.animalID = animalID;
 	}
 
 

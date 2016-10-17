@@ -1,7 +1,6 @@
 package Model.animal;
 import View.helper.Graphics;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Turtle extends Animal {
 	private Image turtleAppearance;
@@ -38,10 +37,5 @@ public class Turtle extends Animal {
 	@Override
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
-	}
-	
-	@Override
-	public ImageView getImageView() {
-		return new ImageView(turtleAppearance);
 	}
 }
