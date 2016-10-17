@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
-import View.SceneManager;
 import javafx.scene.Group;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;

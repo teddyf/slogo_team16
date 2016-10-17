@@ -1,4 +1,4 @@
-package View;
+package View.helper;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
