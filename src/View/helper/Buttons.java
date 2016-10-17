@@ -5,6 +5,8 @@ import java.util.Map;
 import Controller.AnimalController;
 import Controller.Controller;
 import Parsing.Parser;
+import View.Main;
+import View.SlogoView;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -25,13 +27,15 @@ public class Buttons {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
 	private Controller myController = new AnimalController();
+	private Main main = new Main();
 
-	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane) {
+	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
 		Button clear = createClearButton(console);
 		Button help = createHTMLHelpButton();
-		container.getChildren().addAll(run, clear, help);
+		Button wkspc=createNewWorkspaceButton(slogoView);
+		container.getChildren().addAll(run, clear, help,wkspc);
 		return container;
 	}
 
@@ -72,6 +76,15 @@ public class Buttons {
 		return help;
 	}
 	
+	private Button createNewWorkspaceButton(SlogoView slogoView){
+		Button wkspc = graphic.createButton("Help");
+		wkspc.setOnAction(e -> {
+			System.out.println("main.getSlogoView(): "+main.getSlogoView());
+			slogoView.makeWorkSpace();
+		});
+		return wkspc;
+		
+	}
 	private void addCommandToHistory(final GenericPane<String> pane, String input) {
 		pane.getAllItems().add(input);
 	}

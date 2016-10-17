@@ -2,7 +2,7 @@ package Model.animal;
 
 import java.util.Observable;
 
-import View.SLogoView;
+import View.Workspace;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
@@ -30,8 +30,8 @@ public abstract class Animal extends Observable {
 		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		setX(SLogoView.SCENE_WIDTH/2);
-		setY(SLogoView.SCENE_HEIGHT/2);
+		setX(Workspace.SCENE_WIDTH/2);
+		setY(Workspace.SCENE_HEIGHT/2);
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -120,8 +120,8 @@ public abstract class Animal extends Observable {
 	 */
 	public double setXY(double x, double y) {
 		double distance = Math.sqrt(Math.pow(this.x-x, 2) + Math.pow(this.y-y, 2));
-		this.x = x + SLogoView.SCENE_WIDTH/2;
-		this.y = SLogoView.SCENE_HEIGHT/2 - y;
+		this.x = x + Workspace.SCENE_WIDTH/2;
+		this.y = Workspace.SCENE_HEIGHT/2 - y;
 		return distance;
 	}
 		

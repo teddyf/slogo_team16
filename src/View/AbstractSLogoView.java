@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 // TODO: - Jordan fix this abstract view
 public interface AbstractSLogoView {
 	
-	public Scene init();
+	public void init(SlogoView view);
 	
 	//I have literally no idea what this does lol
 	public <T> ComboBox<? extends T> createLanguageChooser();

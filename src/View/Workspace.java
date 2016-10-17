@@ -41,7 +41,7 @@ import javafx.scene.text.Text;
  * @author Jordan Frazier
  *
  */
-public class SLogoView implements AbstractSLogoView {
+public class Workspace implements AbstractSLogoView {
 	private Scene myScene;
 	private Graphics graphics;
 	
@@ -65,25 +65,37 @@ public class SLogoView implements AbstractSLogoView {
 	private ResourceBundle myResources;
 	private Controller myController;
 	private final GenericPane<String> historyPane = new CommandHistoryPane();
+	private int workSpaceID;
+	private SlogoView mainView;
 	
-	public SLogoView() {
+	public Workspace() {
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
 		myAnimalList = new ArrayList<>();	
 		myController = new AnimalController();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+		workSpaceID=0;
 	}
 
-	public Scene init() {
+	public void setWorkspaceID(int id){
+		this.workSpaceID=id; 
+	}
+	public void init(SlogoView view) {
+		mainView = view;
 		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
+		//myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
-		return myScene;
+		//return myScene;
+	}
+	
+	public BorderPane getMyRoot(){
+		return myRoot;
 	}
 
+	
 	private void populateLeftPane() {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);	
 		leftPane.getStyleClass().add("left-pane");
@@ -192,7 +204,7 @@ public class SLogoView implements AbstractSLogoView {
 	}
 
 	private VBox createButtons() {
-		VBox container = buttons.createConsoleInputButtons(console, historyPane);
+		VBox container = buttons.createConsoleInputButtons(console, historyPane, mainView);
 		return container;
 	}
 
