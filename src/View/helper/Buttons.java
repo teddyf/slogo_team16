@@ -2,6 +2,8 @@ package View.helper;
 
 import java.util.Map;
 
+import Controller.AnimalController;
+import Controller.Controller;
 import Parsing.Parser;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
@@ -21,8 +23,8 @@ import javafx.scene.layout.VBox;
 // also, add the commands to the input area instead of running them immediately on double click
 public class Buttons {
 	private Graphics graphic = new Graphics();
-	private Parser parse = new Parser();
 	private HelpScreen helpPage = new HelpScreen();
+	private Controller myController = new AnimalController();
 
 	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane) {
 		VBox container = new VBox(5);
@@ -47,8 +49,8 @@ public class Buttons {
 			// for errors
 			addCommandToHistory(pane, input);
 
-			Map<Integer, String[]> map = parse.parseInput(input);
-			parse.checkForPrintCommand("print", console); // testing the print
+			Map<Integer, String[]> map = myController.handleInput(input);
+//			myController.checkForPrintCommand("print", console); // testing the print
 															// command
 		});
 		return run;

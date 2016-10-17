@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Controller.AnimalController;
+import Controller.Controller;
 import Model.animal.Animal;
 import Model.animal.Turtle;
 import View.helper.Animate;
@@ -43,8 +45,8 @@ public class SLogoView implements AbstractSLogoView {
 	private Graphics graphics;
 	
 	
-	static final int SCENE_WIDTH = 1200;
-	static final int SCENE_HEIGHT = 700;
+	public static final int SCENE_WIDTH = 1200;
+	public static final int SCENE_HEIGHT = 700;
 	static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
 	static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 	private static final int TURTLE_HEIGHT = 15;
@@ -60,13 +62,15 @@ public class SLogoView implements AbstractSLogoView {
 	private Console console;
 	private Animate animation;
 	private ResourceBundle myResources;
+	private Controller myController;
 	private final GenericPane<String> historyPane = new CommandHistoryPane();
 	
 	public SLogoView() {
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
-		myAnimalList = new ArrayList<>();
+		myAnimalList = new ArrayList<>();	
+		myController = new AnimalController();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
 	}
 

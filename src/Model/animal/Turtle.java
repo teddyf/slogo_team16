@@ -24,6 +24,8 @@ public class Turtle extends Animal {
 	public void update() {
 		// TODO - update turtle
 		
+		setChanged();
+		notifyObservers();
 	}
 	
 	/*****GETTERS*****/

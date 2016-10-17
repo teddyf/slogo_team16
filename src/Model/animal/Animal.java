@@ -21,6 +21,9 @@ public abstract class Animal extends Observable {
 	private double heading;
 	private int pen; 
 	private int showing;
+	private int ID;
+	// Used when multiple turtles are on the same screen, and if user only wants to move a certain animal
+	private boolean isSelected;
 
 	public Animal(double width, double height) {
 		xProperty = new SimpleStringProperty();
@@ -32,6 +35,8 @@ public abstract class Animal extends Observable {
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
+		this.ID = -1;
+		this.isSelected = true;
 	}
 	
 	public Animal(double width, double height, double x, double y) {
@@ -212,6 +217,14 @@ public abstract class Animal extends Observable {
 	public StringProperty getYProperty() {
 		return yProperty;
 	}
+	
+	public int getId() {
+		return ID;
+	}
+	
+	public boolean getSelected() {
+		return isSelected;
+	}
 
 	/*****SETTERS*****/
 	
@@ -243,6 +256,14 @@ public abstract class Animal extends Observable {
 		
 	public void setShowing(int showing) {
 		this.showing = showing;
+	}
+	
+	public void setId(int ID) {
+		this.ID = ID;
+	}
+	
+	public void setSelected(boolean isSelected) {
+		 this.isSelected = isSelected;
 	}
 
 	public abstract void update();
