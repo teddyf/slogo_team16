@@ -45,7 +45,7 @@ public class SlogoView {
 	public void makeWorkSpace() {
 		numWorkspaces++;
 		Tab tab = new Tab();
-		// add borderpane to the tab
+		tab.setText("Workspace #"+numWorkspaces);
 		tab.setContent(initWorkspaceScene().getMyRoot());
 		// add tab to tabpane
 		mainView.getTabs().add(tab);

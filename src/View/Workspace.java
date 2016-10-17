@@ -105,7 +105,9 @@ public class Workspace implements AbstractSLogoView {
 		ScrollPane scrollableAnimalPane = new ScrollPane();
 		scrollableAnimalPane.setContent(myAnimalPane);
 		leftPane.getChildren().addAll(scrollableAnimalPane, container);
-		myRoot.setLeft(leftPane);
+		ScrollPane left = new ScrollPane();
+		left.setContent(leftPane);
+		myRoot.setLeft(left);
 	}
 
 	private void populateRightPane() {

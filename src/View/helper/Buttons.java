@@ -77,7 +77,7 @@ public class Buttons {
 	}
 	
 	private Button createNewWorkspaceButton(SlogoView slogoView){
-		Button wkspc = graphic.createButton("Help");
+		Button wkspc = graphic.createButton("New Workspace");
 		wkspc.setOnAction(e -> {
 			System.out.println("main.getSlogoView(): "+main.getSlogoView());
 			slogoView.makeWorkSpace();
