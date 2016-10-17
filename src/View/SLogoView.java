@@ -93,10 +93,6 @@ public class SLogoView implements AbstractSLogoView {
 		ScrollPane scrollableAnimalPane = new ScrollPane();
 		scrollableAnimalPane.setContent(myAnimalPane);
 		leftPane.getChildren().addAll(scrollableAnimalPane, container);
-		//this makes the entire left side scrollable
-		//ScrollPane left = new ScrollPane();
-		//left.setContent(leftPane);
-		//myRoot.setLeft(left);
 		myRoot.setLeft(leftPane);
 	}
 
