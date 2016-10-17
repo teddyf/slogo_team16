@@ -21,6 +21,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
@@ -89,7 +90,13 @@ public class SLogoView implements AbstractSLogoView {
 		HBox container = createConsole();
 		createAnimalGrid();
 		populateGridWithAnimals();
-		leftPane.getChildren().addAll(myAnimalPane, container);
+		ScrollPane scrollableAnimalPane = new ScrollPane();
+		scrollableAnimalPane.setContent(myAnimalPane);
+		leftPane.getChildren().addAll(scrollableAnimalPane, container);
+		//this makes the entire left side scrollable
+		//ScrollPane left = new ScrollPane();
+		//left.setContent(leftPane);
+		//myRoot.setLeft(left);
 		myRoot.setLeft(leftPane);
 	}
 

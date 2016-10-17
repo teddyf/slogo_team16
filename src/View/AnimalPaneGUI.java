@@ -1,16 +1,17 @@
 package View;
 
 import Model.AnimalPane;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
 public class AnimalPaneGUI {
 
 	private AnimalPane animalPane;
-	private Pane pane;
+	private ScrollPane pane;
 	
 	public AnimalPaneGUI(AnimalPane animalPane) {
 		this.animalPane = animalPane;
-		pane = new Pane();
+		pane = new ScrollPane();
 		
 	}	
 	
@@ -18,7 +19,7 @@ public class AnimalPaneGUI {
 		return animalPane;
 	}
 
-	public Pane getPane() {
+	public ScrollPane getPane() {
 		return pane;
 	}
 
@@ -26,7 +27,7 @@ public class AnimalPaneGUI {
 		this.animalPane = animalPane;
 	}
 
-	public void setPane(Pane pane) {
+	public void setPane(ScrollPane pane) {
 		this.pane = pane;
 	}
 }
