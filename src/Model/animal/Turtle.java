@@ -1,5 +1,5 @@
 package Model.animal;
-import View.Graphics;
+import View.helper.Graphics;
 import javafx.scene.image.Image;
 
 public class Turtle extends Animal {

@@ -6,6 +6,10 @@ import java.util.ResourceBundle;
 
 import Model.animal.Animal;
 import Model.animal.Turtle;
+import View.helper.Animate;
+import View.helper.Buttons;
+import View.helper.Console;
+import View.helper.Graphics;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;

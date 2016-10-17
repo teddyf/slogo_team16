@@ -1,6 +1,7 @@
-package View;
+package View.helper;
 
 import Model.animal.Animal;
+import View.SLogoView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;

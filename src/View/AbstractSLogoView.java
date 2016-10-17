@@ -4,7 +4,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
-
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
+// TODO: - Jordan fix this abstract view
 public interface AbstractSLogoView {
 	
 	public Scene init();

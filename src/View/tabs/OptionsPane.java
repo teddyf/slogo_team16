@@ -1,9 +1,9 @@
 package View.tabs;
 
 import Model.animal.Animal;
-import View.Colors;
-import View.DisplayVariable;
-import View.Graphics;
+import View.helper.Colors;
+import View.helper.DisplayVariable;
+import View.helper.Graphics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;

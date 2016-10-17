@@ -1,4 +1,4 @@
-package View;
+package View.helper;
 
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
