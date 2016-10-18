@@ -5,9 +5,6 @@ import java.util.List;
 
 import Model.AnimalPane;
 import Model.animal.Animal;
-import View.helper.Buttons;
-import View.helper.Console;
-import View.helper.Graphics;
 import javafx.scene.control.ScrollPane;
 
 public class AnimalPaneGUI {

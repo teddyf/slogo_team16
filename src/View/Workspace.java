@@ -29,6 +29,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -52,6 +53,7 @@ public class Workspace implements Observer {
 	public static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 	public  static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
+	public static final int BUTTON_WIDTH = 140;
 	
 	private static final String EN_RESRC_PATH = "resources/languages/English";
 	private static final String CHI_RESRC_PATH = "resources/languages/Chinese";
@@ -70,10 +72,10 @@ public class Workspace implements Observer {
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
-	private HBox turtleContainer;
+	private Pane turtleContainer;
 
 	public Workspace(int workspaceID) {
-		turtleContainer = new HBox(5);
+		turtleContainer = new Pane();
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
@@ -173,7 +175,7 @@ public class Workspace implements Observer {
 
 	public TextArea createConsoleArea() {
 		// TODO: Jordan - input correct width / height (doesn't matter)
-		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - 100, SCENE_HEIGHT / 6);
+		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - BUTTON_WIDTH, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
 		console.initConsole();
 		return consoleArea;
@@ -301,7 +303,12 @@ public class Workspace implements Observer {
 				if (animalGUI.getAnimalPane() == o) {
 					// for (int animalId :
 					// animalGUI.getAnimalPane().getMyAnimalMap().keySet()) {
-					animation.beginAnimation(animalGUI.getAnimalPane());
+					
+//					for(Animal animal : animalGUI.getAnimalPane().getMyAnimalList()) {
+//						if(animal.getSelected()) {
+							animation.beginAnimation(animalGUI.getAnimalPane());
+//						}
+//					}
 					// }
 				}
 			}

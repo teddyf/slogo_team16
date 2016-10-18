@@ -10,7 +10,6 @@ import java.util.Observer;
 import Model.animal.Animal;
 import Model.animal.Turtle;
 import javafx.geometry.Point2D;
-import javafx.scene.control.ScrollPane;
 
 public class AnimalPane extends Observable implements Observer {
 

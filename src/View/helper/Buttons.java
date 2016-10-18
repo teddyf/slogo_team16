@@ -6,6 +6,7 @@ import Controller.AnimalController;
 import Controller.Controller;
 import View.Main;
 import View.SlogoView;
+import View.Workspace;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -40,6 +41,7 @@ public class Buttons {
 
 	private Button createRunButton(Console console, final GenericPane<String> pane) {
 		Button run = graphic.createButton("Run");
+		run.setPrefWidth(Workspace.BUTTON_WIDTH);
 		run.setOnAction(e -> {
 			String input = console.getInput();
 			// TODO: add more checks for empty input
@@ -61,6 +63,7 @@ public class Buttons {
 
 	private Button createClearButton(Console console) {
 		Button clear = graphic.createButton("Clear");
+		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
 		clear.setOnAction(e -> {
 			console.clearConsole();
 		});
@@ -69,6 +72,7 @@ public class Buttons {
 
 	private Button createHTMLHelpButton() {
 		Button help = graphic.createButton("Help");
+		help.setPrefWidth(Workspace.BUTTON_WIDTH);
 		help.setOnAction(e -> {
 			helpPage.displayHelp();
 		});
@@ -76,7 +80,8 @@ public class Buttons {
 	}
 	
 	private Button createNewWorkspaceButton(SlogoView slogoView){
-		Button wkspc = graphic.createButton("New WS");
+		Button wkspc = graphic.createButton("New Workspace");
+		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
 		wkspc.setOnAction(e -> {
 //			System.out.println("main.getSlogoView(): "+main.getSlogoView());
 			slogoView.createNewWorkSpace();

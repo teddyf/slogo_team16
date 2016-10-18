@@ -33,19 +33,24 @@ public class Animate {
 		for (Point2D point : coordinatePairs) {
 			for (int i : animalPane.getMyAnimalMap().keySet()) {
 				Animal animal = animalPane.getMyAnimalMap().get(i);
+				
+				if(!animal.getSelected()) {
+					return;
+				}
+				
 				ImageView animalImage = animal.getImageView();
-				TranslateTransition translation = new TranslateTransition(Duration.millis(500),
-						animalImage);
+				// TODO: Jordan: Time for translation
+				TranslateTransition translation = new TranslateTransition(Duration.millis(500), animalImage);
 				translation.setFromX(animal.getX());
 				translation.setFromY(animal.getY());
 				translation.setToX(point.getX());
 				translation.setToY(point.getY());
-				
-				translation.setOnFinished(e -> { 
+
+				translation.setOnFinished(e -> {
 					animal.setX(point.getX());
-					animal.setY(point.getY());	
+					animal.setY(point.getY());
 				});
-				
+
 				translation.play();
 			}
 		}
