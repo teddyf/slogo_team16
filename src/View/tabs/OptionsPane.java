@@ -1,8 +1,8 @@
 package View.tabs;
 
+import Model.AnimalPane;
 import Model.animal.Animal;
 import View.helper.Colors;
-import View.helper.DisplayVariable;
 import View.helper.Graphics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +22,7 @@ public class OptionsPane implements GenericPane<HBox> {
 	private String displayName = "Options";
 	private ListView<HBox> content;
 	private Graphics graphics;
-	private Animal animal;
+	private AnimalPane animalPane;
 	
 	private static final String X_COORDINATE = "x: ";
 	private static final String Y_COORDINATE = "y: ";
@@ -32,20 +32,22 @@ public class OptionsPane implements GenericPane<HBox> {
 	
 	private static final String[] COLORS = {Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString()};
 
-	public OptionsPane(Animal animal) {
-		this.animal = animal;
+	public OptionsPane(AnimalPane animalPane) {
+		this.animalPane = animalPane;
 		graphics = new Graphics();
 		content = new ListView<>();
+		//Maybe have to loop through all animals in animalPane to create custom buttons for each turtle
 		createAllOptions();
 	}
 	
 	private void createAllOptions() {
 		HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		HBox backgroundColor = createComboBoxOption(BACKGROUND_COLOR, COLORS);
-		DisplayVariable displayX = graphics.createDisplayVariable(X_COORDINATE, animal.getXProperty());
-		DisplayVariable displayY = graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
-
-		content.getItems().addAll(penColor, backgroundColor, displayX.getContainer(), displayY.getContainer());
+//		DisplayVariable displayX = graphics.createDisplayVariable(X_COORDINATE, animal.getXProperty());
+//		DisplayVariable displayY = graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
+		
+		content.getItems().addAll(penColor, backgroundColor);
+//		content.getItems().addAll(penColor, backgroundColor, displayX.getContainer(), displayY.getContainer());
 	}
 
 	private HBox createComboBoxOption(String name, String[] options) {

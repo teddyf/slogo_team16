@@ -13,8 +13,8 @@ public interface Controller {
 	
 	public Map<Integer, String[]> handleInput(String input);
 	
-	public AnimalPane getCurrentAnimalPane();
+	public AnimalPane getActiveAnimalPane();
 	
-	public void setCurrentAnimalPane(AnimalPane currentAnimalPane);
+	public void setActiveAnimalPane(AnimalPane currentAnimalPane);
 	
 }

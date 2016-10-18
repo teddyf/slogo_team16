@@ -18,7 +18,7 @@ public interface AbstractWorkspace {
 	
 	public void populateGridWithAnimals();
 		
-	public void createAnimalGrid();
+	public void createAnimalPane();
 	
 	public void renderAnimalGrid();
 

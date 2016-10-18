@@ -8,14 +8,22 @@ import java.util.Observable;
 import java.util.Observer;
 
 import Model.animal.Animal;
-import View.helper.CoordinatePair;
+import Model.animal.Turtle;
 import javafx.geometry.Point2D;
+import javafx.scene.control.ScrollPane;
 
 public class AnimalPane extends Observable implements Observer {
+	
+	
+	public static final int SCENE_WIDTH = 1200;
+	public static final int SCENE_HEIGHT = 700;
+	static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 
 	private Map<Integer, Animal> myAnimalMap = new HashMap<>();
-//	private List<Animal> myAnimalMap;
+	private List<Animal> myAnimalList;
 	private List<String> myCommandHistory;
+	private ScrollPane myPane;
 
 	// <string = name of variable, string/other? = value / expression>
 	private Map<String, String> myVariables;
@@ -25,13 +33,13 @@ public class AnimalPane extends Observable implements Observer {
 	private List<Point2D> coordinateMap;
 
 	private int animalID;
-
-	public AnimalPane(Animal animal) {
+	
+	public AnimalPane() {
 		// this increments when adding new animals
 		animalID = 0;
 		// map of AnimalPane ID to Animal (for multiple animals on same pane)
 		myAnimalMap = new HashMap<Integer, Animal>();
-//		myAnimalMap = new ArrayList<Animal>();
+		myAnimalList = new ArrayList<Animal>();
 		
 		//Map of variable names and expressions
 		myVariables = new HashMap<String, String>();
@@ -43,7 +51,49 @@ public class AnimalPane extends Observable implements Observer {
 		coordinateMap = new ArrayList<Point2D>();
 //		coordinateMap = new HashMap<String, List<CoordinatePair>>();
 		
+		myPane = new ScrollPane();
+		stylePane();
+		addAnimal();
+	}
+
+	public AnimalPane(Animal animal) {
+		// this increments when adding new animals
+		animalID = 0;
+		// map of AnimalPane ID to Animal (for multiple animals on same pane)
+		myAnimalMap = new HashMap<Integer, Animal>();
+		myAnimalList = new ArrayList<Animal>();
+		
+		//Map of variable names and expressions
+		myVariables = new HashMap<String, String>();
+		
+		//list of all executed commands
+		myCommandHistory = new ArrayList<String>();
+		//list of Animal ID and Coordinate Lists for translation rendering
+		// should this just be a list? 
+		coordinateMap = new ArrayList<Point2D>();
+//		coordinateMap = new HashMap<String, List<CoordinatePair>>();
+		
+		myPane = new ScrollPane();
+		stylePane();
 		addAnimal(animal);
+	}
+	
+	public void addAnimal() {
+		animalID++;
+		Animal animal = new Turtle();
+		myAnimalMap.put(animalID, animal);
+		animal.setId(animalID);
+		animal.addObserver(this);
+		
+		// notify SLogoView that a new turtle was added, and needs to update the view to include new turtle
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void stylePane() {
+		myPane.setPrefWidth(LEFT_PANE_WIDTH);
+		myPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
+		myPane.getStyleClass().add("animal-pane");
 	}
 	
 	/**
@@ -52,7 +102,10 @@ public class AnimalPane extends Observable implements Observer {
 	 */
 	public void addAnimal(Animal animal) {
 		animalID++;
+		
 		myAnimalMap.put(animalID, animal);
+		myAnimalList.add(animal);
+		
 		animal.setId(animalID);
 		animal.addObserver(this);
 		
@@ -126,6 +179,18 @@ public class AnimalPane extends Observable implements Observer {
 
 	public void setAnimalID(int animalID) {
 		this.animalID = animalID;
+	}
+
+	public List<Animal> getMyAnimalList() {
+		return myAnimalList;
+	}
+
+	public void setMyAnimalList(List<Animal> myAnimalList) {
+		this.myAnimalList = myAnimalList;
+	}
+	
+	public ScrollPane getScrollPane() {
+		return myPane;
 	}
 
 

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import Model.AnimalPane;
 import Parsing.Parser;
-import View.Workspace;
 
 /**
  * 
@@ -23,7 +22,6 @@ public class AnimalController implements Controller {
 	public AnimalController() {
 		parser = new Parser();
 		error = "";
-
 	}
 
 	@Override
@@ -42,20 +40,20 @@ public class AnimalController implements Controller {
 	}
 
 	@Override
-	public AnimalPane getCurrentAnimalPane() {
+	public AnimalPane getActiveAnimalPane() {
 		return currentAnimalPane;
 	}
 	
-	public void setCurrentAnimalPane(AnimalPane currentAnimalPane) {
+	public void setActiveAnimalPane(AnimalPane currentAnimalPane) {
 		this.currentAnimalPane = currentAnimalPane;
 	}
 	
-	public void addAnimalPane(Workspace workspace) {
-		AnimalPane pane = new AnimalPane();
-		myAnimalPanes.add(pane);
-		workspace.add
-		
-	}
+//	public void addAnimalPane(Workspace workspace) {
+//		AnimalPane pane = new AnimalPane();
+//		myAnimalPanes.add(pane);
+//		workspace.add
+//		
+//	}
 
 	// Evaluate expression, handle errors
 

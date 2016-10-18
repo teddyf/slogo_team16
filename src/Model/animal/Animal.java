@@ -25,6 +25,21 @@ public abstract class Animal extends Observable {
 	private int ID;
 	// Used when multiple turtles are on the same screen, and if user only wants to move a certain animal
 	private boolean isSelected;
+	
+	public Animal() {
+		xProperty = new SimpleStringProperty();
+		yProperty = new SimpleStringProperty();
+		// TODO: Hard Coding width and height?
+		this.width = 15;
+		this.height = 15;
+		setX(Workspace.SCENE_WIDTH/2);
+		setY(Workspace.SCENE_HEIGHT/2);
+		this.heading = 0;
+		this.pen = 0;
+		this.showing = 1;
+		this.ID = -1;
+		this.isSelected = true;
+	}
 
 	public Animal(double width, double height) {
 		xProperty = new SimpleStringProperty();
@@ -50,6 +65,8 @@ public abstract class Animal extends Observable {
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
+		this.ID = -1;
+		this.isSelected = true;
 	}
 
 	/**

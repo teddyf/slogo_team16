@@ -9,6 +9,13 @@ public class Turtle extends Animal {
 	
 	private String imagePath;
 	
+	
+	public Turtle() {
+		super();
+		setImagePath("turtleLogo.png");
+		turtleAppearance = graphic.createImage(imagePath);
+	}
+	
 	public Turtle(double width, double height) {
 		super(width, height);
 		setImagePath("turtleLogo.png");
