@@ -1,4 +1,4 @@
-package slogo_team16;
+package operations;
 
 public class SLogoBoolean {
 	public SLogoBoolean() {

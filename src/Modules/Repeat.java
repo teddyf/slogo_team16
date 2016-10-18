@@ -3,8 +3,7 @@ package Modules;
 import java.util.*;
 import ErrorHandling.*;
 
-
-public class Repeat extends Module {
+public class Repeat extends Command {
 
     public Repeat (String[] params) {
         super(params);
