@@ -5,27 +5,32 @@ import javafx.scene.image.ImageView;
 
 public class Turtle extends Animal {
 	private Image turtleAppearance;
+	private ImageView turtleImageView;
 	private Graphics graphic = new Graphics();
 	
 	private String imagePath;
+	
 	
 	
 	public Turtle() {
 		super();
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
+		turtleImageView = graphic.createImageView(turtleAppearance);
 	}
 	
 	public Turtle(double width, double height) {
 		super(width, height);
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
+		turtleImageView = graphic.createImageView(turtleAppearance);
 	}
 	
 	public Turtle(double width, double height, double x, double y) {
 		super(width, height, x, y);
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
+		turtleImageView = graphic.createImageView(turtleAppearance);
 	}
 	
 	@Override
@@ -49,6 +54,6 @@ public class Turtle extends Animal {
 	
 	@Override
 	public ImageView getImageView() {
-		return new ImageView(turtleAppearance);
+		return turtleImageView;
 	}
 }

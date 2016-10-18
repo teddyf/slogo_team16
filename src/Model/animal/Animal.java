@@ -29,7 +29,6 @@ public abstract class Animal extends Observable {
 	public Animal() {
 		xProperty = new SimpleStringProperty();
 		yProperty = new SimpleStringProperty();
-		// TODO: Hard Coding width and height?
 		this.width = 15;
 		this.height = 15;
 		setX(Workspace.SCENE_WIDTH/2);

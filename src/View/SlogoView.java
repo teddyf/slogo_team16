@@ -5,6 +5,12 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 
+/**
+ * 
+ * @author Lucy Zhang
+ * @author Jordan Frazier
+ *
+ */
 public class SlogoView {
 
 	public static final int SCENE_WIDTH = 1200;
