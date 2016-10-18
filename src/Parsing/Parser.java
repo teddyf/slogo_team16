@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import Translator.BasicCommands;
-import View.Console;
+import View.helper.Console;
 
 /**
  * Handles parsing input

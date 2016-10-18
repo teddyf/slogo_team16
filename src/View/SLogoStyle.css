@@ -28,6 +28,23 @@
 	-fx-padding: 6 36 0 0;
 }
 
+.tab-pane {
+	-fx-border-color: black;
+	-fx-border-width: 3.0;
+}
+
+.label-variable {
+	-fx-padding: 5 0 0 0;
+}
+.display-variable {
+	-fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
 .language-button {
-	-fx-padding: 0 0 0 0 ;
+	-fx-padding: 0 0 0 0;
+	-fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
 }

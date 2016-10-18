@@ -1,4 +1,4 @@
-package View;
+package View.helper;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

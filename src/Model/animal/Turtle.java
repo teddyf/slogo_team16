@@ -1,5 +1,5 @@
-package animal;
-import View.Graphics;
+package Model.animal;
+import View.helper.Graphics;
 import javafx.scene.image.Image;
 
 public class Turtle extends Animal {
@@ -24,6 +24,8 @@ public class Turtle extends Animal {
 	public void update() {
 		// TODO - update turtle
 		
+		setChanged();
+		notifyObservers();
 	}
 	
 	/*****GETTERS*****/

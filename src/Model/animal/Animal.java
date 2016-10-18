@@ -1,7 +1,8 @@
-package animal;
+package Model.animal;
 
-import View.SLogoView;
-import javafx.beans.property.SimpleDoubleProperty;
+import java.util.Observable;
+
+import View.Workspace;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
@@ -10,7 +11,7 @@ import javafx.scene.image.Image;
  * @author Aninda Manocha, Teddy Franceschi
  */
 
-public abstract class Animal {
+public abstract class Animal extends Observable {
 	private double width;
 	private double height;
 	private double x;
@@ -20,17 +21,22 @@ public abstract class Animal {
 	private double heading;
 	private int pen; 
 	private int showing;
+	private int ID;
+	// Used when multiple turtles are on the same screen, and if user only wants to move a certain animal
+	private boolean isSelected;
 
 	public Animal(double width, double height) {
 		xProperty = new SimpleStringProperty();
 		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		setX(SLogoView.SCENE_WIDTH/2);
-		setY(SLogoView.SCENE_HEIGHT/2);
+		setX(Workspace.SCENE_WIDTH/2);
+		setY(Workspace.SCENE_HEIGHT/2);
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
+		this.ID = -1;
+		this.isSelected = true;
 	}
 	
 	public Animal(double width, double height, double x, double y) {
@@ -114,8 +120,8 @@ public abstract class Animal {
 	 */
 	public double setXY(double x, double y) {
 		double distance = Math.sqrt(Math.pow(this.x-x, 2) + Math.pow(this.y-y, 2));
-		this.x = x + SLogoView.SCENE_WIDTH/2;
-		this.y = SLogoView.SCENE_HEIGHT/2 - y;
+		this.x = x + Workspace.SCENE_WIDTH/2;
+		this.y = Workspace.SCENE_HEIGHT/2 - y;
 		return distance;
 	}
 		
@@ -211,17 +217,29 @@ public abstract class Animal {
 	public StringProperty getYProperty() {
 		return yProperty;
 	}
+	
+	public int getId() {
+		return ID;
+	}
+	
+	public boolean getSelected() {
+		return isSelected;
+	}
 
 	/*****SETTERS*****/
 	
 	public void setX(double x) {
 		this.x = x;
 		this.xProperty.setValue(String.valueOf(x));
+		setChanged();
+		notifyObservers();
 	}
 
 	public void setY(double y) {
 		this.y = y;
 		this.yProperty.setValue(String.valueOf(y));
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void setHeight(double height) {
@@ -238,6 +256,14 @@ public abstract class Animal {
 		
 	public void setShowing(int showing) {
 		this.showing = showing;
+	}
+	
+	public void setId(int ID) {
+		this.ID = ID;
+	}
+	
+	public void setSelected(boolean isSelected) {
+		 this.isSelected = isSelected;
 	}
 
 	public abstract void update();

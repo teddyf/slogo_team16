@@ -2,26 +2,30 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
+import Controller.AnimalController;
+import Controller.Controller;
+import Model.animal.Animal;
+import Model.animal.Turtle;
+import View.helper.Animate;
+import View.helper.Buttons;
+import View.helper.Console;
+import View.helper.Graphics;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
 import View.tabs.OptionsPane;
 import View.tabs.VariablesPane;
-import animal.Animal;
-import animal.Turtle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -37,46 +41,73 @@ import javafx.scene.text.Text;
  * @author Jordan Frazier
  *
  */
-public class SLogoView implements AbstractSLogoView {
+public class Workspace implements AbstractSLogoView {
 	private Scene myScene;
 	private Graphics graphics;
 	
+	
+	public static final int SCENE_WIDTH = 1200;
+	public static final int SCENE_HEIGHT = 700;
+	static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 	private static final int TURTLE_HEIGHT = 15;
 	private static final int TURTLE_WIDTH = 15;
-	private static final int NUM_ANIMALS = 1;
+	private static final String EN_RESRC_PATH = "resources/languages/English";
+	private static final String CHI_RESRC_PATH = "resources/languages/Chinese";
 	
 	private BorderPane myRoot;
 	private Pane myAnimalPane;
 	private List<Animal> myAnimalList;
+	private int NUM_ANIMALS = 1;
 	private Buttons buttons;
 	private Console console;
 	private Animate animation;
+	private ResourceBundle myResources;
+	private Controller myController;
 	private final GenericPane<String> historyPane = new CommandHistoryPane();
+	private int workSpaceID;
+	private SlogoView mainView;
 	
-	public SLogoView() {
+	public Workspace() {
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
-		myAnimalList = new ArrayList<>();
+		myAnimalList = new ArrayList<>();	
+		myController = new AnimalController();
+		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+		workSpaceID=0;
 	}
 
-	public Scene init() {
+	public void setWorkspaceID(int id){
+		this.workSpaceID=id; 
+	}
+	public void init(SlogoView view) {
+		mainView = view;
 		myRoot = new BorderPane();
-		myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
+		//myScene = new Scene(myRoot, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
-		return myScene;
+		//return myScene;
+	}
+	
+	public BorderPane getMyRoot(){
+		return myRoot;
 	}
 
+	
 	private void populateLeftPane() {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);	
 		leftPane.getStyleClass().add("left-pane");
 		HBox container = createConsole();
 		createAnimalGrid();
 		populateGridWithAnimals();
-		leftPane.getChildren().addAll(myAnimalPane, container);
-		myRoot.setLeft(leftPane);
+		ScrollPane scrollableAnimalPane = new ScrollPane();
+		scrollableAnimalPane.setContent(myAnimalPane);
+		leftPane.getChildren().addAll(scrollableAnimalPane, container);
+		ScrollPane left = new ScrollPane();
+		left.setContent(leftPane);
+		myRoot.setLeft(left);
 	}
 
 	private void populateRightPane() {
@@ -85,6 +116,7 @@ public class SLogoView implements AbstractSLogoView {
 		rightPane.getStyleClass().add("right-pane");
 		
 		TabPane informationTabPane = createTabInfoPane();
+		informationTabPane.getStyleClass().add("tab-pane");
 		
 		rightPane.getChildren().addAll(informationTabPane);
 		myRoot.setRight(rightPane);
@@ -137,7 +169,7 @@ public class SLogoView implements AbstractSLogoView {
 		HBox container = new HBox(20);
 		container.getStyleClass().add("top-pane");
 		
-		Text title = new Text("SLogo");
+		Text title = new Text(myResources.getString("SLogo"));
 		title.getStyleClass().add("slogo-title");
 		
 		ComboBox<String> languageComboBox = createLanguageChooser();
@@ -174,7 +206,7 @@ public class SLogoView implements AbstractSLogoView {
 	}
 
 	private VBox createButtons() {
-		VBox container = buttons.createConsoleInputButtons(console, historyPane);
+		VBox container = buttons.createConsoleInputButtons(console, historyPane, mainView);
 		return container;
 	}
 
@@ -237,8 +269,15 @@ public class SLogoView implements AbstractSLogoView {
 		languageSelector.setValue(languages[0]);
 		languageSelector.valueProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				System.out.println("combbox value is: " + newValue);
-				//TODO: change the language
+				System.out.println("combobox value is: " + newValue);
+				if (newValue.equals("Chinese")) {
+					myResources = ResourceBundle.getBundle(CHI_RESRC_PATH);
+				} else if (newValue.equals("English")) {
+					myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+				}
+				// etc
+				// Loop through a list of all Text Values that should be updated and update them? 
+//				currentText.setText(myResources.getString(currentText.getText()));
 			}
 		});
 		return languageSelector;

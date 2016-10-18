@@ -4,15 +4,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
-
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
+// TODO: - Jordan fix this abstract view
 public interface AbstractSLogoView {
 	
-	static final int SCENE_WIDTH = 1200;
-	static final int SCENE_HEIGHT = 700;
-	static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
-	static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
-	
-	public Scene init();
+	public void init(SlogoView view);
 	
 	//I have literally no idea what this does lol
 	public <T> ComboBox<? extends T> createLanguageChooser();

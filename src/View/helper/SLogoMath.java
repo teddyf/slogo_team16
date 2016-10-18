@@ -1,4 +1,4 @@
-package View;
+package View.helper;
 
 public class SLogoMath {
 	public SLogoMath() {

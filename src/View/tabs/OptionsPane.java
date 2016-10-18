@@ -1,9 +1,9 @@
 package View.tabs;
 
-import View.Colors;
-import View.DisplayVariable;
-import View.Graphics;
-import animal.Animal;
+import Model.animal.Animal;
+import View.helper.Colors;
+import View.helper.DisplayVariable;
+import View.helper.Graphics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
@@ -25,6 +25,8 @@ public class OptionsPane implements GenericPane<HBox> {
 	private Animal animal;
 	
 	private static final String X_COORDINATE = "x: ";
+	private static final String Y_COORDINATE = "y: ";
+
 	private static final String PEN_COLOR = "Pen Color: ";
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 	
@@ -40,8 +42,10 @@ public class OptionsPane implements GenericPane<HBox> {
 	private void createAllOptions() {
 		HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		HBox backgroundColor = createComboBoxOption(BACKGROUND_COLOR, COLORS);
-		DisplayVariable displayX = graphics.createDisplayVariable(X_COORDINATE, animal);
-		content.getItems().addAll(penColor, backgroundColor, displayX.getContainer());
+		DisplayVariable displayX = graphics.createDisplayVariable(X_COORDINATE, animal.getXProperty());
+		DisplayVariable displayY = graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
+
+		content.getItems().addAll(penColor, backgroundColor, displayX.getContainer(), displayY.getContainer());
 	}
 
 	private HBox createComboBoxOption(String name, String[] options) {
