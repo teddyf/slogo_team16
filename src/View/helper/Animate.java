@@ -5,7 +5,6 @@ import java.util.List;
 import Model.AnimalPane;
 import Model.animal.Animal;
 import View.Workspace;
-import View.SLogoView;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -26,7 +25,7 @@ public class Animate {
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
 	private Timeline animation = new Timeline();
 
-	public void handleTurtleAnimation(Animal turtle, Workspace slogo) {
+	public void beginAnimation(AnimalPane animalPane) {
 
 		// Map<String, List<CoordinatePair>> coordinatePairs =
 		// animal.getCoordinateMap();

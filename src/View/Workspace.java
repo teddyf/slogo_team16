@@ -44,7 +44,7 @@ import javafx.scene.text.Text;
  * @author Jordan Frazier
  *
  */
-public class Workspace implements AbstractSLogoView {
+public class Workspace implements AbstractSLogoView, Observer {
 	private Scene myScene;
 	private Graphics graphics;
 	
