@@ -3,6 +3,7 @@ package Model.animal;
 import java.util.Observable;
 
 import View.Workspace;
+import View.helper.Pen;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
@@ -290,5 +291,7 @@ public abstract class Animal extends Observable {
 	public abstract Image getImage();
 	
 	public abstract ImageView getImageView();
+
+	public abstract Pen getActualPen();
 
 }

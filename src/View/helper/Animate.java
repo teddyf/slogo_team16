@@ -4,9 +4,7 @@ import java.util.List;
 
 import Model.AnimalPane;
 import Model.animal.Animal;
-import View.Workspace;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import View.AnimalPaneGUI;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
@@ -23,40 +21,34 @@ public class Animate {
 
 	public static final int FRAMES_PER_SECOND = 60;
 	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	private Timeline animation = new Timeline();
 	private List<Point2D> coordinatePairs;
 	private int counter;
-	
-	public void beginAnimation(AnimalPane animalPane) {
+	private AnimalPaneGUI animalPaneGUI;
+	private Pen pen;
 
+	public void beginAnimation(AnimalPaneGUI animalPaneGUI) {
+		this.animalPaneGUI = animalPaneGUI;
 		counter = 0;
-		// Map<String, List<CoordinatePair>> coordinatePairs =
-		// animal.getCoordinateMap();
-		coordinatePairs = animalPane.getCoordinateMap();
-		Animal animal = animalPane.getMyAnimalList().get(0);
-		ImageView animalImage = animal.getImageView();
-		translateAnimation(coordinatePairs.get(counter), animal, animalImage);
+		coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
 
-//		for (Point2D point : coordinatePairs) {
-//
-//			System.out.println("new point : " + point.getX() + " , " + point.getY());
-//			// for (Animal animal : animalPane.getMyAnimalList()) {
-//			Animal animal = animalPane.getMyAnimalList().get(0);
-//
-//			if (!animal.getSelected()) {
-//				return;
-//			}
-//
-//			ImageView animalImage = animal.getImageView();
-//			// TODO: Jordan: Fix Time for translation
-//			translateAnimation(point, animal, animalImage);
-//
-//			// }
-//		}
+		// TODO: this might not work for multiple turtles
+		for (Animal animal : animalPaneGUI.getAnimalPane().getMyAnimalList()) {
+		
+			translateAnimation(coordinatePairs.get(counter), animal);
+		}
 	}
 
-
-	private void translateAnimation(Point2D point, Animal animal, ImageView animalImage) {
+	private void translateAnimation(Point2D point, Animal animal) {
+		
+		ImageView animalImage = animal.getImageView();
+		
+		pen = animal.getActualPen();
+		pen.createLine(animalImage.getTranslateX(), animalImage.getTranslateY());
+		animalPaneGUI.getMyContainer().getChildren().add(pen.getLineList().get(counter));
+		pen.getLineList().get(counter).endXProperty().bind(animalImage.translateXProperty());
+		pen.getLineList().get(counter).endYProperty().bind(animalImage.translateYProperty());
+		
+		
 		TranslateTransition translation = new TranslateTransition(Duration.millis(1000), animalImage);
 		// translation.setFromX(animal.getX());
 		// translation.setFromY(animal.getY());
@@ -74,11 +66,15 @@ public class Animate {
 					+ animalImage.getTranslateY());
 			animal.setX(point.getX());
 			animal.setY(point.getY());
+
+			pen.getLineList().get(counter).endXProperty().unbind();
+			pen.getLineList().get(counter).endYProperty().unbind();
 			counter++;
-			if(counter >= coordinatePairs.size()) {
-				// Do nothing
+			if (counter >= coordinatePairs.size()) {
+				// Do nothing, but maybe should do something with a boolean
 			} else {
-				translateAnimation(coordinatePairs.get(counter), animal, animalImage);
+				// Call translate to do with the next set of points
+				translateAnimation(coordinatePairs.get(counter), animal);
 			}
 		});
 		translation.play();

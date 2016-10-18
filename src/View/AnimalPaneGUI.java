@@ -8,12 +8,14 @@ import java.util.Observer;
 import Model.AnimalPane;
 import Model.animal.Animal;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 
 public class AnimalPaneGUI implements Observer {
 
 	private AnimalPane myAnimalPane;
 	private ScrollPane myScrollPane;
 	private List<Animal> myAnimalList;
+	private Pane myContainer;
 	
 	public AnimalPaneGUI() {
 		myAnimalList = new ArrayList<>();
@@ -23,6 +25,7 @@ public class AnimalPaneGUI implements Observer {
 		myAnimalPane.addAnimal();
 		
 		myScrollPane = new ScrollPane();
+		myContainer = new Pane();
 		stylePane();
 	}
 	@Deprecated
@@ -66,6 +69,12 @@ public class AnimalPaneGUI implements Observer {
 
 	public void setMyAnimalList(List<Animal> myAnimalList) {
 		this.myAnimalList = myAnimalList;
+	}
+	public Pane getMyContainer() {
+		return myContainer;
+	}
+	public void setMyContainer(Pane myContainer) {
+		this.myContainer = myContainer;
 	}
 	@Override
 	public void update(Observable o, Object arg) {

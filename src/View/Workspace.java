@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import Controller.AnimalController;
@@ -34,9 +35,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
@@ -49,7 +47,6 @@ import javafx.scene.text.Text;
 public class Workspace implements Observer {
 	private Scene myScene;
 	private Graphics graphics;
-
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
 	public static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
@@ -75,10 +72,8 @@ public class Workspace implements Observer {
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
-	private Pane turtleContainer;
 
 	public Workspace(int workspaceID) {
-		turtleContainer = new Pane();
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
@@ -276,12 +271,12 @@ public class Workspace implements Observer {
 		ImageView animalImage = animal.getImageView();
 		animalImage.setFitHeight(TURTLE_HEIGHT);
 		animalImage.setFitWidth(TURTLE_WIDTH);
-		animalImage.setTranslateX(LEFT_PANE_WIDTH / 2);
-		animalImage.setTranslateY(SCENE_HEIGHT /2);
-		turtleContainer.getChildren().add(animalImage);
+//		animalImage.setTranslateX(LEFT_PANE_WIDTH / 2);
+//		animalImage.setTranslateY(SCENE_HEIGHT /2);
+		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
 
 		// turtleContainer.getChildren().add(s);
-		myAnimalPaneGUI.getScrollPane().setContent(turtleContainer);
+		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
 
 	// are we going to let turtle go off of the screen?
@@ -326,7 +321,7 @@ public class Workspace implements Observer {
 					// animalGUI.getAnimalPane().getMyAnimalList()) {
 					// if(animal.getSelected()) {
 					System.out.println("BEGINNING ANIMATION in UPDATE");
-					animation.beginAnimation(animalGUI.getAnimalPane());
+					animation.beginAnimation(animalGUI);
 					// }
 					// }
 					// }
@@ -336,13 +331,16 @@ public class Workspace implements Observer {
 	}
 
 	public Button CREATETESTBUTTON() {
-		List<Point2D> list = new ArrayList<Point2D>();
-		list.add(new Point2D(300, 40));
-		list.add(new Point2D(50, 300));
-		list.add(new Point2D(100, 200));
+	
 		Button button = new Button("TESTER");
 		button.setOnMouseClicked(e -> {
 			System.out.println("setting coordinate map");
+			Random random = new Random();
+			List<Point2D> list = new ArrayList<Point2D>();
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
 			myAnimalPaneGUI.getAnimalPane().setCoordinateMap(list);
 		});
 		return button;

@@ -1,5 +1,6 @@
 package Model.animal;
 import View.helper.Graphics;
+import View.helper.Pen;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -7,7 +8,8 @@ public class Turtle extends Animal {
 	private Image turtleAppearance;
 	private ImageView turtleImageView;
 	private Graphics graphic = new Graphics();
-	
+	private Pen actualPen;
+
 	private String imagePath;
 	
 	
@@ -17,6 +19,11 @@ public class Turtle extends Animal {
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
 		turtleImageView = graphic.createImageView(turtleAppearance);
+		
+		actualPen = new Pen(getX(), getY());
+//		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
+//		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
+
 	}
 	
 	public Turtle(double width, double height) {
@@ -24,6 +31,11 @@ public class Turtle extends Animal {
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
 		turtleImageView = graphic.createImageView(turtleAppearance);
+		
+		actualPen = new Pen(getX(), getY());
+//		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
+//		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
+
 	}
 	
 	public Turtle(double width, double height, double x, double y) {
@@ -31,6 +43,11 @@ public class Turtle extends Animal {
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
 		turtleImageView = graphic.createImageView(turtleAppearance);
+		
+		actualPen = new Pen(getX(), getY());
+//		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
+//		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
+
 	}
 	
 	@Override
@@ -55,5 +72,10 @@ public class Turtle extends Animal {
 	@Override
 	public ImageView getImageView() {
 		return turtleImageView;
+	}
+	
+	@Override
+	public Pen getActualPen() {
+		return actualPen;
 	}
 }
