@@ -13,17 +13,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.control.ScrollPane;
 
 public class AnimalPane extends Observable implements Observer {
-	
-	
-	public static final int SCENE_WIDTH = 1200;
-	public static final int SCENE_HEIGHT = 700;
-	static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
-	static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 
 	private Map<Integer, Animal> myAnimalMap = new HashMap<>();
 	private List<Animal> myAnimalList;
 	private List<String> myCommandHistory;
-	private ScrollPane myPane;
 
 	// <string = name of variable, string/other? = value / expression>
 	private Map<String, String> myVariables;
@@ -51,8 +44,6 @@ public class AnimalPane extends Observable implements Observer {
 		coordinateMap = new ArrayList<Point2D>();
 //		coordinateMap = new HashMap<String, List<CoordinatePair>>();
 		
-		myPane = new ScrollPane();
-		stylePane();
 		addAnimal();
 	}
 
@@ -73,8 +64,6 @@ public class AnimalPane extends Observable implements Observer {
 		coordinateMap = new ArrayList<Point2D>();
 //		coordinateMap = new HashMap<String, List<CoordinatePair>>();
 		
-		myPane = new ScrollPane();
-		stylePane();
 		addAnimal(animal);
 	}
 	
@@ -88,12 +77,6 @@ public class AnimalPane extends Observable implements Observer {
 		// notify SLogoView that a new turtle was added, and needs to update the view to include new turtle
 		setChanged();
 		notifyObservers();
-	}
-	
-	public void stylePane() {
-		myPane.setPrefWidth(LEFT_PANE_WIDTH);
-		myPane.setPrefHeight(SCENE_HEIGHT - SCENE_HEIGHT / 4);
-		myPane.getStyleClass().add("animal-pane");
 	}
 	
 	/**
@@ -189,9 +172,4 @@ public class AnimalPane extends Observable implements Observer {
 		this.myAnimalList = myAnimalList;
 	}
 	
-	public ScrollPane getScrollPane() {
-		return myPane;
-	}
-
-
 }

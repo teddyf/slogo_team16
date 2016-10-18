@@ -1,7 +1,6 @@
 package View.tabs;
 
-import Model.AnimalPane;
-import Model.animal.Animal;
+import View.AnimalPaneGUI;
 import View.helper.Colors;
 import View.helper.Graphics;
 import javafx.collections.FXCollections;
@@ -22,7 +21,7 @@ public class OptionsPane implements GenericPane<HBox> {
 	private String displayName = "Options";
 	private ListView<HBox> content;
 	private Graphics graphics;
-	private AnimalPane animalPane;
+	private AnimalPaneGUI animalPaneGUI;
 	
 	private static final String X_COORDINATE = "x: ";
 	private static final String Y_COORDINATE = "y: ";
@@ -32,8 +31,8 @@ public class OptionsPane implements GenericPane<HBox> {
 	
 	private static final String[] COLORS = {Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString()};
 
-	public OptionsPane(AnimalPane animalPane) {
-		this.animalPane = animalPane;
+	public OptionsPane(AnimalPaneGUI animalPaneGUI) {
+		this.animalPaneGUI = animalPaneGUI;
 		graphics = new Graphics();
 		content = new ListView<>();
 		//Maybe have to loop through all animals in animalPane to create custom buttons for each turtle

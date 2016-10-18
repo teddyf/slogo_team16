@@ -1,33 +1,60 @@
 package View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Model.AnimalPane;
+import Model.animal.Animal;
+import View.helper.Buttons;
+import View.helper.Console;
+import View.helper.Graphics;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 
 public class AnimalPaneGUI {
 
-	private AnimalPane animalPane;
-	private ScrollPane pane;
+	private AnimalPane myAnimalPane;
+	private ScrollPane myScrollPane;
+	private List<Animal> myAnimalList;
 	
 	public AnimalPaneGUI(AnimalPane animalPane) {
-		this.animalPane = animalPane;
-		pane = new ScrollPane();
-		
+		myAnimalPane = animalPane;
+		myScrollPane = new ScrollPane();
+		myAnimalList = new ArrayList<>();
+		stylePane();
 	}	
 	
+	public void stylePane() {
+		myScrollPane.setPrefWidth(Workspace.LEFT_PANE_WIDTH);
+		myScrollPane.setPrefHeight(Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4);
+		myScrollPane.getStyleClass().add("animal-pane");
+	}
+	
+	public void addAnimal(Animal animal) {
+		myAnimalList.add(animal);
+		getAnimalPane().addAnimal(animal);
+	}
+	
 	public AnimalPane getAnimalPane() {
-		return animalPane;
+		return myAnimalPane;
 	}
 
-	public ScrollPane getPane() {
-		return pane;
+	public ScrollPane getScrollPane() {
+		return myScrollPane;
 	}
 
 	public void setAnimalPane(AnimalPane animalPane) {
-		this.animalPane = animalPane;
+		myAnimalPane = animalPane;
 	}
 
-	public void setPane(ScrollPane pane) {
-		this.pane = pane;
+	public void setScrollPane(ScrollPane pane) {
+		myScrollPane = pane;
+	}
+
+	public List<Animal> getMyAnimalList() {
+		return myAnimalList;
+	}
+
+	public void setMyAnimalList(List<Animal> myAnimalList) {
+		this.myAnimalList = myAnimalList;
 	}
 }

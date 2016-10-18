@@ -1,8 +1,5 @@
 package View;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;

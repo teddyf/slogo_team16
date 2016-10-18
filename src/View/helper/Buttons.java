@@ -4,7 +4,6 @@ import java.util.Map;
 
 import Controller.AnimalController;
 import Controller.Controller;
-import Parsing.Parser;
 import View.Main;
 import View.SlogoView;
 import View.tabs.GenericPane;
@@ -27,7 +26,7 @@ public class Buttons {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
 	private Controller myController = new AnimalController();
-	private Main main = new Main();
+//	private Main main = new Main();
 
 	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
@@ -77,7 +76,7 @@ public class Buttons {
 	}
 	
 	private Button createNewWorkspaceButton(SlogoView slogoView){
-		Button wkspc = graphic.createButton("New Workspace");
+		Button wkspc = graphic.createButton("New WS");
 		wkspc.setOnAction(e -> {
 //			System.out.println("main.getSlogoView(): "+main.getSlogoView());
 			slogoView.createNewWorkSpace();
