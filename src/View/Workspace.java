@@ -44,7 +44,7 @@ import javafx.scene.text.Text;
  * @author Jordan Frazier
  *
  */
-public class Workspace implements AbstractSLogoView, Observer {
+public class Workspace implements AbstractWorkspace, Observer {
 	private Scene myScene;
 	private Graphics graphics;
 	
@@ -71,14 +71,14 @@ public class Workspace implements AbstractSLogoView, Observer {
 	private int workSpaceID;
 	private SlogoView mainView;
 	
-	public Workspace() {
+	public Workspace(int workspaceID) {
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
 		myAnimalGUIList = new ArrayList<>();	
 		myController = new AnimalController();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
-		workSpaceID=0;
+		this.workSpaceID = workspaceID;
 	}
 
 	public void setWorkspaceID(int id){
@@ -102,15 +102,20 @@ public class Workspace implements AbstractSLogoView, Observer {
 	private void populateLeftPane() {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);	
 		leftPane.getStyleClass().add("left-pane");
+		
 		HBox container = createConsole();
 		createAnimalGrid();
 		populateGridWithAnimals();
+		
 		ScrollPane scrollableAnimalPane = new ScrollPane();
 		scrollableAnimalPane.setContent(myAnimalPane);
+		
 		leftPane.getChildren().addAll(scrollableAnimalPane, container);
-		ScrollPane left = new ScrollPane();
-		left.setContent(leftPane);
-		myRoot.setLeft(left);
+		
+//		ScrollPane left = new ScrollPane();
+//		left.setContent(leftPane);
+		
+		myRoot.setLeft(leftPane);
 	}
 
 	private void populateRightPane() {

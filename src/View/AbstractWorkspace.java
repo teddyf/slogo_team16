@@ -1,6 +1,5 @@
 package View;
 
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
@@ -10,7 +9,7 @@ import javafx.scene.layout.HBox;
  *
  */
 // TODO: - Jordan fix this abstract view
-public interface AbstractSLogoView {
+public interface AbstractWorkspace {
 	
 	public void init(SlogoView view);
 	

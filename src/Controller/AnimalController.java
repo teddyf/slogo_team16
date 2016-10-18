@@ -2,11 +2,10 @@ package Controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Queue;
 
 import Model.AnimalPane;
 import Parsing.Parser;
+import View.Workspace;
 
 /**
  * 
@@ -49,6 +48,13 @@ public class AnimalController implements Controller {
 	
 	public void setCurrentAnimalPane(AnimalPane currentAnimalPane) {
 		this.currentAnimalPane = currentAnimalPane;
+	}
+	
+	public void addAnimalPane(Workspace workspace) {
+		AnimalPane pane = new AnimalPane();
+		myAnimalPanes.add(pane);
+		workspace.add
+		
 	}
 
 	// Evaluate expression, handle errors
