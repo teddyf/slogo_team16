@@ -93,6 +93,10 @@ public class Workspace implements Observer {
 		populateLeftPane();
 		populateRightPane();
 	}
+	
+	public Pane getTurtleContainer(){
+		return turtleContainer;
+	}
 
 	public void createAnimalPaneGUI() {
 		myAnimalPaneGUI = new AnimalPaneGUI(createAnimalPane());
@@ -160,7 +164,7 @@ public class Workspace implements Observer {
 
 	private Tab createOptionsTab() {
 		// TODO: Jordan - passing in animalPaneGUI, need to update options pane to make custom ID buttons
-		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI);
+		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this);
 		Tab tab = createTab(pane);
 		return tab;
 	}
@@ -264,6 +268,7 @@ public class Workspace implements Observer {
 		s.setFill(turtlePattern);
 		turtleContainer.getChildren().add(s);
 		myAnimalPaneGUI.getScrollPane().setContent(turtleContainer);
+		//turtleContainer.setStyle("-fx-background-color: #f12b92;"); //testing
 	}
 
 	// are we going to let turtle go off of the screen?
