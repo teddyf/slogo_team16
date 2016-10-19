@@ -1,5 +1,6 @@
-package View;
+package main;
 
+import View.SlogoView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

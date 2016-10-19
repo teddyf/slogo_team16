@@ -271,8 +271,8 @@ public class Workspace implements Observer {
 		ImageView animalImage = animal.getImageView();
 		animalImage.setFitHeight(TURTLE_HEIGHT);
 		animalImage.setFitWidth(TURTLE_WIDTH);
-//		animalImage.setTranslateX(LEFT_PANE_WIDTH / 2);
-//		animalImage.setTranslateY(SCENE_HEIGHT /2);
+		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
+		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
 
 		// turtleContainer.getChildren().add(s);
@@ -310,7 +310,6 @@ public class Workspace implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-
 		if (o instanceof AnimalPane) {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {
@@ -331,17 +330,17 @@ public class Workspace implements Observer {
 	}
 
 	public Button CREATETESTBUTTON() {
-	
 		Button button = new Button("TESTER");
 		button.setOnMouseClicked(e -> {
 			System.out.println("setting coordinate map");
 			Random random = new Random();
 			List<Point2D> list = new ArrayList<Point2D>();
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH), random.nextInt(SCENE_HEIGHT / 2)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
 			myAnimalPaneGUI.getAnimalPane().setCoordinateMap(list);
+			myAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0).setHeading(40);
 		});
 		return button;
 	}

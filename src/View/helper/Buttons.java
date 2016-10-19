@@ -4,12 +4,13 @@ import java.util.Map;
 
 import Controller.AnimalController;
 import Controller.Controller;
-import View.Main;
 import View.SlogoView;
 import View.Workspace;
+import View.helpscreen.HelpScreen;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import main.Main;
 
 /**
  * Handles buttons
