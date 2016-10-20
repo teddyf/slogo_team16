@@ -1,7 +1,6 @@
 package View.tabs;
 
 import java.util.HashMap;
-
 import View.AnimalPaneGUI;
 import View.Workspace;
 import View.helper.Colors;

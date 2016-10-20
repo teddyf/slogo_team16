@@ -2,10 +2,10 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import Model.AnimalPane;
-import Model.animal.Animal;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
+import model.AnimalPane;
+import model.animal.Animal;
 
 public class AnimalPaneGUI {
 

@@ -8,9 +8,6 @@ import java.util.ResourceBundle;
 
 import Controller.AnimalController;
 import Controller.Controller;
-import Model.AnimalPane;
-import Model.animal.Animal;
-import Model.animal.Turtle;
 import View.helper.Animate;
 import View.helper.Buttons;
 import View.helper.Console;
@@ -35,6 +32,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import model.AnimalPane;
+import model.animal.Animal;
+import model.animal.Turtle;
 
 /**
  * Main SLogo interface

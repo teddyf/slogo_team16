@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-
-import Model.animal.Animal;
-import Model.animal.Turtle;
+import model.animal.Animal;
+import model.animal.Turtle;
 import javafx.geometry.Point2D;
+import View.helper.CoordinatePair;
 
 public class AnimalPane extends Observable implements Observer {
 
@@ -19,9 +19,9 @@ public class AnimalPane extends Observable implements Observer {
 
 	// <string = name of variable, string/other? = value / expression>
 	private Map<String, String> myVariables;
-	
+
 	// Map of string ID to List of CoordinatePair<double x, double y>
-//	private Map<String, List<CoordinatePair>> coordinateMap;
+	//private Map<String, List<CoordinatePair>> coordinateMap;
 	private List<Point2D> coordinateMap;
 
 	private int animalID;
@@ -29,6 +29,7 @@ public class AnimalPane extends Observable implements Observer {
 	public AnimalPane() {
 		// this increments when adding new animals
 		animalID = 0;
+		
 		// map of AnimalPane ID to Animal (for multiple animals on same pane)
 		myAnimalMap = new HashMap<Integer, Animal>();
 		myAnimalList = new ArrayList<Animal>();
@@ -38,31 +39,30 @@ public class AnimalPane extends Observable implements Observer {
 		
 		//list of all executed commands
 		myCommandHistory = new ArrayList<String>();
-		//list of Animal ID and Coordinate Lists for translation rendering
-		// should this just be a list? 
-		coordinateMap = new ArrayList<Point2D>();
-//		coordinateMap = new HashMap<String, List<CoordinatePair>>();
 		
+		//list of Animal ID and Coordinate Lists for translation rendering
+		coordinateMap = new ArrayList<Point2D>();
+
 		addAnimal();
 	}
 
 	public AnimalPane(Animal animal) {
 		// this increments when adding new animals
 		animalID = 0;
+		
 		// map of AnimalPane ID to Animal (for multiple animals on same pane)
 		myAnimalMap = new HashMap<Integer, Animal>();
 		myAnimalList = new ArrayList<Animal>();
-		
-		//Map of variable names and expressions
+
+		// Map of variable names and expressions
 		myVariables = new HashMap<String, String>();
-		
-		//list of all executed commands
+
+		// list of all executed commands
 		myCommandHistory = new ArrayList<String>();
+
 		//list of Animal ID and Coordinate Lists for translation rendering
-		// should this just be a list? 
 		coordinateMap = new ArrayList<Point2D>();
-//		coordinateMap = new HashMap<String, List<CoordinatePair>>();
-		
+
 		addAnimal(animal);
 	}
 	
@@ -77,9 +77,10 @@ public class AnimalPane extends Observable implements Observer {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	/**
 	 * Adds animal and notifies view that a new animal needs to be displayed
+	 * 
 	 * @param animal
 	 */
 	public void addAnimal(Animal animal) {
@@ -90,8 +91,9 @@ public class AnimalPane extends Observable implements Observer {
 		
 		animal.setId(animalID);
 		animal.addObserver(this);
-		
-		// notify SLogoView that a new turtle was added, and needs to update the view to include new turtle
+
+		// notify SLogoView that a new turtle was added, and needs to update the
+		// view to include new turtle
 		setChanged();
 		notifyObservers();
 	}
@@ -99,18 +101,19 @@ public class AnimalPane extends Observable implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// updates values of animals, object arg is the value that is changing
-		// or just update everything why not with a complete re renderingR	
-		
-		if ( o instanceof Animal) {
+		// or just update everything why not with a complete re renderingR
+
+		if (o instanceof Animal) {
 			Animal cur = (Animal) o;
-			for( int animalId : myAnimalMap.keySet() ) {
-				if (animalId == cur.getId()) { // I think this will hit them all no matter what
+			for (int animalId : myAnimalMap.keySet()) {
+				if (animalId == cur.getId()) { // I think this will hit them all
+												// no matter what
 					// TODO: update animalPane.
-					
-					if(cur.getSelected()) {
+
+					if (cur.getSelected()) {
 						// now update this guy
 					}
-					
+
 				}
 			}
 		}
@@ -170,5 +173,4 @@ public class AnimalPane extends Observable implements Observer {
 	public void setMyAnimalList(List<Animal> myAnimalList) {
 		this.myAnimalList = myAnimalList;
 	}
-	
 }

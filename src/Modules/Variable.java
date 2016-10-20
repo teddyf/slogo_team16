@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import ErrorHandling.InvalidParameterException;
 
-public class Variable extends Module{
+public class Variable extends Command{
 	
 	private HashMap<String, String> variables = new HashMap<String, String>();
 	

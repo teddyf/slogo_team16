@@ -4,11 +4,11 @@ import ErrorHandling.InvalidParameterException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public abstract class Module {
+public abstract class Command {
     String[] params;
     protected Library library;
     String name;
-    public Module(String[] params){
+    public Command(String[] params){
        this.params = params;
        library = new Library();
     }

@@ -3,9 +3,9 @@ package Controller;
 import java.util.List;
 import java.util.Map;
 
-import Model.AnimalPane;
 import Parsing.Parser;
 import View.AnimalPaneGUI;
+import model.AnimalPane;
 
 /**
  * 

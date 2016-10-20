@@ -3,11 +3,11 @@ package View.helper;
 import java.util.Observable;
 import java.util.Observer;
 
-import Model.animal.Animal;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import model.animal.Animal;
 
 /**
  * 

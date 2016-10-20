@@ -1,9 +1,9 @@
 package Controller;
 
 import java.util.Map;
-
-import Model.AnimalPane;
+import model.AnimalPane;
 import View.AnimalPaneGUI;
+
 /**
  * 
  * @author Jordan Frazier

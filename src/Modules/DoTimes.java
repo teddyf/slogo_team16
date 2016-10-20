@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import ErrorHandling.ClassUndefinedException;
 import ErrorHandling.InvalidParameterException;
 
-public class DoTimes extends Module {
+public class DoTimes extends Command {
 	/*
 	 * runs command(s) for each value specified in the range, i.e., from (1 -
 	 * limit) inclusive returns the value of the final command executed (or 0 if
