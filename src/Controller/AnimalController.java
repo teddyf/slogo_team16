@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 
-import Model.AnimalPane;
 import Parsing.Parser;
+import model.AnimalPane;
 
 /**
  * 

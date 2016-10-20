@@ -1,6 +1,5 @@
 package View.tabs;
 
-import Model.animal.Animal;
 import View.helper.Colors;
 import View.helper.DisplayVariable;
 import View.helper.Graphics;
@@ -10,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import model.animal.Animal;
 
 
 /**

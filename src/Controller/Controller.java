@@ -2,7 +2,7 @@ package Controller;
 
 import java.util.Map;
 
-import Model.AnimalPane;
+import model.AnimalPane;
 /**
  * 
  * @author Jordan Frazier

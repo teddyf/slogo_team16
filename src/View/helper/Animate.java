@@ -1,10 +1,10 @@
 package View.helper;
 
-import Model.animal.Animal;
 import View.Workspace;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import model.animal.Animal;
 
 /**
  * Handles animation

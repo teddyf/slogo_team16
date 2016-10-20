@@ -1,8 +1,8 @@
 package View;
 
-import Model.AnimalPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import model.AnimalPane;
 
 public class AnimalPaneGUI {
 
