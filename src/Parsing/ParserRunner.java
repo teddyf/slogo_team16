@@ -1,7 +1,10 @@
 package Parsing;
 
+import model.command.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -15,6 +18,7 @@ public class ParserRunner {
     private final String PATH = "resources/languages/";
     private final String PATH_SYNTAX = "resources/languages/Syntax";
     private final String METHOD = "run";
+    private final String PARAM_COUNT = "knownParams";
 
     File file = new File("data/examples/sample.logo");
 
@@ -60,15 +64,15 @@ public class ParserRunner {
         return lines.toArray(new String[lines.size()]);
     }
 
-    public String[] markDepth(String[] input) throws NoSuchMethodException, SecurityException, ClassNotFoundException {
+    public String[] markDepth (String[] input) throws NoSuchMethodException, SecurityException,
+                                               ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
         ArrayList<String> userInput = new ArrayList<String>();
         Stack<Integer> st = new Stack<Integer>();
         for(String s: input){
             userInput.add(s);
             if(isMethod(s)){
-                int param = Class.forName(s).
-                Method m = Class.forName(s).getMethod(METHOD);
-                st.push(m.getParameterCount());
+                int count = (int)getParameterCount(s);
+                st.push(count);
                 userInput.add("{");
             }
             else{
@@ -113,5 +117,16 @@ public class ParserRunner {
             return false;
         }
         return true;
+    }
+    
+    public Object getParameterCount (String method) throws InstantiationException,
+                                                    IllegalAccessException,
+                                                    IllegalArgumentException,
+                                                    InvocationTargetException,
+                                                    NoSuchMethodException, SecurityException,
+                                                    ClassNotFoundException, NoSuchFieldException{
+        Class a = Class.forName(method);
+        Object count = a.getField(PARAM_COUNT);
+        return count;
     }
 }
