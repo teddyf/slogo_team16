@@ -43,7 +43,7 @@ public class ExpressionTree {
                 parent = curr;
             }
             else if(a[0][i].equals("}")){
-                curr = curr.getParent();
+                parent = parent.getParent();
             }
             else if(a[0][i].equals("["));
             else if(a[0][i].equals("]"));

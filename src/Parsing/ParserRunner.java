@@ -7,18 +7,23 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 
 public class ParserRunner {
 
     private ProgramParser parser;
     private String language;
+    private List<Entry<String, Pattern>> methodPaths;
 
     private final String REGEX = "\\p{Space}|^#.*";
     private final String PATH = "resources/languages/";
     private final String PATH_SYNTAX = "resources/languages/Syntax";
     private final String METHOD = "run";
     private final String PARAM_COUNT = "knownParams";
+    private final String RESOURCE_PATH = "resources/languages/methodMapping";
 
     File file = new File("data/examples/sample.logo");
 
@@ -27,6 +32,7 @@ public class ParserRunner {
         this.language = language;
         parser.setNames(PATH + language);
         parser.setLabels(PATH_SYNTAX);
+        methodPaths = new ArrayList<>();
     }
 
     private String[][] parseLine (ProgramParser lang, String input) {
@@ -93,7 +99,7 @@ public class ParserRunner {
             userInput.add(s);
             vestigialLabels.add(input[1][i]);
             if(isMethod(s)){
-                int count = (int)getParameterCount(s);
+                int count = getCommandParamCount(s);
                 st.push(count);
                 userInput.add("{");
                 vestigialLabels.add("{");
@@ -102,7 +108,7 @@ public class ParserRunner {
                 if(!st.isEmpty()){
                     int check = st.pop()-1;
                     st.push(check);
-                    if(st.peek() == 0){
+                    if(st.peek() <= 0){
                         st.pop();
                         userInput.add("}");
                         vestigialLabels.add("}");
@@ -169,5 +175,45 @@ public class ParserRunner {
         for(int i = 0; i < a.length; i++){
             System.out.println(a[i]);
         }
+    }
+    
+    public void addPatterns (String syntax) {
+        ResourceBundle resources = ResourceBundle.getBundle(syntax);
+        Enumeration<String> iter = resources.getKeys();
+        while (iter.hasMoreElements()) {
+            String key = iter.nextElement();
+            String regex = resources.getString(key);
+            methodPaths.add(new SimpleEntry<>(key,
+                           // THIS IS THE IMPORTANT LINE
+                           Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+        }
+    }
+    
+    private boolean match (String text, Pattern regex) {
+        // THIS IS THE KEY LINE
+        return regex.matcher(text).matches();
+    }
+    
+    public int getCommandParamCount (String input) throws ClassNotFoundException, NoSuchFieldException, SecurityException {
+        try{
+        String inputWithPath = getLabel(input);
+        System.out.println(input);
+        Class c = Class.forName(inputWithPath);
+        Object count = c.getField(PARAM_COUNT);
+        return (int) count;
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
+    
+    public String getLabel (String text) {
+        final String ERROR = "NO MATCH";
+        for (Entry<String, Pattern> e : methodPaths) {
+            if (match(text, e.getValue())) {
+                return e.getKey();
+            }
+        }
+        return ERROR;
     }
 }
