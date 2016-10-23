@@ -8,6 +8,8 @@ import View.AnimalPaneGUI;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 /**
@@ -44,16 +46,15 @@ public class Animate {
 	}
 
 	private void handleMovement(Point2D point, Animal animal, ImageView animalImage) {
-		TranslateTransition translation = new TranslateTransition(Duration.millis(1000), animalImage);
-		System.out.println("trans X : " + animalImage.getTranslateX());
-		System.out.println("trans Y : " + animalImage.getTranslateY());
+		TranslateTransition translation = new TranslateTransition(Duration.millis(getTranslateTime(point, animalImage)), animalImage);
+//		System.out.println("trans X : " + animalImage.getTranslateX());
+//		System.out.println("trans Y : " + animalImage.getTranslateY());
 		
 		inputTranslationCoordinates(point, animalImage, translation);
 		
 		translation.setOnFinished(e -> {
-			System.out.println("Finished, setting animal x and y" + animalImage.getTranslateX() + ", "
-					+ animalImage.getTranslateY());
-			
+//			System.out.println("Finished, setting animal x and y" + animalImage.getTranslateX() + ", "
+//					+ animalImage.getTranslateY());
 			updateAnimalCoordinates(point, animal);
 			unbindPen();
 			incrementCounters();
@@ -95,5 +96,16 @@ public class Animate {
 		animalPaneGUI.getMyContainer().getChildren().add(pen.getLineList().get(pen.getCounter()));
 		pen.getLineList().get(pen.getCounter()).endXProperty().bind(animalImage.translateXProperty());
 		pen.getLineList().get(pen.getCounter()).endYProperty().bind(animalImage.translateYProperty());
+	}
+	
+	private Double getTranslateTime(Point2D point, ImageView turtle) {
+		double oldx = turtle.getTranslateX();
+		double oldy = turtle.getTranslateY();
+		double newx = point.getX();
+		double newy = point.getY();
+		
+		double distance = Math.sqrt(Math.pow( (int) newx-oldx, 2) + Math.pow( (int) newy-oldy, 2));
+		Double time = distance * 5;
+		return time;
 	}
 }

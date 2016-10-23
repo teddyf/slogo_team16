@@ -9,7 +9,11 @@ import Model.AnimalPane;
 import Model.animal.Animal;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
 public class AnimalPaneGUI implements Observer {
 
 	private AnimalPane myAnimalPane;

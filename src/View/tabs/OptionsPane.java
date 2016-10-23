@@ -5,6 +5,7 @@ import java.util.Observable;
 import View.AnimalPaneGUI;
 import View.helper.Colors;
 import View.helper.Graphics;
+import View.helper.PenColor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
