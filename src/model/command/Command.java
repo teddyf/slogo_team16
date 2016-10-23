@@ -6,4 +6,8 @@ public abstract class Command {
 	}
 
 	public abstract double run(Parameter[] params);
+	
+	public String getName() { 
+		return this.getClass().getName();
+	}
 }
