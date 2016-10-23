@@ -38,8 +38,8 @@ public class Animate {
 
 	private void translateAnimation(Point2D point, Animal animal) {
 		ImageView animalImage = animal.getImageView();
-		handleRotation(animal, animalImage);
 		bindPenToAnimal(animalImage);
+		handleRotation(animal, animalImage);
 		handleMovement(point, animal, animalImage);
 	}
 
