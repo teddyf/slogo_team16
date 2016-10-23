@@ -22,8 +22,8 @@ public class For extends Command {
 		double start = params[1].getValue();
 		double end = params[2].getValue();
 		double increment = params[3].getValue();
-		Command[] commands = params[4].getCommands();
-		Parameter[][] parameters = params[5].getParameters();
+		Command[] commands = (Command[])params[4].getList();
+		Parameter[][] parameters = (Parameter[][])params[5].getList();
 		
 		Command command;
 		double value = 0;

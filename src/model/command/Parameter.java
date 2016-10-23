@@ -6,55 +6,41 @@ public class Parameter {
 	private Animal turtle;
 	private String name;
 	private double value;
-	private Command[] commands;
-	private Parameter[][] params;
+	private Object[] list;
 	
 	public Parameter() {
 		this.turtle = null;
 		this.name = null;
 		this.value = 0;
-		this.commands = null;
-		this.params = null;
+		this.list = null;
 	}
 	
 	public Parameter(Animal turtle) {
 		this.turtle = turtle;
 		this.name = null;
 		this.value = 0;
-		this.commands = null;
-		this.params = null;
+		this.list = null;
 	}
 	
 	public Parameter(String name) {
 		this.turtle = null;
 		this.name = name;
 		this.value = 0;
-		this.commands = null;
-		this.params = null;
+		this.list = null;
 	}
 	
 	public Parameter(double value) {
 		this.turtle = null;
 		this.name = null;
 		this.value = value;
-		this.commands = null;
-		this.params = null;
+		this.list = null;
 	}
 	
-	public Parameter(Command[] commands) {
+	public Parameter(Object[] list) {
 		this.turtle = null;
 		this.name = null;
 		this.value = 0;
-		this.commands = commands;
-		this.params = null;
-	}
-	
-	public Parameter(Parameter[][] params) {
-		this.turtle = null;
-		this.name = null;
-		this.value = 0;
-		this.commands = null;
-		this.params = params;
+		this.list = list;
 	}
 	
 	/*****GETTERS*****/
@@ -71,12 +57,8 @@ public class Parameter {
 		return value;
 	}
 	
-	public Command[] getCommands() {
-		return commands;
-	}
-	
-	public Parameter[][] getParameters() {
-		return params;
+	public Object[] getList() {
+		return list;
 	}
 	
 	/*****SETTERS*****/
@@ -93,11 +75,7 @@ public class Parameter {
 		this.value = value;
 	}
 	
-	public void setCommands(Command[] commands) {
-		this.commands = commands;
-	}
-	
-	public void setParameters(Parameter[][] params) {
-		this.params = params;
+	public void setList(Object[] list) {
+		this.list = list;
 	}
 }

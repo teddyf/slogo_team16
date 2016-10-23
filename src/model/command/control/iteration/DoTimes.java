@@ -20,8 +20,8 @@ public class DoTimes extends Command {
 	public double run(Parameter[] params) {
 		Variable variable = new Variable(params[0].getName());
 		double limit = params[1].getValue();
-		Command[] commands = params[2].getCommands();
-		Parameter[][] parameters = params[3].getParameters();
+		Command[] commands = (Command[])params[2].getList();
+		Parameter[][] parameters = (Parameter[][])params[3].getList();
 		
 		Command command;
 		double value = 0;

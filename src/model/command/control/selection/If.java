@@ -18,8 +18,8 @@ public class If extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		double expression = params[0].getValue();
-		Command[] commands = params[1].getCommands();
-		Parameter[][] parameters = params[2].getParameters();
+		Command[] commands = (Command[])params[1].getList();
+		Parameter[][] parameters = (Parameter[][])params[2].getList();
 		
 		Command command;
 		double value = 0;

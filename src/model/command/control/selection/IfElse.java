@@ -18,10 +18,10 @@ public class IfElse extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		double expression = params[0].getValue();
-		Command[] trueCommands = params[1].getCommands();
-		Command[] falseCommands = params[2].getCommands();
-		Parameter[][] trueParameters = params[3].getParameters();
-		Parameter[][] falseParameters = params[4].getParameters();
+		Command[] trueCommands = (Command[])params[1].getList();
+		Command[] falseCommands = (Command[])params[2].getList();
+		Parameter[][] trueParameters = (Parameter[][])params[3].getList();
+		Parameter[][] falseParameters = (Parameter[][])params[4].getList();
 		
 		Command[] commands;
 		Parameter[][] parameters;
