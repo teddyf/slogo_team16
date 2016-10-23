@@ -18,7 +18,7 @@ public class For extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		Variable variable = new Variable(params[0].getName());
+		int variable = (int)params[0].getValue();
 		double start = params[1].getValue();
 		double end = params[2].getValue();
 		double increment = params[3].getValue();
@@ -32,7 +32,7 @@ public class For extends Command {
 			for(int c = 0; c < commands.length; c++) {
 				command = commands[c];
 				value = command.run(parameters[c]);
-				variable.setValue(value);
+				variable = i+1;
 			}
 		}
 		
