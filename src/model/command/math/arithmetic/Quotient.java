@@ -1,18 +1,23 @@
 package model.command.math.arithmetic;
 
+import model.command.Parameter;
+
 public class Quotient extends MathArithmetic {
 
+	private final double numParams = 2;
+	
 	public Quotient() {
 		super();
 	}
 
 	/**
 	 * Determines the quotient of two values
-	 * @param expression1 - value 1
-	 * @param expression2 - value 2
+	 * @param params - array of parameters
 	 * @return the quotient
 	 */
-	public double run(double expression1, double expression2) {
+	public double run(Parameter[] params) {
+		double expression1 = params[0].getValue();
+		double expression2 = params[0].getValue();
 		return product(expression1, 1/expression2);
 	}
 }

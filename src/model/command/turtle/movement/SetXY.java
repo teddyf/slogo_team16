@@ -3,22 +3,24 @@ package model.command.turtle.movement;
 import model.animal.Animal;
 import model.command.Parameter;
 
-public class ClearScreen extends TurtleMovement {
+public class SetXY extends TurtleMovement {
 
-	private final double numParams = 1;
+	private final double numParams = 3;
 	
-	public ClearScreen() {
+	public SetXY() {
 		super();
 	}
 
 	/**
-	 * Erases the animal's trails and places it at the center of the screen
+	 * Moves the animal to an absolute screen position
 	 * @param params - array of parameters
 	 * @return the distance the turtle moved
 	 */
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		return moveTo(turtle, 0,0);
+		double x = params[1].getValue();
+		double y = params[2].getValue();
+		return moveTo(turtle, x, y);
 	}
 }

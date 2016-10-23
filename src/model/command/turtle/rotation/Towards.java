@@ -1,23 +1,26 @@
 package model.command.turtle.rotation;
 
 import model.animal.Animal;
+import model.command.Parameter;
 
 public class Towards extends TurtleRotation {
 
-	public Towards(Animal turtle) {
-		super(turtle);
+	private final double numParams = 3;
+	
+	public Towards() {
+		super();
 	}
 
 	/**
 	 * Turns the animal to face an absolute screen position
-	 * 
-	 * @param x
-	 *            - the specified x coordinate
-	 * @param y
-	 *            - the specified y coordinate
+	 * @param params - array of parameters
 	 * @return the number of degrees moved
 	 */
-	public double run(double x, double y) {
-		return turnTo(x, y);
+	@Override
+	public double run(Parameter[] params) {
+		Animal turtle = params[0].getAnimal();
+		double x = params[1].getValue();
+		double y = params[2].getValue();
+		return turnTo(turtle, x, y);
 	}
 }

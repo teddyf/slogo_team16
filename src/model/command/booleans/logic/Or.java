@@ -1,18 +1,24 @@
 package model.command.booleans.logic;
 
+import model.command.Parameter;
+
 public class Or extends BooleanLogic {
 
+	private final double numParams = 2;
+	
 	public Or() {
 		super();
 	}
 
 	/**
 	 * Determines logical or of two test values
-	 * @param test1 - value 1
-	 * @param test2 - value 2
+	 * @param params - array of parameters
 	 * @return 1 if value 1 or value 2 are non-zero
 	 */
-	public double run(double test1, double test2) {
+	@Override
+	public double run(Parameter[] params) {
+		double test1 = params[0].getValue();
+		double test2 = params[1].getValue();
 		return or(test1, test2);
 	}
 }

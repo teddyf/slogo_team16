@@ -1,17 +1,14 @@
 package model.command.turtle.rotation;
 
 import model.animal.Animal;
-import model.command.turtle.TurtleCommand;
+import model.command.Command;
 
-public abstract class TurtleRotation extends TurtleCommand {
-	private Animal turtle;
-
-	public TurtleRotation(Animal turtle) {
-		super(turtle);
-		this.turtle = turtle;
+public abstract class TurtleRotation extends Command {
+	public TurtleRotation() {
+		super();
 	}
 
-	public double turn(double degrees, double left) {
+	public double turn(Animal turtle, double degrees, double left) {
 		turtle.setHeading(turtle.getHeading() + degrees);
 		turtle.setHeading(turtle.getHeading() % 360);
 		if (left == 1) {
@@ -22,7 +19,7 @@ public abstract class TurtleRotation extends TurtleCommand {
 		return degrees;
 	}
 
-	public double turnTo(double heading) {
+	public double turnTo(Animal turtle, double heading) {
 		heading = heading % 360;
 		turtle.setHeading(heading);
 		double diff = Math.abs(turtle.getHeading() - heading);
@@ -33,10 +30,10 @@ public abstract class TurtleRotation extends TurtleCommand {
 		}
 	}
 
-	public double turnTo(double x, double y) {
+	public double turnTo(Animal turtle, double x, double y) {
 		double x_diff = x - turtle.getX();
 		double y_diff = y - turtle.getY();
 		double heading = Math.atan2(y_diff, x_diff);
-		return turnTo(heading);
+		return turnTo(turtle, heading);
 	}
 }

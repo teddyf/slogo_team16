@@ -1,9 +1,12 @@
 package model.command.math.number;
 
-import model.command.math.MathCommand;
+import model.command.Command;
+import model.command.Parameter;
 
-public class Pi extends MathCommand {
+public class Pi extends Command {
 
+	private final double numParams = 0;
+	
 	public Pi() {
 		super();
 	}
@@ -12,7 +15,8 @@ public class Pi extends MathCommand {
 	 * Reports the number pi
 	 * @return pi
 	 */
-	public double run() {
+	@Override
+	public double run(Parameter[] params) {
 		return Math.PI;
 	}
 }

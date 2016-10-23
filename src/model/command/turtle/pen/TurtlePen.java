@@ -1,17 +1,14 @@
 package model.command.turtle.pen;
 
 import model.animal.Animal;
-import model.command.turtle.TurtleCommand;
+import model.command.Command;
 
-public abstract class TurtlePen extends TurtleCommand {
-	private Animal turtle;
-
-	public TurtlePen(Animal turtle) {
-		super(turtle);
-		this.turtle = turtle;
+public abstract class TurtlePen extends Command {
+	public TurtlePen() {
+		super();
 	}
 
-	public double penDown(double pen) {
+	public double penDown(Animal turtle, double pen) {
 		turtle.setPen(pen);
 		return turtle.getPen();
 	}

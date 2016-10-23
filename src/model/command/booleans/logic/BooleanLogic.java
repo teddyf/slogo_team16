@@ -1,8 +1,8 @@
 package model.command.booleans.logic;
 
-import model.command.booleans.BooleanCommand;
+import model.command.Command;
 
-public abstract class BooleanLogic extends BooleanCommand{
+public abstract class BooleanLogic extends Command{
 	public BooleanLogic() {
 		super();
 	}

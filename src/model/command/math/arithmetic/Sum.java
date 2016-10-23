@@ -1,18 +1,23 @@
 package model.command.math.arithmetic;
 
+import model.command.Parameter;
+
 public class Sum extends MathArithmetic {
 
+	private final double numParams = 2;
+	
 	public Sum() {
 		super();
 	}
 
 	/**
 	 * Determines the sum of two values
-	 * @param expression1 - value 1
-	 * @param expression2 - value 2
+	 * @param params - array of parameters
 	 * @return the sum
 	 */
-	public double run(double expression1, double expression2) {
+	public double run(Parameter[] params) {
+		double expression1 = params[0].getValue();
+		double expression2 = params[1].getValue();
 		return sum(expression1, expression2);
 	}
 }

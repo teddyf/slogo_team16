@@ -1,8 +1,8 @@
 package model.command.booleans.comparison;
 
-import model.command.booleans.BooleanCommand;
+import model.command.Command;
 
-public abstract class BooleanComparison extends BooleanCommand{
+public abstract class BooleanComparison extends Command{
 	public BooleanComparison() {
 		super();
 	}

@@ -1,8 +1,8 @@
 package model.command.math.arithmetic;
 
-import model.command.math.MathCommand;
+import model.command.Command;
 
-public abstract class MathArithmetic extends MathCommand {
+public abstract class MathArithmetic extends Command {
 	public MathArithmetic() {
 		super();
 	}

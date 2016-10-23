@@ -1,19 +1,24 @@
 package model.command.turtle.visibility;
 
 import model.animal.Animal;
+import model.command.Parameter;
 
 public class HideTurtle extends TurtleVisibility {
 
-	public HideTurtle(Animal turtle) {
-		super(turtle);
+	private final double numParams = 1;
+	
+	public HideTurtle() {
+		super();
 	}
 
 	/**
 	 * Makes the animal invisible
-	 * 
+	 * @param params - array of parameters
 	 * @return 0
 	 */
-	public double run() {
-		return showTurtle(0);
+	@Override
+	public double run(Parameter[] params) {
+		Animal turtle = params[0].getAnimal();
+		return showTurtle(turtle, 0);
 	}
 }

@@ -1,8 +1,8 @@
 package model.command.math.trigonometry;
 
-import model.command.math.MathCommand;
+import model.command.Command;
 
-public abstract class MathTrigonometry extends MathCommand {
+public abstract class MathTrigonometry extends Command {
 	public MathTrigonometry() {
 		super();
 	}

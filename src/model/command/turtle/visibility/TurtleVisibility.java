@@ -1,17 +1,14 @@
 package model.command.turtle.visibility;
 
 import model.animal.Animal;
-import model.command.turtle.TurtleCommand;
+import model.command.Command;
 
-public abstract class TurtleVisibility extends TurtleCommand {
-	private Animal turtle;
-
-	public TurtleVisibility(Animal turtle) {
-		super(turtle);
-		this.turtle = turtle;
+public abstract class TurtleVisibility extends Command {
+	public TurtleVisibility() {
+		super();
 	}
 
-	public double showTurtle(double show) {
+	public double showTurtle(Animal turtle, double show) {
 		turtle.setShowing(show);
 		return turtle.getShowing();
 	}

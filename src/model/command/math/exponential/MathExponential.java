@@ -1,8 +1,8 @@
 package model.command.math.exponential;
 
-import model.command.math.MathCommand;
+import model.command.Command;
 
-public abstract class MathExponential extends MathCommand {
+public abstract class MathExponential extends Command {
 	public MathExponential() {
 		super();
 	}

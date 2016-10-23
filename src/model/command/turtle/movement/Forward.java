@@ -1,22 +1,25 @@
 package model.command.turtle.movement;
 
 import model.animal.Animal;
+import model.command.Parameter;
 
 public class Forward extends TurtleMovement {
 
-	public Forward(Animal turtle) {
-		super(turtle);
+	private final double numParams = 2;
+	
+	public Forward() {
+		super();
 	}
 
 	/**
-	 * Moves the animal forward in its current heading by a specified number of
-	 * pixels
-	 * 
-	 * @param pixels
-	 *            - the specified number of pixels
+	 * Moves the animal forward in its current heading by a specified number of pixels
+	 * @param params - array of parameters
 	 * @return the number of pixels
 	 */
-	public double run(double pixels) {
-		return move(pixels);
+	@Override
+	public double run(Parameter[] params) {
+		Animal turtle = params[0].getAnimal();
+		double pixels = params[1].getValue();
+		return move(turtle, pixels);
 	}
 }
