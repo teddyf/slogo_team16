@@ -32,9 +32,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import model.AnimalPane;
-import model.animal.Animal;
-import model.animal.Turtle;
+import Model.AnimalPane;
+import Model.animal.Animal;
+import Model.animal.Turtle;
 
 /**
  * Main SLogo interface

@@ -1,6 +1,6 @@
-package model.command.math.number;
+package Model.command.math.number;
 
-import model.command.math.MathCommand;
+import Model.command.math.MathCommand;
 
 public class Pi extends MathCommand {
 

@@ -1,4 +1,4 @@
-package model.command.booleans.comparison;
+package Model.command.booleans.comparison;
 
 public class Equal extends BooleanComparison {
 

@@ -1,7 +1,7 @@
-package model.command.turtle.rotation;
+package Model.command.turtle.rotation;
 
-import model.animal.Animal;
-import model.command.turtle.TurtleCommand;
+import Model.animal.Animal;
+import Model.command.turtle.TurtleCommand;
 
 public abstract class TurtleRotation extends TurtleCommand {
 	private Animal turtle;

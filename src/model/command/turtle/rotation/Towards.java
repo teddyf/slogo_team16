@@ -1,6 +1,6 @@
-package model.command.turtle.rotation;
+package Model.command.turtle.rotation;
 
-import model.animal.Animal;
+import Model.animal.Animal;
 
 public class Towards extends TurtleRotation {
 

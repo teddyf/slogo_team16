@@ -1,4 +1,4 @@
-package model.command.booleans.logic;
+package Model.command.booleans.logic;
 
 public class Not extends BooleanLogic {
 

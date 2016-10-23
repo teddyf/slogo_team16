@@ -1,7 +1,7 @@
-package model.command.turtle.rotation;
+package Model.command.turtle.rotation;
 
-import model.animal.Animal;
-import model.command.turtle.movement.TurtleMovement;
+import Model.animal.Animal;
+import Model.command.turtle.movement.TurtleMovement;
 
 public class SetXY extends TurtleMovement {
 

@@ -1,7 +1,7 @@
-package model.command.turtle.pen;
+package Model.command.turtle.pen;
 
-import model.animal.Animal;
-import model.command.turtle.TurtleCommand;
+import Model.animal.Animal;
+import Model.command.turtle.TurtleCommand;
 
 public abstract class TurtlePen extends TurtleCommand {
 	private Animal turtle;

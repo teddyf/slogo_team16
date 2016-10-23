@@ -1,4 +1,4 @@
-package model.command.math.exponential;
+package Model.command.math.exponential;
 
 public class Power extends MathExponential {
 

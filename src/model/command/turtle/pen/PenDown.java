@@ -1,6 +1,6 @@
-package model.command.turtle.pen;
+package Model.command.turtle.pen;
 
-import model.animal.Animal;
+import Model.animal.Animal;
 
 public class PenDown extends TurtlePen {
 

@@ -1,6 +1,6 @@
-package model.command.turtle;
+package Model.command.turtle;
 
-import model.animal.Animal;
+import Model.animal.Animal;
 
 public abstract class TurtleCommand {
 

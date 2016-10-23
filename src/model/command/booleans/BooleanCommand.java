@@ -1,4 +1,4 @@
-package model.command.booleans;
+package Model.command.booleans;
 
 public abstract class BooleanCommand {
 

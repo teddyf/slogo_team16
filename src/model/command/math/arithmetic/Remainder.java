@@ -1,4 +1,4 @@
-package model.command.math.arithmetic;
+package Model.command.math.arithmetic;
 
 public class Remainder extends MathArithmetic {
 

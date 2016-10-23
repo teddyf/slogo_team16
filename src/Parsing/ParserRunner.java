@@ -1,6 +1,6 @@
 package Parsing;
 
-import model.command.turtle.movement.Forward;
+import Model.command.turtle.movement.Forward;
 
 import java.io.File;
 import java.io.FileNotFoundException;

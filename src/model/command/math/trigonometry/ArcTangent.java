@@ -1,4 +1,4 @@
-package model.command.math.trigonometry;
+package Model.command.math.trigonometry;
 
 public class ArcTangent extends MathTrigonometry {
 

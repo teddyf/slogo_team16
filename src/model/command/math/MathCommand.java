@@ -1,4 +1,4 @@
-package model.command.math;
+package Model.command.math;
 
 public abstract class MathCommand {
 

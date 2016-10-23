@@ -1,6 +1,6 @@
-package model.command.math.arithmetic;
+package Model.command.math.arithmetic;
 
-import model.command.math.MathCommand;
+import Model.command.math.MathCommand;
 
 public abstract class MathArithmetic extends MathCommand {
 	public MathArithmetic() {

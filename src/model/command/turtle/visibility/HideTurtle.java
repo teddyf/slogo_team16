@@ -1,6 +1,6 @@
-package model.command.turtle.visibility;
+package Model.command.turtle.visibility;
 
-import model.animal.Animal;
+import Model.animal.Animal;
 
 public class HideTurtle extends TurtleVisibility {
 

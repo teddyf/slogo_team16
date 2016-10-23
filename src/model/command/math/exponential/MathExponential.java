@@ -1,6 +1,6 @@
-package model.command.math.exponential;
+package Model.command.math.exponential;
 
-import model.command.math.MathCommand;
+import Model.command.math.MathCommand;
 
 public abstract class MathExponential extends MathCommand {
 	public MathExponential() {

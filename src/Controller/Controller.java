@@ -1,7 +1,7 @@
 package Controller;
 
 import java.util.Map;
-import model.AnimalPane;
+import Model.AnimalPane;
 import View.AnimalPaneGUI;
 
 /**

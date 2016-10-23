@@ -1,7 +1,7 @@
-package model.command.turtle.visibility;
+package Model.command.turtle.visibility;
 
-import model.animal.Animal;
-import model.command.turtle.TurtleCommand;
+import Model.animal.Animal;
+import Model.command.turtle.TurtleCommand;
 
 public abstract class TurtleVisibility extends TurtleCommand {
 	private Animal turtle;

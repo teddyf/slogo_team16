@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
-import model.animal.Animal;
-import model.animal.Turtle;
+import Model.animal.Animal;
+import Model.animal.Turtle;
 import javafx.geometry.Point2D;
 import View.helper.CoordinatePair;
 

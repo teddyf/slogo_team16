@@ -1,8 +1,8 @@
-package model.command.turtle.movement;
+package Model.command.turtle.movement;
 
 import View.Workspace;
-import model.animal.Animal;
-import model.command.turtle.TurtleCommand;
+import Model.animal.Animal;
+import Model.command.turtle.TurtleCommand;
 
 public abstract class TurtleMovement extends TurtleCommand {
 	private Animal turtle;

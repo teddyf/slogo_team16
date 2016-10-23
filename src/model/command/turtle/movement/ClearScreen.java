@@ -1,6 +1,6 @@
-package model.command.turtle.movement;
+package Model.command.turtle.movement;
 
-import model.animal.Animal;
+import Model.animal.Animal;
 
 public class ClearScreen extends TurtleMovement {
 

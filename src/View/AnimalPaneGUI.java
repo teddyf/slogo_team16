@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import model.AnimalPane;
-import model.animal.Animal;
+import Model.AnimalPane;
+import Model.animal.Animal;
 
 public class AnimalPaneGUI {
 

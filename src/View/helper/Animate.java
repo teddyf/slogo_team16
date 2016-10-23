@@ -8,8 +8,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import java.util.List;
-import model.AnimalPane;
-import model.animal.Animal;
+import Model.AnimalPane;
+import Model.animal.Animal;
 
 /**
  * Handles animation

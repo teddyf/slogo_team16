@@ -1,6 +1,6 @@
-package model.command.math.trigonometry;
+package Model.command.math.trigonometry;
 
-import model.command.math.MathCommand;
+import Model.command.math.MathCommand;
 
 public abstract class MathTrigonometry extends MathCommand {
 	public MathTrigonometry() {
