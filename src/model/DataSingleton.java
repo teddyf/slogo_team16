@@ -34,4 +34,12 @@ public class DataSingleton {
 	public boolean containsCommand(String commandName) {
 		return commands.containsKey(commandName);
 	}
+	
+	public void addCommand(Command command) {
+		commands.put(command.getName(), command);
+	}
+	
+	public void changeCommand(String commandName, Command command) {
+		commands.put(commandName, command);
+	}
 }

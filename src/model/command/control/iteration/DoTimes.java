@@ -18,7 +18,7 @@ public class DoTimes extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		Variable variable = new Variable(params[0].getName());
+		int variable = (int)params[0].getValue();
 		double limit = params[1].getValue();
 		Command[] commands = (Command[])params[2].getList();
 		Parameter[][] parameters = (Parameter[][])params[3].getList();
@@ -30,7 +30,7 @@ public class DoTimes extends Command {
 			for(int c = 0; c < commands.length; c++) {
 				command = commands[c];
 				value = command.run(parameters[c]);
-				variable.setValue(value);
+				variable = i+1;
 			}
 		}
 		

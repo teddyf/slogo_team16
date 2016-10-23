@@ -1,37 +1,38 @@
 package model.command.control.variable;
 
+import java.util.Arrays;
 import model.DataSingleton;
 import model.command.Command;
+import model.command.NewCommand;
 import model.command.Parameter;
 import model.variable.Variable;
 
 public class To extends Command {
-	private final double numParams = 3;
+	private final double numParams = 4;
 	
 	public To() {
 		super();
 	}
 	
 	/**
-	 * Assigns a value to a variable or creates the variable if it doesn't already exist
+	 * Creates a new command given variables and commands to run
 	 * @param params - array of parameters
-	 * @return the value of the variable
+	 * @return 1 if the command is successfully defined and 0 otherwise
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		String commandName = params[0].getName();
-		String[] variableNames = (String[])params[1].getList();
-		Variable[] variables = new Variable[variableNames.length]; 
-		for(int v = 0; v < variables.length; v++) {
-			variables[v] = new Variable(variableNames[v]);
-		}
-		Command[] commands = (Command[])params[2].getList();
 		DataSingleton data = DataSingleton.getInstance();
+		String commandName = params[0].getName();
+		if (data.containsCommand(commandName)) {
+			return 0; //IMPLEMENT ERROR CHECKING
+		}
+		String[] variableNames = (String[])params[1].getList();
+		Command[] commands = (Command[])params[2].getList();
+		Parameter[][] parameters = (Parameter[][])params[3].getList();
 		
-		Command command;
-		double value = 0;
+		Command newCommand = new NewCommand(commandName, variableNames, commands, parameters);
+		data.addCommand(newCommand);
 		
-		
-		return value;
+		return 1;
 	}
 }
