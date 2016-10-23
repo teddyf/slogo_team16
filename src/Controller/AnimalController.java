@@ -10,27 +10,33 @@ import model.AnimalPane;
 /**
  * 
  * @author Jordan Frazier
- *
+ * @author Lucy Zhang
  */
-// TODO: Jordan - update this when parser gets implemented
+
 public class AnimalController implements Controller {
 	
-	private Parser parser;
+	private WriteFile file;
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
 	private AnimalPane activeAnimalPane;
 	private AnimalPaneGUI activeAnimalPaneGUI;
+	public static final String FILEPATH = "Resources/myInput.slogo";
 
 	public AnimalController() {
-		parser = new Parser();
+		file = new WriteFile();
 		error = "";
 	}
 
+	public void writeInputToFile(String input){
+		file.writeToFile(FILEPATH, input);
+	}
+	
 	@Override
-	public 	Map<Integer, String[]> handleInput(String input) {
-		Map<Integer, String[]> parsedText = parser.parseInput(input);
+	public 	Map<Integer, String[]> handleInput(Map<Integer, String[]> parsedText) {
+		
+		//Map<Integer, String[]> parsedText = parser.parseInput(input);
 		if (parsedText == null) {
-			error = ("Invalid input: " + input);
+			error = ("Invalid input: ");
 		} else {
 			runCommands(parsedText);
 		}

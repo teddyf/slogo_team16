@@ -54,9 +54,7 @@ public class Buttons {
 			// for errors
 			addCommandToHistory(pane, input);
 
-			Map<Integer, String[]> map = myController.handleInput(input);
-//			myController.checkForPrintCommand("print", console); // testing the print
-															// command
+			myController.writeInputToFile(input);
 		});
 		return run;
 	}

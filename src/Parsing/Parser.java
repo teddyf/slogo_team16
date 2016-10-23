@@ -1,6 +1,11 @@
 package Parsing;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -36,6 +41,7 @@ public class Parser {
 
 		return parsedData;
 	}
+	
 
 	// for testing
 	public void checkForPrintCommand(String command, Console console) {

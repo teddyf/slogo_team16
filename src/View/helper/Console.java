@@ -22,7 +22,7 @@ public class Console {
 
 	public void initConsole() {
 		writeToConsole("Type your SLogo here");
-		addListener();
+		//addListener();
 		eraseTextOnInitialClick();
 	}
 
@@ -56,7 +56,7 @@ public class Console {
 	}
 
 	private boolean nextCharIsSpace(String value) {
-		return value.charAt(value.length() - 1) == ' ';
+		return value.length()>1 && value.charAt(value.length() - 1) == ' ';
 	}
 
 	private void autoComplete(String currentWord) { // GUYS I FORGOT HOW TO USE

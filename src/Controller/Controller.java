@@ -7,12 +7,14 @@ import View.AnimalPaneGUI;
 /**
  * 
  * @author Jordan Frazier
+ * @author lucyzhang
  *
  */
 public interface Controller {
 
+	public void writeInputToFile(String input);
 	
-	public Map<Integer, String[]> handleInput(String input);
+	public Map<Integer, String[]> handleInput(Map<Integer, String[]> parsedText);
 	
 //	public AnimalPane getActiveAnimalPane();
 	
