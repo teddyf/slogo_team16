@@ -1,8 +1,12 @@
 package Parsing;
 
 public abstract class Expression {
-    String name;
+    private String name;
     public Expression(String name){
         this.name = name;
+    }
+    
+    public String toString(){
+        return this.name;
     }
 }

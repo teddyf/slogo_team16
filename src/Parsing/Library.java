@@ -14,6 +14,6 @@ public class Library {
         if(data.containsKey(input)){
             return data.get(input);
         }
-        else ret
+        else return this.getClass();
     }
 }

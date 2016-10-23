@@ -6,10 +6,14 @@ public class TreeNode {
     public ArrayList<TreeNode> neighbors;
     public TreeNode parent;
     
-    public TreeNode(Expression expression){
-        this.parent = null;
+    public TreeNode(){
+        this.neighbors = new ArrayList<TreeNode>();
+    }
+    public TreeNode(Expression expression, TreeNode parent){
+        this.parent = parent;
         this.expression = expression;
         this.neighbors = new ArrayList<TreeNode>();
+        parent.push(this);
     }
     
     public void push(TreeNode a){
@@ -18,5 +22,13 @@ public class TreeNode {
     
     public ArrayList<TreeNode> getNeighbors(){
         return this.neighbors;
+    }
+    
+    public TreeNode getParent(){
+        return parent;
+    }
+    
+    public String toString(){
+        return this.expression.toString();
     }
 }

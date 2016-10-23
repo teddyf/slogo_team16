@@ -55,12 +55,19 @@ public class ProgramParser {
         // THIS IS THE KEY LINE
         return regex.matcher(text).matches();
     }
-    
-    
+       
     public void setNames(String path){
-        this.addPatterns(path);
+        this.names = addPatterns(path);
     }
     public void setLabels(String path){
-        this.addPatterns(path);
+        this.labels = addPatterns(path);
     }
+    
+    public List<Entry<String, Pattern>> getNames(){
+        return names;
+    }
+    public List<Entry<String, Pattern>> getLabels(){
+        return labels;
+    }
+    
 }
