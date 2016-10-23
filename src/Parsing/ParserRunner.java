@@ -1,9 +1,10 @@
 package Parsing;
 
-import Model.command.turtle.movement.Forward;
+import model.command.turtle.movement.Forward;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -22,7 +23,7 @@ public class ParserRunner {
     private final String PATH = "resources/languages/";
     private final String PATH_SYNTAX = "resources/languages/Syntax";
     private final String METHOD = "run";
-    private final String PARAM_COUNT = "knownParams";
+    private final String PARAM_COUNT = "numParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
 
     File file = new File("data/examples/sample.logo");
@@ -33,6 +34,7 @@ public class ParserRunner {
         parser.setNames(PATH + language);
         parser.setLabels(PATH_SYNTAX);
         methodPaths = new ArrayList<>();
+        addPatterns(RESOURCE_PATH);
     }
 
     private String[][] parseLine (ProgramParser lang, String input) {
@@ -45,8 +47,8 @@ public class ParserRunner {
             String s = text[i];
             //System.out.println(s);
             if (s.trim().length() > 0) {
-                System.out.println(String.format("%s : %s : %s", s, lang.getName(s),
-                                                 lang.getLabel(s)));
+                //System.out.println(String.format("%s : %s : %s", s, lang.getName(s),
+                                                 //lang.getLabel(s)));
                 if(isNumber(s)){
                     names.add(s);
                 }
@@ -93,20 +95,22 @@ public class ParserRunner {
                                                ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
         ArrayList<String> userInput = new ArrayList<String>();
         ArrayList<String> vestigialLabels = new ArrayList<String>();
-        Stack<Integer> st = new Stack<Integer>();
+        Stack<Double> st = new Stack<Double>();
         for(int i = 0; i < input[0].length; i++){
             String s = input[0][i];
             userInput.add(s);
             vestigialLabels.add(input[1][i]);
             if(isMethod(s)){
-                int count = getCommandParamCount(s);
+                System.out.println(s);
+                double count = getCommandParamCount(s);
+                System.out.println(count);
                 st.push(count);
                 userInput.add("{");
                 vestigialLabels.add("{");
             }
             else{
                 if(!st.isEmpty()){
-                    int check = st.pop()-1;
+                    double check = st.pop()-1;
                     st.push(check);
                     if(st.peek() <= 0){
                         st.pop();
@@ -115,7 +119,7 @@ public class ParserRunner {
                     }
                 }
             }
-            System.out.println(st);
+            //System.out.println(st);
         }
         for(int i = 0; i < st.size(); i++){
             userInput.add("}");
@@ -153,7 +157,7 @@ public class ParserRunner {
         }
         return true;
     }
-    
+    //Outdated method
     public Object getParameterCount (String method) throws InstantiationException,
                                                     IllegalAccessException,
                                                     IllegalArgumentException,
@@ -161,6 +165,7 @@ public class ParserRunner {
                                                     NoSuchMethodException, SecurityException,
                                                     ClassNotFoundException, NoSuchFieldException{
         try{
+            System.out.println(method);
             Class a = Class.forName("model.command.turtle.movement."+method);
             Object count = a.getField(PARAM_COUNT);
             return count;
@@ -194,17 +199,22 @@ public class ParserRunner {
         return regex.matcher(text).matches();
     }
     
-    public int getCommandParamCount (String input) throws ClassNotFoundException, NoSuchFieldException, SecurityException {
+    public double getCommandParamCount (String input) throws ClassNotFoundException, NoSuchFieldException, SecurityException {
         try{
-        String inputWithPath = getLabel(input);
-        System.out.println(input);
-        Class c = Class.forName(inputWithPath);
-        Object count = c.getField(PARAM_COUNT);
-        return (int) count;
-        }
+            String inputWithPath = getLabel(input);
+            Class c = Class.forName(inputWithPath);
+            Object obj = c.newInstance();
+            Field count = obj.getClass().getDeclaredField(PARAM_COUNT);
+            count.setAccessible(true);
+            return count.getDouble(obj);
+       }
+        
         catch(Exception e){
             return 0;
         }
+       
+
+
     }
     
     public String getLabel (String text) {

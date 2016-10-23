@@ -45,8 +45,12 @@ public class ExpressionTree {
             else if(a[0][i].equals("}")){
                 parent = parent.getParent();
             }
-            else if(a[0][i].equals("["));
-            else if(a[0][i].equals("]"));
+            else if(a[0][i].equals("[")){
+                parent = curr;
+            }
+            else if(a[0][i].equals("]")){
+                parent = parent.getParent();
+            }
             else{
                 curr = buildNode(parent,a[0][i],a[1][i]); 
             }        
