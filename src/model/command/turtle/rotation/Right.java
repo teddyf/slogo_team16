@@ -17,8 +17,8 @@ public class Right extends TurtleRotation {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double degrees = params[0].getValue();
-		Animal turtle = params[1].getAnimal();
+		Animal turtle = params[0].getAnimal();
+		double degrees = params[1].getValue();
 		return turn(turtle, degrees, 0);
 	}
 }

@@ -19,6 +19,6 @@ public class Backward extends TurtleMovement {
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
 		double pixels = params[1].getValue();
-		return move(turtle, pixels * -1);
+		return move(turtle, pixels * -1)*-1;
 	}
 }

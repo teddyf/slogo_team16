@@ -26,7 +26,12 @@ public class Tester {
         System.out.println("****");
         ArrayList<TreeNode>node = tree.dfs();
         ProcessCommand pc = new ProcessCommand();
-        System.out.println(tree.reverse(node));
+        //System.out.println(tree.reverse(node));
+        ArrayList<TreeNode> inputs = tree.reverse(node);
+        for(int i = 0; i < inputs.size(); i++) {
+			System.out.println(inputs.get(i).expression.getClass().getName());
+		}
+        System.out.println("PRINTING");
         double v = pc.process(new AnimalController(), tree.reverse(node));
         System.out.println(v);
     }

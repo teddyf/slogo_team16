@@ -41,7 +41,7 @@ public class ProcessCommand {
 				int startIndex = parametersList.size()-(int)command.getNumParams();
 				if (command instanceof TurtleCommand) {
 					//Animal turtle = ac.getActiveAnimalPaneGUI().getAnimalPane().getMyAnimalList().get(0);
-					Animal turtle = new Turtle();
+					Animal turtle = new Turtle(15, 15, 3, 4);
 					parameters[0] = new Parameter(turtle);
 				} else {
 					parameters[0] = parametersList.get(startIndex);

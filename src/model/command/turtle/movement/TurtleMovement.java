@@ -17,7 +17,9 @@ public abstract class TurtleMovement extends TurtleCommand {
 	}
 
 	public double moveTo(Animal turtle, double x, double y) {
-		double distance = Math.sqrt(Math.pow(turtle.getX() - x, 2) + Math.pow(turtle.getY() - y, 2));
+		double turtleX = turtle.getX() - Workspace.SCENE_WIDTH/2;
+		double turtleY = Workspace.SCENE_HEIGHT/2 - turtle.getY();
+		double distance = Math.sqrt(Math.pow(turtleX - x, 2) + Math.pow(turtleY - y, 2));
 		turtle.setX(x + Workspace.SCENE_WIDTH / 2);
 		turtle.setY(Workspace.SCENE_HEIGHT / 2 - y);
 		return distance;

@@ -21,8 +21,8 @@ public abstract class TurtleRotation extends TurtleCommand {
 
 	public double turnTo(Animal turtle, double heading) {
 		heading = heading % 360;
-		turtle.setHeading(heading);
 		double diff = Math.abs(turtle.getHeading() - heading);
+		turtle.setHeading(heading);
 		if (diff <= 180) {
 			return diff;
 		} else {
