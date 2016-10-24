@@ -101,9 +101,9 @@ public class ParserRunner {
             userInput.add(s);
             vestigialLabels.add(input[1][i]);
             if(isMethod(s)){
-                System.out.println(s);
+                //System.out.println(s);
                 double count = getCommandParamCount(s);
-                System.out.println(count);
+                //System.out.println(count);
                 st.push(count);
                 userInput.add("{");
                 vestigialLabels.add("{");
@@ -119,7 +119,6 @@ public class ParserRunner {
                     }
                 }
             }
-            //System.out.println(st);
         }
         for(int i = 0; i < st.size(); i++){
             userInput.add("}");

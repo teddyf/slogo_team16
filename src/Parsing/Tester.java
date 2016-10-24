@@ -2,8 +2,6 @@ package Parsing;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
-
-import Controller.AnimalController;
 import ErrorHandling.InvalidLabelException;
 import model.command.ProcessCommand;
 public class Tester {
@@ -25,15 +23,16 @@ public class Tester {
         tree.buildTree(b);
         System.out.println("****");
         ArrayList<TreeNode>node = tree.dfs();
+
         ProcessCommand pc = new ProcessCommand();
-        //System.out.println(tree.reverse(node));
-        ArrayList<TreeNode> inputs = tree.reverse(node);
-        for(int i = 0; i < inputs.size(); i++) {
-			System.out.println(inputs.get(i).expression.getClass().getName());
-		}
-        System.out.println("PRINTING");
-        double v = pc.process(new AnimalController(), tree.reverse(node));
-        System.out.println(v);
+		node = tree.reverse(node);
+        for(int i = 0; i < node.size(); i++){
+            System.out.println(node.get(i).expression.getClass().getName());
+            
+        }
+        //double v = pc.process(new AnimalController(), tree.reverse(node));
+        //System.out.println(v);
+        System.out.println(node);
     }
     
     public static <a> String toString(a[] input){
