@@ -41,6 +41,39 @@ public class AnimalController implements Controller {
 
 	public void writeInputToFile(String input){
 		file.writeToFile(FILEPATH, input);
+		try {
+			runCommands();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidLabelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -52,7 +85,7 @@ public class AnimalController implements Controller {
 //			displayErrorDialog(input);
 		} else {
 			try {
-				runCommands(parsedText);
+				runCommands();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -88,7 +121,7 @@ public class AnimalController implements Controller {
 		return parsedText;
 	}
 
-	private void runCommands(Map<Integer, String[]> parsedText) throws FileNotFoundException, NoSuchMethodException,
+	private void runCommands() throws FileNotFoundException, NoSuchMethodException,
     SecurityException, ClassNotFoundException,
     InstantiationException, IllegalAccessException,
     IllegalArgumentException, InvocationTargetException,
@@ -102,6 +135,8 @@ public class AnimalController implements Controller {
         ArrayList<TreeNode>node = tree.dfs();
         //node = tree.reverse(node);
         
+        System.out.println("ANIMAL PANE");
+        System.out.println(activeAnimalPaneGUI.getAnimalPane());
         Animal turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
         ProcessCommand pc = new ProcessCommand();
         double v = pc.process(this, turtle, tree.reverse(node));
