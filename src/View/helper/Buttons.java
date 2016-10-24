@@ -28,8 +28,12 @@ import main.Main;
 public class Buttons {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
-	private Controller myController = new AnimalController();
+	private Controller myController;
 	// private Main main = new Main();
+	
+	public Buttons(Controller controller) {
+		myController = controller;
+	}
 
 	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
@@ -57,6 +61,7 @@ public class Buttons {
 			addCommandToHistory(pane, input);
 
 			myController.writeInputToFile(input);
+			myController.handleInput();
 //			myController.checkForPrintCommand("print", console); // testing the print
 			// myController.checkForPrintCommand("print", console); // testing
 			// the print

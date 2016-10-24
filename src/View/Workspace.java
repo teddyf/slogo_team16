@@ -74,10 +74,10 @@ public class Workspace implements Observer {
 
 	public Workspace(int workspaceID) {
 		graphics = new Graphics();
-		buttons = new Buttons();
+		myController = new AnimalController();
+		buttons = new Buttons(myController);
 		animation = new Animate();
 		myAnimalGUIList = new ArrayList<>();
-		myController = new AnimalController();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
 		this.workSpaceID = workspaceID;
 	}

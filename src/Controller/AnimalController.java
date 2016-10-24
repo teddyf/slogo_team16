@@ -26,7 +26,7 @@ import javafx.scene.control.Alert.AlertType;
  */
 
 public class AnimalController implements Controller {
-	
+
 	private WriteFile file;
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
@@ -39,20 +39,20 @@ public class AnimalController implements Controller {
 		error = "";
 	}
 
-	public void writeInputToFile(String input){
+	public void writeInputToFile(String input) {
 		file.writeToFile(FILEPATH, input);
 	}
-	
+
 	@Override
-	public 	Map<Integer, String[]> handleInput(Map<Integer, String[]> parsedText) {
-		
-		//Map<Integer, String[]> parsedText = parser.parseInput(input);
-		if (parsedText == null) {
+	public Map<Integer, String[]> handleInput() {
+
+		 Map<Integer, String[]> parsedText = null;//parser.parseInput(input);
+		if ("lol" == null) {
 			// Invalid input, display error dialog
-//			displayErrorDialog(input);
+			// displayErrorDialog(input);
 		} else {
 			try {
-				runCommands(parsedText);
+				runCommands();
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -88,53 +88,51 @@ public class AnimalController implements Controller {
 		return parsedText;
 	}
 
-	private void runCommands(Map<Integer, String[]> parsedText) throws FileNotFoundException, NoSuchMethodException,
-    SecurityException, ClassNotFoundException,
-    InstantiationException, IllegalAccessException,
-    IllegalArgumentException, InvocationTargetException,
-    NoSuchFieldException, InvalidLabelException {
+	private void runCommands() throws FileNotFoundException, NoSuchMethodException,
+			SecurityException, ClassNotFoundException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException, NoSuchFieldException, InvalidLabelException {
 		ProgramParser lang = new ProgramParser();
-        ParserRunner pr = new ParserRunner("English", lang);
-        String[][] a = pr.combineAllLines();
-        String[][] b = pr.markDepth(a);
-        ExpressionTree tree = new ExpressionTree();
-        tree.buildTree(b);
-        ArrayList<TreeNode>node = tree.dfs();
-        //node = tree.reverse(node);
-        
-        Animal turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
-        ProcessCommand pc = new ProcessCommand();
-        double v = pc.process(this, turtle, tree.reverse(node));
-        System.out.println(v);
-        Point2D coordinates = new Point2D(turtle.getX(), turtle.getY());
-        ArrayList<Point2D> points = new ArrayList<Point2D>();
-        points.add(coordinates);
-        activeAnimalPane.setCoordinateMap(points);
+		ParserRunner pr = new ParserRunner("English", lang);
+		String[][] a = pr.combineAllLines();
+		String[][] b = pr.markDepth(a);
+		ExpressionTree tree = new ExpressionTree();
+		tree.buildTree(b);
+		ArrayList<TreeNode> node = tree.dfs();
+		// node = tree.reverse(node);
+
+		Animal turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
+		ProcessCommand pc = new ProcessCommand();
+		double v = pc.process(this, turtle, tree.reverse(node));
+		System.out.println(v);
+		Point2D coordinates = new Point2D(turtle.getX(), turtle.getY());
+		ArrayList<Point2D> points = new ArrayList<Point2D>();
+		points.add(coordinates);
+		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
 	}
 
-//	@Override
-//	public AnimalPane getActiveAnimalPane() {
-//		return activeAnimalPane;
-//	}
-	
-//	@Override
-//	public void setActiveAnimalPane(AnimalPane currentAnimalPane) {
-//		this.activeAnimalPane = currentAnimalPane;
-//	}
-	
-	// Could have this listening to the main view, and when user switches workspace, the active animal pane gui changes
-	
-	
+	// @Override
+	// public AnimalPane getActiveAnimalPane() {
+	// return activeAnimalPane;
+	// }
+
+	// @Override
+	// public void setActiveAnimalPane(AnimalPane currentAnimalPane) {
+	// this.activeAnimalPane = currentAnimalPane;
+	// }
+
+	// Could have this listening to the main view, and when user switches
+	// workspace, the active animal pane gui changes
+
 	@Override
 	public AnimalPaneGUI getActiveAnimalPaneGUI() {
 		return activeAnimalPaneGUI;
 	}
-	
+
 	@Override
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI) {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
 	}
-	
+
 	public void displayErrorDialog(String error) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Parsing error!");
@@ -142,13 +140,13 @@ public class AnimalController implements Controller {
 		alert.setContentText("Invalid input: " + error);
 		alert.showAndWait();
 	}
-	
-//	public void addAnimalPane(Workspace workspace) {
-//		AnimalPane pane = new AnimalPane();
-//		myAnimalPanes.add(pane);
-//		workspace.add
-//		
-//	}
+
+	// public void addAnimalPane(Workspace workspace) {
+	// AnimalPane pane = new AnimalPane();
+	// myAnimalPanes.add(pane);
+	// workspace.add
+	//
+	// }
 
 	// Evaluate expression, handle errors
 
