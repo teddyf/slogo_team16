@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class And extends BooleanLogic {
 
-	private final double numParams = 2;
-	
 	public And() {
 		super();
+		numParams = 2;
 	}
 
 	/**

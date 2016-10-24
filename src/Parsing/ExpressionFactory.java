@@ -7,7 +7,7 @@ public class ExpressionFactory {
             return null;
         }
         if (type.equalsIgnoreCase("Command")) {
-            return new Command(name, (Class)obj);
+            return new Method(name, (Class)obj);
 
         }
         else if (type.equalsIgnoreCase("Constant")) {

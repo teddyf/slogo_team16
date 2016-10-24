@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class ClearScreen extends TurtleMovement {
 
-	private final double numParams = 1;
-	
 	public ClearScreen() {
 		super();
+		numParams = 1;
 	}
 
 	/**

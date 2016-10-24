@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Minus extends MathArithmetic {
 
-	private final double numParams = 1;
-	
 	public Minus() {
 		super();
+		numParams = 1;
 	}
 
 	/**

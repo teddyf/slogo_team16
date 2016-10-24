@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Sum extends MathArithmetic {
 
-	private final double numParams = 2;
-	
 	public Sum() {
 		super();
+		numParams = 2;
 	}
 
 	/**

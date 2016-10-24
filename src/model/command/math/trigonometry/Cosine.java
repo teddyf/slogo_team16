@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Cosine extends MathTrigonometry {
 
-	private final double numParams = 1;
-	
 	public Cosine() {
 		super();
+		numParams = 1;
 	}
 
 	/**

@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Not extends BooleanLogic {
 
-	private final double numParams = 2;
-	
 	public Not() {
 		super();
+		numParams = 2;
 	}
 
 	/**

@@ -6,10 +6,9 @@ import model.command.Parameter;
 import model.variable.Variable;
 
 public class Repeat extends Command {
-	private final double numParams = 2;
-	
 	public Repeat() {
 		super();
+		numParams = 2;
 	}
 	
 	/**

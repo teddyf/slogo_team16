@@ -4,9 +4,9 @@ import model.command.Parameter;
 
 public class Tangent extends MathTrigonometry {
 
-	private final double numParams = 1;
 	public Tangent () {
 		super();
+		numParams = 1;
 	}
 
 	/**

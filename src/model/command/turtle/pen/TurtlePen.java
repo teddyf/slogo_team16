@@ -1,9 +1,9 @@
 package model.command.turtle.pen;
 
 import model.animal.Animal;
-import model.command.Command;
+import model.command.turtle.TurtleCommand;
 
-public abstract class TurtlePen extends Command {
+public abstract class TurtlePen extends TurtleCommand {
 	public TurtlePen() {
 		super();
 	}

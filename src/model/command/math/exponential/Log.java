@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Log extends MathExponential {
 
-	private final double numParams = 1;
-	
 	public Log() {
 		super();
+		numParams = 1;
 	}
 
 	/**

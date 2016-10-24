@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class Random extends Command {
 
-	private final double numParams = 1;
-	
 	public Random() {
 		super();
+		numParams = 1;
 	}
 
 	/**

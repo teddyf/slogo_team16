@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Sine extends MathTrigonometry {
 
-	private final double numParams = 1;
-	
 	public Sine() {
 		super();
+		numParams = 1;
 	}
 
 	/**

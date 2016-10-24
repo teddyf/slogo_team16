@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Quotient extends MathArithmetic {
 
-	private final double numParams = 2;
-	
 	public Quotient() {
 		super();
+		numParams = 2;
 	}
 
 	/**

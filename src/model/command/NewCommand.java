@@ -3,7 +3,6 @@ package model.command;
 import java.util.Arrays;
 
 public class NewCommand extends Command {
-	private final double numParams = 1;
 	private String commandName;
 	private String[] variableNames;
 	private Command[] commands;
@@ -12,6 +11,7 @@ public class NewCommand extends Command {
 	
 	public NewCommand() {
 		super();
+		numParams = 1;
 	}
 	
 	public NewCommand(String commandName, String[] variableNames, Command[] commands, Parameter[][] parameters) {
