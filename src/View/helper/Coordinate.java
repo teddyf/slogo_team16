@@ -1,13 +1,15 @@
 package View.helper;
 
-public class CoordinatePair {
+public class Coordinate {
 	
 	private double x;
 	private double y;
+	private double heading;
 	
-	public CoordinatePair(double x, double y) {
+	public Coordinate(double x, double y, double heading) {
 		this.x = x;
 		this.y = y;	
+		this.heading = heading;
 	}
 
 	public double getX() {
@@ -17,6 +19,10 @@ public class CoordinatePair {
 	public double getY() {
 		return y;
 	}
+	
+	public double getHeading() {
+		return heading;
+	}
 
 	public void setX(double x) {
 		this.x = x;
@@ -24,6 +30,10 @@ public class CoordinatePair {
 
 	public void setY(double y) {
 		this.y = y;
+	}
+	
+	public void setHeading(double heading) {
+		this.heading = heading;
 	}
 
 }

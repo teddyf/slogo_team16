@@ -23,6 +23,9 @@ public class Animate {
 	private AnimalPaneGUI animalPaneGUI;
 	private Pen pen;
 	private int counter;
+	
+	// decrease this to speed up, increase to slow down 
+	private double SPEED = 2; 
 
 	public void beginAnimation(AnimalPaneGUI animalPaneGUI) {
 		this.animalPaneGUI = animalPaneGUI;
@@ -103,7 +106,7 @@ public class Animate {
 		double newy = point.getY();
 		
 		double distance = Math.sqrt(Math.pow( (int) newx-oldx, 2) + Math.pow( (int) newy-oldy, 2));
-		Double time = distance * 5;
+		Double time = distance * SPEED;
 		return time;
 	}
 }
