@@ -283,13 +283,14 @@ public class Workspace implements Observer {
 //				Color.WHITE, Color.WHITE);
 //		ImagePattern turtlePattern = new ImagePattern(animal.getImage());
 //		s.setFill(turtlePattern);
-
+		
 		ImageView animalImage = animal.getImageView();
 		animalImage.setFitHeight(TURTLE_HEIGHT);
 		//turtleContainer.setStyle("-fx-background-color: #f12b92;"); //testing
 		animalImage.setFitWidth(TURTLE_WIDTH);
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
+		
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
 		System.out.println("Is this duplicate added? Pane@5a2741ee: "+myAnimalPaneGUI.getMyContainer());
 
