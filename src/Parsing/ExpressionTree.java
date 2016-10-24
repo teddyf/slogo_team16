@@ -60,7 +60,7 @@ public class ExpressionTree {
 
     public Class getCommand (String input) throws ClassNotFoundException {
         String inputWithPath = getLabel(input);
-        System.out.println(input);
+        //System.out.println(input);
         Class c = Class.forName(inputWithPath);
         return c;
     }
@@ -88,16 +88,25 @@ public class ExpressionTree {
         return new TreeNode(e, parent);
     }
     
-    public void dfs(){
+    public ArrayList<TreeNode> dfs(){
         Stack<TreeNode> st = new Stack<TreeNode>();
         st.push(root);
+        ArrayList<TreeNode> data = new ArrayList<TreeNode>();
+        
         while(!st.isEmpty()){
             TreeNode temp = st.pop();
-            System.out.println(temp.neighbors);
+            if(!temp.equals(null)){
+                data.add(temp);
+                
+            }
+            //System.out.println(temp.neighbors);
             for(TreeNode tn: temp.getNeighbors()){
                 st.push(tn);
             }
+            
         }
+        data.remove(0);
+        return data;
     }
     
     
@@ -127,5 +136,12 @@ public class ExpressionTree {
         }
         return ERROR;
     }
-        
+    
+    public ArrayList<TreeNode> reverse(ArrayList<TreeNode> a){
+        ArrayList<TreeNode> rev = new ArrayList<TreeNode>();
+        for(int i = a.size()-1; i >= 0; i--){
+            rev.add(a.get(i));
+        }
+        return rev;
+    }
 }
