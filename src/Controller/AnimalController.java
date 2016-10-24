@@ -5,6 +5,8 @@ import java.util.Map;
 
 import View.AnimalPaneGUI;
 import model.AnimalPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 /**
  * 
@@ -35,7 +37,8 @@ public class AnimalController implements Controller {
 		
 		//Map<Integer, String[]> parsedText = parser.parseInput(input);
 		if (parsedText == null) {
-			error = ("Invalid input: ");
+			// Invalid input, display error dialog
+			displayErrorDialog(input);
 		} else {
 			runCommands(parsedText);
 		}
@@ -43,7 +46,7 @@ public class AnimalController implements Controller {
 	}
 
 	private void runCommands(Map<Integer, String[]> parsedText) {
-	
+		
 	}
 
 //	@Override
@@ -56,6 +59,9 @@ public class AnimalController implements Controller {
 //		this.activeAnimalPane = currentAnimalPane;
 //	}
 	
+	// Could have this listening to the main view, and when user switches workspace, the active animal pane gui changes
+	
+	
 	@Override
 	public AnimalPaneGUI getActiveAnimalPaneGUI() {
 		return activeAnimalPaneGUI;
@@ -64,6 +70,14 @@ public class AnimalController implements Controller {
 	@Override
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI) {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
+	}
+	
+	public void displayErrorDialog(String error) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Parsing error!");
+		alert.setHeaderText("Invalid input displayed");
+		alert.setContentText("Invalid input: " + error);
+		alert.showAndWait();
 	}
 	
 //	public void addAnimalPane(Workspace workspace) {

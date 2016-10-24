@@ -4,12 +4,13 @@ import java.util.Map;
 
 import Controller.AnimalController;
 import Controller.Controller;
-import View.Main;
 import View.SlogoView;
 import View.Workspace;
+import View.helpscreen.HelpScreen;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import main.Main;
 
 /**
  * Handles buttons
@@ -20,22 +21,23 @@ import javafx.scene.layout.VBox;
  *
  */
 
-
-//TODO: Jordan - Bind the history to a data set of history commands instead of passing in the pane. 
-// also, add the commands to the input area instead of running them immediately on double click
+// TODO: Jordan - Bind the history to a data set of history commands instead of
+// passing in the pane.
+// also, add the commands to the input area instead of running them immediately
+// on double click
 public class Buttons {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
 	private Controller myController = new AnimalController();
-//	private Main main = new Main();
+	// private Main main = new Main();
 
 	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
 		Button clear = createClearButton(console);
 		Button help = createHTMLHelpButton();
-		Button wkspc=createNewWorkspaceButton(slogoView);
-		container.getChildren().addAll(run, clear, help,wkspc);
+		Button wkspc = createNewWorkspaceButton(slogoView);
+		container.getChildren().addAll(run, clear, help, wkspc);
 		return container;
 	}
 
@@ -55,6 +57,10 @@ public class Buttons {
 			addCommandToHistory(pane, input);
 
 			myController.writeInputToFile(input);
+//			myController.checkForPrintCommand("print", console); // testing the print
+			// myController.checkForPrintCommand("print", console); // testing
+			// the print
+			// command
 		});
 		return run;
 	}
@@ -76,17 +82,18 @@ public class Buttons {
 		});
 		return help;
 	}
-	
-	private Button createNewWorkspaceButton(SlogoView slogoView){
+
+	private Button createNewWorkspaceButton(SlogoView slogoView) {
 		Button wkspc = graphic.createButton("New Workspace");
 		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
 		wkspc.setOnAction(e -> {
-//			System.out.println("main.getSlogoView(): "+main.getSlogoView());
+			// System.out.println("main.getSlogoView(): "+main.getSlogoView());
 			slogoView.createNewWorkSpace();
 		});
 		return wkspc;
 		
 	}
+
 	private void addCommandToHistory(final GenericPane<String> pane, String input) {
 		pane.getAllItems().add(input);
 	}

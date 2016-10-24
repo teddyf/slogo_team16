@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 import Controller.AnimalController;
@@ -19,18 +20,18 @@ import View.tabs.OptionsPane;
 import View.tabs.VariablesPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import model.AnimalPane;
 import model.animal.Animal;
@@ -46,15 +47,14 @@ import model.animal.Turtle;
 public class Workspace implements Observer {
 	private Scene myScene;
 	private Graphics graphics;
-
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
 	public static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
 	public static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
-	public  static final int TURTLE_HEIGHT = 15;
+	public static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
 	public static final int BUTTON_WIDTH = 140;
-	
+
 	private static final String EN_RESRC_PATH = "resources/languages/English";
 	private static final String CHI_RESRC_PATH = "resources/languages/Chinese";
 
@@ -72,10 +72,8 @@ public class Workspace implements Observer {
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
-	private Pane turtleContainer;
 
 	public Workspace(int workspaceID) {
-		turtleContainer = new Pane();
 		graphics = new Graphics();
 		buttons = new Buttons();
 		animation = new Animate();
@@ -99,9 +97,34 @@ public class Workspace implements Observer {
 	}
 
 	public void createAnimalPaneGUI() {
-		myAnimalPaneGUI = new AnimalPaneGUI(createAnimalPane());
+		myAnimalPaneGUI = new AnimalPaneGUI();
 		myAnimalGUIList.add(myAnimalPaneGUI);
+		myAnimalPaneGUI.getAnimalPane().addObserver(this);
+		// Need to switch? no? yes?
 		myController.setActiveAnimalPaneGUI(myAnimalPaneGUI);
+	}
+	
+	public AnimalPane createAnimalPane() {
+		AnimalPane animalPane = new AnimalPane();
+		// myController.setActiveAnimalPane(animalPane);
+		animalPane.addObserver(this);
+		return animalPane;
+	}
+
+	private void populateTopPane() {
+		HBox container = new HBox(20);
+		container.getStyleClass().add("top-pane");
+
+		Text title = new Text(myResources.getString("SLogo"));
+		title.getStyleClass().add("slogo-title");
+
+		ComboBox<String> languageComboBox = createLanguageChooser();
+		languageComboBox.getStyleClass().add("language-button");
+
+		Button tb = CREATETESTBUTTON();
+
+		container.getChildren().addAll(title, languageComboBox, tb);
+		myRoot.setTop(container);
 	}
 
 	private void populateLeftPane() {
@@ -163,8 +186,9 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createOptionsTab() {
-		// TODO: Jordan - passing in animalPaneGUI, need to update options pane to make custom ID buttons
+		// TODO: Jordan - passing in animalPaneGUI, need to update options pane
 		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this);
+		// to make custom ID buttons
 		Tab tab = createTab(pane);
 		return tab;
 	}
@@ -212,10 +236,10 @@ public class Workspace implements Observer {
 
 	// Maybe specific animal buttons that call this, which adds to animallist,
 	// then the list is completely rendered by calling populateGridWithAnimals()
-//	private void addAnimal(Animal animal) {
-//		getActiveAnimalPane().addAnimal(animal);
-//		renderAnimalGrid();
-//	}
+	// private void addAnimal(Animal animal) {
+	// getActiveAnimalPane().addAnimal(animal);
+	// renderAnimalGrid();
+	// }
 
 	// private void fillAnimalList(int numAnimals) {
 	// for (int i = 0; i < numAnimals; i++) {
@@ -227,17 +251,18 @@ public class Workspace implements Observer {
 	// myAnimalPaneGUI.addAnimal(turtle);
 	// }
 	// }
-//
-//	public void populateGridWithAnimals() {
-//		fillAnimalList(NUM_ANIMALS);
-//		renderAnimalGrid();
-//	}
+	//
+	// public void populateGridWithAnimals() {
+	// fillAnimalList(NUM_ANIMALS);
+	// renderAnimalGrid();
+	// }
 
 	public void populateGridWithAnimals() {
-		createAnimal();
+		//createAnimal();
 		renderAnimalGrid();
 	}
 
+	@Deprecated
 	private void createAnimal() {
 		Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
 				(myAnimalPaneGUI.getScrollPane().getPrefWidth() - myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
@@ -262,13 +287,21 @@ public class Workspace implements Observer {
 	}
 
 	private void addAnimalToGrid(Animal animal) {
-		Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
-				Color.WHITE, Color.WHITE);
-		ImagePattern turtlePattern = new ImagePattern(animal.getImage());
-		s.setFill(turtlePattern);
-		turtleContainer.getChildren().add(s);
-		myAnimalPaneGUI.getScrollPane().setContent(turtleContainer);
+//		Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
+//				Color.WHITE, Color.WHITE);
+//		ImagePattern turtlePattern = new ImagePattern(animal.getImage());
+//		s.setFill(turtlePattern);
+
+		ImageView animalImage = animal.getImageView();
+		animalImage.setFitHeight(TURTLE_HEIGHT);
 		//turtleContainer.setStyle("-fx-background-color: #f12b92;"); //testing
+		animalImage.setFitWidth(TURTLE_WIDTH);
+		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
+		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
+		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
+
+		// turtleContainer.getChildren().add(s);
+		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
 
 	// are we going to let turtle go off of the screen?
@@ -303,21 +336,40 @@ public class Workspace implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
+
 		if (o instanceof AnimalPane) {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {
 					// for (int animalId :
 					// animalGUI.getAnimalPane().getMyAnimalMap().keySet()) {
-					
-//					for(Animal animal : animalGUI.getAnimalPane().getMyAnimalList()) {
-//						if(animal.getSelected()) {
-							animation.beginAnimation(animalGUI.getAnimalPane());
-//						}
-//					}
+
+					// for(Animal animal :
+					// animalGUI.getAnimalPane().getMyAnimalList()) {
+					// if(animal.getSelected()) {
+					System.out.println("BEGINNING ANIMATION in UPDATE");
+					animation.beginAnimation(animalGUI);
+					// }
+					// }
 					// }
 				}
 			}
 		}
+	}
+
+	public Button CREATETESTBUTTON() {
+		Button button = new Button("TESTER");
+		button.setOnMouseClicked(e -> {
+			System.out.println("setting coordinate map");
+			Random random = new Random();
+			List<Point2D> list = new ArrayList<Point2D>();
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			myAnimalPaneGUI.getAnimalPane().setCoordinateMap(list);
+			myAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0).setHeading(40);
+		});
+		return button;
 	}
 
 	public void setWorkspaceID(int id) {

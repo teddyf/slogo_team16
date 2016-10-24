@@ -43,9 +43,9 @@ public class AnimalPane extends Observable implements Observer {
 		//list of Animal ID and Coordinate Lists for translation rendering
 		coordinateMap = new ArrayList<Point2D>();
 
-		addAnimal();
-	}
+		}
 
+	@Deprecated
 	public AnimalPane(Animal animal) {
 		// this increments when adding new animals
 		animalID = 0;
@@ -63,13 +63,16 @@ public class AnimalPane extends Observable implements Observer {
 		//list of Animal ID and Coordinate Lists for translation rendering
 		coordinateMap = new ArrayList<Point2D>();
 
-		addAnimal(animal);
+//		addAnimal(animal);
 	}
 	
 	public void addAnimal() {
 		animalID++;
 		Animal animal = new Turtle();
+		
 		myAnimalMap.put(animalID, animal);
+		myAnimalList.add(animal);
+
 		animal.setId(animalID);
 		animal.addObserver(this);
 		
@@ -94,8 +97,8 @@ public class AnimalPane extends Observable implements Observer {
 
 		// notify SLogoView that a new turtle was added, and needs to update the
 		// view to include new turtle
-		setChanged();
-		notifyObservers();
+//		setChanged();
+//		notifyObservers();
 	}
 
 	@Override
@@ -160,6 +163,9 @@ public class AnimalPane extends Observable implements Observer {
 //	}
 	public void setCoordinateMap(List<Point2D> coordinateMap) {
 		this.coordinateMap = coordinateMap;
+		System.out.println("set changed, notify observers");
+		setChanged();
+		notifyObservers();
 	}
 
 	public void setAnimalID(int animalID) {

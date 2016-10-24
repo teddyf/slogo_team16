@@ -13,7 +13,6 @@ public interface AbstractWorkspace {
 	
 	public void init(SlogoView view);
 	
-	//I have literally no idea what this does lol
 	public <T> ComboBox<? extends T> createLanguageChooser();
 	
 	public void populateGridWithAnimals();
