@@ -38,7 +38,7 @@ public class Buttons {
 	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
-		Button clear = createClearButton(console);
+		Button clear = createClearButton(console, slogoView);
 		Button help = createHTMLHelpButton();
 		Button wkspc = createNewWorkspaceButton(slogoView);
 		container.getChildren().addAll(run, clear, help, wkspc);
@@ -70,11 +70,14 @@ public class Buttons {
 		return run;
 	}
 
-	private Button createClearButton(Console console) {
+	private Button createClearButton(Console console, SlogoView slogoView) {
 		Button clear = graphic.createButton("Clear");
 		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
 		clear.setOnAction(e -> {
 			console.clearConsole();
+			Workspace pane=slogoView.getCurrentWorkspaceLeftPane();
+			pane.resetLeftPane();
+			
 		});
 		return clear;
 	}
