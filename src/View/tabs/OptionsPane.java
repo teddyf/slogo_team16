@@ -60,7 +60,7 @@ public class OptionsPane implements GenericPane<HBox> {
 		PenColor penColor = new PenColor();
 		penColor.addObserver(animalPaneGUI.getAnimalPane().getMyAnimalList().get(0).getActualPen());
 		//HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
-		HBox backgroundColor = createBackgroundColor();
+		HBox backgroundColor = createBackgroundColorOptions();
 				//createComboBoxOption(BACKGROUND_COLOR, COLORS);
 				// DisplayVariable displayX =
 		// graphics.createDisplayVariable(X_COORDINATE, animal.getXProperty());
@@ -74,7 +74,7 @@ public class OptionsPane implements GenericPane<HBox> {
 		// displayX.getContainer(), displayY.getContainer());
 	}
 	
-	private HBox createBackgroundColor(){
+	private HBox createBackgroundColorOptions(){
 		ComboBox<String> colors = createComboBoxOption(COLORS);
 		colors.valueProperty().addListener((o, old, neww) -> changeBackgroundColor(neww));
 		HBox backgroundColor = setComboBoxInContainer(colors, BACKGROUND_COLOR);
@@ -104,7 +104,10 @@ public class OptionsPane implements GenericPane<HBox> {
 	private void changeBackgroundColor(String color){
 		//change the color to the selected one
 		System.out.println("CHange to this color: "+colorHexVals.get(color));
-		animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";"); //testing
+		//animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
+		animalPaneGUI.getScrollPane().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
+		workspace.getMyRoot().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
+		//animalPaneGUI.getScrollPane().getContent().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
 	}
 
 	@Override

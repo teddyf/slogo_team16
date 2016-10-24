@@ -132,7 +132,7 @@ public class Workspace implements Observer {
 		myRoot.setTop(container);
 	}
 
-	public void populateLeftPane() {
+	private void populateLeftPane() {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);
 		leftPane.getStyleClass().add("left-pane");
 
