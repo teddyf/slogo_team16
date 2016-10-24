@@ -27,6 +27,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
@@ -72,6 +73,7 @@ public class Workspace implements Observer {
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
+	
 
 	public Workspace(int workspaceID) {
 		graphics = new Graphics();
@@ -90,6 +92,11 @@ public class Workspace implements Observer {
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
+	}
+	
+	
+	public AnimalPaneGUI getAnimalPaneGUI(){
+		return myAnimalPaneGUI;
 	}
 
 	public void createAnimalPaneGUI() {
@@ -125,7 +132,7 @@ public class Workspace implements Observer {
 		myRoot.setTop(container);
 	}
 
-	private void populateLeftPane() {
+	public void populateLeftPane() {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);
 		leftPane.getStyleClass().add("left-pane");
 
@@ -135,9 +142,18 @@ public class Workspace implements Observer {
 		leftPane.getChildren().addAll(myAnimalPaneGUI.getScrollPane(), container);
 		myRoot.setLeft(leftPane);
 	}
+	
+	public void resetLeftPane(){
+		//myRoot.setLeft(null);
+		ScrollPane newPane = new ScrollPane();
+		Pane myContainer = new Pane();
+		myAnimalPaneGUI.setScrollPane(newPane);
+		myAnimalPaneGUI.stylePane();
+		myAnimalPaneGUI.setMyContainer(myContainer);
+		populateLeftPane();
+	}
 
 	private void populateRightPane() {
-		// TODO: Jordan - inset magic numbers
 		VBox rightPane = graphics.createVBoxPane(RIGHT_PANE_WIDTH, SCENE_HEIGHT);
 		rightPane.getStyleClass().add("right-pane");
 
@@ -184,7 +200,6 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createOptionsTab() {
-		// TODO: Jordan - passing in animalPaneGUI, need to update options pane
 		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this);
 		// to make custom ID buttons
 		Tab tab = createTab(pane);
@@ -200,7 +215,6 @@ public class Workspace implements Observer {
 	}
 
 	public TextArea createConsoleArea() {
-		// TODO: Jordan - input correct width / height (doesn't matter)
 		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - BUTTON_WIDTH, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
 		console.initConsole();
@@ -277,12 +291,13 @@ public class Workspace implements Observer {
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
+		System.out.println("Is this duplicate added? Pane@5a2741ee: "+myAnimalPaneGUI.getMyContainer());
 
 		// turtleContainer.getChildren().add(s);
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
 
-	// are we going to let turtle go off of the screen?
+	// are we going to let turtle go off of the screen? @Lucy: yes
 	private boolean isValidLocation(double x, double y) {
 		return (x > myAnimalPaneGUI.getScrollPane().getLayoutX()) && (y > myAnimalPaneGUI.getScrollPane().getLayoutY())
 				&& (x < myAnimalPaneGUI.getScrollPane().getPrefWidth())
