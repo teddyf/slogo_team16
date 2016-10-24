@@ -26,7 +26,7 @@ public class ParserRunner {
     private final String PARAM_COUNT = "numParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
 
-    File file = new File("data/examples/sample.logo");
+    File file = new File("Resources/myInput.slogo");
 
     public ParserRunner (String language, ProgramParser parser) {
         this.parser = parser;

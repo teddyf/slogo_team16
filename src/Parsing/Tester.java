@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import ErrorHandling.InvalidLabelException;
+import model.command.ProcessCommand;
 public class Tester {
     public static void main (String[] args) throws FileNotFoundException, NoSuchMethodException,
                                             SecurityException, ClassNotFoundException,
@@ -22,7 +23,10 @@ public class Tester {
         tree.buildTree(b);
         System.out.println("****");
         ArrayList<TreeNode>node = tree.dfs();
+        ProcessCommand pc = new ProcessCommand();
         System.out.println(tree.reverse(node));
+        double v = pc.process(tree.reverse(node));
+        System.out.println(v);
     }
     
     public static <a> String toString(a[] input){

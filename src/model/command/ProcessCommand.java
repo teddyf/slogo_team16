@@ -8,15 +8,18 @@ import Parsing.TreeNode;
 import Parsing.Variable;
 
 public class ProcessCommand {
-	public double process(TreeNode[] inputs) {
+	public double process(ArrayList<TreeNode> inputs) {
 		int index = 0; 
 		ArrayList<Parameter> parametersList = new ArrayList<Parameter>();
 		Parameter[] parameters;
-		double value = 0;
+		double value = 1;
 		
-		while (index < inputs.length) {
-			Expression nodeExpression = inputs[index].expression; 
-			if (nodeExpression.getClass().equals("Method")) {
+		for(int i = 0; i < inputs.size(); i++) {
+			System.out.println(inputs.get(i).expression.getClass());
+		}
+		while (index < inputs.size()) {
+			Expression nodeExpression = inputs.get(index).expression; 
+			if (nodeExpression.getClass().getSimpleName().equals("Method")) {
 				Class method = ((Method)nodeExpression).getMethod();
 				Object obj = null;
 				try {
@@ -29,15 +32,19 @@ public class ProcessCommand {
 					e.printStackTrace();
 				}
 				Command command = (Command)obj;
-				parameters = new Parameter[parametersList.size()];
-				parameters = parametersList.toArray(parameters);
+				parameters = new Parameter[(int)command.getNumParams()];
+				int startIndex = parametersList.size()-(int)command.getNumParams();
+				//System.out.println(parametersList.get(1).getValue());
+				for(int i = 0; i < command.getNumParams(); i++) {
+					parameters[i] = parametersList.get(startIndex+i);
+				}
 				value = command.run(parameters);
 				parametersList.clear();
 				parametersList.add(new Parameter(value));
-			} else if (nodeExpression.getClass().equals("Constant")) {
+			} else if (nodeExpression.getClass().getSimpleName().equals("Constant")) {
 				double constant = ((Constant)nodeExpression).getValue();
 				parametersList.add(new Parameter(constant));
-			} else if (nodeExpression.getClass().equals("Variable")) {
+			} else if (nodeExpression.getClass().getSimpleName().equals("Variable")) {
 				String variable = ((Variable)nodeExpression).getName();
 				parametersList.add(new Parameter(variable));
 			} else {
