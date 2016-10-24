@@ -3,7 +3,7 @@ package View.helper;
 import java.util.Observable;
 import java.util.Observer;
 
-import Model.animal.Animal;
+import model.animal.Animal;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

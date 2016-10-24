@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-import Model.animal.Animal;
-import Model.animal.Turtle;
+import model.animal.Animal;
+import model.animal.Turtle;
 import javafx.geometry.Point2D;
 
 public class AnimalPane extends Observable implements Observer {

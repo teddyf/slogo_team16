@@ -2,7 +2,7 @@ package View.helper;
 
 import java.util.List;
 
-import Model.animal.Animal;
+import model.animal.Animal;
 import View.AnimalPaneGUI;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;

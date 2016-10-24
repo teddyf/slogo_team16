@@ -9,9 +9,9 @@ import java.util.ResourceBundle;
 
 import Controller.AnimalController;
 import Controller.Controller;
-import Model.AnimalPane;
-import Model.animal.Animal;
-import Model.animal.Turtle;
+import model.AnimalPane;
+import model.animal.Animal;
+import model.animal.Turtle;
 import View.helper.Animate;
 import View.helper.Buttons;
 import View.helper.Console;

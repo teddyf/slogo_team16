@@ -3,7 +3,7 @@ package Controller;
 import java.util.List;
 import java.util.Map;
 
-import Model.AnimalPane;
+import model.AnimalPane;
 import View.AnimalPaneGUI;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
