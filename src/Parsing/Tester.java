@@ -2,6 +2,8 @@ package Parsing;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+
+import Controller.AnimalController;
 import ErrorHandling.InvalidLabelException;
 import model.command.ProcessCommand;
 public class Tester {
@@ -25,7 +27,7 @@ public class Tester {
         ArrayList<TreeNode>node = tree.dfs();
         ProcessCommand pc = new ProcessCommand();
         System.out.println(tree.reverse(node));
-        double v = pc.process(tree.reverse(node));
+        double v = pc.process(new AnimalController(), tree.reverse(node));
         System.out.println(v);
     }
     

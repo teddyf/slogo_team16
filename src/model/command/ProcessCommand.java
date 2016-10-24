@@ -1,14 +1,19 @@
 package model.command;
 
 import java.util.ArrayList;
+
+import Controller.AnimalController;
 import Parsing.Method;
 import Parsing.Constant;
 import Parsing.Expression;
 import Parsing.TreeNode;
 import Parsing.Variable;
+import model.animal.Animal;
+import model.animal.Turtle;
+import model.command.turtle.TurtleCommand;
 
 public class ProcessCommand {
-	public double process(ArrayList<TreeNode> inputs) {
+	public double process(AnimalController ac, ArrayList<TreeNode> inputs) {
 		int index = 0; 
 		ArrayList<Parameter> parametersList = new ArrayList<Parameter>();
 		Parameter[] parameters;
@@ -34,8 +39,15 @@ public class ProcessCommand {
 				Command command = (Command)obj;
 				parameters = new Parameter[(int)command.getNumParams()];
 				int startIndex = parametersList.size()-(int)command.getNumParams();
+				if (command instanceof TurtleCommand) {
+					//Animal turtle = ac.getActiveAnimalPaneGUI().getAnimalPane().getMyAnimalList().get(0);
+					Animal turtle = new Turtle();
+					parameters[0] = new Parameter(turtle);
+				} else {
+					parameters[0] = parametersList.get(startIndex);
+				}
 				//System.out.println(parametersList.get(1).getValue());
-				for(int i = 0; i < command.getNumParams(); i++) {
+				for(int i = 1; i < command.getNumParams(); i++) {
 					parameters[i] = parametersList.get(startIndex+i);
 				}
 				value = command.run(parameters);
