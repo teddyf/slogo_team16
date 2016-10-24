@@ -46,8 +46,8 @@ public abstract class Animal extends Observable {
 		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		this.x = Workspace.SCENE_WIDTH / 2;
-		this.y = Workspace.SCENE_HEIGHT / 2;
+		this.x = Workspace.LEFT_PANE_WIDTH / 2;
+		this.y = Workspace.LEFT_PANE_HEIGHT / 2;
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -60,8 +60,8 @@ public abstract class Animal extends Observable {
 		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		this.x = Workspace.SCENE_WIDTH / 2 + x;
-		this.y = Workspace.SCENE_HEIGHT / 2 - y;
+		this.x = Workspace.LEFT_PANE_WIDTH / 2 + x;
+		this.y = Workspace.LEFT_PANE_HEIGHT / 2 - y;
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
