@@ -1,15 +1,14 @@
 package View.helper;
 
+import java.util.List;
+
+import Model.animal.Animal;
 import View.AnimalPaneGUI;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import java.util.List;
-import model.AnimalPane;
-import model.animal.Animal;
+
 
 /**
  * Handles animation

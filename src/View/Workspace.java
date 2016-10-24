@@ -9,6 +9,9 @@ import java.util.ResourceBundle;
 
 import Controller.AnimalController;
 import Controller.Controller;
+import Model.AnimalPane;
+import Model.animal.Animal;
+import Model.animal.Turtle;
 import View.helper.Animate;
 import View.helper.Buttons;
 import View.helper.Console;
@@ -33,10 +36,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import model.AnimalPane;
-import model.animal.Animal;
-import model.animal.Turtle;
-
 /**
  * Main SLogo interface
  *
@@ -90,10 +89,6 @@ public class Workspace implements Observer {
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
-	}
-	
-	public Pane getTurtleContainer(){
-		return turtleContainer;
 	}
 
 	public void createAnimalPaneGUI() {
@@ -212,26 +207,6 @@ public class Workspace implements Observer {
 	private VBox createButtons() {
 		VBox container = buttons.createConsoleInputButtons(console, historyPane, mainView);
 		return container;
-	}
-
-	private void populateTopPane() {
-		HBox container = new HBox(20);
-		container.getStyleClass().add("top-pane");
-
-		Text title = new Text(myResources.getString("SLogo"));
-		title.getStyleClass().add("slogo-title");
-
-		ComboBox<String> languageComboBox = createLanguageChooser();
-		languageComboBox.getStyleClass().add("language-button");
-
-		container.getChildren().addAll(title, languageComboBox);
-		myRoot.setTop(container);
-	}
-
-	public AnimalPane createAnimalPane() {
-		AnimalPane animalPane = new AnimalPane();
-		// myController.setActiveAnimalPane(animalPane);
-		return animalPane;
 	}
 
 	// Maybe specific animal buttons that call this, which adds to animallist,

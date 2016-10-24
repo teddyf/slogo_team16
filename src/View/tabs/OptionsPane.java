@@ -1,15 +1,12 @@
 package View.tabs;
 
 import java.util.HashMap;
-import java.util.Observable;
 
 import View.AnimalPaneGUI;
 import View.Workspace;
 import View.helper.Colors;
 import View.helper.Graphics;
 import View.helper.PenColor;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -65,16 +62,14 @@ public class OptionsPane implements GenericPane<HBox> {
 		//HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		HBox backgroundColor = createBackgroundColor();
 				//createComboBoxOption(BACKGROUND_COLOR, COLORS);
-		
-		HBox backgroundColor = createComboBoxOption(BACKGROUND_COLOR, COLORS);
-		// DisplayVariable displayX =
+				// DisplayVariable displayX =
 		// graphics.createDisplayVariable(X_COORDINATE, animal.getXProperty());
 		// DisplayVariable displayY =
 		// graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
 
 		content.getItems().addAll(penColor.getContainer(), backgroundColor);
-		content.getItems().addAll(penColor, backgroundColor);
-		content.getItems().addAll(/*penColor,*/ backgroundColor);
+//		content.getItems().addAll(penColor, backgroundColor);
+//		content.getItems().addAll(/*penColor,*/ backgroundColor);
 		// content.getItems().addAll(penColor, backgroundColor,
 		// displayX.getContainer(), displayY.getContainer());
 	}
@@ -109,7 +104,7 @@ public class OptionsPane implements GenericPane<HBox> {
 	private void changeBackgroundColor(String color){
 		//change the color to the selected one
 		System.out.println("CHange to this color: "+colorHexVals.get(color));
-		workspace.getTurtleContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";"); //testing
+		animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";"); //testing
 	}
 
 	@Override

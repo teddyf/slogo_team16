@@ -3,8 +3,8 @@ package Controller;
 import java.util.List;
 import java.util.Map;
 
+import Model.AnimalPane;
 import View.AnimalPaneGUI;
-import model.AnimalPane;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -38,7 +38,7 @@ public class AnimalController implements Controller {
 		//Map<Integer, String[]> parsedText = parser.parseInput(input);
 		if (parsedText == null) {
 			// Invalid input, display error dialog
-			displayErrorDialog(input);
+//			displayErrorDialog(input);
 		} else {
 			runCommands(parsedText);
 		}

@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+
+import Model.AnimalPane;
+import Model.animal.Animal;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import model.AnimalPane;
-import model.animal.Animal;
 /**
  * 
  * @author Jordan Frazier

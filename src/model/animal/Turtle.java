@@ -1,4 +1,4 @@
-package model.animal;
+package Model.animal;
 
 import View.helper.Graphics;
 import View.helper.Pen;
@@ -81,6 +81,7 @@ public class Turtle extends Animal {
 	@Override
 	public Pen getActualPen() {
 		return actualPen;
+	}
 
 	/***** SETTERS *****/
 
