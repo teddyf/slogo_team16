@@ -30,7 +30,6 @@ public class AnimalController implements Controller {
 	private WriteFile file;
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
-	private AnimalPane activeAnimalPane;
 	private AnimalPaneGUI activeAnimalPaneGUI;
 	public static final String FILEPATH = "Resources/myInput.slogo";
 
@@ -44,53 +43,46 @@ public class AnimalController implements Controller {
 	}
 
 	@Override
-	public Map<Integer, String[]> handleInput() {
-
-		 Map<Integer, String[]> parsedText = null;//parser.parseInput(input);
-		if ("lol" == null) {
-			// Invalid input, display error dialog
-			// displayErrorDialog(input);
-		} else {
-			try {
-				runCommands();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchMethodException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NoSuchFieldException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidLabelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void handleInput() {
+		try {
+			runCommands();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidLabelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return parsedText;
+
 	}
 
-	private void runCommands() throws FileNotFoundException, NoSuchMethodException,
-			SecurityException, ClassNotFoundException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException, NoSuchFieldException, InvalidLabelException {
+	private void runCommands() throws FileNotFoundException, NoSuchMethodException, SecurityException,
+			ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, NoSuchFieldException, InvalidLabelException {
 		ProgramParser lang = new ProgramParser();
 		ParserRunner pr = new ParserRunner("English", lang);
 		String[][] a = pr.combineAllLines();

@@ -88,6 +88,7 @@ public class Animate {
 		pen.getLineList().get(pen.getCounter()).endYProperty().unbind();
 	}
 
+	// TODO: Jordan - rotation change when passed in heading
 	private void handleRotation(Animal animal, ImageView animalImage) {
 		animalImage.setRotate(animalImage.getRotate() + animal.getHeading());
 	}

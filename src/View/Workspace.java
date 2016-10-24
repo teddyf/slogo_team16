@@ -49,6 +49,7 @@ public class Workspace implements Observer {
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
 	public static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	public static final int LEFT_PANE_HEIGHT = Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4;
 	public static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 	public static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
