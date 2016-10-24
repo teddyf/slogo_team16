@@ -4,20 +4,20 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import ErrorHandling.InvalidLabelException;
 import Parsing.ExpressionTree;
 import Parsing.ParserRunner;
 import Parsing.ProgramParser;
 import Parsing.TreeNode;
-import model.AnimalPane;
-import model.animal.Animal;
-import model.command.ProcessCommand;
 import View.AnimalPaneGUI;
+import View.helper.Coordinate;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import model.AnimalPane;
+import model.animal.Animal;
+import model.command.ProcessCommand;
 
 /**
  * 
@@ -96,8 +96,9 @@ public class AnimalController implements Controller {
 		ProcessCommand pc = new ProcessCommand();
 		double v = pc.process(this, turtle, tree.reverse(node));
 		System.out.println(v);
-		Point2D coordinates = new Point2D(turtle.getX(), turtle.getY());
-		ArrayList<Point2D> points = new ArrayList<Point2D>();
+		
+		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading());
+		List<Coordinate> points = new ArrayList<Coordinate>();
 		points.add(coordinates);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
 	}
