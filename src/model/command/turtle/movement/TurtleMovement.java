@@ -2,9 +2,9 @@ package model.command.turtle.movement;
 
 import View.Workspace;
 import model.animal.Animal;
-import model.command.Command;
+import model.command.turtle.TurtleCommand;
 
-public abstract class TurtleMovement extends Command {
+public abstract class TurtleMovement extends TurtleCommand {
 	public TurtleMovement() {
 		super();
 	}

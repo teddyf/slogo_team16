@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class SetXY extends TurtleMovement {
 
-	private final double numParams = 3;
-	
 	public SetXY() {
 		super();
+		numParams = 3;
 	}
 
 	/**

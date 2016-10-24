@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class ShowTurtle extends TurtleVisibility {
 
-	private final double numParams = 1;
-	
 	public ShowTurtle() {
 		super();
+		numParams = 1;
 	}
 
 	/**

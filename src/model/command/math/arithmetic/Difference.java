@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Difference extends MathArithmetic {
 
-	private final double numParams = 2;
-	
 	public Difference() {
 		super();
+		numParams = 2;
 	}
 
 	/**

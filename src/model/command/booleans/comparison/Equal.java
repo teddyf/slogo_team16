@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Equal extends BooleanComparison {
 
-	private final double numParams = 2;
-	
 	public Equal() {
 		super();
+		numParams = 2;
 	}
 
 	/**

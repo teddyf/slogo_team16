@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class ArcTangent extends MathTrigonometry {
 
-	private final double numParams = 1;
-	
 	public ArcTangent() {
 		super();
+		numParams = 1;
 	}
 
 	/**

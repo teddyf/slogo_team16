@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class NotEqual extends BooleanComparison {
 
-	private final double numParams = 2;
-	
 	public NotEqual() {
 		super();
+		numParams = 2;
 	}
 
 	/**

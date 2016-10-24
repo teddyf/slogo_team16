@@ -4,10 +4,9 @@ import model.command.Command;
 import model.command.Parameter;
 
 public class If extends Command {
-	private final double numParams = 2;
-	
 	public If() {
 		super();
+		numParams = 2;
 	}
 	
 	/**

@@ -1,9 +1,9 @@
 package model.command.turtle.rotation;
 
 import model.animal.Animal;
-import model.command.Command;
+import model.command.turtle.TurtleCommand;
 
-public abstract class TurtleRotation extends Command {
+public abstract class TurtleRotation extends TurtleCommand {
 	public TurtleRotation() {
 		super();
 	}

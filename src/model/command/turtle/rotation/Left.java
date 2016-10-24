@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class Left extends TurtleRotation {
 
-	private final double numParams = 2;
-	
 	public Left() {
 		super();
+		numParams = 2;
 	}
 
 	/**

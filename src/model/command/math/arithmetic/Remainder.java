@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Remainder extends MathArithmetic {
 
-	private final double numParams = 2;
-	
 	public Remainder() {
 		super();
+		numParams = 2;
 	}
 
 	/**

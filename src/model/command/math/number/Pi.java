@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class Pi extends Command {
 
-	private final double numParams = 0;
-	
 	public Pi() {
 		super();
+		numParams = 0;
 	}
 
 	/**

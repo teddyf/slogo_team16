@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Product extends MathArithmetic {
 
-	private final double numParams = 2;
-	
 	public Product() {
 		super();
+		numParams = 2;
 	}
 
 	/**

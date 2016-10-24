@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Power extends MathExponential {
 
-	private final double numParams = 2;
-	
 	public Power() {
 		super();
+		numParams = 2;
 	}
 
 	/**

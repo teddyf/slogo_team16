@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Less extends BooleanComparison {
 
-	private final double numParams = 2;
-	
 	public Less() {
 		super();
+		numParams = 2;
 	}
 
 	/**

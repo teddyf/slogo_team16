@@ -4,10 +4,9 @@ import model.command.Parameter;
 
 public class Or extends BooleanLogic {
 
-	private final double numParams = 2;
-	
 	public Or() {
 		super();
+		numParams = 2;
 	}
 
 	/**

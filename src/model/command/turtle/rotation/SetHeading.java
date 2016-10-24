@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class SetHeading extends TurtleRotation {
 
-	private final double numParams = 2;
-	
 	public SetHeading() {
 		super();
+		numParams = 2;
 	}
 
 	/**

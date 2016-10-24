@@ -5,10 +5,9 @@ import model.command.Parameter;
 
 public class PenDown extends TurtlePen {
 
-	private final double numParams = 1;
-	
 	public PenDown() {
 		super();
+		numParams = 1;
 	}
 
 	/**
