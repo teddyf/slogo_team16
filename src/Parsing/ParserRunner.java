@@ -23,7 +23,7 @@ public class ParserRunner {
     private final String PATH = "resources/languages/";
     private final String PATH_SYNTAX = "resources/languages/Syntax";
     private final String METHOD = "run";
-    private final String PARAM_COUNT = "numParams";
+    private final String PARAM_COUNT = "paramCount";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
 
     File file = new File("Resources/myInput.slogo");
@@ -209,7 +209,8 @@ public class ParserRunner {
        }
         
         catch(Exception e){
-            return 0;
+        	
+        	return 0;
         }
        
 

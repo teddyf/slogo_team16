@@ -4,10 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class Backward extends TurtleMovement {
-
+	private final double paramCount;
+	
 	public Backward() {
 		super();
 		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

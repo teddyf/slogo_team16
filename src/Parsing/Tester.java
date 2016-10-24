@@ -2,7 +2,10 @@ package Parsing;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+
+import Controller.AnimalController;
 import ErrorHandling.InvalidLabelException;
+import model.animal.Turtle;
 import model.command.ProcessCommand;
 public class Tester {
     public static void main (String[] args) throws FileNotFoundException, NoSuchMethodException,
@@ -18,21 +21,16 @@ public class Tester {
         //System.out.println(toString(a[0]));
         //System.out.println(toString(a[1]));
         String[][] b = pr.markDepth(a);
-        //System.out.println(toString(b[0]));
+        System.out.println(toString(b[0]));
         ExpressionTree tree = new ExpressionTree();
         tree.buildTree(b);
         System.out.println("****");
         ArrayList<TreeNode>node = tree.dfs();
-
+        //node = tree.reverse(node);
+        
         ProcessCommand pc = new ProcessCommand();
-		node = tree.reverse(node);
-        for(int i = 0; i < node.size(); i++){
-            System.out.println(node.get(i).expression.getClass().getName());
-            
-        }
-        //double v = pc.process(new AnimalController(), tree.reverse(node));
-        //System.out.println(v);
-        System.out.println(node);
+        double v = pc.process(new AnimalController(), new Turtle(), tree.reverse(node));
+        System.out.println(v);
     }
     
     public static <a> String toString(a[] input){

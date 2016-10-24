@@ -3,10 +3,12 @@ package model.command.math.arithmetic;
 import model.command.Parameter;
 
 public class Product extends MathArithmetic {
-
+	private final double paramCount;
+	
 	public Product() {
 		super();
 		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

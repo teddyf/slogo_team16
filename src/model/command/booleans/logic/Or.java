@@ -3,10 +3,12 @@ package model.command.booleans.logic;
 import model.command.Parameter;
 
 public class Or extends BooleanLogic {
-
+	private final double paramCount;
+	
 	public Or() {
 		super();
 		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

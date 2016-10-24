@@ -13,7 +13,7 @@ import model.animal.Turtle;
 import model.command.turtle.TurtleCommand;
 
 public class ProcessCommand {
-	public double process(AnimalController ac, ArrayList<TreeNode> inputs) {
+	public double process(AnimalController ac, Animal turtle, ArrayList<TreeNode> inputs) {
 		int index = 0; 
 		ArrayList<Parameter> parametersList = new ArrayList<Parameter>();
 		Parameter[] parameters;
@@ -39,18 +39,20 @@ public class ProcessCommand {
 				Command command = (Command)obj;
 				parameters = new Parameter[(int)command.getNumParams()];
 				int startIndex = parametersList.size()-(int)command.getNumParams();
+				System.out.print(parametersList.size());
+				System.out.println((int)command.getNumParams());
 				if (command instanceof TurtleCommand) {
 					//Animal turtle = ac.getActiveAnimalPaneGUI().getAnimalPane().getMyAnimalList().get(0);
-					Animal turtle = new Turtle(15, 15, 3, 4);
+					//Animal turtle = new Turtle(15, 15, 3, 3);
 					parameters[0] = new Parameter(turtle);
 				} else {
 					parameters[0] = parametersList.get(startIndex);
 				}
-				//System.out.println(parametersList.get(1).getValue());
 				for(int i = 1; i < command.getNumParams(); i++) {
 					parameters[i] = parametersList.get(startIndex+i);
 				}
 				value = command.run(parameters);
+				System.out.println("VALUE " + value);
 				parametersList.clear();
 				parametersList.add(new Parameter(value));
 			} else if (nodeExpression.getClass().getSimpleName().equals("Constant")) {

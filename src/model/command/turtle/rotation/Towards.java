@@ -4,10 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class Towards extends TurtleRotation {
-
+	private final double paramCount;
+	
 	public Towards() {
 		super();
 		numParams = 3;
+		paramCount = 3;
 	}
 
 	/**

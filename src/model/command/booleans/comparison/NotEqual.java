@@ -3,10 +3,12 @@ package model.command.booleans.comparison;
 import model.command.Parameter;
 
 public class NotEqual extends BooleanComparison {
-
+	private final double paramCount;
+	
 	public NotEqual() {
 		super();
 		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

@@ -3,10 +3,12 @@ package model.command.booleans.comparison;
 import model.command.Parameter;
 
 public class Less extends BooleanComparison {
-
+	private final double paramCount;
+	
 	public Less() {
 		super();
 		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

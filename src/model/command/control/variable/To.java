@@ -6,9 +6,12 @@ import model.command.NewCommand;
 import model.command.Parameter;
 
 public class To extends Command {
+	private final double paramCount;
+	
 	public To() {
 		super();
 		numParams = 4;
+		paramCount = 4;
 	}
 	
 	/**
