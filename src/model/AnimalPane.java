@@ -7,9 +7,10 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
+import View.helper.Coordinate;
+import javafx.geometry.Point2D;
 import model.animal.Animal;
 import model.animal.Turtle;
-import javafx.geometry.Point2D;
 
 public class AnimalPane extends Observable implements Observer {
 
@@ -22,7 +23,7 @@ public class AnimalPane extends Observable implements Observer {
 
 	// Map of string ID to List of CoordinatePair<double x, double y>
 	//private Map<String, List<CoordinatePair>> coordinateMap;
-	private List<Point2D> coordinateMap;
+	private List<Coordinate> coordinateMap;
 
 	private int animalID;
 	
@@ -41,7 +42,7 @@ public class AnimalPane extends Observable implements Observer {
 		myCommandHistory = new ArrayList<String>();
 		
 		//list of Animal ID and Coordinate Lists for translation rendering
-		coordinateMap = new ArrayList<Point2D>();
+		coordinateMap = new ArrayList<Coordinate>();
 
 		}
 
@@ -61,7 +62,7 @@ public class AnimalPane extends Observable implements Observer {
 		myCommandHistory = new ArrayList<String>();
 
 		//list of Animal ID and Coordinate Lists for translation rendering
-		coordinateMap = new ArrayList<Point2D>();
+		coordinateMap = new ArrayList<Coordinate>();
 
 //		addAnimal(animal);
 	}
@@ -138,7 +139,7 @@ public class AnimalPane extends Observable implements Observer {
 //		return coordinateMap;
 //	}
 	
-	public List<Point2D> getCoordinateMap() {
+	public List<Coordinate> getCoordinateMap() {
 		return coordinateMap;
 	}
 
@@ -161,7 +162,7 @@ public class AnimalPane extends Observable implements Observer {
 //	public void setCoordinateMap(Map<String, List<CoordinatePair>> coordinateMap) {
 //		this.coordinateMap = coordinateMap;
 //	}
-	public void setCoordinateMap(List<Point2D> coordinateMap) {
+	public void setCoordinateMap(List<Coordinate> coordinateMap) {
 		this.coordinateMap = coordinateMap;
 		System.out.println("set changed, notify observers");
 		setChanged();

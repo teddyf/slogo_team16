@@ -14,7 +14,7 @@ public interface Controller {
 
 	public void writeInputToFile(String input);
 	
-	public Map<Integer, String[]> handleInput();
+	public void handleInput();
 	
 //	public AnimalPane getActiveAnimalPane();
 	

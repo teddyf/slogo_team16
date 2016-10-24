@@ -50,6 +50,7 @@ public class Workspace implements Observer {
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
 	public static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	public static final int LEFT_PANE_HEIGHT = Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4;
 	public static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
 	public static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
@@ -123,9 +124,11 @@ public class Workspace implements Observer {
 		ComboBox<String> languageComboBox = createLanguageChooser();
 		languageComboBox.getStyleClass().add("language-button");
 
-		Button tb = CREATETESTBUTTON();
+		//Button tb = CREATETESTBUTTON();
 
-		container.getChildren().addAll(title, languageComboBox, tb);
+//		container.getChildren().addAll(title, languageComboBox, tb);
+		container.getChildren().addAll(title, languageComboBox);
+
 		myRoot.setTop(container);
 	}
 
@@ -345,14 +348,14 @@ public class Workspace implements Observer {
 			}
 		}
 	}
-
+/*
 	public Button CREATETESTBUTTON() {
 		Button button = new Button("TESTER");
 		button.setOnMouseClicked(e -> {
 			System.out.println("setting coordinate map");
 			Random random = new Random();
-			List<Point2D> list = new ArrayList<Point2D>();
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+			List<Coordinate> list = new ArrayList<Point2D>();
+			list.add(new Coordinate(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
 			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
 			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
 			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
@@ -361,6 +364,7 @@ public class Workspace implements Observer {
 		});
 		return button;
 	}
+	*/
 
 	public void setWorkspaceID(int id) {
 		this.workSpaceID = id;

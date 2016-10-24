@@ -19,7 +19,7 @@ import javafx.util.Duration;
  */
 public class Animate {
 
-	private List<Point2D> coordinatePairs;
+	private List<Coordinate> coordinatePairs;
 	private AnimalPaneGUI animalPaneGUI;
 	private Pen pen;
 	private int counter;
@@ -39,14 +39,14 @@ public class Animate {
 		}
 	}
 
-	private void translateAnimation(Point2D point, Animal animal) {
+	private void translateAnimation(Coordinate point, Animal animal) {
 		ImageView animalImage = animal.getImageView();
 		bindPenToAnimal(animalImage);
-		handleRotation(animal, animalImage);
+		handleRotation(point, animalImage);
 		handleMovement(point, animal, animalImage);
 	}
 
-	private void handleMovement(Point2D point, Animal animal, ImageView animalImage) {
+	private void handleMovement(Coordinate point, Animal animal, ImageView animalImage) {
 		TranslateTransition translation = new TranslateTransition(Duration.millis(getTranslateTime(point, animalImage)), animalImage);
 //		System.out.println("trans X : " + animalImage.getTranslateX());
 //		System.out.println("trans Y : " + animalImage.getTranslateY());
@@ -66,7 +66,7 @@ public class Animate {
 		translation.play();
 	}
 
-	private void inputTranslationCoordinates(Point2D point, ImageView animalImage, TranslateTransition translation) {
+	private void inputTranslationCoordinates(Coordinate point, ImageView animalImage, TranslateTransition translation) {
 		translation.setFromX(animalImage.getTranslateX());
 		translation.setFromY(animalImage.getTranslateY());
 		translation.setToX(point.getX());
@@ -78,7 +78,7 @@ public class Animate {
 		counter++;
 	}
 
-	private void updateAnimalCoordinates(Point2D point, Animal animal) {
+	private void updateAnimalCoordinates(Coordinate point, Animal animal) {
 		animal.setX(point.getX());
 		animal.setY(point.getY());
 	}
@@ -88,8 +88,9 @@ public class Animate {
 		pen.getLineList().get(pen.getCounter()).endYProperty().unbind();
 	}
 
-	private void handleRotation(Animal animal, ImageView animalImage) {
-		animalImage.setRotate(animalImage.getRotate() + animal.getHeading());
+	// TODO: Jordan - rotation change when passed in heading
+	private void handleRotation(Coordinate coordinate, ImageView animalImage) {
+		animalImage.setRotate(coordinate.getHeading());
 	}
 
 	private void bindPenToAnimal(ImageView animalImage) {
@@ -99,7 +100,7 @@ public class Animate {
 		pen.getLineList().get(pen.getCounter()).endYProperty().bind(animalImage.translateYProperty());
 	}
 	
-	private Double getTranslateTime(Point2D point, ImageView turtle) {
+	private Double getTranslateTime(Coordinate point, ImageView turtle) {
 		double oldx = turtle.getTranslateX();
 		double oldy = turtle.getTranslateY();
 		double newx = point.getX();
