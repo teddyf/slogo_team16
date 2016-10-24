@@ -3,10 +3,12 @@ package model.command.math.trigonometry;
 import model.command.Parameter;
 
 public class Sine extends MathTrigonometry {
-
+	private final double paramCount;
+	
 	public Sine() {
 		super();
 		numParams = 1;
+		paramCount = 1;
 	}
 
 	/**

@@ -3,10 +3,12 @@ package model.command.math.arithmetic;
 import model.command.Parameter;
 
 public class Minus extends MathArithmetic {
-
+	private final double paramCount;
+	
 	public Minus() {
 		super();
 		numParams = 1;
+		paramCount = 1;
 	}
 
 	/**

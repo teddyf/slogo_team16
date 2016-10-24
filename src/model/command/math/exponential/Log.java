@@ -3,10 +3,12 @@ package model.command.math.exponential;
 import model.command.Parameter;
 
 public class Log extends MathExponential {
-
+	private final double paramCount;
+	
 	public Log() {
 		super();
 		numParams = 1;
+		paramCount = 1;
 	}
 
 	/**

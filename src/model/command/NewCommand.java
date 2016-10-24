@@ -3,6 +3,7 @@ package model.command;
 import java.util.Arrays;
 
 public class NewCommand extends Command {
+	private final double paramCount;
 	private String commandName;
 	private String[] variableNames;
 	private Command[] commands;
@@ -12,6 +13,7 @@ public class NewCommand extends Command {
 	public NewCommand() {
 		super();
 		numParams = 1;
+		paramCount = 1;
 	}
 	
 	public NewCommand(String commandName, String[] variableNames, Command[] commands, Parameter[][] parameters) {
@@ -20,6 +22,8 @@ public class NewCommand extends Command {
 		this.commands = commands;
 		this.parameters = parameters;
 		this.parameterValues = parameters;
+		numParams = 1;
+		paramCount = 1;
 	}
 	
 	private void setParameterValues(Double[] variables) {

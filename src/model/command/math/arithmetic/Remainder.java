@@ -3,10 +3,12 @@ package model.command.math.arithmetic;
 import model.command.Parameter;
 
 public class Remainder extends MathArithmetic {
-
+	private final double paramCount;
+	
 	public Remainder() {
 		super();
 		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

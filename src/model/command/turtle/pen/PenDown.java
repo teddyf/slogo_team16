@@ -4,10 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class PenDown extends TurtlePen {
-
+	private final double paramCount;
+	
 	public PenDown() {
 		super();
 		numParams = 1;
+		paramCount = 1;
 	}
 
 	/**

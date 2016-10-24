@@ -6,9 +6,12 @@ import model.command.Parameter;
 import model.variable.Variable;
 
 public class For extends Command {
+	private final double paramCount;
+	
 	public For() {
 		super();
 		numParams = 6;
+		paramCount = 6;
 	}
 	
 	/**

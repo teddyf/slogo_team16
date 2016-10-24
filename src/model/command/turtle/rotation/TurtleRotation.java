@@ -1,5 +1,6 @@
 package model.command.turtle.rotation;
 
+import View.Workspace;
 import model.animal.Animal;
 import model.command.turtle.TurtleCommand;
 
@@ -31,9 +32,9 @@ public abstract class TurtleRotation extends TurtleCommand {
 	}
 
 	public double turnTo(Animal turtle, double x, double y) {
-		double x_diff = x - turtle.getX();
-		double y_diff = y - turtle.getY();
+		double x_diff = x - (turtle.getX() - Workspace.SCENE_WIDTH/2);
+		double y_diff = y - (Workspace.SCENE_HEIGHT/2 - turtle.getY());
 		double heading = Math.atan2(y_diff, x_diff);
-		return turnTo(turtle, heading);
+		return turnTo(turtle, heading*180/Math.PI);
 	}
 }

@@ -6,9 +6,12 @@ import model.command.Parameter;
 import model.variable.Variable;
 
 public class DoTimes extends Command {
+	private final double paramCount;
+	
 	public DoTimes() {
 		super();
 		numParams = 4;
+		paramCount = 4;
 	}
 	
 	/**

@@ -4,10 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class SetXY extends TurtleMovement {
-
+	private final double paramCount;
+	
 	public SetXY() {
 		super();
 		numParams = 3;
+		paramCount = 3;
 	}
 
 	/**

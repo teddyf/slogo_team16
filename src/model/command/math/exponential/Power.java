@@ -3,10 +3,12 @@ package model.command.math.exponential;
 import model.command.Parameter;
 
 public class Power extends MathExponential {
-
+	private final double paramCount;
+	
 	public Power() {
 		super();
 		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**
