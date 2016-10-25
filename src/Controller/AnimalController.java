@@ -60,7 +60,7 @@ public class AnimalController implements Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			displayErrorDialog(e.getMessage());
 			e.printStackTrace();
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
@@ -98,7 +98,7 @@ public class AnimalController implements Controller {
 		double v = pc.process(this, turtle, tree.reverse(node));
 		System.out.println("VALUE " + v);
 		
-		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading());
+		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
 		List<Coordinate> points = new ArrayList<Coordinate>();
 		points.add(coordinates);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);

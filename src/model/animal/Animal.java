@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import View.Workspace;
 import View.helper.Pen;
+import javafx.animation.Animation;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
@@ -70,6 +71,8 @@ public abstract class Animal extends Observable {
 	public abstract void update();
 
 	/***** GETTERS *****/
+	
+	public abstract Animation getGif();
 
 	public double getWidth() {
 		return width;

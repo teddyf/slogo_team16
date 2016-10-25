@@ -5,11 +5,15 @@ public class Coordinate {
 	private double x;
 	private double y;
 	private double heading;
+	private double pen;
+	private double showing;
 	
-	public Coordinate(double x, double y, double heading) {
+	public Coordinate(double x, double y, double heading, double pen, double showing) {
 		this.x = x;
 		this.y = y;	
 		this.heading = heading;
+		this.pen = pen;
+		this.showing = showing;
 	}
 
 	public double getX() {
@@ -34,6 +38,22 @@ public class Coordinate {
 	
 	public void setHeading(double heading) {
 		this.heading = heading;
+	}
+
+	public double getPen() {
+		return pen;
+	}
+
+	public double getShowing() {
+		return showing;
+	}
+
+	public void setPen(int pen) {
+		this.pen = pen;
+	}
+
+	public void setShowing(int showing) {
+		this.showing = showing;
 	}
 
 }
