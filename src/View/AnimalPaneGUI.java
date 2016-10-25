@@ -30,20 +30,26 @@ public class AnimalPaneGUI implements Observer {
 		
 		myScrollPane = new ScrollPane();
 		myContainer = new Pane();
-		stylePane();
+		styleScrollPane();
+		styleMyContainer();
 	}
 	@Deprecated
 	public AnimalPaneGUI(AnimalPane animalPane) {
 		myAnimalPane = animalPane;
 		myScrollPane = new ScrollPane();
 		myAnimalList = new ArrayList<>();
-		stylePane();
+		styleScrollPane();
 	}	
 	
-	public void stylePane() {
+	public void styleScrollPane() {
 		myScrollPane.setPrefWidth(Workspace.LEFT_PANE_WIDTH);
 		myScrollPane.setPrefHeight(Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4);
 		myScrollPane.getStyleClass().add("animal-pane");
+	}
+	
+	public void styleMyContainer() {
+		myContainer.setPrefWidth(Workspace.LEFT_PANE_WIDTH);
+		myContainer.setPrefHeight(Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4);
 	}
 	
 	public void addAnimal(Animal animal) {

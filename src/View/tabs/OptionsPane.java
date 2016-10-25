@@ -1,6 +1,7 @@
 package View.tabs;
 
 import java.util.HashMap;
+import java.util.Observable;
 
 import View.AnimalPaneGUI;
 import View.SlogoView;
@@ -20,7 +21,7 @@ import javafx.scene.layout.HBox;
  * @author lucyzhang
  *
  */
-public class OptionsPane implements GenericPane<HBox> {
+public class OptionsPane extends Observable implements GenericPane<HBox>  {
 
 	private String displayName = "Options";
 	private ListView<HBox> content;
@@ -40,6 +41,10 @@ public class OptionsPane implements GenericPane<HBox> {
 	
 	private static final String[] COLORS = { Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
 
+
+	public OptionsPane(){
+		
+	}
 	
 	public OptionsPane(AnimalPaneGUI animalPaneGUI, Workspace workspace, SlogoView mainView) {
 		this.slogoView = mainView;
@@ -47,20 +52,14 @@ public class OptionsPane implements GenericPane<HBox> {
 		graphics = new Graphics();
 		content = new ListView<>();
 		this.workspace=workspace;
-		// Maybe have to loop through all animals in animalPane to create custom
-		// buttons for each turtle
 		createAllOptions();
 		populateColorHexVals();
 	}
-
-	public OptionsPane(){
-		
-	}
 	
 	private void populateColorHexVals(){
-		colorHexVals.put(Colors.BLUE.toString(),"#0000ff");
-		colorHexVals.put(Colors.GREEN.toString(),"#008000");
-		colorHexVals.put(Colors.RED.toString(),"#ff0000");
+		colorHexVals.put(Colors.BLUE.toString(), Colors.BLUE.getColor());
+		colorHexVals.put(Colors.GREEN.toString(), Colors.GREEN.getColor());
+		colorHexVals.put(Colors.RED.toString(),Colors.RED.getColor());
 		
 	}
 	private void createAllOptions() {
@@ -84,20 +83,16 @@ public class OptionsPane implements GenericPane<HBox> {
 	
 	private HBox createBackgroundColorOptions(){
 		ComboBox<String> colors = createComboBoxOption(COLORS);
-		colors.valueProperty().addListener((o, old, neww) -> changeBackgroundColor(neww));
+		colors.valueProperty().addListener((o, oldValue, newValue) -> workspace.changeAnimalBackgroundColor(newValue));
 		HBox backgroundColor = setComboBoxInContainer(colors, BACKGROUND_COLOR);
 		return backgroundColor;
-	}
-
-	private void createPenColor(){
-		
 	}
 
 	private ComboBox<String> createComboBoxOption(String[] options) {
 		
 		//ObservableList<String> optionList = FXCollections.observableArrayList(options);
 		ComboBox<String> combobox = graphic.createComboBox(options);
-		//ComboBox<String> combobox = new ComboBox<>(optionList);
+		// Sets default value to first value in list
 		combobox.setValue(options[0]);
 		return combobox;
 	}
@@ -109,15 +104,15 @@ public class OptionsPane implements GenericPane<HBox> {
 		return container;
 	}
 	
-	public void changeBackgroundColor(String color){
-		slogoView.setBackgroundColor(color);
-		//change the color to the selected one
-		System.out.println("CHange to this color: "+colorHexVals.get(color));
-		//animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-		animalPaneGUI.getScrollPane().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-		workspace.getMyRoot().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-		//animalPaneGUI.getScrollPane().getContent().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-	}
+//	public void changeBackgroundColor(String color){
+//		slogoView.setBackgroundColor(color);
+//		//change the color to the selected one
+//		System.out.println("CHange to this color: "+colorHexVals.get(color));
+//		//animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
+//		animalPaneGUI.getScrollPane().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
+//		workspace.getMyRoot().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
+//		//animalPaneGUI.getScrollPane().getContent().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
+//	}
 
 	@Override
 	public String getTabName() {

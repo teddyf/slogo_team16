@@ -1,5 +1,9 @@
 package View.helper;
-
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
 public class Coordinate {
 	
 	private double x;

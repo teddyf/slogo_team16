@@ -8,7 +8,11 @@ import java.util.Observer;
 import View.tabs.OptionsPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
 public class Pen implements Observer {
 	
 //	private Line line;
@@ -19,6 +23,7 @@ public class Pen implements Observer {
 	public Pen() {
 		counter = 0;
 		lineList = new ArrayList<>();
+		color = "#00FF00";
 //		line = new Line();
 //		line.setFill(Color.BLACK);
 	}
@@ -26,13 +31,14 @@ public class Pen implements Observer {
 	public Pen(double x, double y){
 		counter = 0;
 		lineList = new ArrayList<>();
+		color = "#00FF00";
 //		line = new Line(x, y, x, y);
 //		line.setFill(Color.BLACK);
 	}
 	
 	public void createLine(double x, double y) {
 		Line line = new Line(x, y, x, y);
-		line.setFill(Color.web("#00FF00"));
+		line.setFill(Color.web(color));
 		lineList.add(line);
 		
 	}

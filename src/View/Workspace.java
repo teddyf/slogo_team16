@@ -4,16 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import Controller.AnimalController;
 import Controller.Controller;
-import model.AnimalPane;
-import model.animal.Animal;
-import model.animal.Turtle;
 import View.helper.Animate;
 import View.helper.Buttons;
+import View.helper.Colors;
 import View.helper.Console;
 import View.helper.Graphics;
 import View.tabs.CommandHistoryPane;
@@ -23,9 +20,7 @@ import View.tabs.OptionsPane;
 import View.tabs.VariablesPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
@@ -37,6 +32,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import model.AnimalPane;
+import model.animal.Animal;
+import model.animal.Turtle;
 
 /**
  * Main SLogo interface
@@ -170,8 +168,9 @@ public class Workspace implements Observer {
 		ScrollPane newPane = new ScrollPane();
 		Pane myContainer = new Pane();
 		myAnimalPaneGUI.setScrollPane(newPane);
-		myAnimalPaneGUI.stylePane();
+		myAnimalPaneGUI.styleScrollPane();
 		myAnimalPaneGUI.setMyContainer(myContainer);
+		myAnimalPaneGUI.styleMyContainer();
 		populateLeftPane();
 	}
 
@@ -223,10 +222,10 @@ public class Workspace implements Observer {
 
 	private Tab createOptionsTab() {
 		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this, mainView);
-		if (defaultBackgroundColor != null && !defaultBackgroundColor.isEmpty()){
-			System.out.println("default background color: "+defaultBackgroundColor);
-			((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);
-		}
+//		if (defaultBackgroundColor != null && !defaultBackgroundColor.isEmpty()){
+//			System.out.println("default background color: "+defaultBackgroundColor);
+//			((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);
+//		}
 		// to make custom ID buttons
 		Tab tab = createTab(pane);
 		return tab;
@@ -307,31 +306,37 @@ public class Workspace implements Observer {
 	}
 
 	private void addAnimalToGrid(Animal animal) {
-		// Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(),
-		// animal.getWidth(), animal.getHeight(),
-		// Color.WHITE, Color.WHITE);
-		// ImagePattern turtlePattern = new ImagePattern(animal.getImage());
-		// s.setFill(turtlePattern);
-
 		ImageView animalImage = animal.getImageView();
 		animalImage.setFitHeight(TURTLE_HEIGHT);
-		// turtleContainer.setStyle("-fx-background-color: #f12b92;"); //testing
 		animalImage.setFitWidth(TURTLE_WIDTH);
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
 
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
-		System.out.println("Is this duplicate added? Pane@5a2741ee: " + myAnimalPaneGUI.getMyContainer());
-
-		// turtleContainer.getChildren().add(s);
+//		myAnimalPaneGUI.getMyContainer().setMinWidth(myAnimalPaneGUI.getScrollPane().getPrefWidth());
+//		myAnimalPaneGUI.getMyContainer().setMinHeight(myAnimalPaneGUI.getScrollPane().getPrefHeight());
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
 
-	// are we going to let turtle go off of the screen? @Lucy: yes
 	private boolean isValidLocation(double x, double y) {
 		return (x > myAnimalPaneGUI.getScrollPane().getLayoutX()) && (y > myAnimalPaneGUI.getScrollPane().getLayoutY())
 				&& (x < myAnimalPaneGUI.getScrollPane().getPrefWidth())
 				&& (y < myAnimalPaneGUI.getScrollPane().getPrefHeight());
+	}
+	
+	public void changeAnimalBackgroundColor(String color) {
+		String hexColor = decodeColor(color);
+		myAnimalPaneGUI.getScrollPane().setStyle("-fx-background-color: " + hexColor);
+		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
+	}
+	
+	public String decodeColor(String color) {
+		for(Colors c : Colors.values()) {
+			if(c.toString().equals(color)) {
+				return c.getColor();
+			}
+		}
+		return null;
 	}
 
 	public ComboBox<String> createLanguageChooser() {
