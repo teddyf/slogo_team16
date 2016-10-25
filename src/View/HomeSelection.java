@@ -42,7 +42,7 @@ public class HomeSelection {
 			System.out.println(temp.toString());
 			fileName = temp.toString();
 			data = new DataSetup(fileName);
-			Workspace wkspc = createWorkspaceFromXML(fileName);
+			createWorkspaceFromXML(fileName);
 			System.out.println("Data: "+data);
 			System.out.println(fileName);
 		}
@@ -56,6 +56,7 @@ public class HomeSelection {
 		s.show();
 		DataSetup data = new DataSetup(fileName);
 		HashMap<String, String> generalInfo = data.getGeneralInfo();
+		System.out.println(generalInfo);
 		return null;
 	}
 }
