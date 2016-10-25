@@ -105,7 +105,9 @@ public class Workspace implements Observer {
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
+		mainView.setBackgroundColor(defaultBackgroundColor);
 	}
+
 
 	public ResourceBundle getResources() {
 		return myResources;
@@ -220,7 +222,7 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createOptionsTab() {
-		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this);
+		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this, mainView);
 		if (defaultBackgroundColor != null && !defaultBackgroundColor.isEmpty()){
 			System.out.println("default background color: "+defaultBackgroundColor);
 			((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);

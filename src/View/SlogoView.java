@@ -1,6 +1,8 @@
 package View;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.scene.Scene;
@@ -36,6 +38,7 @@ public class SlogoView {
 
 	public SlogoView(String title, String backgroundColor, String language) {
 		this.title = title;
+		System.out.println("There is a title! 1st: " + this.title);
 		this.backgroundColor = backgroundColor;
 		this.language = language;
 		numWorkspaces = 0;
@@ -52,10 +55,20 @@ public class SlogoView {
 		return workspaces;
 	}
 
+	public void setBackgroundColor(String color) {
+		this.backgroundColor = color;
+	}
+
 	public Workspace getCurrentWorkspaceLeftPane() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
 		int wkspcID = Integer.parseInt(currentTab.getText()) - 1;
 		return workspaces.get(wkspcID);
+	}
+
+	private void setCurrentWorkspaceTitle() {
+		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
+		title = currentTab.getText();
+		//return Integer.parseInt(currentTab.getText());
 	}
 
 	private void initScene() {
@@ -73,14 +86,13 @@ public class SlogoView {
 		tab.setContent(initWorkspace().getMyRoot());
 		// add tab to tabpane
 		mainView.getTabs().add(tab);
-		title = null;
 	}
 
 	private Workspace initWorkspace() {
 		Workspace slogo;
 		if (stringExists(backgroundColor)) {
 			slogo = new Workspace(numWorkspaces, backgroundColor);
-		}else{
+		} else {
 			slogo = new Workspace(numWorkspaces);
 		}
 		if (stringExists(language)) {
@@ -91,6 +103,18 @@ public class SlogoView {
 		slogo.init(this);
 		// slogo.setWorkspaceID(numWorkspaces);
 		return slogo;
+	}
+
+	public Map<String, String> parseWorkspaceData() {
+		System.out.println("There is a title!2: " + this.title);
+		setCurrentWorkspaceTitle();
+		Map<String, String> data = new HashMap<String, String>();
+		data.put("title", title);
+		data.put("background_color", backgroundColor);
+		data.put("language", "current language here"); // TODO: add the correct
+														// values
+		data.put("numTurtles", "some number");
+		return data;
 	}
 
 	private boolean stringExists(String text) {

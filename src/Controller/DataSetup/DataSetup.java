@@ -12,7 +12,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class DataSetup {
-	private static String[] generalInfo = { "title", "numTurtles", "background_color", "language" };
+	public static final String[] generalInfo = { "title", "numTurtles", "background_color", "language" };
 	private String dataFilePath;
 
 	public String getDataFilePath() {

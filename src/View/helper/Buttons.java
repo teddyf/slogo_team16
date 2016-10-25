@@ -1,9 +1,11 @@
 package View.helper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import Controller.AnimalController;
 import Controller.Controller;
+import Controller.DataSetup.DataOutput;
 import View.SlogoView;
 import View.Workspace;
 import View.helpscreen.HelpScreen;
@@ -29,6 +31,7 @@ public class Buttons {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
 	private Controller myController;
+ 
 	// private Main main = new Main();
 	
 	public Buttons(Controller controller) {
@@ -41,7 +44,8 @@ public class Buttons {
 		Button clear = createClearButton(console, slogoView);
 		Button help = createHTMLHelpButton();
 		Button wkspc = createNewWorkspaceButton(slogoView);
-		container.getChildren().addAll(run, clear, help, wkspc);
+		Button saveWkspc = createSaveWorkspaceButton(slogoView);
+		container.getChildren().addAll(run, clear, help, wkspc, saveWkspc);
 		return container;
 	}
 
@@ -99,7 +103,16 @@ public class Buttons {
 			slogoView.createNewWorkSpace();
 		});
 		return wkspc;
-		
+	}
+	
+	private Button createSaveWorkspaceButton(SlogoView slogoView){
+		Button wkspc = graphic.createButton("Save Workspace");
+		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
+		wkspc.setOnAction(e -> {
+			Map<String,String> data = slogoView.parseWorkspaceData();
+			DataOutput dataOutput = new DataOutput(data.get("title")+"_out.xml",data);
+		});
+		return wkspc;
 	}
 
 	private void addCommandToHistory(final GenericPane<String> pane, String input) {

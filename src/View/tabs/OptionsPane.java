@@ -3,6 +3,7 @@ package View.tabs;
 import java.util.HashMap;
 
 import View.AnimalPaneGUI;
+import View.SlogoView;
 import View.Workspace;
 import View.helper.Colors;
 import View.helper.Graphics;
@@ -16,6 +17,7 @@ import javafx.scene.layout.HBox;
 /**
  * 
  * @author Jordan Frazier
+ * @author lucyzhang
  *
  */
 public class OptionsPane implements GenericPane<HBox> {
@@ -26,6 +28,7 @@ public class OptionsPane implements GenericPane<HBox> {
 	private AnimalPaneGUI animalPaneGUI;
 	private Graphics graphic = new Graphics();
 	private Workspace workspace;
+	private SlogoView slogoView;
 
 	private static final String X_COORDINATE = "x: ";
 	private static final String Y_COORDINATE = "y: ";
@@ -38,7 +41,8 @@ public class OptionsPane implements GenericPane<HBox> {
 	private static final String[] COLORS = { Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
 
 	
-	public OptionsPane(AnimalPaneGUI animalPaneGUI, Workspace workspace) {
+	public OptionsPane(AnimalPaneGUI animalPaneGUI, Workspace workspace, SlogoView mainView) {
+		this.slogoView = mainView;
 		this.animalPaneGUI = animalPaneGUI;
 		graphics = new Graphics();
 		content = new ListView<>();
@@ -106,6 +110,7 @@ public class OptionsPane implements GenericPane<HBox> {
 	}
 	
 	public void changeBackgroundColor(String color){
+		slogoView.setBackgroundColor(color);
 		//change the color to the selected one
 		System.out.println("CHange to this color: "+colorHexVals.get(color));
 		//animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
