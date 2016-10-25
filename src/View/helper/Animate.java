@@ -12,7 +12,7 @@ import model.animal.Animal;
  * Handles animation
  */
 /**
- * @author Lucy Zhang
+ * @author Lucy Zhang, Jordan Frazier
  *
  */
 public class Animate {
@@ -47,25 +47,15 @@ public class Animate {
 	
 	public void changeAnimalVisibility(ImageView animalImage, Coordinate coordinate) {
 		animalImage.setVisible(coordinate.getShowing() != 0);
-//		if(coordinate.getShowing() == 0) {
-//			animalImage.setVisible(false);
-//		} else {
-//			animalImage.setVisible(true);
-//		}
 	}
 
 	private void handleMovement(Coordinate point, Animal animal, ImageView animalImage) {
 		TranslateTransition translation = new TranslateTransition(Duration.millis(getTranslateTime(point, animalImage)),
 				animalImage);
-		// System.out.println("trans X : " + animalImage.getTranslateX());
-		// System.out.println("trans Y : " + animalImage.getTranslateY());
 
 		inputTranslationCoordinates(point, animalImage, translation);
 
 		translation.setOnFinished(e -> {
-			// System.out.println("Finished, setting animal x and y" +
-			// animalImage.getTranslateX() + ", "
-			// + animalImage.getTranslateY());
 			updateAnimalCoordinates(point, animal);
 			unbindPen(point);
 			incrementCounters(point);
@@ -102,7 +92,6 @@ public class Animate {
 		}
 	}
 
-	// TODO: Jordan - rotation change when passed in heading
 	private void handleRotation(Coordinate coordinate, ImageView animalImage) {
 		animalImage.setRotate(coordinate.getHeading());
 	}

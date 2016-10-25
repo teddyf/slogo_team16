@@ -1,5 +1,10 @@
 package View.helper;
 
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
 public enum Colors {
 	BLACK("#000000"),
 	BLUE("#0000FF"), 

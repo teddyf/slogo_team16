@@ -1,7 +1,9 @@
 package View.tabs;
 
+import java.util.Observable;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
+
 /**
  * 
  * @author Jordan Frazier
