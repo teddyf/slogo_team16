@@ -1,6 +1,7 @@
 package View;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -18,6 +19,7 @@ public class SlogoView {
 
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
+	public static final String LANGUAGEPATH = "resources/languages/";
 
 	private TabPane mainView = new TabPane();
 	private Scene myScene;
@@ -25,15 +27,17 @@ public class SlogoView {
 	private ArrayList<Workspace> workspaces = new ArrayList<Workspace>();
 	private String title;
 	private String backgroundColor;
+	private String language;
 
 	public SlogoView() {
 		numWorkspaces = 0;
 		mainView = new TabPane();
 	}
 
-	public SlogoView(String title, String backgroundColor) {
+	public SlogoView(String title, String backgroundColor, String language) {
 		this.title = title;
 		this.backgroundColor = backgroundColor;
+		this.language = language;
 		numWorkspaces = 0;
 		mainView = new TabPane();
 	}
@@ -61,7 +65,7 @@ public class SlogoView {
 	public void createNewWorkSpace() {
 		numWorkspaces++;
 		Tab tab = new Tab();
-		if (title != null && !title.isEmpty()) {
+		if (stringExists(title)) {
 			tab.setText(title);
 		} else {
 			tab.setText(/* "Workspace #"+ */Integer.toString(numWorkspaces));
@@ -69,15 +73,28 @@ public class SlogoView {
 		tab.setContent(initWorkspace().getMyRoot());
 		// add tab to tabpane
 		mainView.getTabs().add(tab);
-		title=null;
+		title = null;
 	}
 
 	private Workspace initWorkspace() {
-		Workspace slogo = new Workspace(numWorkspaces);
+		Workspace slogo;
+		if (stringExists(backgroundColor)) {
+			slogo = new Workspace(numWorkspaces, backgroundColor);
+		}else{
+			slogo = new Workspace(numWorkspaces);
+		}
+		if (stringExists(language)) {
+			System.out.println("Language: " + language);
+			slogo.setResources(ResourceBundle.getBundle(LANGUAGEPATH + language));
+		}
 		workspaces.add(slogo);
 		slogo.init(this);
 		// slogo.setWorkspaceID(numWorkspaces);
 		return slogo;
+	}
+
+	private boolean stringExists(String text) {
+		return (text != null && !text.isEmpty());
 	}
 
 	public Scene getScene() {

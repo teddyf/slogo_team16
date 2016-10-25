@@ -10,6 +10,8 @@ import javafx.scene.control.ListView;
  */
 public interface GenericPane<T> {
 	
+	//public void changeBackgroundColor(String color);
+	
 	public String getTabName();
 	
 	public void makeClickable();	

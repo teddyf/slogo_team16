@@ -49,6 +49,10 @@ public class OptionsPane implements GenericPane<HBox> {
 		populateColorHexVals();
 	}
 
+	public OptionsPane(){
+		
+	}
+	
 	private void populateColorHexVals(){
 		colorHexVals.put(Colors.BLUE.toString(),"#0000ff");
 		colorHexVals.put(Colors.GREEN.toString(),"#008000");
@@ -101,7 +105,7 @@ public class OptionsPane implements GenericPane<HBox> {
 		return container;
 	}
 	
-	private void changeBackgroundColor(String color){
+	public void changeBackgroundColor(String color){
 		//change the color to the selected one
 		System.out.println("CHange to this color: "+colorHexVals.get(color));
 		//animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");

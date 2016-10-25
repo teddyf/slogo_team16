@@ -37,6 +37,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
 /**
  * Main SLogo interface
  *
@@ -56,8 +57,10 @@ public class Workspace implements Observer {
 	public static final int TURTLE_WIDTH = 15;
 	public static final int BUTTON_WIDTH = 140;
 
-	private static final String EN_RESRC_PATH = "resources/languages/English";
-	private static final String CHI_RESRC_PATH = "resources/languages/Chinese";
+	public static final String EN_RESRC_PATH = "resources/languages/English";
+	public static final String CHI_RESRC_PATH = "resources/languages/Chinese";
+
+	private String defaultBackgroundColor;
 
 	private BorderPane myRoot;
 	// private AnimalPane myAnimalPane;
@@ -73,7 +76,6 @@ public class Workspace implements Observer {
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
-	
 
 	public Workspace(int workspaceID) {
 		graphics = new Graphics();
@@ -85,6 +87,17 @@ public class Workspace implements Observer {
 		this.workSpaceID = workspaceID;
 	}
 
+	public Workspace(int workspaceID, String color) {
+		graphics = new Graphics();
+		myController = new AnimalController();
+		buttons = new Buttons(myController);
+		animation = new Animate();
+		myAnimalGUIList = new ArrayList<>();
+		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+		this.workSpaceID = workspaceID;
+		this.defaultBackgroundColor = color;
+	}
+
 	public void init(SlogoView view) {
 		mainView = view;
 		myRoot = new BorderPane();
@@ -93,9 +106,16 @@ public class Workspace implements Observer {
 		populateLeftPane();
 		populateRightPane();
 	}
-	
-	
-	public AnimalPaneGUI getAnimalPaneGUI(){
+
+	public ResourceBundle getResources() {
+		return myResources;
+	}
+
+	public void setResources(ResourceBundle resource) {
+		this.myResources = resource;
+	}
+
+	public AnimalPaneGUI getAnimalPaneGUI() {
 		return myAnimalPaneGUI;
 	}
 
@@ -106,7 +126,7 @@ public class Workspace implements Observer {
 		// Need to switch? no? yes?
 		myController.setActiveAnimalPaneGUI(myAnimalPaneGUI);
 	}
-	
+
 	public AnimalPane createAnimalPane() {
 		AnimalPane animalPane = new AnimalPane();
 		// myController.setActiveAnimalPane(animalPane);
@@ -124,9 +144,9 @@ public class Workspace implements Observer {
 		ComboBox<String> languageComboBox = createLanguageChooser();
 		languageComboBox.getStyleClass().add("language-button");
 
-		//Button tb = CREATETESTBUTTON();
+		// Button tb = CREATETESTBUTTON();
 
-//		container.getChildren().addAll(title, languageComboBox, tb);
+		// container.getChildren().addAll(title, languageComboBox, tb);
 		container.getChildren().addAll(title, languageComboBox);
 
 		myRoot.setTop(container);
@@ -142,9 +162,9 @@ public class Workspace implements Observer {
 		leftPane.getChildren().addAll(myAnimalPaneGUI.getScrollPane(), container);
 		myRoot.setLeft(leftPane);
 	}
-	
-	public void resetLeftPane(){
-		//myRoot.setLeft(null);
+
+	public void resetLeftPane() {
+		// myRoot.setLeft(null);
 		ScrollPane newPane = new ScrollPane();
 		Pane myContainer = new Pane();
 		myAnimalPaneGUI.setScrollPane(newPane);
@@ -201,12 +221,16 @@ public class Workspace implements Observer {
 
 	private Tab createOptionsTab() {
 		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this);
+		if (defaultBackgroundColor != null && !defaultBackgroundColor.isEmpty()){
+			System.out.println("default background color: "+defaultBackgroundColor);
+			((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);
+		}
 		// to make custom ID buttons
 		Tab tab = createTab(pane);
 		return tab;
 	}
 
-	public ScrollPane/*HBox*/ createConsole() {
+	public ScrollPane/* HBox */ createConsole() {
 		ScrollPane consolePane = new ScrollPane();
 		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
@@ -214,7 +238,7 @@ public class Workspace implements Observer {
 		consoleContainer.getChildren().addAll(consoleArea, buttons);
 		consolePane.setContent(consoleContainer);
 		return consolePane;
-		//return consoleContainer;
+		// return consoleContainer;
 	}
 
 	public TextArea createConsoleArea() {
@@ -253,7 +277,7 @@ public class Workspace implements Observer {
 	// }
 
 	public void populateGridWithAnimals() {
-		//createAnimal();
+		// createAnimal();
 		renderAnimalGrid();
 	}
 
@@ -265,7 +289,6 @@ public class Workspace implements Observer {
 				(myAnimalPaneGUI.getScrollPane().getPrefHeight() - myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
 		myAnimalPaneGUI.addAnimal(turtle);
 	}
-
 
 	public void renderAnimalGrid() {
 		for (Animal animal : myAnimalPaneGUI.getMyAnimalList()) {
@@ -282,20 +305,21 @@ public class Workspace implements Observer {
 	}
 
 	private void addAnimalToGrid(Animal animal) {
-//		Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
-//				Color.WHITE, Color.WHITE);
-//		ImagePattern turtlePattern = new ImagePattern(animal.getImage());
-//		s.setFill(turtlePattern);
-		
+		// Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(),
+		// animal.getWidth(), animal.getHeight(),
+		// Color.WHITE, Color.WHITE);
+		// ImagePattern turtlePattern = new ImagePattern(animal.getImage());
+		// s.setFill(turtlePattern);
+
 		ImageView animalImage = animal.getImageView();
 		animalImage.setFitHeight(TURTLE_HEIGHT);
-		//turtleContainer.setStyle("-fx-background-color: #f12b92;"); //testing
+		// turtleContainer.setStyle("-fx-background-color: #f12b92;"); //testing
 		animalImage.setFitWidth(TURTLE_WIDTH);
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
-		
+
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
-		System.out.println("Is this duplicate added? Pane@5a2741ee: "+myAnimalPaneGUI.getMyContainer());
+		System.out.println("Is this duplicate added? Pane@5a2741ee: " + myAnimalPaneGUI.getMyContainer());
 
 		// turtleContainer.getChildren().add(s);
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
@@ -333,7 +357,6 @@ public class Workspace implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 
-
 		if (o instanceof AnimalPane) {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {
@@ -352,23 +375,23 @@ public class Workspace implements Observer {
 			}
 		}
 	}
-/*
-	public Button CREATETESTBUTTON() {
-		Button button = new Button("TESTER");
-		button.setOnMouseClicked(e -> {
-			System.out.println("setting coordinate map");
-			Random random = new Random();
-			List<Coordinate> list = new ArrayList<Point2D>();
-			list.add(new Coordinate(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
-			list.add(new Point2D(random.nextInt(LEFT_PANE_WIDTH - 15), random.nextInt(SCENE_HEIGHT*3/4 - 20)));
-			myAnimalPaneGUI.getAnimalPane().setCoordinateMap(list);
-			myAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0).setHeading(40);
-		});
-		return button;
-	}
-	*/
+	/*
+	 * public Button CREATETESTBUTTON() { Button button = new Button("TESTER");
+	 * button.setOnMouseClicked(e -> {
+	 * System.out.println("setting coordinate map"); Random random = new
+	 * Random(); List<Coordinate> list = new ArrayList<Point2D>(); list.add(new
+	 * Coordinate(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
+	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
+	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
+	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+	 * myAnimalPaneGUI.getAnimalPane().setCoordinateMap(list);
+	 * myAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0).setHeading(40);
+	 * }); return button; }
+	 */
 
 	public void setWorkspaceID(int id) {
 		this.workSpaceID = id;
