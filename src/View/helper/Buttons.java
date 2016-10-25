@@ -37,15 +37,17 @@ public class Buttons {
 	public Buttons(Controller controller) {
 		myController = controller;
 	}
+	
+	public Buttons(){
+		
+	}
 
 	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
 		Button clear = createClearButton(console, slogoView);
 		Button help = createHTMLHelpButton();
-		Button wkspc = createNewWorkspaceButton(slogoView);
-		Button saveWkspc = createSaveWorkspaceButton(slogoView);
-		container.getChildren().addAll(run, clear, help, wkspc, saveWkspc);
+		container.getChildren().addAll(run, clear, help);
 		return container;
 	}
 
@@ -95,7 +97,7 @@ public class Buttons {
 		return help;
 	}
 
-	private Button createNewWorkspaceButton(SlogoView slogoView) {
+	public Button createNewWorkspaceButton(SlogoView slogoView) {
 		Button wkspc = graphic.createButton("New Workspace");
 		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
 		wkspc.setOnAction(e -> {
@@ -105,7 +107,7 @@ public class Buttons {
 		return wkspc;
 	}
 	
-	private Button createSaveWorkspaceButton(SlogoView slogoView){
+	public Button createSaveWorkspaceButton(SlogoView slogoView){
 		Button wkspc = graphic.createButton("Save Workspace");
 		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
 		wkspc.setOnAction(e -> {

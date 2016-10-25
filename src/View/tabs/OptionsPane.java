@@ -5,10 +5,12 @@ import java.util.HashMap;
 import View.AnimalPaneGUI;
 import View.SlogoView;
 import View.Workspace;
+import View.helper.Buttons;
 import View.helper.Colors;
 import View.helper.Graphics;
 import View.helper.PenColor;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -29,6 +31,7 @@ public class OptionsPane implements GenericPane<HBox> {
 	private Graphics graphic = new Graphics();
 	private Workspace workspace;
 	private SlogoView slogoView;
+	private Buttons buttons = new Buttons();
 
 	private static final String X_COORDINATE = "x: ";
 	private static final String Y_COORDINATE = "y: ";
@@ -75,11 +78,18 @@ public class OptionsPane implements GenericPane<HBox> {
 		// DisplayVariable displayY =
 		// graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
 
-		content.getItems().addAll(penColor.getContainer(), backgroundColor);
 //		content.getItems().addAll(penColor, backgroundColor);
 //		content.getItems().addAll(/*penColor,*/ backgroundColor);
 		// content.getItems().addAll(penColor, backgroundColor,
 		// displayX.getContainer(), displayY.getContainer());
+		HBox btn1 = new HBox();
+		Button wkspc = buttons.createNewWorkspaceButton(slogoView);
+		btn1.getChildren().add(wkspc);
+		HBox btn2 = new HBox();
+		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
+		btn2.getChildren().add(saveWkspc);
+		
+		content.getItems().addAll(penColor.getContainer(), backgroundColor, btn1, btn2);
 	}
 	
 	private HBox createBackgroundColorOptions(){
