@@ -18,13 +18,22 @@ public class SlogoView {
 
 	public static final int SCENE_WIDTH = 1200;
 	public static final int SCENE_HEIGHT = 700;
-	
+
 	private TabPane mainView = new TabPane();
 	private Scene myScene;
 	private int numWorkspaces;
 	private ArrayList<Workspace> workspaces = new ArrayList<Workspace>();
+	private String title;
+	private String backgroundColor;
 
 	public SlogoView() {
+		numWorkspaces = 0;
+		mainView = new TabPane();
+	}
+
+	public SlogoView(String title, String backgroundColor) {
+		this.title = title;
+		this.backgroundColor = backgroundColor;
 		numWorkspaces = 0;
 		mainView = new TabPane();
 	}
@@ -35,17 +44,16 @@ public class SlogoView {
 		return myScene;
 	}
 
-	public ArrayList<Workspace> getWorkspaces(){
+	public ArrayList<Workspace> getWorkspaces() {
 		return workspaces;
 	}
-	
 
-	public Workspace getCurrentWorkspaceLeftPane(){
+	public Workspace getCurrentWorkspaceLeftPane() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
-		int wkspcID = Integer.parseInt(currentTab.getText())-1;
+		int wkspcID = Integer.parseInt(currentTab.getText()) - 1;
 		return workspaces.get(wkspcID);
 	}
-	
+
 	private void initScene() {
 		myScene = new Scene(mainView, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 	}
@@ -53,20 +61,25 @@ public class SlogoView {
 	public void createNewWorkSpace() {
 		numWorkspaces++;
 		Tab tab = new Tab();
-		tab.setText(/*"Workspace #"+*/Integer.toString(numWorkspaces));
+		if (title != null && !title.isEmpty()) {
+			tab.setText(title);
+		} else {
+			tab.setText(/* "Workspace #"+ */Integer.toString(numWorkspaces));
+		}
 		tab.setContent(initWorkspace().getMyRoot());
 		// add tab to tabpane
 		mainView.getTabs().add(tab);
+		title=null;
 	}
 
 	private Workspace initWorkspace() {
 		Workspace slogo = new Workspace(numWorkspaces);
 		workspaces.add(slogo);
 		slogo.init(this);
-//		slogo.setWorkspaceID(numWorkspaces);
+		// slogo.setWorkspaceID(numWorkspaces);
 		return slogo;
 	}
-	
+
 	public Scene getScene() {
 		return myScene;
 	}

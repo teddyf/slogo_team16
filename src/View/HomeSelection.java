@@ -48,14 +48,14 @@ public class HomeSelection {
 		}
 	}
 	private Workspace createWorkspaceFromXML(String fileName) {
-		slogoView = new SlogoView();
+		DataSetup data = new DataSetup(fileName);
+		HashMap<String, String> generalInfo = data.getGeneralInfo();
+		slogoView = new SlogoView(generalInfo.get("title"), generalInfo.get("background_color").toUpperCase());
 		Scene scene = slogoView.init();
 		scene.getStylesheets().add(this.getClass().getResource("/main/SLogoStyle.css").toExternalForm());
 		s.setTitle(Main.TITLE);
 		s.setScene(scene);
 		s.show();
-		DataSetup data = new DataSetup(fileName);
-		HashMap<String, String> generalInfo = data.getGeneralInfo();
 		System.out.println(generalInfo);
 		return null;
 	}
