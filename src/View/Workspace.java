@@ -48,7 +48,7 @@ public class Workspace implements Observer {
 	private Scene myScene;
 	private Graphics graphics;
 	public static final int SCENE_WIDTH = 1200;
-	public static final int SCENE_HEIGHT = 700;
+	public static final int SCENE_HEIGHT = 670;
 	public static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
 	public static final int LEFT_PANE_HEIGHT = Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4;
 	public static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
@@ -136,7 +136,7 @@ public class Workspace implements Observer {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);
 		leftPane.getStyleClass().add("left-pane");
 
-		HBox container = createConsole();
+		ScrollPane container = createConsole();
 		populateGridWithAnimals();
 
 		leftPane.getChildren().addAll(myAnimalPaneGUI.getScrollPane(), container);
@@ -206,12 +206,15 @@ public class Workspace implements Observer {
 		return tab;
 	}
 
-	public HBox createConsole() {
+	public ScrollPane/*HBox*/ createConsole() {
+		ScrollPane consolePane = new ScrollPane();
 		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
 		HBox consoleContainer = new HBox(5);
 		consoleContainer.getChildren().addAll(consoleArea, buttons);
-		return consoleContainer;
+		consolePane.setContent(consoleContainer);
+		return consolePane;
+		//return consoleContainer;
 	}
 
 	public TextArea createConsoleArea() {
