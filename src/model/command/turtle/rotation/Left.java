@@ -9,7 +9,7 @@ public class Left extends TurtleRotation {
 	public Left() {
 		super();
 		numParams = 2;
-		paramCount = 2;
+		paramCount = 1;
 	}
 
 	/**

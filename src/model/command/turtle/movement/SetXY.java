@@ -9,7 +9,7 @@ public class SetXY extends TurtleMovement {
 	public SetXY() {
 		super();
 		numParams = 3;
-		paramCount = 3;
+		paramCount = 2;
 	}
 
 	/**

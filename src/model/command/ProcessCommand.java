@@ -48,7 +48,7 @@ public class ProcessCommand {
 					parameters[i] = parametersList.get(startIndex+i);
 				}
 				value = command.run(parameters);
-				System.out.println("VALUE " + value);
+				
 				parametersList.clear();
 				parametersList.add(new Parameter(value));
 			} else if (nodeExpression.getClass().getSimpleName().equals("Constant")) {

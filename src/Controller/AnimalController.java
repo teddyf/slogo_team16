@@ -96,7 +96,7 @@ public class AnimalController implements Controller {
 
 		ProcessCommand pc = new ProcessCommand();
 		double v = pc.process(this, turtle, tree.reverse(node));
-		System.out.println(v);
+		System.out.println("VALUE " + v);
 		
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading());
 		List<Coordinate> points = new ArrayList<Coordinate>();

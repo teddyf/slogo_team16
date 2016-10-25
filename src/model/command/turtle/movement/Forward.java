@@ -9,7 +9,7 @@ public class Forward extends TurtleMovement {
 	public Forward() {
 		super();
 		numParams = 2;
-		paramCount = 2;
+		paramCount = 1;
 	}
 
 	/**
