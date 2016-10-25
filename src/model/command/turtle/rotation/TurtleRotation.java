@@ -12,11 +12,13 @@ public abstract class TurtleRotation extends TurtleCommand {
 	public double turn(Animal turtle, double degrees, double left) {
 		turtle.setHeading(turtle.getHeading() + degrees);
 		turtle.setHeading(turtle.getHeading() % 360);
+		System.out.println(turtle.getHeading());
 		if (left == 1) {
 			if (turtle.getHeading() < 0) {
-				turtle.setHeading(360 - turtle.getHeading());
+				turtle.setHeading(360 + turtle.getHeading());
 			}
 		}
+		System.out.println("TURTLE HEADING2 " + turtle.getHeading());
 		return degrees;
 	}
 

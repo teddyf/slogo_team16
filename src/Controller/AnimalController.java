@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-
 import ErrorHandling.InvalidLabelException;
 import Parsing.ExpressionTree;
 import Parsing.ParserRunner;
@@ -12,7 +11,6 @@ import Parsing.ProgramParser;
 import Parsing.TreeNode;
 import View.AnimalPaneGUI;
 import View.helper.Coordinate;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.AnimalPane;
@@ -31,48 +29,21 @@ public class AnimalController implements Controller {
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
 	private AnimalPaneGUI activeAnimalPaneGUI;
+	private ProgramParser myProgramParser;
+	private ParserRunner myParserRunner;
+	private Animal turtle;
 	public static final String FILEPATH = "Resources/myInput.slogo";
 
 	public AnimalController() {
 		file = new WriteFile();
 		error = "";
+		myProgramParser = new ProgramParser();
+		myParserRunner = new ParserRunner("English", myProgramParser);
+		turtle = null;
 	}
 
 	public void writeInputToFile(String input) {
 		file.writeToFile(FILEPATH, input);
-		try {
-			runCommands();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidLabelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Override
@@ -116,16 +87,13 @@ public class AnimalController implements Controller {
 	private void runCommands() throws FileNotFoundException, NoSuchMethodException, SecurityException,
 			ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchFieldException, InvalidLabelException {
-		ProgramParser lang = new ProgramParser();
-		ParserRunner pr = new ParserRunner("English", lang);
-		String[][] a = pr.combineAllLines();
-		String[][] b = pr.markDepth(a);
+		
+		String[][] a = myParserRunner.combineAllLines();
+		String[][] b = myParserRunner.markDepth(a);
 		ExpressionTree tree = new ExpressionTree();
 		tree.buildTree(b);
 		ArrayList<TreeNode> node = tree.dfs();
-		// node = tree.reverse(node);
 
-		Animal turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
 		ProcessCommand pc = new ProcessCommand();
 		double v = pc.process(this, turtle, tree.reverse(node));
 		System.out.println(v);
@@ -157,6 +125,7 @@ public class AnimalController implements Controller {
 	@Override
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI) {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
+		this.turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
 	}
 
 	public void displayErrorDialog(String error) {

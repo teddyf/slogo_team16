@@ -21,6 +21,6 @@ public class Left extends TurtleRotation {
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
 		double degrees = params[1].getValue();
-		return turn(turtle, degrees, 1);
+		return turn(turtle, degrees*-1, 1);
 	}
 }
