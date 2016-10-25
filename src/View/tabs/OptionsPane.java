@@ -1,6 +1,7 @@
 package View.tabs;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import View.AnimalPaneGUI;
@@ -33,12 +34,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 
 	private static final String X_COORDINATE = "x: ";
 	private static final String Y_COORDINATE = "y: ";
-
 	private static final String PEN_COLOR = "Pen Color: ";
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 
-	private static final HashMap<String,String> colorHexVals = new HashMap<String,String>();
-	
+	private static final Map<String,String> colorHexVals = new HashMap<String,String>();
 	private static final String[] COLORS = { Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
 
 
@@ -66,6 +65,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 //		HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		PenColor penColor = new PenColor();
 		penColor.addObserver(animalPaneGUI.getAnimalPane().getMyAnimalList().get(0).getActualPen());
+		
 		//HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		HBox backgroundColor = createBackgroundColorOptions();
 				//createComboBoxOption(BACKGROUND_COLOR, COLORS);

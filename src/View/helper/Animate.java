@@ -5,6 +5,7 @@ import java.util.List;
 import View.AnimalPaneGUI;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.animal.Animal;
 

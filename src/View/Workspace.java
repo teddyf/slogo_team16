@@ -313,8 +313,6 @@ public class Workspace implements Observer {
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
 
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
-//		myAnimalPaneGUI.getMyContainer().setMinWidth(myAnimalPaneGUI.getScrollPane().getPrefWidth());
-//		myAnimalPaneGUI.getMyContainer().setMinHeight(myAnimalPaneGUI.getScrollPane().getPrefHeight());
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
 
@@ -326,11 +324,10 @@ public class Workspace implements Observer {
 	
 	public void changeAnimalBackgroundColor(String color) {
 		String hexColor = decodeColor(color);
-		myAnimalPaneGUI.getScrollPane().setStyle("-fx-background-color: " + hexColor);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
 	}
 	
-	public String decodeColor(String color) {
+	private String decodeColor(String color) {
 		for(Colors c : Colors.values()) {
 			if(c.toString().equals(color)) {
 				return c.getColor();
