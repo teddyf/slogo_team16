@@ -3,11 +3,12 @@ package model.command.math.arithmetic;
 import model.command.Parameter;
 
 public class Sum extends MathArithmetic {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public Sum() {
 		super();
+		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

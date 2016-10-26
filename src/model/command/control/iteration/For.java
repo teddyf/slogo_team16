@@ -1,14 +1,17 @@
 package model.command.control.iteration;
 
+import model.DataSingleton;
 import model.command.Command;
 import model.command.Parameter;
 import model.variable.Variable;
 
 public class For extends Command {
-	private final double numParams = 6;
+	private final double paramCount;
 	
 	public For() {
 		super();
+		numParams = 6;
+		paramCount = 6;
 	}
 	
 	/**
@@ -18,7 +21,9 @@ public class For extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		int variable = (int)params[0].getValue();
+		Variable variable = new Variable(params[0].getName());
+		DataSingleton data = DataSingleton.getInstance();
+		data.addVariable(variable);
 		double start = params[1].getValue();
 		double end = params[2].getValue();
 		double increment = params[3].getValue();
@@ -32,7 +37,7 @@ public class For extends Command {
 			for(int c = 0; c < commands.length; c++) {
 				command = commands[c];
 				value = command.run(parameters[c]);
-				variable = i+1;
+				variable.setValue(i+1);;
 			}
 		}
 		

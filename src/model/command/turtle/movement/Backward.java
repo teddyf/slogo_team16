@@ -4,11 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class Backward extends TurtleMovement {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public Backward() {
 		super();
+		numParams = 2;
+		paramCount = 1;
 	}
 
 	/**
@@ -20,6 +21,6 @@ public class Backward extends TurtleMovement {
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
 		double pixels = params[1].getValue();
-		return move(turtle, pixels * -1);
+		return move(turtle, pixels * -1)*-1;
 	}
 }

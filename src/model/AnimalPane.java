@@ -1,15 +1,17 @@
 package model;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
+
+import View.helper.Coordinate;
+import javafx.geometry.Point2D;
 import model.animal.Animal;
 import model.animal.Turtle;
-import javafx.geometry.Point2D;
-import View.helper.CoordinatePair;
 
 public class AnimalPane extends Observable implements Observer {
 
@@ -22,7 +24,7 @@ public class AnimalPane extends Observable implements Observer {
 
 	// Map of string ID to List of CoordinatePair<double x, double y>
 	//private Map<String, List<CoordinatePair>> coordinateMap;
-	private List<Point2D> coordinateMap;
+	private List<Coordinate> coordinateMap;
 
 	private int animalID;
 	
@@ -41,11 +43,11 @@ public class AnimalPane extends Observable implements Observer {
 		myCommandHistory = new ArrayList<String>();
 		
 		//list of Animal ID and Coordinate Lists for translation rendering
-		coordinateMap = new ArrayList<Point2D>();
+		coordinateMap = new ArrayList<Coordinate>();
 
-		addAnimal();
-	}
+		}
 
+	@Deprecated
 	public AnimalPane(Animal animal) {
 		// this increments when adding new animals
 		animalID = 0;
@@ -61,15 +63,18 @@ public class AnimalPane extends Observable implements Observer {
 		myCommandHistory = new ArrayList<String>();
 
 		//list of Animal ID and Coordinate Lists for translation rendering
-		coordinateMap = new ArrayList<Point2D>();
+		coordinateMap = new ArrayList<Coordinate>();
 
-		addAnimal(animal);
+//		addAnimal(animal);
 	}
 	
 	public void addAnimal() {
 		animalID++;
 		Animal animal = new Turtle();
+		
 		myAnimalMap.put(animalID, animal);
+		myAnimalList.add(animal);
+
 		animal.setId(animalID);
 		animal.addObserver(this);
 		
@@ -94,8 +99,8 @@ public class AnimalPane extends Observable implements Observer {
 
 		// notify SLogoView that a new turtle was added, and needs to update the
 		// view to include new turtle
-		setChanged();
-		notifyObservers();
+//		setChanged();
+//		notifyObservers();
 	}
 
 	@Override
@@ -135,7 +140,7 @@ public class AnimalPane extends Observable implements Observer {
 //		return coordinateMap;
 //	}
 	
-	public List<Point2D> getCoordinateMap() {
+	public List<Coordinate> getCoordinateMap() {
 		return coordinateMap;
 	}
 
@@ -158,8 +163,12 @@ public class AnimalPane extends Observable implements Observer {
 //	public void setCoordinateMap(Map<String, List<CoordinatePair>> coordinateMap) {
 //		this.coordinateMap = coordinateMap;
 //	}
-	public void setCoordinateMap(List<Point2D> coordinateMap) {
+	public void setCoordinateMap(List<Coordinate> coordinateMap) {
 		this.coordinateMap = coordinateMap;
+		//System.out.println("set changed, notify observers");
+		setChanged();
+		
+		notifyObservers();
 	}
 
 	public void setAnimalID(int animalID) {

@@ -21,9 +21,9 @@ public class Dictionary {
     }
     
     private void populateMethods(Object a){
-        Method[] methods = a.getClass().getMethods();
+        /*Method[] methods = a.getClass().getMethods();
         for(int i = 0; i < methods.length; i++){
             this.methods.put("temporary",methods[i] );
-        }
+        }*/
     }
 }

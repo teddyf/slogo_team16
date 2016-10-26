@@ -3,11 +3,12 @@ package model.command.booleans.logic;
 import model.command.Parameter;
 
 public class Not extends BooleanLogic {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public Not() {
 		super();
+		numParams = 1;
+		paramCount = 1;
 	}
 
 	/**

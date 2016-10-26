@@ -1,7 +1,10 @@
 package model.animal;
 
 import java.util.Observable;
+
 import View.Workspace;
+import View.helper.Pen;
+import javafx.animation.Animation;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
@@ -30,8 +33,8 @@ public abstract class Animal extends Observable {
 		yProperty = new SimpleStringProperty();
 		this.width = 15;
 		this.height = 15;
-		setX(Workspace.SCENE_WIDTH / 2);
-		setY(Workspace.SCENE_HEIGHT / 2);
+		this.x = Workspace.LEFT_PANE_WIDTH / 2;
+		this.y = Workspace.LEFT_PANE_HEIGHT / 2;
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -44,8 +47,8 @@ public abstract class Animal extends Observable {
 		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		setX(Workspace.SCENE_WIDTH / 2);
-		setY(Workspace.SCENE_HEIGHT / 2);
+		this.x = Workspace.LEFT_PANE_WIDTH / 2;
+		this.y = Workspace.LEFT_PANE_HEIGHT / 2;
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -58,8 +61,8 @@ public abstract class Animal extends Observable {
 		yProperty = new SimpleStringProperty();
 		this.width = width;
 		this.height = height;
-		setX(x);
-		setY(y);
+		this.x = Workspace.LEFT_PANE_WIDTH / 2 + x;
+		this.y = Workspace.LEFT_PANE_HEIGHT / 2 - y;
 		this.heading = 0;
 		this.pen = 0;
 		this.showing = 1;
@@ -68,6 +71,8 @@ public abstract class Animal extends Observable {
 	public abstract void update();
 
 	/***** GETTERS *****/
+	
+	public abstract Animation getGif();
 
 	public double getWidth() {
 		return width;
@@ -168,4 +173,6 @@ public abstract class Animal extends Observable {
 	public abstract void setImageView(ImageView imageView);
 
 	public abstract void setImagePath(String imagePath);
+	
+	public abstract Pen getActualPen();
 }

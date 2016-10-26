@@ -3,11 +3,12 @@ package model.command.math.arithmetic;
 import model.command.Parameter;
 
 public class Difference extends MathArithmetic {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public Difference() {
 		super();
+		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

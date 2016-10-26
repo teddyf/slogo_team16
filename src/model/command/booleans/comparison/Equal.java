@@ -3,11 +3,12 @@ package model.command.booleans.comparison;
 import model.command.Parameter;
 
 public class Equal extends BooleanComparison {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public Equal() {
 		super();
+		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

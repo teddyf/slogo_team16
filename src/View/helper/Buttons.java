@@ -1,12 +1,13 @@
 package View.helper;
 
 import java.util.Map;
+import java.util.Observable;
 
-import Controller.AnimalController;
 import Controller.Controller;
-import View.Main;
+import Controller.DataSetup.DataOutput;
 import View.SlogoView;
 import View.Workspace;
+import View.helpscreen.HelpScreen;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -20,26 +21,30 @@ import javafx.scene.layout.VBox;
  *
  */
 
-
-//TODO: Jordan - Bind the history to a data set of history commands instead of passing in the pane. 
-// also, add the commands to the input area instead of running them immediately on double click
-public class Buttons {
+public class Buttons extends Observable {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
-	private Controller myController = new AnimalController();
-//	private Main main = new Main();
+	private Controller myController;
+	
+	private String currentCommand;
+ 	
+	public Buttons(Controller controller) {
+		myController = controller;
+		currentCommand = "";
+	}
 
-	public VBox createConsoleInputButtons(Console console, final GenericPane<String> pane, SlogoView slogoView) {
+	public VBox createConsoleInputButtons(Console console, GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
-		Button clear = createClearButton(console);
+		Button clear = createClearButton(console, slogoView);
 		Button help = createHTMLHelpButton();
-		Button wkspc=createNewWorkspaceButton(slogoView);
-		container.getChildren().addAll(run, clear, help,wkspc);
+		Button wkspc = createNewWorkspaceButton(slogoView);
+		Button saveWkspc = createSaveWorkspaceButton(slogoView);
+		container.getChildren().addAll(run, clear, help, wkspc, saveWkspc);
 		return container;
 	}
 
-	private Button createRunButton(Console console, final GenericPane<String> pane) {
+	private Button createRunButton(Console console, GenericPane<String> pane) {
 		Button run = graphic.createButton("Run");
 		run.setPrefWidth(Workspace.BUTTON_WIDTH);
 		run.setOnAction(e -> {
@@ -52,18 +57,35 @@ public class Buttons {
 			System.out.println(input);
 			// Add command to history, move this to only after its been checked
 			// for errors
-			addCommandToHistory(pane, input);
+//			addCommandToHistory(pane, input);
 
 			myController.writeInputToFile(input);
+			myController.handleInput();
+//			myController.checkForPrintCommand("print", console); // testing the print
+			// myController.checkForPrintCommand("print", console); // testing
+			// the print
+			// command
+			
+			// Updating Command History Pane with command
+			updateObservers(input);
 		});
 		return run;
 	}
 
-	private Button createClearButton(Console console) {
+	private void updateObservers(String input) {
+		currentCommand = input;
+		setChanged();
+		notifyObservers();
+	}
+
+	private Button createClearButton(Console console, SlogoView slogoView) {
 		Button clear = graphic.createButton("Clear");
 		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
 		clear.setOnAction(e -> {
 			console.clearConsole();
+			Workspace pane=slogoView.getCurrentWorkspaceLeftPane();
+			pane.resetLeftPane();
+			
 		});
 		return clear;
 	}
@@ -76,18 +98,33 @@ public class Buttons {
 		});
 		return help;
 	}
-	
-	private Button createNewWorkspaceButton(SlogoView slogoView){
+
+	private Button createNewWorkspaceButton(SlogoView slogoView) {
 		Button wkspc = graphic.createButton("New Workspace");
 		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
 		wkspc.setOnAction(e -> {
-//			System.out.println("main.getSlogoView(): "+main.getSlogoView());
+			// System.out.println("main.getSlogoView(): "+main.getSlogoView());
 			slogoView.createNewWorkSpace();
 		});
 		return wkspc;
-		
 	}
+	
+	private Button createSaveWorkspaceButton(SlogoView slogoView){
+		Button wkspc = graphic.createButton("Save Workspace");
+		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
+		wkspc.setOnAction(e -> {
+			Map<String,String> data = slogoView.parseWorkspaceData();
+			DataOutput dataOutput = new DataOutput(data.get("title")+"_out.xml",data);
+		});
+		return wkspc;
+	}
+
+	@Deprecated
 	private void addCommandToHistory(final GenericPane<String> pane, String input) {
 		pane.getAllItems().add(input);
+	}
+	
+	public String getCurrentCommand() {
+		return currentCommand;
 	}
 }

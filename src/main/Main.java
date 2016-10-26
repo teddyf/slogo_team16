@@ -1,5 +1,7 @@
-package View;
+package main;
 
+import View.HomeSelection;
+import View.SlogoView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-	public static final String title = "Slogo";
+	public static final String TITLE = "Slogo";
 	private SlogoView slogoView;
 
 //	public SlogoView getSlogoView(){
@@ -19,12 +21,18 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage s){
+		HomeSelection home = new HomeSelection(s);
+		home.initHomeScreen();
+		/*
 		slogoView = new SlogoView();
 		Scene scene = slogoView.init();
 		scene.getStylesheets().add(this.getClass().getResource("SLogoStyle.css").toExternalForm());
+		
+		
 		s.setTitle(title);
 		s.setScene(scene);
 		s.show();
+		*/
 	}
 
 	public static void main(String[] args) {

@@ -4,11 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class Home extends TurtleMovement {
-
-	private final double numParams = 1;
+	private final double paramCount;
 	
 	public Home() {
 		super();
+		numParams = 1;
+		paramCount = 0;
 	}
 
 	/**

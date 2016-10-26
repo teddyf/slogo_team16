@@ -3,11 +3,12 @@ package model.command.math.trigonometry;
 import model.command.Parameter;
 
 public class ArcTangent extends MathTrigonometry {
-
-	private final double numParams = 1;
+	private final double paramCount;
 	
 	public ArcTangent() {
 		super();
+		numParams = 1;
+		paramCount = 1;
 	}
 
 	/**

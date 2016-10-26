@@ -4,11 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class ShowTurtle extends TurtleVisibility {
-
-	private final double numParams = 1;
+	private final double paramCount;
 	
 	public ShowTurtle() {
 		super();
+		numParams = 1;
+		paramCount = 0;
 	}
 
 	/**

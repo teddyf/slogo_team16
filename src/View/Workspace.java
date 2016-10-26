@@ -10,27 +10,28 @@ import Controller.AnimalController;
 import Controller.Controller;
 import View.helper.Animate;
 import View.helper.Buttons;
+import View.helper.Colors;
 import View.helper.Console;
 import View.helper.Graphics;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
+import View.tabs.ListeningPane;
 import View.tabs.OptionsPane;
 import View.tabs.VariablesPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import model.AnimalPane;
 import model.animal.Animal;
@@ -46,17 +47,19 @@ import model.animal.Turtle;
 public class Workspace implements Observer {
 	private Scene myScene;
 	private Graphics graphics;
-
 	public static final int SCENE_WIDTH = 1200;
-	public static final int SCENE_HEIGHT = 700;
+	public static final int SCENE_HEIGHT = 670;
 	public static final int LEFT_PANE_WIDTH = SCENE_WIDTH - SCENE_WIDTH / 3;
+	public static final int LEFT_PANE_HEIGHT = Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4;
 	public static final int RIGHT_PANE_WIDTH = SCENE_WIDTH / 3 - 30;
-	public  static final int TURTLE_HEIGHT = 15;
+	public static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
 	public static final int BUTTON_WIDTH = 140;
-	
-	private static final String EN_RESRC_PATH = "resources/languages/English";
-	private static final String CHI_RESRC_PATH = "resources/languages/Chinese";
+
+	public static final String EN_RESRC_PATH = "resources/languages/English";
+	public static final String CHI_RESRC_PATH = "resources/languages/Chinese";
+
+	private String defaultBackgroundColor;
 
 	private BorderPane myRoot;
 	// private AnimalPane myAnimalPane;
@@ -66,23 +69,35 @@ public class Workspace implements Observer {
 	private Animate animation;
 	private ResourceBundle myResources;
 	private Controller myController;
-	private final GenericPane<String> historyPane = new CommandHistoryPane();
+	private GenericPane<String> historyPane;
 	private int workSpaceID;
 	private SlogoView mainView;
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
-	private Pane turtleContainer;
 
 	public Workspace(int workspaceID) {
-		turtleContainer = new Pane();
 		graphics = new Graphics();
-		buttons = new Buttons();
+		myController = new AnimalController();
+		buttons = new Buttons(myController);
 		animation = new Animate();
 		myAnimalGUIList = new ArrayList<>();
-		myController = new AnimalController();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+		console = new Console();
 		this.workSpaceID = workspaceID;
+
+	}
+
+	public Workspace(int workspaceID, String color) {
+		graphics = new Graphics();
+		myController = new AnimalController();
+		buttons = new Buttons(myController);
+		animation = new Animate();
+		myAnimalGUIList = new ArrayList<>();
+		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+		console = new Console();
+		this.workSpaceID = workspaceID;
+		this.defaultBackgroundColor = color;
 	}
 
 	public void init(SlogoView view) {
@@ -92,31 +107,65 @@ public class Workspace implements Observer {
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
-	}
-	
-	public Pane getTurtleContainer(){
-		return turtleContainer;
+		mainView.setBackgroundColor(defaultBackgroundColor);
 	}
 
 	public void createAnimalPaneGUI() {
-		myAnimalPaneGUI = new AnimalPaneGUI(createAnimalPane());
+		myAnimalPaneGUI = new AnimalPaneGUI();
 		myAnimalGUIList.add(myAnimalPaneGUI);
+		myAnimalPaneGUI.getAnimalPane().addObserver(this);
+		// Need to switch? no? yes?
 		myController.setActiveAnimalPaneGUI(myAnimalPaneGUI);
+	}
+
+	public AnimalPane createAnimalPane() {
+		AnimalPane animalPane = new AnimalPane();
+		// myController.setActiveAnimalPane(animalPane);
+		animalPane.addObserver(this);
+		return animalPane;
+	}
+
+	private void populateTopPane() {
+		HBox container = new HBox(20);
+		container.getStyleClass().add("top-pane");
+
+		Text title = new Text(myResources.getString("SLogo"));
+		title.getStyleClass().add("slogo-title");
+
+		ComboBox<String> languageComboBox = createLanguageChooser();
+		languageComboBox.getStyleClass().add("language-button");
+
+		// Button tb = CREATETESTBUTTON();
+
+		// container.getChildren().addAll(title, languageComboBox, tb);
+		container.getChildren().addAll(title, languageComboBox);
+
+		myRoot.setTop(container);
 	}
 
 	private void populateLeftPane() {
 		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);
 		leftPane.getStyleClass().add("left-pane");
 
-		HBox container = createConsole();
+		ScrollPane container = createConsole();
 		populateGridWithAnimals();
 
 		leftPane.getChildren().addAll(myAnimalPaneGUI.getScrollPane(), container);
 		myRoot.setLeft(leftPane);
 	}
 
+	public void resetLeftPane() {
+		// myRoot.setLeft(null);
+		ScrollPane newPane = new ScrollPane();
+		Pane myContainer = new Pane();
+		myAnimalPaneGUI.setScrollPane(newPane);
+		myAnimalPaneGUI.styleScrollPane();
+		myAnimalPaneGUI.setMyContainer(myContainer);
+		myAnimalPaneGUI.styleMyContainer();
+		populateLeftPane();
+	}
+
 	private void populateRightPane() {
-		// TODO: Jordan - inset magic numbers
 		VBox rightPane = graphics.createVBoxPane(RIGHT_PANE_WIDTH, SCENE_HEIGHT);
 		rightPane.getStyleClass().add("right-pane");
 
@@ -158,27 +207,38 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createHistoryTab() {
+		historyPane = new CommandHistoryPane(console);
+		buttons.addObserver(historyPane);
 		Tab tab = createTab(historyPane);
 		return tab;
 	}
 
 	private Tab createOptionsTab() {
-		// TODO: Jordan - passing in animalPaneGUI, need to update options pane to make custom ID buttons
-		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this);
+		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this, mainView);
+		// if (defaultBackgroundColor != null &&
+		// !defaultBackgroundColor.isEmpty()){
+		// System.out.println("default background color:
+		// "+defaultBackgroundColor);
+		// ((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);
+		// }
+		// to make custom ID buttons
 		Tab tab = createTab(pane);
 		return tab;
 	}
 
-	public HBox createConsole() {
-		TextArea consoleArea = createConsoleArea();
+	public ScrollPane createConsole() {
+		ScrollPane consolePane = new ScrollPane();
+//		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
 		HBox consoleContainer = new HBox(5);
-		consoleContainer.getChildren().addAll(consoleArea, buttons);
-		return consoleContainer;
+		consoleContainer.getChildren().addAll(console.getConsoleArea(), buttons);
+		consolePane.setContent(consoleContainer);
+		return consolePane;
+		// return consoleContainer;
 	}
 
+	@Deprecated
 	public TextArea createConsoleArea() {
-		// TODO: Jordan - input correct width / height (doesn't matter)
 		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - BUTTON_WIDTH, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
 		console.initConsole();
@@ -190,32 +250,12 @@ public class Workspace implements Observer {
 		return container;
 	}
 
-	private void populateTopPane() {
-		HBox container = new HBox(20);
-		container.getStyleClass().add("top-pane");
-
-		Text title = new Text(myResources.getString("SLogo"));
-		title.getStyleClass().add("slogo-title");
-
-		ComboBox<String> languageComboBox = createLanguageChooser();
-		languageComboBox.getStyleClass().add("language-button");
-
-		container.getChildren().addAll(title, languageComboBox);
-		myRoot.setTop(container);
-	}
-
-	public AnimalPane createAnimalPane() {
-		AnimalPane animalPane = new AnimalPane();
-		// myController.setActiveAnimalPane(animalPane);
-		return animalPane;
-	}
-
 	// Maybe specific animal buttons that call this, which adds to animallist,
 	// then the list is completely rendered by calling populateGridWithAnimals()
-//	private void addAnimal(Animal animal) {
-//		getActiveAnimalPane().addAnimal(animal);
-//		renderAnimalGrid();
-//	}
+	// private void addAnimal(Animal animal) {
+	// getActiveAnimalPane().addAnimal(animal);
+	// renderAnimalGrid();
+	// }
 
 	// private void fillAnimalList(int numAnimals) {
 	// for (int i = 0; i < numAnimals; i++) {
@@ -227,17 +267,18 @@ public class Workspace implements Observer {
 	// myAnimalPaneGUI.addAnimal(turtle);
 	// }
 	// }
-//
-//	public void populateGridWithAnimals() {
-//		fillAnimalList(NUM_ANIMALS);
-//		renderAnimalGrid();
-//	}
+	//
+	// public void populateGridWithAnimals() {
+	// fillAnimalList(NUM_ANIMALS);
+	// renderAnimalGrid();
+	// }
 
 	public void populateGridWithAnimals() {
-		createAnimal();
+		// createAnimal();
 		renderAnimalGrid();
 	}
 
+	@Deprecated
 	private void createAnimal() {
 		Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
 				(myAnimalPaneGUI.getScrollPane().getPrefWidth() - myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
@@ -245,7 +286,6 @@ public class Workspace implements Observer {
 				(myAnimalPaneGUI.getScrollPane().getPrefHeight() - myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
 		myAnimalPaneGUI.addAnimal(turtle);
 	}
-
 
 	public void renderAnimalGrid() {
 		for (Animal animal : myAnimalPaneGUI.getMyAnimalList()) {
@@ -262,20 +302,34 @@ public class Workspace implements Observer {
 	}
 
 	private void addAnimalToGrid(Animal animal) {
-		Rectangle s = graphics.createRectCell(animal.getX(), animal.getY(), animal.getWidth(), animal.getHeight(),
-				Color.WHITE, Color.WHITE);
-		ImagePattern turtlePattern = new ImagePattern(animal.getImage());
-		s.setFill(turtlePattern);
-		turtleContainer.getChildren().add(s);
-		myAnimalPaneGUI.getScrollPane().setContent(turtleContainer);
-		//turtleContainer.setStyle("-fx-background-color: #f12b92;"); //testing
+		ImageView animalImage = animal.getImageView();
+		animalImage.setFitHeight(TURTLE_HEIGHT);
+		animalImage.setFitWidth(TURTLE_WIDTH);
+		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
+		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
+
+		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
+		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
 
-	// are we going to let turtle go off of the screen?
 	private boolean isValidLocation(double x, double y) {
 		return (x > myAnimalPaneGUI.getScrollPane().getLayoutX()) && (y > myAnimalPaneGUI.getScrollPane().getLayoutY())
 				&& (x < myAnimalPaneGUI.getScrollPane().getPrefWidth())
 				&& (y < myAnimalPaneGUI.getScrollPane().getPrefHeight());
+	}
+
+	public void changeAnimalBackgroundColor(String color) {
+		String hexColor = decodeColor(color);
+		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
+	}
+
+	private String decodeColor(String color) {
+		for (Colors c : Colors.values()) {
+			if (c.toString().equals(color)) {
+				return c.getColor();
+			}
+		}
+		return null;
 	}
 
 	public ComboBox<String> createLanguageChooser() {
@@ -308,17 +362,36 @@ public class Workspace implements Observer {
 				if (animalGUI.getAnimalPane() == o) {
 					// for (int animalId :
 					// animalGUI.getAnimalPane().getMyAnimalMap().keySet()) {
-					
-//					for(Animal animal : animalGUI.getAnimalPane().getMyAnimalList()) {
-//						if(animal.getSelected()) {
-							animation.beginAnimation(animalGUI.getAnimalPane());
-//						}
-//					}
+
+					// for(Animal animal :
+					// animalGUI.getAnimalPane().getMyAnimalList()) {
+					// if(animal.getSelected()) {
+					System.out.println("BEGINNING ANIMATION in UPDATE");
+					animation.beginAnimation(animalGUI);
+					// }
+					// }
 					// }
 				}
 			}
 		}
 	}
+	/*
+	 * public Button CREATETESTBUTTON() { Button button = new Button("TESTER");
+	 * button.setOnMouseClicked(e -> {
+	 * System.out.println("setting coordinate map"); Random random = new
+	 * Random(); List<Coordinate> list = new ArrayList<Point2D>(); list.add(new
+	 * Coordinate(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
+	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
+	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
+	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
+	 * random.nextInt(SCENE_HEIGHT*3/4 - 20)));
+	 * myAnimalPaneGUI.getAnimalPane().setCoordinateMap(list);
+	 * myAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0).setHeading(40);
+	 * }); return button; }
+	 */
 
 	public void setWorkspaceID(int id) {
 		this.workSpaceID = id;
@@ -326,6 +399,18 @@ public class Workspace implements Observer {
 
 	public BorderPane getMyRoot() {
 		return myRoot;
+	}
+
+	public ResourceBundle getResources() {
+		return myResources;
+	}
+
+	public void setResources(ResourceBundle resource) {
+		this.myResources = resource;
+	}
+
+	public AnimalPaneGUI getAnimalPaneGUI() {
+		return myAnimalPaneGUI;
 	}
 
 }

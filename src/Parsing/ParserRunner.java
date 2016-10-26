@@ -23,10 +23,10 @@ public class ParserRunner {
     private final String PATH = "resources/languages/";
     private final String PATH_SYNTAX = "resources/languages/Syntax";
     private final String METHOD = "run";
-    private final String PARAM_COUNT = "numParams";
+    private final String PARAM_COUNT = "paramCount";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
 
-    File file = new File("data/examples/sample.logo");
+    File file = new File("Resources/myInput.slogo");
 
     public ParserRunner (String language, ProgramParser parser) {
         this.parser = parser;
@@ -101,9 +101,9 @@ public class ParserRunner {
             userInput.add(s);
             vestigialLabels.add(input[1][i]);
             if(isMethod(s)){
-                System.out.println(s);
+                //System.out.println(s);
                 double count = getCommandParamCount(s);
-                System.out.println(count);
+                //System.out.println(count);
                 st.push(count);
                 userInput.add("{");
                 vestigialLabels.add("{");
@@ -119,7 +119,6 @@ public class ParserRunner {
                     }
                 }
             }
-            //System.out.println(st);
         }
         for(int i = 0; i < st.size(); i++){
             userInput.add("}");
@@ -210,7 +209,8 @@ public class ParserRunner {
        }
         
         catch(Exception e){
-            return 0;
+        	
+        	return 0;
         }
        
 

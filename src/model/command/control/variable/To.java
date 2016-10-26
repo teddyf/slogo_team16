@@ -1,17 +1,17 @@
 package model.command.control.variable;
 
-import java.util.Arrays;
 import model.DataSingleton;
 import model.command.Command;
 import model.command.NewCommand;
 import model.command.Parameter;
-import model.variable.Variable;
 
 public class To extends Command {
-	private final double numParams = 4;
+	private final double paramCount;
 	
 	public To() {
 		super();
+		numParams = 4;
+		paramCount = 4;
 	}
 	
 	/**

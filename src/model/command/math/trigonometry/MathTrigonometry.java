@@ -16,6 +16,6 @@ public abstract class MathTrigonometry extends Command {
 	}
 	
 	public double atan(double degrees) {
-		return Math.atan(degrees*Math.PI/180);
+		return Math.atan(degrees)*180/Math.PI;
 	}
 }

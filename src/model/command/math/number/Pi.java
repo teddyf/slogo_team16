@@ -4,11 +4,12 @@ import model.command.Command;
 import model.command.Parameter;
 
 public class Pi extends Command {
-
-	private final double numParams = 0;
+	private final double paramCount;
 	
 	public Pi() {
 		super();
+		numParams = 0;
+		paramCount = 0;
 	}
 
 	/**

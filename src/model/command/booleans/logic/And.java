@@ -3,11 +3,12 @@ package model.command.booleans.logic;
 import model.command.Parameter;
 
 public class And extends BooleanLogic {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public And() {
 		super();
+		numParams = 2;
+		paramCount = 2;
 	}
 
 	/**

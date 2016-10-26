@@ -6,10 +6,12 @@ import model.command.Parameter;
 import model.variable.Variable;
 
 public class Make extends Command {
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public Make() {
 		super();
+		numParams = 2;
+		paramCount = 2;
 	}
 	
 	/**

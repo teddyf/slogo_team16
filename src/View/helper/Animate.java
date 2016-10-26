@@ -1,69 +1,119 @@
 package View.helper;
 
-import View.Workspace;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.geometry.Point2D;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
 import java.util.List;
-import model.AnimalPane;
+
+import View.AnimalPaneGUI;
+import javafx.animation.TranslateTransition;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import model.animal.Animal;
 
 /**
  * Handles animation
  */
 /**
- * @author Lucy Zhang
+ * @author Lucy Zhang, Jordan Frazier
  *
  */
 public class Animate {
 
-	public static final int FRAMES_PER_SECOND = 60;
-	public static final int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
-	private Timeline animation = new Timeline();
+	private List<Coordinate> coordinatePairs;
+	private AnimalPaneGUI animalPaneGUI;
+	private Pen pen;
+	private int counter;
 
-	public void beginAnimation(AnimalPane animalPane) {
+	// decrease this to speed up, increase to slow down
+	private double SPEED = 1;
 
-		// Map<String, List<CoordinatePair>> coordinatePairs =
-		// animal.getCoordinateMap();
-		List<Point2D> coordinatePairs = animalPane.getCoordinateMap();
-		for (Point2D point : coordinatePairs) {
-			for (int i : animalPane.getMyAnimalMap().keySet()) {
-				Animal animal = animalPane.getMyAnimalMap().get(i);
-				
-				if(!animal.getSelected()) {
-					return;
-				}
-				
-				ImageView animalImage = animal.getImageView();
-				// TODO: Jordan: Time for translation
-				TranslateTransition translation = new TranslateTransition(Duration.millis(500), animalImage);
-				translation.setFromX(animal.getX());
-				translation.setFromY(animal.getY());
-				translation.setToX(point.getX());
-				translation.setToY(point.getY());
+	public void beginAnimation(AnimalPaneGUI animalPaneGUI) {
+		this.animalPaneGUI = animalPaneGUI;
+		coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
+		counter = 0;
 
-				translation.setOnFinished(e -> {
-					animal.setX(point.getX());
-					animal.setY(point.getY());
-				});
-
-				translation.play();
-			}
+		// TODO: will this work with multiple turtles
+		for (Animal animal : animalPaneGUI.getAnimalPane().getMyAnimalList()) {
+			pen = animal.getActualPen();
+			translateAnimation(coordinatePairs.get(counter), animal);
 		}
 	}
 
-	/*
-	 * public void handleTurtleAnimation(Animal turtle, SLogoView slogo) {
-	 * KeyFrame frame1 = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e ->
-	 * turtle.update()); KeyFrame[] frames = { frame1 };
-	 * initAnimation(animation, frames); }
-	 * 
-	 * private void initAnimation(Timeline animation, KeyFrame[] frames) {
-	 * animation.setCycleCount(Timeline.INDEFINITE); for (KeyFrame frame :
-	 * frames) { animation.getKeyFrames().add(frame); } animation.play(); }
-	 */
+	private void translateAnimation(Coordinate coordinate, Animal animal) {
+		ImageView animalImage = animal.getImageView();
+		bindPenToAnimal(animalImage, coordinate);
+		changeAnimalVisibility(animalImage, coordinate);
+		handleRotation(coordinate, animalImage);
+		handleMovement(coordinate, animal, animalImage);
+	}
+	
+	public void changeAnimalVisibility(ImageView animalImage, Coordinate coordinate) {
+		animalImage.setVisible(coordinate.getShowing() != 0);
+	}
 
+	private void handleMovement(Coordinate point, Animal animal, ImageView animalImage) {
+		TranslateTransition translation = new TranslateTransition(Duration.millis(getTranslateTime(point, animalImage)),
+				animalImage);
+
+		inputTranslationCoordinates(point, animalImage, translation);
+
+		translation.setOnFinished(e -> {
+			updateAnimalCoordinates(point, animal);
+			unbindPen(point);
+			incrementCounters(point);
+			if (counter < coordinatePairs.size()) {
+				translateAnimation(coordinatePairs.get(counter), animal);
+			}
+		});
+		translation.play();
+	}
+
+	private void inputTranslationCoordinates(Coordinate point, ImageView animalImage, TranslateTransition translation) {
+		translation.setFromX(animalImage.getTranslateX());
+		translation.setFromY(animalImage.getTranslateY());
+		translation.setToX(point.getX());
+		translation.setToY(point.getY());
+	}
+
+	private void incrementCounters(Coordinate coordinate) {
+		if (coordinate.getPen() == 1) {
+			pen.incrementCounter();
+		}
+		counter++;
+	}
+
+	private void updateAnimalCoordinates(Coordinate point, Animal animal) {
+		animal.setX(point.getX());
+		animal.setY(point.getY());
+	}
+
+	private void unbindPen(Coordinate coordinate) {
+		if (coordinate.getPen() == 1) {
+			pen.getLineList().get(pen.getCounter()).endXProperty().unbind();
+			pen.getLineList().get(pen.getCounter()).endYProperty().unbind();
+		}
+	}
+
+	private void handleRotation(Coordinate coordinate, ImageView animalImage) {
+		animalImage.setRotate(coordinate.getHeading());
+	}
+
+	private void bindPenToAnimal(ImageView animalImage, Coordinate coordinate) {
+		if (coordinate.getPen() == 1) {
+			pen.createLine(animalImage.getTranslateX(), animalImage.getTranslateY());
+			animalPaneGUI.getMyContainer().getChildren().add(pen.getLineList().get(pen.getCounter()));
+			pen.getLineList().get(pen.getCounter()).endXProperty().bind(animalImage.translateXProperty());
+			pen.getLineList().get(pen.getCounter()).endYProperty().bind(animalImage.translateYProperty());
+		}
+	}
+
+	private Double getTranslateTime(Coordinate point, ImageView turtle) {
+		double oldx = turtle.getTranslateX();
+		double oldy = turtle.getTranslateY();
+		double newx = point.getX();
+		double newy = point.getY();
+
+		double distance = Math.sqrt(Math.pow((int) newx - oldx, 2) + Math.pow((int) newy - oldy, 2));
+		Double time = distance * SPEED;
+		return time;
+	}
 }

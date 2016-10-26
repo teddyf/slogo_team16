@@ -4,11 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class SetHeading extends TurtleRotation {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public SetHeading() {
 		super();
+		numParams = 2;
+		paramCount = 1;
 	}
 
 	/**

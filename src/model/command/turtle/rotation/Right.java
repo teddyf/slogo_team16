@@ -4,11 +4,12 @@ import model.animal.Animal;
 import model.command.Parameter;
 
 public class Right extends TurtleRotation {
-
-	private final double numParams = 2;
+	private final double paramCount;
 	
 	public Right() {
 		super();
+		numParams = 2;
+		paramCount = 1;
 	}
 
 	/**
@@ -18,8 +19,8 @@ public class Right extends TurtleRotation {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double degrees = params[0].getValue();
-		Animal turtle = params[1].getAnimal();
+		Animal turtle = params[0].getAnimal();
+		double degrees = params[1].getValue();
 		return turn(turtle, degrees, 0);
 	}
 }

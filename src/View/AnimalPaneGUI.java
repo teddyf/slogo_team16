@@ -2,28 +2,54 @@ package View;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
+import java.util.Observable;
+import java.util.Observer;
+
 import model.AnimalPane;
 import model.animal.Animal;
-
-public class AnimalPaneGUI {
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
+/**
+ * 
+ * @author Jordan Frazier
+ *
+ */
+public class AnimalPaneGUI implements Observer {
 
 	private AnimalPane myAnimalPane;
 	private ScrollPane myScrollPane;
 	private List<Animal> myAnimalList;
+	private Pane myContainer;
 	
+	public AnimalPaneGUI() {
+		myAnimalList = new ArrayList<>();
+
+		myAnimalPane = new AnimalPane();
+		myAnimalPane.addObserver(this);
+		myAnimalPane.addAnimal();
+		
+		myScrollPane = new ScrollPane();
+		myContainer = new Pane();
+		styleScrollPane();
+		styleMyContainer();
+	}
+	@Deprecated
 	public AnimalPaneGUI(AnimalPane animalPane) {
 		myAnimalPane = animalPane;
 		myScrollPane = new ScrollPane();
 		myAnimalList = new ArrayList<>();
-		stylePane();
+		styleScrollPane();
 	}	
 	
-	public void stylePane() {
+	public void styleScrollPane() {
 		myScrollPane.setPrefWidth(Workspace.LEFT_PANE_WIDTH);
 		myScrollPane.setPrefHeight(Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4);
 		myScrollPane.getStyleClass().add("animal-pane");
+	}
+	
+	public void styleMyContainer() {
+		myContainer.setPrefWidth(Workspace.LEFT_PANE_WIDTH);
+		myContainer.setPrefHeight(Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4);
 	}
 	
 	public void addAnimal(Animal animal) {
@@ -53,5 +79,22 @@ public class AnimalPaneGUI {
 
 	public void setMyAnimalList(List<Animal> myAnimalList) {
 		this.myAnimalList = myAnimalList;
+	}
+	public Pane getMyContainer() {
+		return myContainer;
+	}
+	public void setMyContainer(Pane myContainer) {
+		this.myContainer = myContainer;
+	}
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof AnimalPane) {
+			System.out.println("animalGUI updating to reflect new animal list");
+			for(Animal an : ((AnimalPane) o).getMyAnimalList()) {
+				System.out.println("ANIMAL ID: " + an.getId());
+			}
+			setMyAnimalList(((AnimalPane) o).getMyAnimalList());
+		}
+		
 	}
 }

@@ -4,11 +4,12 @@ import model.command.Command;
 import model.command.Parameter;
 
 public class Random extends Command {
-
-	private final double numParams = 1;
+	private final double paramCount;
 	
 	public Random() {
 		super();
+		numParams = 1;
+		paramCount = 1;
 	}
 
 	/**
