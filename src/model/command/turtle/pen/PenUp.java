@@ -9,7 +9,7 @@ public class PenUp extends TurtlePen {
 	public PenUp() {
 		super();
 		numParams = 1;
-		paramCount = 1;
+		paramCount = 0;
 	}
 
 	/**

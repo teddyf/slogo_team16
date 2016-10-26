@@ -9,7 +9,7 @@ public class ShowTurtle extends TurtleVisibility {
 	public ShowTurtle() {
 		super();
 		numParams = 1;
-		paramCount = 1;
+		paramCount = 0;
 	}
 
 	/**

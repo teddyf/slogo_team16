@@ -11,9 +11,8 @@ public abstract class TurtleMovement extends TurtleCommand {
 
 	public double move(Animal turtle, double pixels) {
 		double angle = 90 - turtle.getHeading();
-		turtle.setX(turtle.getX() + Math.sin(angle) * pixels);
-		turtle.setY(turtle.getY() - Math.cos(angle) * pixels);
-		System.out.print(turtle.getX());
+		turtle.setX(turtle.getX() + Math.cos(angle*Math.PI/180) * pixels);
+		turtle.setY(turtle.getY() - Math.sin(angle*Math.PI/180) * pixels);
 		return pixels;
 	}
 

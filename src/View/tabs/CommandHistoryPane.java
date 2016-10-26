@@ -1,5 +1,11 @@
 package View.tabs;
 
+
+
+import java.util.Observable;
+
+import View.helper.Buttons;
+import View.helper.Console;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
@@ -12,8 +18,10 @@ public class CommandHistoryPane implements ListViewPane, GenericPane<String> {
 	
 	private String displayName = "History";
 	private ListView<String> content;
+	private Console myConsole;
 
-	public CommandHistoryPane() {
+	public CommandHistoryPane(Console console) {
+		myConsole = console;
 		initializeListView();
 		makeClickable();
 	}
@@ -21,7 +29,6 @@ public class CommandHistoryPane implements ListViewPane, GenericPane<String> {
 	@Override
 	public void initializeListView() {
 		content = new ListView<>();
-		content.getItems().add("First History\nCommand");
 		content.setStyle("-fx-background:white");
 	}
 
@@ -35,9 +42,7 @@ public class CommandHistoryPane implements ListViewPane, GenericPane<String> {
 		content.setOnMouseClicked(e -> {
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
-					//TODO: Jordan - Add run functionality to clicking
-					// Add command to text area instead of running actually
-					System.out.println("clicked on " + content.getSelectionModel().getSelectedItem());
+					myConsole.getConsoleArea().setText(content.getSelectionModel().getSelectedItem());
 				}
 			}
 		});		
@@ -56,5 +61,14 @@ public class CommandHistoryPane implements ListViewPane, GenericPane<String> {
 	@Override
 	public ListView<String> getTabContent() {
 		return this.content;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof Buttons) {
+			String command = ((Buttons) o).getCurrentCommand();
+			content.getItems().add(command);
+		}
+		
 	}
 }

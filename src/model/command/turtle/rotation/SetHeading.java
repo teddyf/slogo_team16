@@ -9,7 +9,7 @@ public class SetHeading extends TurtleRotation {
 	public SetHeading() {
 		super();
 		numParams = 2;
-		paramCount = 2;
+		paramCount = 1;
 	}
 
 	/**

@@ -14,12 +14,22 @@ import javafx.scene.control.TextArea;
 public class Console {
 	private TextArea console;
 	private String currentlyTypedWord;
+	
+	public Console() {
+		this.console = new TextArea();
+		currentlyTypedWord = "";
+		writeToConsole("Type your SLogo here");
+		eraseTextOnInitialClick();
+	}
 
 	public Console(TextArea area) {
 		this.console = area;
 		currentlyTypedWord = "";
+		writeToConsole("Type your SLogo here");
+		eraseTextOnInitialClick();
 	}
 
+	@Deprecated
 	public void initConsole() {
 		writeToConsole("Type your SLogo here");
 		//addListener();
@@ -80,6 +90,10 @@ public class Console {
 				//do nothing after initial clear
 			});
 		});
+	}
+	
+	public TextArea getConsoleArea() {
+		return console;
 	}
 
 }

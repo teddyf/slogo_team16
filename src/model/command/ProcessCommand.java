@@ -1,7 +1,6 @@
 package model.command;
 
 import java.util.ArrayList;
-
 import Controller.AnimalController;
 import Parsing.Method;
 import Parsing.Constant;
@@ -9,7 +8,6 @@ import Parsing.Expression;
 import Parsing.TreeNode;
 import Parsing.Variable;
 import model.animal.Animal;
-import model.animal.Turtle;
 import model.command.turtle.TurtleCommand;
 
 public class ProcessCommand {
@@ -39,8 +37,6 @@ public class ProcessCommand {
 				Command command = (Command)obj;
 				parameters = new Parameter[(int)command.getNumParams()];
 				int startIndex = parametersList.size()-(int)command.getNumParams();
-				System.out.print(parametersList.size());
-				System.out.println((int)command.getNumParams());
 				if (command instanceof TurtleCommand) {
 					//Animal turtle = ac.getActiveAnimalPaneGUI().getAnimalPane().getMyAnimalList().get(0);
 					//Animal turtle = new Turtle(15, 15, 3, 3);
@@ -52,7 +48,7 @@ public class ProcessCommand {
 					parameters[i] = parametersList.get(startIndex+i);
 				}
 				value = command.run(parameters);
-				System.out.println("VALUE " + value);
+				
 				parametersList.clear();
 				parametersList.add(new Parameter(value));
 			} else if (nodeExpression.getClass().getSimpleName().equals("Constant")) {

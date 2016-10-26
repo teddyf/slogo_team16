@@ -9,7 +9,7 @@ public class HideTurtle extends TurtleVisibility {
 	public HideTurtle() {
 		super();
 		numParams = 1;
-		paramCount = 1;
+		paramCount = 0;
 	}
 
 	/**

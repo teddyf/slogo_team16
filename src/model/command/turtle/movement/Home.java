@@ -9,7 +9,7 @@ public class Home extends TurtleMovement {
 	public Home() {
 		super();
 		numParams = 1;
-		paramCount = 1;
+		paramCount = 0;
 	}
 
 	/**

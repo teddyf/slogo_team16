@@ -9,7 +9,7 @@ public class Towards extends TurtleRotation {
 	public Towards() {
 		super();
 		numParams = 3;
-		paramCount = 3;
+		paramCount = 2;
 	}
 
 	/**

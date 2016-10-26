@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-
 import ErrorHandling.InvalidLabelException;
 import Parsing.ExpressionTree;
 import Parsing.ParserRunner;
@@ -12,7 +11,6 @@ import Parsing.ProgramParser;
 import Parsing.TreeNode;
 import View.AnimalPaneGUI;
 import View.helper.Coordinate;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.AnimalPane;
@@ -31,11 +29,17 @@ public class AnimalController implements Controller {
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
 	private AnimalPaneGUI activeAnimalPaneGUI;
+	private ProgramParser myProgramParser;
+	private ParserRunner myParserRunner;
+	private Animal turtle;
 	public static final String FILEPATH = "Resources/myInput.slogo";
 
 	public AnimalController() {
 		file = new WriteFile();
 		error = "";
+		myProgramParser = new ProgramParser();
+		myParserRunner = new ParserRunner("English", myProgramParser);
+		turtle = null;
 	}
 
 	public void writeInputToFile(String input) {
@@ -83,19 +87,16 @@ public class AnimalController implements Controller {
 	private void runCommands() throws FileNotFoundException, NoSuchMethodException, SecurityException,
 			ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchFieldException, InvalidLabelException {
-		ProgramParser lang = new ProgramParser();
-		ParserRunner pr = new ParserRunner("English", lang);
-		String[][] a = pr.combineAllLines();
-		String[][] b = pr.markDepth(a);
+		
+		String[][] a = myParserRunner.combineAllLines();
+		String[][] b = myParserRunner.markDepth(a);
 		ExpressionTree tree = new ExpressionTree();
 		tree.buildTree(b);
 		ArrayList<TreeNode> node = tree.dfs();
-		// node = tree.reverse(node);
 
-		Animal turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
 		ProcessCommand pc = new ProcessCommand();
 		double v = pc.process(this, turtle, tree.reverse(node));
-		System.out.println(v);
+		System.out.println("VALUE " + v);
 		
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
 		List<Coordinate> points = new ArrayList<Coordinate>();
@@ -124,6 +125,7 @@ public class AnimalController implements Controller {
 	@Override
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI) {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
+		this.turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
 	}
 
 	public void displayErrorDialog(String error) {

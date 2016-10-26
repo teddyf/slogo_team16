@@ -9,7 +9,7 @@ public class ClearScreen extends TurtleMovement {
 	public ClearScreen() {
 		super();
 		numParams = 1;
-		paramCount = 1;
+		paramCount = 0;
 	}
 
 	/**

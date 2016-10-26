@@ -9,7 +9,7 @@ public class Backward extends TurtleMovement {
 	public Backward() {
 		super();
 		numParams = 2;
-		paramCount = 2;
+		paramCount = 1;
 	}
 
 	/**
