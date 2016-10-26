@@ -22,7 +22,7 @@ public class Pen implements Observer {
 	public Pen() {
 		counter = 0;
 		lineList = new ArrayList<>();
-		color = "#00FF00";
+		color = decodeColor(Colors.BLACK.getAllColors()[0]);
 //		line = new Line();
 //		line.setFill(Color.BLACK);
 	}
@@ -30,7 +30,7 @@ public class Pen implements Observer {
 	public Pen(double x, double y){
 		counter = 0;
 		lineList = new ArrayList<>();
-		color = "#000000";
+		color = decodeColor(Colors.BLACK.getAllColors()[0]);
 //		line = new Line(x, y, x, y);
 //		line.setFill(Color.BLACK);
 	}

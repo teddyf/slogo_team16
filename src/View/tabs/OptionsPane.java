@@ -38,7 +38,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 
 	private static final Map<String,String> colorHexVals = new HashMap<String,String>();
-	private static final String[] COLORS = { Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
+	private static final String[] BACKGROUND_COLORS = { Colors.WHITE.toString(), Colors.BLACK.toString(), Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
 
 
 	public OptionsPane(){
@@ -56,9 +56,14 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	}
 	
 	private void populateColorHexVals(){
-		colorHexVals.put(Colors.BLUE.toString(), Colors.BLUE.getColor());
-		colorHexVals.put(Colors.GREEN.toString(), Colors.GREEN.getColor());
-		colorHexVals.put(Colors.RED.toString(),Colors.RED.getColor());
+		for(Colors c : Colors.values() ){ 
+			colorHexVals.put(c.toString(), c.getColor());
+		}
+		
+//		colorHexVals.put(Colors.BLACK.toString(), Colors.BLACK.getColor());
+//		colorHexVals.put(Colors.BLUE.toString(), Colors.BLUE.getColor());
+//		colorHexVals.put(Colors.GREEN.toString(), Colors.GREEN.getColor());
+//		colorHexVals.put(Colors.RED.toString(),Colors.RED.getColor());
 		
 	}
 	private void createAllOptions() {
@@ -82,7 +87,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	}
 	
 	private HBox createBackgroundColorOptions(){
-		ComboBox<String> colors = createComboBoxOption(COLORS);
+		ComboBox<String> colors = createComboBoxOption(BACKGROUND_COLORS);
 		colors.valueProperty().addListener((o, oldValue, newValue) -> workspace.changeAnimalBackgroundColor(newValue));
 		HBox backgroundColor = setComboBoxInContainer(colors, BACKGROUND_COLOR);
 		return backgroundColor;
@@ -132,6 +137,12 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	@Override
 	public ListView<HBox> getTabContent() {
 		return this.content;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

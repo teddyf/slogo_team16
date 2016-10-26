@@ -16,6 +16,7 @@ import View.helper.Graphics;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
+import View.tabs.ListeningPane;
 import View.tabs.OptionsPane;
 import View.tabs.VariablesPane;
 import javafx.beans.value.ChangeListener;
@@ -68,7 +69,7 @@ public class Workspace implements Observer {
 	private Animate animation;
 	private ResourceBundle myResources;
 	private Controller myController;
-	private final GenericPane<String> historyPane = new CommandHistoryPane();
+	private GenericPane<String> historyPane;
 	private int workSpaceID;
 	private SlogoView mainView;
 
@@ -82,7 +83,9 @@ public class Workspace implements Observer {
 		animation = new Animate();
 		myAnimalGUIList = new ArrayList<>();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+		console = new Console();
 		this.workSpaceID = workspaceID;
+
 	}
 
 	public Workspace(int workspaceID, String color) {
@@ -92,6 +95,7 @@ public class Workspace implements Observer {
 		animation = new Animate();
 		myAnimalGUIList = new ArrayList<>();
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
+		console = new Console();
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
 	}
@@ -104,19 +108,6 @@ public class Workspace implements Observer {
 		populateLeftPane();
 		populateRightPane();
 		mainView.setBackgroundColor(defaultBackgroundColor);
-	}
-
-
-	public ResourceBundle getResources() {
-		return myResources;
-	}
-
-	public void setResources(ResourceBundle resource) {
-		this.myResources = resource;
-	}
-
-	public AnimalPaneGUI getAnimalPaneGUI() {
-		return myAnimalPaneGUI;
 	}
 
 	public void createAnimalPaneGUI() {
@@ -216,32 +207,37 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createHistoryTab() {
+		historyPane = new CommandHistoryPane(console);
+		buttons.addObserver(historyPane);
 		Tab tab = createTab(historyPane);
 		return tab;
 	}
 
 	private Tab createOptionsTab() {
 		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this, mainView);
-//		if (defaultBackgroundColor != null && !defaultBackgroundColor.isEmpty()){
-//			System.out.println("default background color: "+defaultBackgroundColor);
-//			((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);
-//		}
+		// if (defaultBackgroundColor != null &&
+		// !defaultBackgroundColor.isEmpty()){
+		// System.out.println("default background color:
+		// "+defaultBackgroundColor);
+		// ((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);
+		// }
 		// to make custom ID buttons
 		Tab tab = createTab(pane);
 		return tab;
 	}
 
-	public ScrollPane/* HBox */ createConsole() {
+	public ScrollPane createConsole() {
 		ScrollPane consolePane = new ScrollPane();
-		TextArea consoleArea = createConsoleArea();
+//		TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
 		HBox consoleContainer = new HBox(5);
-		consoleContainer.getChildren().addAll(consoleArea, buttons);
+		consoleContainer.getChildren().addAll(console.getConsoleArea(), buttons);
 		consolePane.setContent(consoleContainer);
 		return consolePane;
 		// return consoleContainer;
 	}
 
+	@Deprecated
 	public TextArea createConsoleArea() {
 		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - BUTTON_WIDTH, SCENE_HEIGHT / 6);
 		console = new Console(consoleArea);
@@ -321,15 +317,15 @@ public class Workspace implements Observer {
 				&& (x < myAnimalPaneGUI.getScrollPane().getPrefWidth())
 				&& (y < myAnimalPaneGUI.getScrollPane().getPrefHeight());
 	}
-	
+
 	public void changeAnimalBackgroundColor(String color) {
 		String hexColor = decodeColor(color);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
 	}
-	
+
 	private String decodeColor(String color) {
-		for(Colors c : Colors.values()) {
-			if(c.toString().equals(color)) {
+		for (Colors c : Colors.values()) {
+			if (c.toString().equals(color)) {
 				return c.getColor();
 			}
 		}
@@ -403,6 +399,18 @@ public class Workspace implements Observer {
 
 	public BorderPane getMyRoot() {
 		return myRoot;
+	}
+
+	public ResourceBundle getResources() {
+		return myResources;
+	}
+
+	public void setResources(ResourceBundle resource) {
+		this.myResources = resource;
+	}
+
+	public AnimalPaneGUI getAnimalPaneGUI() {
+		return myAnimalPaneGUI;
 	}
 
 }

@@ -7,6 +7,7 @@ package View.helper;
  */
 public enum Colors {
 	BLACK("#000000"),
+	WHITE("#FFFFFF"),
 	BLUE("#0000FF"), 
 	RED("#FF0000"), 
 	GREEN("#00FF00");
