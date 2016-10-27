@@ -75,6 +75,7 @@ public class Workspace implements Observer {
 
 	// support for multiple turtles
 	private int numTurtles;
+	private ArrayList<String> turtleIDs = new ArrayList<String>();
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
@@ -115,12 +116,17 @@ public class Workspace implements Observer {
 
 	public void incrementNumTurtles() {
 		numTurtles++;
+		turtleIDs.add("turtle_"+numTurtles+"_"+workSpaceID);
 	}
 
 	public void decrementNumTurtles() {
 		if (numTurtles > 1) {
 			numTurtles--;
 		}
+	}
+	
+	public ArrayList<String> getTurtleIDs(){
+		return turtleIDs;
 	}
 
 	public void init(SlogoView view) {
