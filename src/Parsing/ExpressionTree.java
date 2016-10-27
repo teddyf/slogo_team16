@@ -46,7 +46,7 @@ public class ExpressionTree {
                 parent = parent.getParent();
             }
             else if(a[0][i].equals("[")){
-                parent = curr;
+                curr = buildNode(parent,a[0][i],a[1][i]); 
             }
             else if(a[0][i].equals("]")){
                 parent = parent.getParent();
@@ -79,6 +79,10 @@ public class ExpressionTree {
         }
         else if (label.equals("Constant")) {
             obj = Double.parseDouble(name);
+        }
+        
+        else if (label.equals("ListStart")){
+            obj = 0;
         }
         else {
             throw new InvalidLabelException("Invalid user input");
