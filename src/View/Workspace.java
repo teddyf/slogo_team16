@@ -350,6 +350,7 @@ public class Workspace implements Observer {
 	public void changeAnimalBackgroundColor(String color) {
 		String hexColor = decodeColor(color);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
+		this.getMyRoot().setStyle("-fx-background-color: "+hexColor+";");
 	}
 
 	private String decodeColor(String color) {
