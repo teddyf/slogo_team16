@@ -86,6 +86,9 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 //		content.getItems().addAll(/*penColor,*/ backgroundColor);
 		// content.getItems().addAll(penColor, backgroundColor,
 		// displayX.getContainer(), displayY.getContainer());
+		
+		//TODO: make this more efficient
+		/*
 		HBox btn1 = new HBox();
 		Button wkspc = buttons.createNewWorkspaceButton(slogoView);
 		btn1.getChildren().add(wkspc);
@@ -93,7 +96,38 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
 		btn2.getChildren().add(saveWkspc);
 		
-		content.getItems().addAll(penColor.getContainer(), backgroundColor, btn1, btn2);
+		HBox btn3 = new HBox();
+		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
+		btn3.getChildren().add(btn3);
+		*/
+		content.getItems().addAll(penColor.getContainer(), backgroundColor);
+		addToPane(addButtonsToHBox(createButtons()));
+	}
+	
+	private Button[] createButtons(){
+		Button wkspc = buttons.createNewWorkspaceButton(slogoView);
+		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
+		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
+		Button decTurtle = buttons.createDecrementNumTurtlesButton(workspace);
+		
+		Button[] buttons = {wkspc, saveWkspc, addTurtle, decTurtle};
+		return buttons;
+	}
+	
+	private HBox[] addButtonsToHBox(Button[] buttons){
+		HBox[] btns = new HBox[buttons.length];
+		for (int i=0; i<buttons.length; i++){
+			HBox hbox = new HBox(); 
+			hbox.getChildren().add(buttons[i]);
+			btns[i]=hbox;
+		}
+		return btns;
+	}
+	
+	private void addToPane(HBox[] components){
+		for (int i=0; i<components.length; i++){
+			content.getItems().add(components[i]);
+		}
 	}
 	
 	private HBox createBackgroundColorOptions(){

@@ -25,16 +25,16 @@ public class Buttons extends Observable {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
 	private Controller myController;
-	
+
 	private String currentCommand;
- 	
+
 	public Buttons(Controller controller) {
 		myController = controller;
 		currentCommand = "";
 	}
-	
-	public Buttons(){
-		
+
+	public Buttons() {
+
 	}
 
 	public VBox createConsoleInputButtons(Console console, GenericPane<String> pane, SlogoView slogoView) {
@@ -59,15 +59,16 @@ public class Buttons extends Observable {
 			System.out.println(input);
 			// Add command to history, move this to only after its been checked
 			// for errors
-//			addCommandToHistory(pane, input);
+			// addCommandToHistory(pane, input);
 
 			myController.writeInputToFile(input);
 			myController.handleInput();
-//			myController.checkForPrintCommand("print", console); // testing the print
+			// myController.checkForPrintCommand("print", console); // testing
+			// the print
 			// myController.checkForPrintCommand("print", console); // testing
 			// the print
 			// command
-			
+
 			// Updating Command History Pane with command
 			updateObservers(input);
 		});
@@ -85,9 +86,9 @@ public class Buttons extends Observable {
 		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
 		clear.setOnAction(e -> {
 			console.clearConsole();
-			Workspace pane=slogoView.getCurrentWorkspaceLeftPane();
+			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
 			pane.resetLeftPane();
-			
+
 		});
 		return clear;
 	}
@@ -110,22 +111,40 @@ public class Buttons extends Observable {
 		});
 		return wkspc;
 	}
-	
-	public Button createSaveWorkspaceButton(SlogoView slogoView){
+
+	public Button createSaveWorkspaceButton(SlogoView slogoView) {
 		Button wkspc = graphic.createButton("Save Workspace");
 		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
 		wkspc.setOnAction(e -> {
-			Map<String,String> data = slogoView.parseWorkspaceData();
-			DataOutput dataOutput = new DataOutput(data.get("title")+"_out.xml",data);
+			Map<String, String> data = slogoView.parseWorkspaceData();
+			DataOutput dataOutput = new DataOutput(data.get("title") + "_out.xml", data);
 		});
 		return wkspc;
+	}
+
+	public Button createAddNumTurtlesButton(Workspace wkspc) {
+		Button addTurtle = graphic.createButton("Add one annoying turtle");
+		addTurtle.setPrefWidth(Workspace.BUTTON_WIDTH);
+		addTurtle.setOnAction(e -> {
+			wkspc.incrementNumTurtles();
+		});
+		return addTurtle;
+	}
+
+	public Button createDecrementNumTurtlesButton(Workspace wkspc) {
+		Button minusTurtle = graphic.createButton("Get rid of one annoying turtle");
+		minusTurtle.setPrefWidth(Workspace.BUTTON_WIDTH);
+		minusTurtle.setOnAction(e -> {
+			wkspc.decrementNumTurtles();
+		});
+		return minusTurtle;
 	}
 
 	@Deprecated
 	private void addCommandToHistory(final GenericPane<String> pane, String input) {
 		pane.getAllItems().add(input);
 	}
-	
+
 	public String getCurrentCommand() {
 		return currentCommand;
 	}

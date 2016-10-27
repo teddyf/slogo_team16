@@ -16,7 +16,7 @@ import View.helper.Graphics;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
-import View.tabs.ListeningPane;
+//import View.tabs.ListeningPane;
 import View.tabs.OptionsPane;
 import View.tabs.VariablesPane;
 import javafx.beans.value.ChangeListener;
@@ -72,6 +72,9 @@ public class Workspace implements Observer {
 	private GenericPane<String> historyPane;
 	private int workSpaceID;
 	private SlogoView mainView;
+	
+	//support for multiple turtles
+	private int numTurtles;
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
@@ -85,6 +88,7 @@ public class Workspace implements Observer {
 		myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
 		console = new Console();
 		this.workSpaceID = workspaceID;
+		numTurtles = 0;
 
 	}
 
@@ -98,6 +102,23 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
+		numTurtles = 0;
+	}
+
+	public int getNumTurtles() {
+		return numTurtles;
+	}
+
+	public void setNumTurtles(int numTurtles) {
+		this.numTurtles = numTurtles;
+	}
+	
+	public void incrementNumTurtles(){
+		numTurtles++;
+	}
+	
+	public void decrementNumTurtles(){
+		numTurtles--;
 	}
 
 	public void init(SlogoView view) {
