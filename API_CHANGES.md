@@ -1,20 +1,10 @@
 Aninda Manocha, Lucy Zhang, Jordan Frazier, Teddy Franceschi
 
 
-On the frontend, in order to accommodate the animal grid functionality, an AnimalPaneGUI class was created. This method consists of the following new APIs:
-One significant change was the inclusion of a ```getMyAnimalList``` method in order to allow for multiple turtles. It is an external API meant to communicate the number of animals between front-end and backend.   
+Originally, we had a couple classes for each type of command (math, boolean, turtle, and control) and within each of these classes, there were several methods for each of the commands of that type. We changed this design so that there was a separate class for each command and all commands extend a superclass called Command. This superclass contains a ```run()``` method and each of the command classes implement this ```run()``` method according to their functionality. This design allows for commands to easily be run through reflection because their respective classes can simply be instantiated and the ```run()``` method can be called. This change in the API significantly affects how the commands are run, and so it affected my other team member on the backend in that he can call these commands more easily (he is responsible for parsing user input and mapping user input to the appropriate commands). In the next few days, I foresee making adjustments to when commands are called in that they should be called as the tree is being traversed. Currently, the tree creates an array to loop through to determine which commands to run.
 
-```java 
-public void styleScrollPane() 
-public void styleMyContainer() 
-public void addAnimal(Animal animal) 
-public AnimalPane getAnimalPane() 
-public ScrollPane getScrollPane() 
-public void setAnimalPane(AnimalPane animalPane) 
-public void setScrollPane(ScrollPane pane) 
-public List<Animal> getMyAnimalList() 
-public void setMyAnimalList(List<Animal> myAnimalList) 
-public Pane getMyContainer() 
-public void setMyContainer(Pane myContainer) 
-public void update(Observable o, Object arg) 
-```
+
+On the frontend, in order to accommodate the animal grid functionality, an AnimalPaneGUI class was created. This method consists of the following new APIs:
+One significant change was the inclusion of a ```getMyAnimalList()``` method in order to allow for multiple turtles. It is an external API meant to communicate the number of animals between front-end and backend.   
+
+AnimalPaneGUI contains the backend AnimalPane, which contains the variables that the backend needs in order to run commands. For example, AnimalPane contains a method, ```getAnimalList()```, which will be changed into ```getAnimalMap()```, so the backend can choose the selected turtle based on <ID, Turtle> and then only command that turtle to perform whatever action is passed through the console. Based on the public methods below, we see that a few should be changed to private. For example, in class Pen, there is a method that decodes color that is only utilized by Pen, and should be switched to private. 
