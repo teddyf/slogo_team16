@@ -72,8 +72,8 @@ public class Workspace implements Observer {
 	private GenericPane<String> historyPane;
 	private int workSpaceID;
 	private SlogoView mainView;
-	
-	//support for multiple turtles
+
+	// support for multiple turtles
 	private int numTurtles;
 
 	// There is only one instance of an AnimalPaneGUI per workspace
@@ -112,13 +112,15 @@ public class Workspace implements Observer {
 	public void setNumTurtles(int numTurtles) {
 		this.numTurtles = numTurtles;
 	}
-	
-	public void incrementNumTurtles(){
+
+	public void incrementNumTurtles() {
 		numTurtles++;
 	}
-	
-	public void decrementNumTurtles(){
-		numTurtles--;
+
+	public void decrementNumTurtles() {
+		if (numTurtles > 1) {
+			numTurtles--;
+		}
 	}
 
 	public void init(SlogoView view) {
@@ -249,7 +251,7 @@ public class Workspace implements Observer {
 
 	public ScrollPane createConsole() {
 		ScrollPane consolePane = new ScrollPane();
-//		TextArea consoleArea = createConsoleArea();
+		// TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
 		HBox consoleContainer = new HBox(5);
 		consoleContainer.getChildren().addAll(console.getConsoleArea(), buttons);
