@@ -60,7 +60,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	
 	private void populateColorHexVals(){
 		for(Colors c : Colors.values() ){ 
-			colorHexVals.put(c.toString(), c.getColor());
+			colorHexVals.put(c.toString(), c.getHexColor());
 		}
 		
 //		colorHexVals.put(Colors.BLACK.toString(), Colors.BLACK.getColor());

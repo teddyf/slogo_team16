@@ -55,11 +55,11 @@ public class Workspace implements Observer {
 	public static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
 	public static final int BUTTON_WIDTH = 140;
-
-	public static final String EN_RESRC_PATH = "resources/languages/English";
-	public static final String CHI_RESRC_PATH = "resources/languages/Chinese";
-
+	
 	private String defaultBackgroundColor;
+	private final String EN_RESRC_PATH = "resources/languages/English";
+	private final String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
+	"Spanish" };
 
 	private BorderPane myRoot;
 	// private AnimalPane myAnimalPane;
@@ -356,29 +356,18 @@ public class Workspace implements Observer {
 	private String decodeColor(String color) {
 		for (Colors c : Colors.values()) {
 			if (c.toString().equals(color)) {
-				return c.getColor();
+				return c.getHexColor();
 			}
 		}
 		return null;
 	}
 
 	public ComboBox<String> createLanguageChooser() {
-		String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
-				"Spanish" };
 		ComboBox<String> languageSelector = graphics.createComboBox(languages);
 		languageSelector.setValue(languages[0]);
 		languageSelector.valueProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				System.out.println("combobox value is: " + newValue);
-				if (newValue.equals("Chinese")) {
-					myResources = ResourceBundle.getBundle(CHI_RESRC_PATH);
-				} else if (newValue.equals("English")) {
-					myResources = ResourceBundle.getBundle(EN_RESRC_PATH);
-				}
-				// etc
-				// Loop through a list of all Text Values that should be updated
-				// and update them?
-				// currentText.setText(myResources.getString(currentText.getText()));
+				myController.setParsingLanguage(newValue);
 			}
 		});
 		return languageSelector;

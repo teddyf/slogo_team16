@@ -78,7 +78,7 @@ public class Pen implements Observer {
 	public String decodeColor(String color) { 
 		for(Colors c : Colors.values()) {
 			if(c.toString().equals(color)) {
-				return c.getColor();
+				return c.getHexColor();
 			}
 		}
 		return null;
