@@ -32,4 +32,8 @@ public class TreeNode {
         return this.expression.toString();
     }
     
+    public ArrayList<TreeNode> getChildren(){
+        return this.neighbors;
+    }
+    
 }
