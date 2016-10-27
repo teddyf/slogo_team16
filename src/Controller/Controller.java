@@ -24,5 +24,5 @@ public interface Controller {
 	
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI);
 
-	
+	public void setParsingLanguage(String language);
 }
