@@ -76,7 +76,7 @@ public class Workspace implements Observer {
 	// support for multiple turtles
 	private int numTurtles;
 	private ArrayList<String> turtleIDs = new ArrayList<String>();
-	private AnimalClick animalClick = new AnimalClick();
+	private AnimalClick animalClick;
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
@@ -91,6 +91,8 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		numTurtles = 0;
+		createAnimalPaneGUI();
+		animalClick= new AnimalClick(myAnimalPaneGUI);
 
 	}
 
@@ -105,6 +107,8 @@ public class Workspace implements Observer {
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
 		numTurtles = 0;
+		createAnimalPaneGUI();
+		animalClick= new AnimalClick(myAnimalPaneGUI);
 	}
 
 	public int getNumTurtles() {
@@ -117,7 +121,10 @@ public class Workspace implements Observer {
 
 	public void incrementNumTurtles() {
 		numTurtles++;
-		turtleIDs.add("turtle_"+numTurtles+"_"+workSpaceID);
+		Animal newAnimal = new Turtle(50,50,30,20);//TODO: change the dummy numbers
+		myAnimalPaneGUI.addAnimal(newAnimal);
+		addAnimalToGrid(newAnimal);
+		System.out.println("Incremented turtles: "+myAnimalPaneGUI.getAnimalPane().getMyAnimalList());
 	}
 
 	public void decrementNumTurtles() {
@@ -133,7 +140,7 @@ public class Workspace implements Observer {
 	public void init(SlogoView view) {
 		mainView = view;
 		myRoot = new BorderPane();
-		createAnimalPaneGUI();
+		//createAnimalPaneGUI();
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
@@ -337,6 +344,9 @@ public class Workspace implements Observer {
 		animalImage.setFitWidth(TURTLE_WIDTH);
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
+		
+		System.out.println("Is animalClick null?"+animalClick);
+		//for multiple turtles
 		animalClick.setEventListener(animal);
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
