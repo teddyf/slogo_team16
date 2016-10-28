@@ -76,6 +76,7 @@ public class Workspace implements Observer {
 	// support for multiple turtles
 	private int numTurtles;
 	private ArrayList<String> turtleIDs = new ArrayList<String>();
+	private AnimalClick animalClick = new AnimalClick();
 
 	// There is only one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
@@ -336,10 +337,11 @@ public class Workspace implements Observer {
 		animalImage.setFitWidth(TURTLE_WIDTH);
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
-
+		animalClick.setEventListener(animal);
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
+	
 
 	private boolean isValidLocation(double x, double y) {
 		return (x > myAnimalPaneGUI.getScrollPane().getLayoutX()) && (y > myAnimalPaneGUI.getScrollPane().getLayoutY())
