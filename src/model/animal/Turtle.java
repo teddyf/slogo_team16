@@ -81,6 +81,7 @@ public class Turtle extends Animal {
 		setChanged();
 		notifyObservers();
 	}
+	
 
 	/***** GETTERS *****/
 	@Override
