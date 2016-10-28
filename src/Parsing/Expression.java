@@ -9,4 +9,6 @@ public abstract class Expression {
     public String toString(){
         return this.name;
     }
+    
+    public abstract double run(TreeNode node);
 }

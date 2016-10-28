@@ -6,7 +6,7 @@ import java.util.*;
 import Controller.AnimalController;
 import ErrorHandling.InvalidLabelException;
 import model.animal.Turtle;
-import model.command.ProcessCommand;
+import model.command.CommandProcessor;
 public class Tester {
     public static void main (String[] args) throws FileNotFoundException, NoSuchMethodException,
                                             SecurityException, ClassNotFoundException,
@@ -28,7 +28,7 @@ public class Tester {
         ArrayList<TreeNode>node = tree.dfs();
         //node = tree.reverse(node);
         
-        ProcessCommand pc = new ProcessCommand();
+        CommandProcessor pc = new CommandProcessor();
         double v = pc.process(new AnimalController(), new Turtle(), tree.reverse(node));
         System.out.println(v);
     }

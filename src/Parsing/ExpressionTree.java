@@ -7,7 +7,8 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 public class ExpressionTree {
-
+	
+	private static final ExpressionTree instance = new ExpressionTree();
     public final Expression ROOT = new Constant("ROOT", 0);
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
@@ -18,11 +19,15 @@ public class ExpressionTree {
     private ExpressionFactory factory;
     private Stack<Expression> expressions;
 
-    public ExpressionTree(){
+    private ExpressionTree(){
         methodPaths = new ArrayList<>();
         expressions  = new Stack<Expression>();
         factory = new ExpressionFactory();
         addPatterns(RESOURCE_PATH);
+    }
+    
+    public static ExpressionTree getInstance() {
+    	return instance;
     }
     
     /**
@@ -137,11 +142,18 @@ public class ExpressionTree {
         return ERROR;
     }
     
-    public ArrayList<TreeNode> reverse(ArrayList<TreeNode> a){
+    /*public ArrayList<TreeNode> reverse(ArrayList<TreeNode> a){
         ArrayList<TreeNode> rev = new ArrayList<TreeNode>();
         for(int i = a.size()-1; i >= 0; i--){
             rev.add(a.get(i));
         }
         return rev;
+    }*/
+    
+    public double process(TreeNode node) {
+    	double value = 0;
+    	Expression nodeExpression = node.expression;
+    	
+    	return value;
     }
 }

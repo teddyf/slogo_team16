@@ -1,17 +1,47 @@
 package model.command;
 
+import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import Controller.AnimalController;
+import ErrorHandling.InvalidLabelException;
 import Parsing.Method;
+import Parsing.ParserRunner;
+import Parsing.ProgramParser;
 import Parsing.Constant;
 import Parsing.Expression;
+import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import Parsing.Variable;
 import model.animal.Animal;
 import model.command.turtle.TurtleCommand;
 
-public class ProcessCommand {
-	public double process(AnimalController ac, Animal turtle, ArrayList<TreeNode> inputs) {
+public class CommandProcessor {
+	private ArrayList<Command> commands;
+	private ArrayList<Parameter[]> parameters;
+	
+	public CommandProcessor() {
+		commands = new ArrayList<Command>();
+		parameters = new ArrayList<Parameter[]>();
+	}
+	
+	private ArrayList<TreeNode> getNodes() throws FileNotFoundException, NoSuchMethodException, SecurityException, 
+	ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, 
+	InvocationTargetException, NoSuchFieldException, InvalidLabelException {
+		ProgramParser myProgramParser = new ProgramParser();
+		ParserRunner myParserRunner = new ParserRunner("English", myProgramParser);
+		
+		String[][] line = myParserRunner.combineAllLines();
+		String[][] markedLine = myParserRunner.markDepth(line);
+		ExpressionTree tree = new ExpressionTree();
+		
+		tree.buildTree(markedLine);
+		ArrayList<TreeNode> nodes = tree.dfs();
+		
+		return nodes;
+	}
+	
+	public double processCommands(Animal turtle, ArrayList<TreeNode> inputs) {
 		int index = 0; 
 		ArrayList<Parameter> parametersList = new ArrayList<Parameter>();
 		Parameter[] parameters;
@@ -64,5 +94,21 @@ public class ProcessCommand {
 		}
 		
 		return value;
+	}
+	
+	private boolean isCommand()
+	public void run(Animal turtle) throws FileNotFoundException, NoSuchMethodException, SecurityException, ClassNotFoundException, 
+	InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException, 
+	InvalidLabelException {
+		ArrayList<TreeNode> nodes = getNodes();
+		processCommands(turtle, nodes);
+	}
+	
+	public ArrayList<Command> getCommands() {
+		return commands;
+	}
+	
+	public ArrayList<Parameter[]> getParameters() {
+		return parameters;
 	}
 }

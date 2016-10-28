@@ -1,46 +1,36 @@
 package model.command;
 
+import java.util.ArrayList;
+import Parsing.TreeNode;
 import model.animal.Animal;
 
 public class Parameter {
 	private Animal turtle;
 	private String name;
 	private double value;
-	private Object[] list;
+	private ArrayList<TreeNode> nodes;
 	
 	public Parameter() {
 		this.turtle = null;
 		this.name = null;
 		this.value = 0;
-		this.list = null;
+		this.nodes = null;
 	}
 	
 	public Parameter(Animal turtle) {
 		this.turtle = turtle;
-		this.name = null;
-		this.value = 0;
-		this.list = null;
 	}
 	
 	public Parameter(String name) {
-		this.turtle = null;
 		this.name = name;
-		this.value = 0;
-		this.list = null;
 	}
 	
 	public Parameter(double value) {
-		this.turtle = null;
-		this.name = null;
 		this.value = value;
-		this.list = null;
 	}
 	
-	public Parameter(Object[] list) {
-		this.turtle = null;
-		this.name = null;
-		this.value = 0;
-		this.list = list;
+	public Parameter(ArrayList<TreeNode> nodes) {
+		this.nodes = nodes;
 	}
 	
 	/*****GETTERS*****/
@@ -57,8 +47,8 @@ public class Parameter {
 		return value;
 	}
 	
-	public Object[] getList() {
-		return list;
+	public ArrayList<TreeNode> getNodes() {
+		return nodes;
 	}
 	
 	/*****SETTERS*****/
@@ -75,7 +65,7 @@ public class Parameter {
 		this.value = value;
 	}
 	
-	public void setList(Object[] list) {
-		this.list = list;
+	public void setList(ArrayList<TreeNode> nodes) {
+		this.nodes = nodes;
 	}
 }

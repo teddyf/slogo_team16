@@ -1,6 +1,10 @@
 package model.command.control.selection;
 
+import java.util.ArrayList;
+import Parsing.TreeNode;
+import model.animal.Animal;
 import model.command.Command;
+import model.command.CommandProcessor;
 import model.command.Parameter;
 
 public class If extends Command {
@@ -20,15 +24,19 @@ public class If extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		double expression = params[0].getValue();
-		Command[] commands = (Command[])params[1].getList();
-		Parameter[][] parameters = (Parameter[][])params[2].getList();
+		Animal turtle = params[1].getAnimal();
+		ArrayList<TreeNode> nodes = params[2].getNodes();
 		
-		Command command;
 		double value = 0;
 		if (expression != 0) {
-			for(int c = 0; c < commands.length; c++) {
-				command = commands[c];
-				value = command.run(parameters[c]);
+			CommandProcessor processor = new CommandProcessor();
+			processor.processCommands(turtle, nodes);
+			ArrayList<Command> commands = processor.getCommands();
+			ArrayList<Parameter[]> parameters = processor.getParameters();
+			Command command;
+			for(int c = 0; c < commands.size(); c++) {
+				command = commands.get(c);
+				value = command.run(parameters.get(c));
 			}
 			return value;
 		} else {

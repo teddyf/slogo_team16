@@ -5,17 +5,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import ErrorHandling.InvalidLabelException;
-import Parsing.ExpressionTree;
-import Parsing.ParserRunner;
-import Parsing.ProgramParser;
-import Parsing.TreeNode;
 import View.AnimalPaneGUI;
 import View.helper.Coordinate;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.AnimalPane;
 import model.animal.Animal;
-import model.command.ProcessCommand;
+import model.command.Command;
+import model.command.CommandProcessor;
+import model.command.Parameter;
 
 /**
  * 
@@ -29,17 +27,11 @@ public class AnimalController implements Controller {
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
 	private AnimalPaneGUI activeAnimalPaneGUI;
-	private ProgramParser myProgramParser;
-	private ParserRunner myParserRunner;
-	private Animal turtle;
 	public static final String FILEPATH = "Resources/myInput.slogo";
 
 	public AnimalController() {
 		file = new WriteFile();
 		error = "";
-		myProgramParser = new ProgramParser();
-		myParserRunner = new ParserRunner("English", myProgramParser);
-		turtle = null;
 	}
 
 	public void writeInputToFile(String input) {
@@ -49,7 +41,9 @@ public class AnimalController implements Controller {
 	@Override
 	public void handleInput() {
 		try {
-			runCommands();
+			for (int t = 0; t < activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().size(); t++) {
+				runCommands(activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(t));
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,24 +78,27 @@ public class AnimalController implements Controller {
 
 	}
 
-	private void runCommands() throws FileNotFoundException, NoSuchMethodException, SecurityException,
+	private void runCommands(Animal turtle) throws FileNotFoundException, NoSuchMethodException, SecurityException,
 			ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchFieldException, InvalidLabelException {
-		
-		String[][] a = myParserRunner.combineAllLines();
-		String[][] b = myParserRunner.markDepth(a);
-		ExpressionTree tree = new ExpressionTree();
-		tree.buildTree(b);
-		ArrayList<TreeNode> node = tree.dfs();
 
-		ProcessCommand pc = new ProcessCommand();
-		double v = pc.process(this, turtle, tree.reverse(node));
-		System.out.println("VALUE " + v);
+		CommandProcessor processor = new CommandProcessor();
+		processor.run(turtle);
+		ArrayList<Command> commands = processor.getCommands();
+		ArrayList<Parameter[]> parameters = processor.getParameters();
 		
-		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
-		List<Coordinate> points = new ArrayList<Coordinate>();
-		points.add(coordinates);
-		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
+		double value = 0;
+		Command command;
+		for (int i = 0; i < commands.size(); i++) {
+			command = commands.get(i);
+			value = command.run(parameters.get(i));
+			
+			Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
+			List<Coordinate> points = new ArrayList<Coordinate>();
+			points.add(coordinates);
+			activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
+		}
+		System.out.println("VALUE " + value);
 	}
 
 	// @Override
@@ -125,7 +122,6 @@ public class AnimalController implements Controller {
 	@Override
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI) {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
-		this.turtle = activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0);
 	}
 
 	public void displayErrorDialog(String error) {
