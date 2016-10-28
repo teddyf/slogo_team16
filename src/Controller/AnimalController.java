@@ -15,9 +15,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.AnimalPane;
 import model.animal.Animal;
-import model.command.Command;
-import model.command.CommandProcessor;
-import model.command.Parameter;
 
 /**
  * 

@@ -30,12 +30,14 @@ public class MethodExpression extends Expression{
 		Command command = (Command)obj;
 		Parameter[] parameters = new Parameter[(int)command.getNumParams()];
 		int paramIndex = 0;
+		int endIndex = node.getChildren().size();
 		
 		if (command instanceof TurtleCommand) {
 			parameters[0] = new Parameter(turtle);
-			paramIndex = 1;
+			paramIndex++;
 		} 
-		for (int c = 0; c < node.getChildren().size(); c++) {
+		for (int c = 0; c < endIndex; c++) {
+			System.out.println(node.getChildren().get(c));
 			parameters[paramIndex] = new Parameter(ExpressionTree.getInstance().process(turtle, node.getChildren().get(c)));
 			paramIndex++;
 		}

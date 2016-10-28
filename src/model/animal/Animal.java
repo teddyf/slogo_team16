@@ -36,7 +36,7 @@ public abstract class Animal extends Observable {
 		this.x = Workspace.LEFT_PANE_WIDTH / 2;
 		this.y = Workspace.LEFT_PANE_HEIGHT / 2;
 		this.heading = 0;
-		this.pen = 0;
+		this.pen = 1;
 		this.showing = 1;
 		this.ID = -1;
 		this.isSelected = true;
@@ -50,7 +50,7 @@ public abstract class Animal extends Observable {
 		this.x = Workspace.LEFT_PANE_WIDTH / 2;
 		this.y = Workspace.LEFT_PANE_HEIGHT / 2;
 		this.heading = 0;
-		this.pen = 0;
+		this.pen = 1;
 		this.showing = 1;
 		this.ID = -1;
 		this.isSelected = true;
@@ -64,7 +64,7 @@ public abstract class Animal extends Observable {
 		this.x = Workspace.LEFT_PANE_WIDTH / 2 + x;
 		this.y = Workspace.LEFT_PANE_HEIGHT / 2 - y;
 		this.heading = 0;
-		this.pen = 0;
+		this.pen = 1;
 		this.showing = 1;
 	}
 
