@@ -32,11 +32,13 @@ public class AnimalController implements Controller {
 	private ParserRunner myParserRunner;
 
 	public static final String FILEPATH = "Resources/myInput.slogo";
+	public static final String DEFAULT_LANGUAGE = "English";
+
 
 	public AnimalController() {
 		file = new WriteFile();
 		error = "";
-		setParsingLanguage("English");
+		setParsingLanguage(DEFAULT_LANGUAGE);
 	}
 
 	public void writeInputToFile(String input) {
