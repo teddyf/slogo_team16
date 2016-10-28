@@ -34,12 +34,13 @@ public class AnimalController implements Controller {
 	private Animal turtle;
 	
 	public static final String FILEPATH = "Resources/myInput.slogo";
+	public static final String DEFAULT_LANGUAGE = "English";
+
 
 	public AnimalController() {
 		file = new WriteFile();
 		error = "";
-		myProgramParser = new ProgramParser();
-		myParserRunner = new ParserRunner("English", myProgramParser);
+		setParsingLanguage(DEFAULT_LANGUAGE);
 		turtle = null;
 	}
 
