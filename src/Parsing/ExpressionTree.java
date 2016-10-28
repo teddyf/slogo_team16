@@ -88,7 +88,7 @@ public class ExpressionTree {
             throw new InvalidLabelException("Invalid user input");
         }
         Expression e = factory.getInfo(name, label, obj);
-        System.out.println(label);
+        //System.out.println(label);
         return new TreeNode(e, parent);
     }
     
@@ -103,7 +103,7 @@ public class ExpressionTree {
                 data.add(temp);
                 
             }
-            //System.out.println(temp.neighbors);
+            System.out.println(temp.neighbors);
             for(TreeNode tn: temp.getNeighbors()){
                 st.push(tn);
             }
