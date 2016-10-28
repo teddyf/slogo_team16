@@ -13,7 +13,7 @@ import java.lang.reflect.*;
  */
 public class Dictionary {
     private Turtle turtle;
-    private HashMap<String,Method> methods;
+    private HashMap<String,MethodExpression> methods;
     
     public Dictionary(){
         this.turtle = new Turtle(0, 0);

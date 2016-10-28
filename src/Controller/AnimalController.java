@@ -5,6 +5,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import ErrorHandling.InvalidLabelException;
+import Parsing.ExpressionTree;
+import Parsing.ParserRunner;
+import Parsing.ProgramParser;
+import Parsing.TreeNode;
 import View.AnimalPaneGUI;
 import View.helper.Coordinate;
 import javafx.scene.control.Alert;
@@ -27,12 +31,15 @@ public class AnimalController implements Controller {
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
 	private AnimalPaneGUI activeAnimalPaneGUI;
+	private ProgramParser myProgramParser;
+	private ParserRunner myParserRunner;
 
 	public static final String FILEPATH = "Resources/myInput.slogo";
 
 	public AnimalController() {
 		file = new WriteFile();
 		error = "";
+		setParsingLanguage("English");
 	}
 
 	public void writeInputToFile(String input) {
@@ -83,12 +90,15 @@ public class AnimalController implements Controller {
 			ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchFieldException, InvalidLabelException {
 
-		CommandProcessor processor = new CommandProcessor();
+		double value = 0;
+		String[][] line = myParserRunner.combineAllLines();
+		String[][] markedLine = myParserRunner.markDepth(line);
+		TreeNode root = ExpressionTree.getInstance().buildTree(markedLine);
+		value = ExpressionTree.getInstance().process(turtle, root);
+		/*CommandProcessor processor = new CommandProcessor();
 		processor.run(turtle);
 		ArrayList<Command> commands = processor.getCommands();
 		ArrayList<Parameter[]> parameters = processor.getParameters();
-		
-		double value = 0;
 		Command command;
 		for (int i = 0; i < commands.size(); i++) {
 			command = commands.get(i);
@@ -98,19 +108,14 @@ public class AnimalController implements Controller {
 			List<Coordinate> points = new ArrayList<Coordinate>();
 			points.add(coordinates);
 			activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
-		}
+		}*/
+		
+		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
+		List<Coordinate> points = new ArrayList<Coordinate>();
+		points.add(coordinates);
+		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
 		System.out.println("VALUE " + value);
 	}
-
-	// @Override
-	// public AnimalPane getActiveAnimalPane() {
-	// return activeAnimalPane;
-	// }
-
-	// @Override
-	// public void setActiveAnimalPane(AnimalPane currentAnimalPane) {
-	// this.activeAnimalPane = currentAnimalPane;
-	// }
 
 	// Could have this listening to the main view, and when user switches
 	// workspace, the active animal pane gui changes

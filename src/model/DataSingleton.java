@@ -18,6 +18,12 @@ public class DataSingleton {
 		return instance;
 	}
 	
+	/*****VARIABLE METHODS*****/
+	
+	public Variable getVariable(String variableName) {
+		return variables.get(variableName);
+	}
+	
 	public boolean containsVariable(String variableName) {
 		return variables.containsKey(variableName);
 	}
@@ -29,6 +35,12 @@ public class DataSingleton {
 	public void changeVariable(String variableName, double value) {
 		Variable variable = variables.get(variableName);
 		variable.setValue(value);
+	}
+	
+	/*****COMMAND METHODS*****/
+	
+	public Command getCommand(String commandName) {
+		return commands.get(commandName);
 	}
 	
 	public boolean containsCommand(String commandName) {

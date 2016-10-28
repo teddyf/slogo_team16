@@ -1,6 +1,7 @@
 package Parsing;
 
 import ErrorHandling.*;
+import model.animal.Animal;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
@@ -9,19 +10,17 @@ import java.util.regex.Pattern;
 public class ExpressionTree {
 	
 	private static final ExpressionTree instance = new ExpressionTree();
-    public final Expression ROOT = new Constant("ROOT", 0);
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
-    TreeNode root = new TreeNode();
-    
-    List<Entry<String, Pattern>> methodPaths;
-
+    private Expression ROOT = new RootExpression("root");
+    private TreeNode root = new TreeNode(ROOT, null);
+    private List<Entry<String, Pattern>> methodPaths;
     private ExpressionFactory factory;
-    private Stack<Expression> expressions;
+    //private Stack<Expression> expressions;
 
     private ExpressionTree(){
         methodPaths = new ArrayList<>();
-        expressions  = new Stack<Expression>();
+        //expressions  = new Stack<Expression>();
         factory = new ExpressionFactory();
         addPatterns(RESOURCE_PATH);
     }
@@ -60,24 +59,23 @@ public class ExpressionTree {
                 curr = buildNode(parent,a[0][i],a[1][i]); 
             }        
         }
+        
         return root;
     }
 
-    public Class getCommand (String input) throws ClassNotFoundException {
+    public Class<?> getCommand (String input) throws ClassNotFoundException {
         String inputWithPath = getLabel(input);
         //System.out.println(input);
-        Class c = Class.forName(inputWithPath);
+        Class<?> c = Class.forName(inputWithPath);
         return c;
     }
 
-    public int getParamCount (Class c) throws NoSuchFieldException, SecurityException {
+    public int getParamCount (Class<?> c) throws NoSuchFieldException, SecurityException {
         Object obj = c.getField(PARAM_COUNT);
         return (int) obj;
     }
 
-    public TreeNode buildNode (TreeNode parent, String name, String label)
-                                                                           throws ClassNotFoundException,
-                                                                           InvalidLabelException {
+    public TreeNode buildNode (TreeNode parent, String name, String label) throws ClassNotFoundException, InvalidLabelException {
         Object obj;
         if (label.equals("Command")) {
             obj = getCommand(name);
@@ -97,7 +95,7 @@ public class ExpressionTree {
         return new TreeNode(e, parent);
     }
     
-    public ArrayList<TreeNode> dfs(){
+    /*public ArrayList<TreeNode> dfs(){
         Stack<TreeNode> st = new Stack<TreeNode>();
         st.push(root);
         ArrayList<TreeNode> data = new ArrayList<TreeNode>();
@@ -116,7 +114,7 @@ public class ExpressionTree {
         }
         data.remove(0);
         return data;
-    }
+    }*/
     
     
     public void addPatterns (String syntax) {
@@ -154,10 +152,10 @@ public class ExpressionTree {
         return rev;
     }*/
     
-    public double process(TreeNode node) {
+    public double process(Animal turtle, TreeNode node) {
     	double value = 0;
     	Expression nodeExpression = node.expression;
-    	
+    	value = nodeExpression.run(turtle, node);
     	return value;
     }
 }

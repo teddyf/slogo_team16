@@ -1,6 +1,5 @@
 package model.command;
 
-import java.util.ArrayList;
 import Parsing.TreeNode;
 import model.animal.Animal;
 
@@ -8,13 +7,13 @@ public class Parameter {
 	private Animal turtle;
 	private String name;
 	private double value;
-	private ArrayList<TreeNode> nodes;
+	private TreeNode node;
 	
 	public Parameter() {
 		this.turtle = null;
 		this.name = null;
 		this.value = 0;
-		this.nodes = null;
+		this.node = null;
 	}
 	
 	public Parameter(Animal turtle) {
@@ -29,8 +28,8 @@ public class Parameter {
 		this.value = value;
 	}
 	
-	public Parameter(ArrayList<TreeNode> nodes) {
-		this.nodes = nodes;
+	public Parameter(TreeNode node) {
+		this.node = node;
 	}
 	
 	/*****GETTERS*****/
@@ -47,8 +46,8 @@ public class Parameter {
 		return value;
 	}
 	
-	public ArrayList<TreeNode> getNodes() {
-		return nodes;
+	public TreeNode getNode() {
+		return node;
 	}
 	
 	/*****SETTERS*****/
@@ -65,7 +64,7 @@ public class Parameter {
 		this.value = value;
 	}
 	
-	public void setList(ArrayList<TreeNode> nodes) {
-		this.nodes = nodes;
+	public void setList(TreeNode node) {
+		this.node = node;
 	}
 }

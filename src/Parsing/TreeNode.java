@@ -13,7 +13,9 @@ public class TreeNode {
         this.parent = parent;
         this.expression = expression;
         this.neighbors = new ArrayList<TreeNode>();
-        parent.push(this);
+        if (parent != null) {
+        	parent.push(this);
+        }
     }
     
     public void push(TreeNode a){
@@ -35,5 +37,4 @@ public class TreeNode {
     public ArrayList<TreeNode> getChildren(){
         return this.neighbors;
     }
-    
 }

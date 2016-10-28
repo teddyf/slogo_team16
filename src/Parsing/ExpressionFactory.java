@@ -7,15 +7,15 @@ public class ExpressionFactory {
             return null;
         }
         if (type.equalsIgnoreCase("Command")) {
-            return new Method(name, (Class)obj);
+            return new MethodExpression(name, (Class)obj);
 
         }
         else if (type.equalsIgnoreCase("Constant")) {
-            return new Constant(name, (Double)obj);
+            return new ConstantExpression(name, (Double)obj);
 
         }
         else if (type.equalsIgnoreCase("Variable")) {
-            return new Variable(name);
+            return new VariableExpression(name);
         }
         else if(type.equalsIgnoreCase("ListStart")){
             return new ListExpression(name);

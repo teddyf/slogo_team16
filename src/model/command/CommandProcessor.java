@@ -103,12 +103,4 @@ public class CommandProcessor {
 		ArrayList<TreeNode> nodes = getNodes();
 		processCommands(turtle, nodes);
 	}
-	
-	public ArrayList<Command> getCommands() {
-		return commands;
-	}
-	
-	public ArrayList<Parameter[]> getParameters() {
-		return parameters;
-	}
 }

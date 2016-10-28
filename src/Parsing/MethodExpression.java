@@ -1,22 +1,21 @@
 package Parsing;
 
+import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
+import model.command.turtle.TurtleCommand;
 
-public class Method extends Expression{
+public class MethodExpression extends Expression{
 
-    private Class method;
+    private Class<Command> method;
     
-    public Method (String name, Class method) {
+    public MethodExpression (String name, Class<Command> method) {
         super(name);
         this.method = method;
     }
-
-    public Class getMethod() {
-    	return method;
-    }
     
-    public double run(TreeNode node) {
+    @Override
+    public double run(Animal turtle, TreeNode node) {
     	double value = 0;
     	Object obj = null;
 		try {
@@ -30,9 +29,15 @@ public class Method extends Expression{
 		}
 		Command command = (Command)obj;
 		Parameter[] parameters = new Parameter[(int)command.getNumParams()];
+		int paramIndex = 0;
 		
+		if (command instanceof TurtleCommand) {
+			parameters[0] = new Parameter(turtle);
+			paramIndex = 1;
+		} 
 		for (int c = 0; c < node.getChildren().size(); c++) {
-			parameters[c] = new Parameter(ExpressionTree.getInstance().process(node.getChildren().get(c)));
+			parameters[paramIndex] = new Parameter(ExpressionTree.getInstance().process(turtle, node.getChildren().get(c)));
+			paramIndex++;
 		}
 		
 		value = command.run(parameters);

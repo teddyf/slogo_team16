@@ -1,6 +1,8 @@
 package model.command.control.selection;
 
 import java.util.ArrayList;
+
+import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import model.animal.Animal;
 import model.command.Command;
@@ -25,19 +27,11 @@ public class If extends Command {
 	public double run(Parameter[] params) {
 		double expression = params[0].getValue();
 		Animal turtle = params[1].getAnimal();
-		ArrayList<TreeNode> nodes = params[2].getNodes();
+		TreeNode node = params[2].getNode();
 		
 		double value = 0;
 		if (expression != 0) {
-			CommandProcessor processor = new CommandProcessor();
-			processor.processCommands(turtle, nodes);
-			ArrayList<Command> commands = processor.getCommands();
-			ArrayList<Parameter[]> parameters = processor.getParameters();
-			Command command;
-			for(int c = 0; c < commands.size(); c++) {
-				command = commands.get(c);
-				value = command.run(parameters.get(c));
-			}
+			value = ExpressionTree.getInstance().process(turtle, node);
 			return value;
 		} else {
 			return 0;
