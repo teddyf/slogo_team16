@@ -89,6 +89,8 @@ public class AnimalPane extends Observable implements Observer {
 	 * @param animal
 	 */
 	public void addAnimal(Animal animal) {
+		
+		System.out.println("Added animal in backend AnimalPane");
 		animalID++;
 		
 		myAnimalMap.put(animalID, animal);
@@ -103,6 +105,13 @@ public class AnimalPane extends Observable implements Observer {
 //		notifyObservers();
 	}
 
+	//for removing non active animals
+	public void removeAnimal(Animal animal) {
+		myAnimalMap.remove(animal.getId());
+		myAnimalList.remove(animal);
+	}
+	
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		// updates values of animals, object arg is the value that is changing

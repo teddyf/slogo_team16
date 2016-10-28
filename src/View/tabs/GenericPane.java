@@ -1,6 +1,7 @@
 package View.tabs;
 
-import java.util.Observable;
+import java.util.Observer;
+
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
@@ -10,7 +11,7 @@ import javafx.scene.control.ListView;
  *
  * @param <T>
  */
-public interface GenericPane<T> {
+public interface GenericPane<T> extends Observer {
 	
 	//public void changeBackgroundColor(String color);
 	

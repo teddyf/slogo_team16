@@ -17,8 +17,8 @@ public class ExpressionFactory {
         else if (type.equalsIgnoreCase("Variable")) {
             return new Variable(name);
         }
-        else if(type.equalsIgnoreCase("List")){
-            return new ListBrackets(name);
+        else if(type.equalsIgnoreCase("ListStart")){
+            return new ListExpression(name);
         }
         return null;
     }

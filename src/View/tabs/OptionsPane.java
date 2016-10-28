@@ -1,15 +1,18 @@
 package View.tabs;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import View.AnimalPaneGUI;
 import View.SlogoView;
 import View.Workspace;
+import View.helper.Buttons;
 import View.helper.Colors;
 import View.helper.Graphics;
 import View.helper.PenColor;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -30,16 +33,15 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	private Graphics graphic = new Graphics();
 	private Workspace workspace;
 	private SlogoView slogoView;
+	private Buttons buttons = new Buttons();
 
 	private static final String X_COORDINATE = "x: ";
 	private static final String Y_COORDINATE = "y: ";
-
 	private static final String PEN_COLOR = "Pen Color: ";
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 
-	private static final HashMap<String,String> colorHexVals = new HashMap<String,String>();
-	
-	private static final String[] COLORS = { Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
+	private static final Map<String,String> colorHexVals = new HashMap<String,String>();
+	private static final String[] BACKGROUND_COLORS = { Colors.WHITE.toString(), Colors.BLACK.toString(), Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
 
 
 	public OptionsPane(){
@@ -57,15 +59,21 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	}
 	
 	private void populateColorHexVals(){
-		colorHexVals.put(Colors.BLUE.toString(), Colors.BLUE.getColor());
-		colorHexVals.put(Colors.GREEN.toString(), Colors.GREEN.getColor());
-		colorHexVals.put(Colors.RED.toString(),Colors.RED.getColor());
+		for(Colors c : Colors.values() ){ 
+			colorHexVals.put(c.toString(), c.getHexColor());
+		}
+		
+//		colorHexVals.put(Colors.BLACK.toString(), Colors.BLACK.getColor());
+//		colorHexVals.put(Colors.BLUE.toString(), Colors.BLUE.getColor());
+//		colorHexVals.put(Colors.GREEN.toString(), Colors.GREEN.getColor());
+//		colorHexVals.put(Colors.RED.toString(),Colors.RED.getColor());
 		
 	}
 	private void createAllOptions() {
 //		HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		PenColor penColor = new PenColor();
 		penColor.addObserver(animalPaneGUI.getAnimalPane().getMyAnimalList().get(0).getActualPen());
+		
 		//HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
 		HBox backgroundColor = createBackgroundColorOptions();
 				//createComboBoxOption(BACKGROUND_COLOR, COLORS);
@@ -74,15 +82,56 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		// DisplayVariable displayY =
 		// graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
 
-		content.getItems().addAll(penColor.getContainer(), backgroundColor);
 //		content.getItems().addAll(penColor, backgroundColor);
 //		content.getItems().addAll(/*penColor,*/ backgroundColor);
 		// content.getItems().addAll(penColor, backgroundColor,
 		// displayX.getContainer(), displayY.getContainer());
+		
+		//TODO: make this more efficient
+		/*
+		HBox btn1 = new HBox();
+		Button wkspc = buttons.createNewWorkspaceButton(slogoView);
+		btn1.getChildren().add(wkspc);
+		HBox btn2 = new HBox();
+		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
+		btn2.getChildren().add(saveWkspc);
+		
+		HBox btn3 = new HBox();
+		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
+		btn3.getChildren().add(btn3);
+		*/
+		content.getItems().addAll(penColor.getContainer(), backgroundColor);
+		addToPane(addButtonsToHBox(createButtons()));
+	}
+	
+	private Button[] createButtons(){
+		Button wkspc = buttons.createNewWorkspaceButton(slogoView);
+		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
+		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
+		//Button decTurtle = buttons.createDecrementNumTurtlesButton(workspace);
+		
+		Button[] buttons = {wkspc, saveWkspc, addTurtle};
+		return buttons;
+	}
+	
+	private HBox[] addButtonsToHBox(Button[] buttons){
+		HBox[] btns = new HBox[buttons.length];
+		for (int i=0; i<buttons.length; i++){
+			HBox hbox = new HBox(); 
+			hbox.getChildren().add(buttons[i]);
+			btns[i]=hbox;
+		}
+		return btns;
+	}
+	
+	private void addToPane(HBox[] components){
+		for (int i=0; i<components.length; i++){
+			content.getItems().add(components[i]);
+		}
 	}
 	
 	private HBox createBackgroundColorOptions(){
-		ComboBox<String> colors = createComboBoxOption(COLORS);
+		ComboBox<String> colors = createComboBoxOption(BACKGROUND_COLORS);
 		colors.valueProperty().addListener((o, oldValue, newValue) -> workspace.changeAnimalBackgroundColor(newValue));
 		HBox backgroundColor = setComboBoxInContainer(colors, BACKGROUND_COLOR);
 		return backgroundColor;
@@ -132,6 +181,12 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	@Override
 	public ListView<HBox> getTabContent() {
 		return this.content;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

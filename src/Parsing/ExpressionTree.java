@@ -51,7 +51,7 @@ public class ExpressionTree {
                 parent = parent.getParent();
             }
             else if(a[0][i].equals("[")){
-                parent = curr;
+                curr = buildNode(parent,a[0][i],a[1][i]); 
             }
             else if(a[0][i].equals("]")){
                 parent = parent.getParent();
@@ -85,11 +85,15 @@ public class ExpressionTree {
         else if (label.equals("Constant")) {
             obj = Double.parseDouble(name);
         }
+        
+        else if (label.equals("ListStart")){
+            obj = 0;
+        }
         else {
             throw new InvalidLabelException("Invalid user input");
         }
         Expression e = factory.getInfo(name, label, obj);
-        System.out.println(label);
+        //System.out.println(label);
         return new TreeNode(e, parent);
     }
     
@@ -104,7 +108,7 @@ public class ExpressionTree {
                 data.add(temp);
                 
             }
-            //System.out.println(temp.neighbors);
+            System.out.println(temp.neighbors);
             for(TreeNode tn: temp.getNeighbors()){
                 st.push(tn);
             }
@@ -157,3 +161,5 @@ public class ExpressionTree {
     	return value;
     }
 }
+
+

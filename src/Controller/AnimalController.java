@@ -27,6 +27,7 @@ public class AnimalController implements Controller {
 	private String error;
 	private List<AnimalPane> myAnimalPanes;
 	private AnimalPaneGUI activeAnimalPaneGUI;
+
 	public static final String FILEPATH = "Resources/myInput.slogo";
 
 	public AnimalController() {
@@ -130,6 +131,11 @@ public class AnimalController implements Controller {
 		alert.setHeaderText("Invalid input displayed");
 		alert.setContentText("Invalid input: " + error);
 		alert.showAndWait();
+	}
+	
+	public void setParsingLanguage(String language) {
+		myProgramParser = new ProgramParser();
+		myParserRunner = new ParserRunner(language, myProgramParser);
 	}
 
 	// public void addAnimalPane(Workspace workspace) {

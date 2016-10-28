@@ -1,5 +1,7 @@
 package View.tabs;
 
+import java.util.Observable;
+
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
@@ -21,7 +23,6 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 	@Override
 	public void initializeListView() {
 		content = new ListView<>();
-		content.getItems().add("First Example\n Command");
 		content.setStyle("-fx-background:white");
 	}
 	
@@ -55,6 +56,12 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 	@Override
 	public ListView<String> getTabContent() {
 		return this.content;
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import View.tabs.OptionsPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 /**
@@ -23,7 +22,7 @@ public class Pen implements Observer {
 	public Pen() {
 		counter = 0;
 		lineList = new ArrayList<>();
-		color = "#00FF00";
+		color = decodeColor(Colors.BLACK.getAllColors()[0]);
 //		line = new Line();
 //		line.setFill(Color.BLACK);
 	}
@@ -31,14 +30,14 @@ public class Pen implements Observer {
 	public Pen(double x, double y){
 		counter = 0;
 		lineList = new ArrayList<>();
-		color = "#00FF00";
+		color = decodeColor(Colors.BLACK.getAllColors()[0]);
 //		line = new Line(x, y, x, y);
 //		line.setFill(Color.BLACK);
 	}
 	
 	public void createLine(double x, double y) {
 		Line line = new Line(x, y, x, y);
-		line.setFill(Color.web(color));
+		line.setStroke(Color.web(color));
 		lineList.add(line);
 		
 	}
@@ -71,9 +70,18 @@ public class Pen implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof PenColor) {
-			color = ((PenColor) o).getComboBox().getValue();
+			// TODO: convert string to hex
+			color = decodeColor(((PenColor) o).getComboBox().getValue());
 		}
-		
+	}
+	
+	public String decodeColor(String color) { 
+		for(Colors c : Colors.values()) {
+			if(c.toString().equals(color)) {
+				return c.getHexColor();
+			}
+		}
+		return null;
 	}
 	
 }

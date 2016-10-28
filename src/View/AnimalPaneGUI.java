@@ -57,6 +57,11 @@ public class AnimalPaneGUI implements Observer {
 		getAnimalPane().addAnimal(animal);
 	}
 	
+	public void removeAnimal(Animal animal) {
+		myAnimalList.remove(animal);
+		getAnimalPane().removeAnimal(animal);
+	}
+	
 	public AnimalPane getAnimalPane() {
 		return myAnimalPane;
 	}
