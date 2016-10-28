@@ -104,9 +104,11 @@ public class ParserRunner {
                 //System.out.println(s);
                 double count = getCommandParamCount(s);
                 //System.out.println(count);
-                st.push(count);
-                userInput.add("{");
-                vestigialLabels.add("{");
+                if(count > 0){
+                    st.push(count);
+                    userInput.add("{");
+                    vestigialLabels.add("{");
+                }
             }
             else{
                 if(!st.isEmpty()){
