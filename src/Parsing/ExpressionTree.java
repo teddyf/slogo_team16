@@ -38,7 +38,8 @@ public class ExpressionTree {
      * @throws InvalidLabelException
      */
     public TreeNode buildTree (String[][] a) throws ClassNotFoundException, InvalidLabelException {
-        TreeNode parent = root;
+        clearTree();
+    	TreeNode parent = root;
         TreeNode curr = root;
 
         for (int i = 0; i < a[0].length; i++) {
@@ -96,28 +97,6 @@ public class ExpressionTree {
         return new TreeNode(e, parent);
     }
     
-    /*public ArrayList<TreeNode> dfs(){
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        st.push(root);
-        ArrayList<TreeNode> data = new ArrayList<TreeNode>();
-        
-        while(!st.isEmpty()){
-            TreeNode temp = st.pop();
-            if(!temp.equals(null)){
-                data.add(temp);
-                
-            }
-            System.out.println(temp.neighbors);
-            for(TreeNode tn: temp.getNeighbors()){
-                st.push(tn);
-            }
-            
-        }
-        data.remove(0);
-        return data;
-    }*/
-    
-    
     public void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
@@ -145,18 +124,14 @@ public class ExpressionTree {
         return ERROR;
     }
     
-    /*public ArrayList<TreeNode> reverse(ArrayList<TreeNode> a){
-        ArrayList<TreeNode> rev = new ArrayList<TreeNode>();
-        for(int i = a.size()-1; i >= 0; i--){
-            rev.add(a.get(i));
-        }
-        return rev;
-    }*/
+    public void clearTree() {
+    	root = new TreeNode(ROOT, null);
+    }
     
     public double process(Animal turtle, TreeNode node) {
     	double value = 0;
     	Expression nodeExpression = node.expression;
-    	System.out.println("EXPRESSION: " + nodeExpression.toString());
+    	//System.out.println("EXPRESSION: " + nodeExpression.toString());
     	value = nodeExpression.run(turtle, node);
     	return value;
     }
