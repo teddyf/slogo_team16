@@ -16,7 +16,7 @@ public class If extends ControlCommand {
 	public If() {
 		super();
 		numParams = 3;
-		paramCount = 2;
+		paramCount = Double.POSITIVE_INFINITY; //was 2
 	}
 	
 	/**

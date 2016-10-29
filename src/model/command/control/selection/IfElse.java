@@ -12,7 +12,7 @@ public class IfElse extends Command {
 	public IfElse() {
 		super();
 		numParams = 4;
-		paramCount = 3;
+		paramCount = Double.POSITIVE_INFINITY; //was 3
 	}
 	
 	/**
