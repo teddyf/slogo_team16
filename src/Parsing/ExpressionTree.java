@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class ExpressionTree {
 	
-	private static final ExpressionTree instance = new ExpressionTree();
+    private static final ExpressionTree instance = new ExpressionTree();
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
     private Expression ROOT = new RootExpression("root");
@@ -42,16 +42,16 @@ public class ExpressionTree {
         TreeNode curr = root;
 
         for (int i = 0; i < a[0].length; i++) {
-            System.out.println(a[0][i]);
+            //System.out.println(a[0][i]);
             if(a[0][i].equals("{")){
                 parent = curr;
             }
             else if(a[0][i].equals("}")){
                 parent = parent.getParent();
             }
-            else if(a[0][i].equals("[")){
-                parent = curr;
+            else if(a[0][i].equals("[")){  
                 curr = buildNode(parent,a[0][i],a[1][i]); 
+                parent = curr;
             }
             else if(a[0][i].equals("]")){
                 parent = parent.getParent();
@@ -96,7 +96,7 @@ public class ExpressionTree {
         return new TreeNode(e, parent);
     }
     
-    /*public ArrayList<TreeNode> dfs(){
+    public ArrayList<TreeNode> dfs(){
         Stack<TreeNode> st = new Stack<TreeNode>();
         st.push(root);
         ArrayList<TreeNode> data = new ArrayList<TreeNode>();
@@ -115,7 +115,7 @@ public class ExpressionTree {
         }
         data.remove(0);
         return data;
-    }*/
+    }
     
     
     public void addPatterns (String syntax) {
@@ -129,6 +129,18 @@ public class ExpressionTree {
                            Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
+    /*
+    public void dfs(){
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        st.addAll(root.getNeighbors());
+        System.out.println(root.getChildren());
+        while(!st.isEmpty()){
+            TreeNode temp = st.pop();
+            System.out.println(temp.getChildren());
+            st.addAll(temp.getChildren());
+        }
+    }
+    */
     
     private boolean match (String text, Pattern regex) {
         // THIS IS THE KEY LINE
