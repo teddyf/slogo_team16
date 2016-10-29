@@ -318,8 +318,8 @@ public class Workspace implements Observer {
 		renderAnimalGrid();
 	}
 
-	@Deprecated
-	private void createAnimal() {
+	//@Deprecated
+	public void createAnimal() {
 		Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
 				(myAnimalPaneGUI.getScrollPane().getPrefWidth() - myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
 						/ 2,

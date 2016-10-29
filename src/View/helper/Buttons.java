@@ -100,8 +100,9 @@ public class Buttons extends Observable {
 		clear.setOnAction(e -> {
 			console.clearConsole();
 			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
-			pane.resetLeftPane();
 			animalPane.resetMyAnimalList();
+			pane.createAnimal();
+			pane.resetLeftPane();
 		});
 		return clear;
 	}
