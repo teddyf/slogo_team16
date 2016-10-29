@@ -108,12 +108,11 @@ public class AnimalController implements Controller {
 			points.add(coordinates);
 			activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
 		}*/
-		
+		System.out.println("VALUE " + value);
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
 		List<Coordinate> points = new ArrayList<Coordinate>();
 		points.add(coordinates);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
-		System.out.println("VALUE " + value);
 	}
 
 	// Could have this listening to the main view, and when user switches

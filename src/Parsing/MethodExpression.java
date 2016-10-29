@@ -37,7 +37,6 @@ public class MethodExpression extends Expression{
 			paramIndex++;
 		} 
 		for (int c = 0; c < endIndex; c++) {
-			System.out.println(node.getChildren().get(c));
 			parameters[paramIndex] = new Parameter(ExpressionTree.getInstance().process(turtle, node.getChildren().get(c)));
 			paramIndex++;
 		}

@@ -155,6 +155,7 @@ public class ExpressionTree {
     public double process(Animal turtle, TreeNode node) {
     	double value = 0;
     	Expression nodeExpression = node.expression;
+    	System.out.println("EXPRESSION: " + nodeExpression.toString());
     	value = nodeExpression.run(turtle, node);
     	return value;
     }
