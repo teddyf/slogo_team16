@@ -8,12 +8,14 @@ public class Parameter {
 	private String name;
 	private double value;
 	private TreeNode node;
+	private String[] variables;
 	
 	public Parameter() {
 		this.turtle = null;
 		this.name = null;
 		this.value = 0;
 		this.node = null;
+		this.variables = null;
 	}
 	
 	public Parameter(Animal turtle) {
@@ -30,6 +32,10 @@ public class Parameter {
 	
 	public Parameter(TreeNode node) {
 		this.node = node;
+	}
+	
+	public Parameter(String[] variables) {
+		this.variables = variables;
 	}
 	
 	/*****GETTERS*****/
@@ -50,6 +56,10 @@ public class Parameter {
 		return node;
 	}
 	
+	public String[] getVariables() {
+		return variables;
+	}
+	
 	/*****SETTERS*****/
 	
 	public void setAnimal(Animal turtle) {
@@ -66,5 +76,9 @@ public class Parameter {
 	
 	public void setList(TreeNode node) {
 		this.node = node;
+	}
+	
+	public void setVariables(String[] variables) {
+		this.variables = variables;
 	}
 }

@@ -51,8 +51,8 @@ public class ExpressionTree {
                 parent = parent.getParent();
             }
             else if(a[0][i].equals("[")){
-                parent = curr;
                 curr = buildNode(parent,a[0][i],a[1][i]); 
+                parent = curr;
             }
             else if(a[0][i].equals("]")){
                 parent = parent.getParent();
@@ -131,7 +131,7 @@ public class ExpressionTree {
     public double process(Animal turtle, TreeNode node) {
     	double value = 0;
     	Expression nodeExpression = node.expression;
-    	//System.out.println("EXPRESSION: " + nodeExpression.toString());
+    	System.out.println("EXPRESSION: " + nodeExpression.toString());
     	value = nodeExpression.run(turtle, node);
     	return value;
     }

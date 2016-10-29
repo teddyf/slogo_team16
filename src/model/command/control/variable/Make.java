@@ -3,6 +3,7 @@ package model.command.control.variable;
 import model.DataSingleton;
 import model.command.Command;
 import model.command.Parameter;
+import model.command.control.ControlCommand;
 import model.variable.Variable;
 
 public class Make extends Command {

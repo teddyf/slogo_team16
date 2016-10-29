@@ -3,6 +3,8 @@ package Parsing;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
+import model.command.control.ControlCommand;
+import model.command.control.variable.To;
 import model.command.turtle.TurtleCommand;
 
 public class MethodExpression extends Expression{
@@ -32,11 +34,13 @@ public class MethodExpression extends Expression{
 		int paramIndex = 0;
 		int endIndex = node.getChildren().size();
 		
-		if (command instanceof TurtleCommand) {
+		if (command instanceof TurtleCommand || command instanceof ControlCommand) {
 			parameters[0] = new Parameter(turtle);
 			paramIndex++;
 		} 
+		System.out.println(node.getChildren().size());
 		for (int c = 0; c < endIndex; c++) {
+			System.out.println(c + " " + node.getChildren().get(c));
 			parameters[paramIndex] = new Parameter(ExpressionTree.getInstance().process(turtle, node.getChildren().get(c)));
 			paramIndex++;
 		}

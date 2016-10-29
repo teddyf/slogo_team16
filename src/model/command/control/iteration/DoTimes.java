@@ -1,6 +1,9 @@
 package model.command.control.iteration;
 
+import Parsing.ExpressionTree;
+import Parsing.TreeNode;
 import model.DataSingleton;
+import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 import model.variable.Variable;
@@ -11,7 +14,7 @@ public class DoTimes extends Command {
 	public DoTimes() {
 		super();
 		numParams = 4;
-		paramCount = 4;
+		paramCount = 3;
 	}
 	
 	/**
@@ -21,22 +24,18 @@ public class DoTimes extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		Variable variable = new Variable(params[0].getName());
+		Animal turtle = params[0].getAnimal();
+		Variable variable = new Variable(params[1].getName());
 		DataSingleton data = DataSingleton.getInstance();
 		data.addVariable(variable);
-		double limit = params[1].getValue();
-		Command[] commands = (Command[])params[2].getList();
-		Parameter[][] parameters = (Parameter[][])params[3].getList();
+		double limit = params[2].getValue();
+		TreeNode node = params[3].getNode();
 		
-		Command command;
 		double value = 0;
 		
 		for(int i = 0; i < limit; i++) {
-			for(int c = 0; c < commands.length; c++) {
-				command = commands[c];
-				value = command.run(parameters[c]);
-				variable.setValue(i+1);
-			}
+			value = ExpressionTree.getInstance().process(turtle, node);
+			variable.setValue(i+1);
 		}
 		
 		return value;
