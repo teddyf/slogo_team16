@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class ExpressionTree {
 	
-	private static final ExpressionTree instance = new ExpressionTree();
+    private static final ExpressionTree instance = new ExpressionTree();
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
     private Expression ROOT = new RootExpression("root");
@@ -38,20 +38,20 @@ public class ExpressionTree {
      * @throws InvalidLabelException
      */
     public TreeNode buildTree (String[][] a) throws ClassNotFoundException, InvalidLabelException {
-        clearTree();
-    	TreeNode parent = root;
+        TreeNode parent = root;
         TreeNode curr = root;
 
         for (int i = 0; i < a[0].length; i++) {
-            System.out.println(a[0][i]);
+            //System.out.println(a[0][i]);
             if(a[0][i].equals("{")){
                 parent = curr;
             }
             else if(a[0][i].equals("}")){
                 parent = parent.getParent();
             }
-            else if(a[0][i].equals("[")){
+            else if(a[0][i].equals("[")){ 
                 curr = buildNode(parent,a[0][i],a[1][i]); 
+                parent = curr;
             }
             else if(a[0][i].equals("]")){
                 parent = parent.getParent();
@@ -95,6 +95,28 @@ public class ExpressionTree {
         return new TreeNode(e, parent);
     }
     
+    public ArrayList<TreeNode> dfs(){
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        st.push(root);
+        ArrayList<TreeNode> data = new ArrayList<TreeNode>();
+        
+        while(!st.isEmpty()){
+            TreeNode temp = st.pop();
+            if(!temp.equals(null)){
+                data.add(temp);
+                
+            }
+            System.out.println(temp.neighbors);
+            for(TreeNode tn: temp.getNeighbors()){
+                st.push(tn);
+            }
+            
+        }
+        data.remove(0);
+        return data;
+    }
+    
+    
     public void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
@@ -106,6 +128,18 @@ public class ExpressionTree {
                            Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
+    /*
+    public void dfs(){
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        st.addAll(root.getNeighbors());
+        System.out.println(root.getChildren());
+        while(!st.isEmpty()){
+            TreeNode temp = st.pop();
+            System.out.println(temp.getChildren());
+            st.addAll(temp.getChildren());
+        }
+    }
+    */
     
     private boolean match (String text, Pattern regex) {
         // THIS IS THE KEY LINE
@@ -122,17 +156,20 @@ public class ExpressionTree {
         return ERROR;
     }
     
-    public void clearTree() {
-    	root = new TreeNode(ROOT, null);
-    }
+    /*public ArrayList<TreeNode> reverse(ArrayList<TreeNode> a){
+        ArrayList<TreeNode> rev = new ArrayList<TreeNode>();
+        for(int i = a.size()-1; i >= 0; i--){
+            rev.add(a.get(i));
+        }
+        return rev;
+    }*/
     
     public double process(Animal turtle, TreeNode node) {
     	double value = 0;
     	Expression nodeExpression = node.expression;
-    	//System.out.println("EXPRESSION: " + nodeExpression.toString());
+    	System.out.println("EXPRESSION: " + nodeExpression.toString());
     	value = nodeExpression.run(turtle, node);
     	return value;
     }
 }
-
 

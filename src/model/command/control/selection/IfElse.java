@@ -1,5 +1,8 @@
 package model.command.control.selection;
 
+import Parsing.ExpressionTree;
+import Parsing.TreeNode;
+import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 
@@ -8,8 +11,8 @@ public class IfElse extends Command {
 	
 	public IfElse() {
 		super();
-		numParams = 3;
-		paramCount = 3;
+		numParams = 4;
+		paramCount = Double.POSITIVE_INFINITY; //was 3
 	}
 	
 	/**
@@ -19,29 +22,18 @@ public class IfElse extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double expression = params[0].getValue();
-		Command[] trueCommands = (Command[])params[1].getList();
-		Command[] falseCommands = (Command[])params[2].getList();
-		Parameter[][] trueParameters = (Parameter[][])params[3].getList();
-		Parameter[][] falseParameters = (Parameter[][])params[4].getList();
+		Animal turtle = params[0].getAnimal();
+		double expression = params[1].getValue();
+		TreeNode trueNode = params[2].getNode();
+		TreeNode falseNode = params[3].getNode();
 		
-		Command[] commands;
-		Parameter[][] parameters;
-		Command command;
 		double value = 0;
 		if (expression != 0) {
-			commands = trueCommands;
-			parameters = trueParameters;
+			value = ExpressionTree.getInstance().process(turtle, trueNode);
+			return value;
 		} else {
-			commands = falseCommands;
-			parameters = falseParameters;
+			value = ExpressionTree.getInstance().process(turtle, falseNode);
+			return value;
 		}
-		
-		for(int c = 0; c < commands.length; c++) {
-			command = commands[c];
-			value = command.run(parameters[c]);
-		}
-		
-		return value;
 	}
 }

@@ -1,17 +1,20 @@
 package model.command.control.variable;
 
+import Parsing.TreeNode;
 import model.DataSingleton;
+import model.animal.Animal;
 import model.command.Command;
 import model.command.NewCommand;
 import model.command.Parameter;
+import model.command.control.ControlCommand;
 
-public class To extends Command {
+public class To extends ControlCommand {
 	private final double paramCount;
 	
 	public To() {
 		super();
 		numParams = 4;
-		paramCount = 4;
+		paramCount = 3;
 	}
 	
 	/**
@@ -21,16 +24,16 @@ public class To extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
+		Animal turtle = params[0].getAnimal();
 		DataSingleton data = DataSingleton.getInstance();
-		String commandName = params[0].getName();
+		String commandName = params[1].getName();
 		if (data.containsCommand(commandName)) {
 			return 0; //IMPLEMENT ERROR CHECKING
 		}
-		String[] variableNames = (String[])params[1].getList();
-		Command[] commands = (Command[])params[2].getList();
-		Parameter[][] parameters = (Parameter[][])params[3].getList();
+		String[] variableNames = (String[])params[2].getVariables();
+		TreeNode node = params[3].getNode();
 		
-		Command newCommand = new NewCommand(commandName, variableNames, commands, parameters);
+		Command newCommand = new NewCommand(commandName, variableNames, node);
 		data.addCommand(newCommand);
 		
 		return 1;
