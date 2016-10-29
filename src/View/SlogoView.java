@@ -61,7 +61,7 @@ public class SlogoView {
 
 	public Workspace getCurrentWorkspaceLeftPane() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
-		int wkspcID = Integer.parseInt(currentTab.getText()) - 1;
+		int wkspcID = Integer.parseInt(String.valueOf(currentTab.getText().charAt(0))) - 1;
 		return workspaces.get(wkspcID);
 	}
 
@@ -79,7 +79,7 @@ public class SlogoView {
 		numWorkspaces++;
 		Tab tab = new Tab();
 		if (stringExists(title)) {
-			tab.setText(title);
+			tab.setText(numWorkspaces+" "+title);
 		} else {
 			tab.setText(/* "Workspace #"+ */Integer.toString(numWorkspaces));
 		}

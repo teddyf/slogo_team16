@@ -115,6 +115,9 @@ public class Workspace implements Observer {
 		return numTurtles;
 	}
 
+	public Console getConsole(){
+		return this.console;
+	}
 	public void setNumTurtles(int numTurtles) {
 		this.numTurtles = numTurtles;
 	}

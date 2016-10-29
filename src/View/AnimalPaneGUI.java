@@ -85,6 +85,11 @@ public class AnimalPaneGUI implements Observer {
 	public void setMyAnimalList(List<Animal> myAnimalList) {
 		this.myAnimalList = myAnimalList;
 	}
+	
+	public void resetMyAnimalList(){
+		List<Animal> newList = new ArrayList<Animal>();
+		setMyAnimalList(newList);
+	}
 	public Pane getMyContainer() {
 		return myContainer;
 	}
