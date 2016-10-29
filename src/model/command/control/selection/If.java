@@ -15,7 +15,7 @@ public class If extends Command {
 	public If() {
 		super();
 		numParams = 2;
-		paramCount = 2;
+		paramCount = Double.POSITIVE_INFINITY; //was 2
 	}
 	
 	/**
