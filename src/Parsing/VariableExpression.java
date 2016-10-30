@@ -1,6 +1,6 @@
 package Parsing;
 
-import model.Data;
+import Controller.Data;
 import model.animal.Animal;
 import model.variable.Variable;
 

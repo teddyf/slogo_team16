@@ -1,7 +1,7 @@
 package model.command.control.variable;
 
+import Controller.Data;
 import Parsing.ExpressionTree;
-import model.Data;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
