@@ -30,19 +30,21 @@ public class SlogoView {
 	private String title;
 	private String backgroundColor;
 	private String language;
+	private int numTurtles;
 
 	public SlogoView() {
 		numWorkspaces = 0;
 		mainView = new TabPane();
 	}
 
-	public SlogoView(String title, String backgroundColor, String language) {
+	public SlogoView(String title, String backgroundColor, String language, int numTurtles) {
 		this.title = title;
 		System.out.println("There is a title! 1st: " + this.title);
 		this.backgroundColor = backgroundColor;
 		this.language = language;
 		numWorkspaces = 0;
 		mainView = new TabPane();
+		this.numTurtles = numTurtles;
 	}
 
 	public Scene init() {
@@ -89,6 +91,14 @@ public class SlogoView {
 		mainView.getTabs().add(tab);
 		//set language
 		getCurrentWorkspaceLeftPane().selectLanguageThroughUI(language);
+		//set number of turtles
+		createNumTurtles();
+	}
+	
+	private void createNumTurtles(){
+		for (int i=0; i<numTurtles; i++){
+			getCurrentWorkspaceLeftPane().createAnimal();
+		}
 	}
 
 	private Workspace initWorkspace() {
@@ -104,7 +114,6 @@ public class SlogoView {
 		}
 		workspaces.add(slogo);
 		slogo.init(this);
-		// slogo.setWorkspaceID(numWorkspaces);
 		return slogo;
 	}
 

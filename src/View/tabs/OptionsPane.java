@@ -101,8 +101,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
 		btn3.getChildren().add(btn3);
 		*/
+
 		content.getItems().addAll(penColor.getContainer(), backgroundColor);
 		addToPane(addButtonsToHBox(createButtons()));
+		
 	}
 	
 	private Button[] createButtons(){
