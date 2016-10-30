@@ -55,11 +55,11 @@ public class Workspace implements Observer {
 	public static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
 	public static final int BUTTON_WIDTH = 140;
-	
+
 	private String defaultBackgroundColor;
 	private final String EN_RESRC_PATH = "resources/languages/English";
 	private final String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
-	"Spanish" };
+			"Spanish" };
 
 	private BorderPane myRoot;
 	// private AnimalPane myAnimalPane;
@@ -91,9 +91,9 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		numTurtles = 0;
+		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
-		animalClick= new AnimalClick(myAnimalPaneGUI);
-
+		// animalClick= new AnimalClick(myAnimalPaneGUI);
 	}
 
 	public Workspace(int workspaceID, String color) {
@@ -107,27 +107,33 @@ public class Workspace implements Observer {
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
 		numTurtles = 0;
+		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
-		animalClick= new AnimalClick(myAnimalPaneGUI);
+		// animalClick= new AnimalClick(myAnimalPaneGUI);
+
 	}
 
 	public int getNumTurtles() {
 		return numTurtles;
 	}
 
-	public Console getConsole(){
+	public Console getConsole() {
 		return this.console;
 	}
+
 	public void setNumTurtles(int numTurtles) {
 		this.numTurtles = numTurtles;
 	}
 
+	@Deprecated
 	public void incrementNumTurtles() {
-		numTurtles++;
-		Animal newAnimal = new Turtle(50,50,30,20);//TODO: change the dummy numbers
-		myAnimalPaneGUI.addAnimal(newAnimal);
-		addAnimalToGrid(newAnimal);
-		System.out.println("Incremented turtles: "+myAnimalPaneGUI.getAnimalPane().getMyAnimalList());
+		// numTurtles++;
+		// Animal newAnimal = new Turtle(50,50,30,20);//TODO: change the dummy
+		// numbers
+		// myAnimalPaneGUI.addAnimal(newAnimal);
+		// addAnimalToGrid(newAnimal);
+		createAnimal();
+		System.out.println("Incremented turtles: " + myAnimalPaneGUI.getAnimalPane().getMyAnimalList());
 	}
 
 	public void decrementNumTurtles() {
@@ -135,15 +141,15 @@ public class Workspace implements Observer {
 			numTurtles--;
 		}
 	}
-	
-	public ArrayList<String> getTurtleIDs(){
+
+	public List<String> getTurtleIDs() {
 		return turtleIDs;
 	}
 
 	public void init(SlogoView view) {
 		mainView = view;
 		myRoot = new BorderPane();
-		//createAnimalPaneGUI();
+		// createAnimalPaneGUI();
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
@@ -154,7 +160,7 @@ public class Workspace implements Observer {
 		myAnimalPaneGUI = new AnimalPaneGUI();
 		myAnimalGUIList.add(myAnimalPaneGUI);
 		myAnimalPaneGUI.getAnimalPane().addObserver(this);
-		// Need to switch? no? yes?
+		createAnimal();
 		myController.setActiveAnimalPaneGUI(myAnimalPaneGUI);
 	}
 
@@ -188,7 +194,7 @@ public class Workspace implements Observer {
 		leftPane.getStyleClass().add("left-pane");
 
 		ScrollPane container = createConsole();
-		populateGridWithAnimals();
+//		populateGridWithAnimals();
 
 		leftPane.getChildren().addAll(myAnimalPaneGUI.getScrollPane(), container);
 		myRoot.setLeft(leftPane);
@@ -318,13 +324,21 @@ public class Workspace implements Observer {
 		renderAnimalGrid();
 	}
 
-	//@Deprecated
+	// @Deprecated
+	// public void createAnimalOld() {
+	// Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
+	// (myAnimalPaneGUI.getScrollPane().getPrefWidth() -
+	// myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
+	// / 2,
+	// (myAnimalPaneGUI.getScrollPane().getPrefHeight() -
+	// myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
+	// myAnimalPaneGUI.addAnimal(turtle);
+	// }
+
 	public void createAnimal() {
-		Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
-				(myAnimalPaneGUI.getScrollPane().getPrefWidth() - myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
-						/ 2,
-				(myAnimalPaneGUI.getScrollPane().getPrefHeight() - myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
-		myAnimalPaneGUI.addAnimal(turtle);
+		numTurtles++;
+		Animal animal = myAnimalPaneGUI.addAnimal();
+		renderAnimal(animal);
 	}
 
 	public void renderAnimalGrid() {
@@ -337,6 +351,9 @@ public class Workspace implements Observer {
 		if (isValidLocation(animal.getX(), animal.getY())) {
 			addAnimalToGrid(animal);
 		} else {
+			// This should never happen since turtle only is added to center of
+			// frame, but if this does change
+			// we will have a place to handle it here
 			System.out.println("NOT INSIDE ANIMAL PANE");
 		}
 	}
@@ -347,14 +364,15 @@ public class Workspace implements Observer {
 		animalImage.setFitWidth(TURTLE_WIDTH);
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
-		
-		System.out.println("Is animalClick null?"+animalClick);
-		//for multiple turtles
+
+		System.out.println("Is animalClick null?" + animalClick);
+		// for multiple turtles
 		animalClick.setEventListener(animal);
-		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
+		if(!myAnimalPaneGUI.getMyContainer().getChildren().contains(animalImage)) {
+			myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
+		}
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
-	
 
 	private boolean isValidLocation(double x, double y) {
 		return (x > myAnimalPaneGUI.getScrollPane().getLayoutX()) && (y > myAnimalPaneGUI.getScrollPane().getLayoutY())
@@ -365,7 +383,7 @@ public class Workspace implements Observer {
 	public void changeAnimalBackgroundColor(String color) {
 		String hexColor = decodeColor(color);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
-		this.getMyRoot().setStyle("-fx-background-color: "+hexColor+";");
+		this.getMyRoot().setStyle("-fx-background-color: " + hexColor + ";");
 	}
 
 	private String decodeColor(String color) {
@@ -394,17 +412,8 @@ public class Workspace implements Observer {
 		if (o instanceof AnimalPane) {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {
-					// for (int animalId :
-					// animalGUI.getAnimalPane().getMyAnimalMap().keySet()) {
-
-					// for(Animal animal :
-					// animalGUI.getAnimalPane().getMyAnimalList()) {
-					// if(animal.getSelected()) {
-					System.out.println("BEGINNING ANIMATION in UPDATE");
+					// System.out.println("BEGINNING ANIMATION in UPDATE");
 					animation.beginAnimation(animalGUI);
-					// }
-					// }
-					// }
 				}
 			}
 		}

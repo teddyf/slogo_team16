@@ -26,7 +26,7 @@ public class AnimalPaneGUI implements Observer {
 
 		myAnimalPane = new AnimalPane();
 		myAnimalPane.addObserver(this);
-		myAnimalPane.addAnimal();
+//		myAnimalPane.addAnimal();
 		
 		myScrollPane = new ScrollPane();
 		myContainer = new Pane();
@@ -52,10 +52,17 @@ public class AnimalPaneGUI implements Observer {
 		myContainer.setPrefHeight(Workspace.SCENE_HEIGHT - Workspace.SCENE_HEIGHT / 4);
 	}
 	
-	public void addAnimal(Animal animal) {
+	public Animal addAnimal() {
+		Animal animal = getAnimalPane().addAnimal();
 		myAnimalList.add(animal);
-		getAnimalPane().addAnimal(animal);
+		return animal;
 	}
+	
+//	@Deprecated
+//	public void addAnimal(Animal animal) {
+//		myAnimalList.add(animal);
+//		getAnimalPane().addAnimal(animal);
+//	}
 	
 	public void removeAnimal(Animal animal) {
 		myAnimalList.remove(animal);

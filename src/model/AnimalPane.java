@@ -68,7 +68,7 @@ public class AnimalPane extends Observable implements Observer {
 //		addAnimal(animal);
 	}
 	
-	public void addAnimal() {
+	public Animal addAnimal() {
 		animalID++;
 		Animal animal = new Turtle();
 		
@@ -79,8 +79,10 @@ public class AnimalPane extends Observable implements Observer {
 		animal.addObserver(this);
 		
 		// notify SLogoView that a new turtle was added, and needs to update the view to include new turtle
-		setChanged();
-		notifyObservers();
+//		setChanged();
+//		notifyObservers();
+		
+		return animal;
 	}
 
 	/**

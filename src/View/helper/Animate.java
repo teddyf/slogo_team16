@@ -33,7 +33,10 @@ public class Animate {
 
 		// TODO: will this work with multiple turtles
 		for (Animal animal : animalPaneGUI.getAnimalPane().getMyAnimalList()) {
+			counter = 0;
 			pen = animal.getActualPen();
+			pen.getLineList().clear();
+			pen.resetCounter();
 			translateAnimation(coordinatePairs.get(counter), animal);
 		}
 	}
@@ -45,7 +48,7 @@ public class Animate {
 		handleRotation(coordinate, animalImage);
 		handleMovement(coordinate, animal, animalImage);
 	}
-	
+
 	public void changeAnimalVisibility(ImageView animalImage, Coordinate coordinate) {
 		animalImage.setVisible(coordinate.getShowing() != 0);
 	}

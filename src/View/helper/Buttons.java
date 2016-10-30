@@ -140,7 +140,7 @@ public class Buttons extends Observable {
 		Button addTurtle = graphic.createButton("Add one annoying turtle");
 		addTurtle.setPrefWidth(Workspace.BUTTON_WIDTH);
 		addTurtle.setOnAction(e -> {
-			wkspc.incrementNumTurtles();
+			wkspc.createAnimal();
 		});
 		return addTurtle;
 	}
