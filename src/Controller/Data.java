@@ -10,12 +10,14 @@ public class Data {
 	private HashMap<String,Command> commands;
 	private HashMap<Integer,String> colors;
 	private String backgroundColor;
+	private String penColor;
 	
 	private Data(){
 		variables = new HashMap<String,Variable>();
 		commands = new HashMap<String,Command>();
 		colors = new HashMap<Integer,String>();
 		backgroundColor = "WHITE";
+		penColor = "BLACK";
 	}
 	
 	public static Data getInstance() {
@@ -26,6 +28,10 @@ public class Data {
 	
 	public Variable getVariable(String variableName) {
 		return variables.get(variableName);
+	}
+	
+	public HashMap<String,Variable> getVariables() {
+		return variables;
 	}
 	
 	public boolean containsVariable(String variableName) {
@@ -47,6 +53,10 @@ public class Data {
 		return commands.get(commandName);
 	}
 	
+	public HashMap<String,Command> getCommands() {
+		return commands;
+	}
+	
 	public boolean containsCommand(String commandName) {
 		return commands.containsKey(commandName);
 	}
@@ -63,6 +73,10 @@ public class Data {
 	
 	public String getColor(int index) {
 		return colors.get(index);
+	}
+	
+	public HashMap <Integer,String> getColors() {
+		return colors;
 	}
 	
 	public boolean containsColor(String color) {
@@ -83,9 +97,21 @@ public class Data {
 		return backgroundColor;
 	}
 	
+	public String getPenColor() {
+		return penColor;
+	}
+	
 	public void setBackgroundColor(int index) {
 		if (colors.containsKey(index)) {
 			this.backgroundColor = colors.get(index);
+		} else {
+			//ERROR HANDLING
+		}
+	}
+	
+	public void setPenColor(int index) {
+		if (colors.containsKey(index)) {
+			this.penColor = colors.get(index);
 		} else {
 			//ERROR HANDLING
 		}
