@@ -357,6 +357,7 @@ public class Workspace implements Observer {
 
 	public void createAnimal() {
 		numTurtles++;
+		System.out.println("Number of turtles: "+numTurtles);
 		Animal animal = myAnimalPaneGUI.addAnimal();
 		renderAnimal(animal);
 	}

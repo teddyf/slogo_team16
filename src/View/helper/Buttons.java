@@ -8,12 +8,15 @@ import java.util.Observable;
 import Controller.Controller;
 import Controller.DataSetup.DataOutput;
 import View.AnimalPaneGUI;
+import View.HomeSelection;
 import View.SlogoView;
 import View.Workspace;
 import View.helpscreen.HelpScreen;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import main.Main;
 import model.animal.Animal;
 
 /**
@@ -93,15 +96,15 @@ public class Buttons extends Observable {
 		});
 		return clear;
 	}
-	
-	public Button resetAndClearScreenButton(Console console, SlogoView slogoView, AnimalPaneGUI animalPane){
+
+	public Button resetAndClearScreenButton(Console console, SlogoView slogoView, AnimalPaneGUI animalPane) {
 		Button clear = graphic.createButton("Reset Screen");
 		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
 		clear.setOnAction(e -> {
 			console.clearConsole();
 			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
 			animalPane.resetMyAnimalList();
-			//check if this add is necessary
+			// check if this add is necessary
 			pane.createAnimal();
 			pane.resetLeftPane();
 		});
@@ -139,20 +142,23 @@ public class Buttons extends Observable {
 
 	public Button createAddNumTurtlesButton(Workspace wkspc) {
 		Button addTurtle = graphic.createButton("Add one annoying turtle");
-		addTurtle.setPrefWidth(Workspace.BUTTON_WIDTH);
+		addTurtle.setPrefWidth(Workspace.BUTTON_WIDTH * 1.5);
 		addTurtle.setOnAction(e -> {
 			wkspc.createAnimal();
 		});
 		return addTurtle;
 	}
 
-	public Button createDecrementNumTurtlesButton(Workspace wkspc) {
-		Button minusTurtle = graphic.createButton("Get rid of one annoying turtle");
-		minusTurtle.setPrefWidth(Workspace.BUTTON_WIDTH);
-		minusTurtle.setOnAction(e -> {
-			wkspc.decrementNumTurtles();
+
+	public Button newWorkspaceFromFileButton() {
+		Button newWkspc = graphic.createButton("New Workspace from file");
+		newWkspc.setPrefWidth(Workspace.BUTTON_WIDTH * 1.5);
+		newWkspc.setOnAction(e -> {
+			Stage s = new Stage();
+			HomeSelection home = new HomeSelection(s);
+			home.initHomeScreen();
 		});
-		return minusTurtle;
+		return newWkspc;
 	}
 
 	@Deprecated

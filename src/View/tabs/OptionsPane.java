@@ -101,8 +101,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
 		btn3.getChildren().add(btn3);
 		*/
+
 		content.getItems().addAll(penColor.getContainer(), backgroundColor);
 		addToPane(addButtonsToHBox(createButtons()));
+		
 	}
 	
 	private Button[] createButtons(){
@@ -110,9 +112,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
 		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
 		Button clearAll = buttons.resetAndClearScreenButton(workspace.getConsole(), slogoView, animalPaneGUI);
+		Button newWkspc=buttons.newWorkspaceFromFileButton();
 		//Button decTurtle = buttons.createDecrementNumTurtlesButton(workspace);
 		
-		Button[] buttons = {wkspc, saveWkspc, addTurtle, clearAll};
+		Button[] buttons = {wkspc, saveWkspc, newWkspc, addTurtle, clearAll};
 		return buttons;
 	}
 	

@@ -50,41 +50,16 @@ public class AnimalController implements Controller {
 
 	@Override
 	public void handleInput() {
-		try {
 			for (int t = 0; t < activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().size(); t++) {
-				runCommands(activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(t));
+				try {
+					runCommands(activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(t));
+				} catch (FileNotFoundException | NoSuchMethodException | SecurityException | ClassNotFoundException
+						| InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException | NoSuchFieldException | InvalidLabelException e) {
+					displayErrorDialog(e.getMessage());
+				}
 			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			displayErrorDialog(e.getMessage());
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidLabelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			activeAnimalPaneGUI.getAnimalPane().signalAnimation(); 
 
 	}
 
@@ -122,6 +97,7 @@ public class AnimalController implements Controller {
 		Map<Integer, List<Coordinate>> mapPoints = new HashMap<>();
 		mapPoints.put(turtle.getId(), points);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(mapPoints);
+//		return mapPoints;
 
 	}
 

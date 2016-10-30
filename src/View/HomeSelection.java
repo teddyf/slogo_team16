@@ -24,6 +24,10 @@ public class HomeSelection {
 	public HomeSelection(Stage s) {
 		this.s = s;
 	}
+	
+	public HomeSelection() {
+		
+	}
 
 	/**
 	 * Creates the file directory to choose an xml simulation file to run
@@ -59,7 +63,7 @@ public class HomeSelection {
 		DataSetup data = new DataSetup(fileName);
 		HashMap<String, String> generalInfo = data.getGeneralInfo();
 		slogoView = new SlogoView(generalInfo.get("title"), generalInfo.get("background_color").toUpperCase(),
-				generalInfo.get("language"));
+				generalInfo.get("language"), Integer.parseInt(generalInfo.get("numTurtles")));
 		Scene scene = slogoView.init();
 		scene.getStylesheets().add(this.getClass().getResource("/main/SLogoStyle.css").toExternalForm());
 		s.setTitle(Main.TITLE);

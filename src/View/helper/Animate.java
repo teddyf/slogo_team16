@@ -30,20 +30,8 @@ public class Animate {
 
 	public void beginAnimation(AnimalPaneGUI animalPaneGUI) {
 		this.animalPaneGUI = animalPaneGUI;
-//		final List<Coordinate> coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateList();
-		// counter = 0;
 		
 		Map<Integer, List<Coordinate>> coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
-
-//		for (Animal animal : animalPaneGUI.getAnimalPane().getMyAnimalList()) {
-//			IntegerProperty counter = new SimpleIntegerProperty();
-//			// issue is that pen is getting overriden while translatetransition
-//			// is moving haha
-//			Pen pen = animal.getActualPen();
-//			pen.getLineList().clear();
-//			pen.resetCounter();
-//			translateAnimation(coordinatePairs.get(counter.get()), animal, pen, counter, coordinatePairs);
-//		}
 		
 		for(Integer id : coordinatePairs.keySet()) {
 			Animal animal = animalPaneGUI.getAnimalPane().getMyAnimalMap().get(id);
