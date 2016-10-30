@@ -7,9 +7,9 @@ import model.animal.Animal;
 
 public class AnimalClick {
 
-	public static final String WEIRDTURTLE = "http://images.clipartpanda.com/turtle-clip-art-turtle6.png";
+	private String WEIRDTURTLE = "http://images.clipartpanda.com/turtle-clip-art-turtle6.png";
 
-	public static final String DEADTURTLE = "http://vignette4.wikia.nocookie.net/penguindrum/images/e/ee/Mawaru_penguindrum_peng_head_by_gintabro-d3lj8vt.png/revision/latest?cb=20120304141806";
+	private String DEADTURTLE = "http://vignette4.wikia.nocookie.net/penguindrum/images/e/ee/Mawaru_penguindrum_peng_head_by_gintabro-d3lj8vt.png/revision/latest?cb=20120304141806";
 	// private Map<Animal, String> activeTurtles = new HashMap<Animal,
 	// String>();
 	private Graphics graphic = new Graphics();
@@ -23,6 +23,14 @@ public class AnimalClick {
 	
 	public AnimalClick() {
 		
+	}
+	
+	public void setWeirdTurtle(String url){
+		WEIRDTURTLE = url;
+	}
+	
+	public void setDeadTurtle(String url){
+		DEADTURTLE = url;
 	}
 
 	public void setEventListener(Animal animal) {
