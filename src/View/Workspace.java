@@ -102,7 +102,7 @@ public class Workspace implements Observer {
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
-		UIUpdate = new UIDataUpdate(this);
+		
 
 	}
 
@@ -122,7 +122,7 @@ public class Workspace implements Observer {
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
-		UIUpdate = new UIDataUpdate(this);
+	
 
 	}
 	
@@ -183,6 +183,7 @@ public class Workspace implements Observer {
 		populateLeftPane();
 		populateRightPane();
 		changeAnimalBackgroundColor(defaultBackgroundColor);
+		UIUpdate = new UIDataUpdate(this);
 	}
 
 	public void createAnimalPaneGUI() {
@@ -409,7 +410,9 @@ public class Workspace implements Observer {
 	}
 
 	public void changeAnimalBackgroundColor(String color) {
+		System.out.println("Changing background in workspace class to :"+color);
 		String hexColor = decodeColor(color);
+		System.out.println("Decoded hex: "+hexColor);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
 	}
 
