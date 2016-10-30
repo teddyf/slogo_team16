@@ -12,8 +12,8 @@ public class ExpressionTree {
     private static final ExpressionTree instance = new ExpressionTree();
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
-    private Expression ROOT = new RootExpression("root");
-    private TreeNode root = new TreeNode(ROOT, null);
+    private final Expression ROOT = new RootExpression("root");
+    private TreeNode root;
     private List<Entry<String, Pattern>> methodPaths;
     private ExpressionFactory factory;
     //private Stack<Expression> expressions;
@@ -38,11 +38,11 @@ public class ExpressionTree {
      * @throws InvalidLabelException
      */
     public TreeNode buildTree (String[][] a) throws ClassNotFoundException, InvalidLabelException {
-        TreeNode parent = root;
+    	root = new TreeNode(ROOT, null);
+    	TreeNode parent = root;
         TreeNode curr = root;
 
         for (int i = 0; i < a[0].length; i++) {
-            //System.out.println(a[0][i]);
             if(a[0][i].equals("{")){
                 parent = curr;
             }
@@ -128,8 +128,8 @@ public class ExpressionTree {
                            Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
-    /*
-    public void dfs(){
+    
+    /*public void dfs(){
         Stack<TreeNode> st = new Stack<TreeNode>();
         st.addAll(root.getNeighbors());
         System.out.println(root.getChildren());
@@ -138,8 +138,7 @@ public class ExpressionTree {
             System.out.println(temp.getChildren());
             st.addAll(temp.getChildren());
         }
-    }
-    */
+    }*/
     
     private boolean match (String text, Pattern regex) {
         // THIS IS THE KEY LINE
@@ -167,7 +166,6 @@ public class ExpressionTree {
     public double process(Animal turtle, TreeNode node) {
     	double value = 0;
     	Expression nodeExpression = node.expression;
-    	System.out.println("EXPRESSION: " + nodeExpression.toString());
     	value = nodeExpression.run(turtle, node);
     	return value;
     }

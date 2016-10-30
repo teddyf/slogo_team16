@@ -174,9 +174,11 @@ public class AnimalPane extends Observable implements Observer {
 //	}
 	public void setCoordinateMap(List<Coordinate> coordinateMap) {
 		this.coordinateMap = coordinateMap;
+		for (int i = 0; i < coordinateMap.size(); i++) {
+			System.out.print(coordinateMap.get(i) + " ");
+		}
 		//System.out.println("set changed, notify observers");
 		setChanged();
-		
 		notifyObservers();
 	}
 

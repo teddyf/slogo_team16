@@ -14,7 +14,7 @@ public class Repeat extends Command {
 	public Repeat() {
 		super();
 		numParams = 3;
-		paramCount = 2;
+		paramCount = Double.POSITIVE_INFINITY; //was 2
 	}
 	
 	/**

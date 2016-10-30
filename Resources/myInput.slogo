@@ -1,1 +1,1 @@
-if [ 1 ] [ fd 50 ]
+repeat 3 [ right 90 ]

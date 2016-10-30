@@ -1,16 +1,11 @@
 package model.command.control.selection;
 
-import java.util.ArrayList;
-
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import model.animal.Animal;
-import model.command.Command;
-import model.command.CommandProcessor;
 import model.command.Parameter;
-import model.command.control.ControlCommand;
 
-public class If extends ControlCommand {
+public class If extends SelectionCommand {
 	private final double paramCount;
 	
 	public If() {
