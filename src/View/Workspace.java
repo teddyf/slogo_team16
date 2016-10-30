@@ -55,12 +55,12 @@ public class Workspace implements Observer {
 	public static final int TURTLE_HEIGHT = 15;
 	public static final int TURTLE_WIDTH = 15;
 	public static final int BUTTON_WIDTH = 140;
-	
+
 	private String defaultBackgroundColor;
 	private final String EN_RESRC_PATH = "resources/languages/English";
 	private final String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
-	"Spanish" };
-	
+			"Spanish" };
+
 	private String currentLanguage;
 	private BorderPane myRoot;
 	// private AnimalPane myAnimalPane;
@@ -73,6 +73,8 @@ public class Workspace implements Observer {
 	private GenericPane<String> historyPane;
 	private int workSpaceID;
 	private SlogoView mainView;
+
+	private ComboBox<String> languageComboBox;
 
 	// support for multiple turtles
 	private int numTurtles;
@@ -93,7 +95,7 @@ public class Workspace implements Observer {
 		this.workSpaceID = workspaceID;
 		numTurtles = 0;
 		createAnimalPaneGUI();
-		animalClick= new AnimalClick(myAnimalPaneGUI);
+		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
 
 	}
@@ -110,34 +112,37 @@ public class Workspace implements Observer {
 		this.defaultBackgroundColor = color;
 		numTurtles = 0;
 		createAnimalPaneGUI();
-		animalClick= new AnimalClick(myAnimalPaneGUI);
+		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
 	}
 
-	public String getCurrentLanguage(){
+	public String getCurrentLanguage() {
 		return currentLanguage;
 	}
-	
-	public void setCurrentLanguage(String newLanguage){
-		this.currentLanguage=newLanguage;
+
+	public void setCurrentLanguage(String newLanguage) {
+		this.currentLanguage = newLanguage;
 	}
+
 	public int getNumTurtles() {
 		return numTurtles;
 	}
 
-	public Console getConsole(){
+	public Console getConsole() {
 		return this.console;
 	}
+
 	public void setNumTurtles(int numTurtles) {
 		this.numTurtles = numTurtles;
 	}
 
 	public void incrementNumTurtles() {
 		numTurtles++;
-		Animal newAnimal = new Turtle(50,50,30,20);//TODO: change the dummy numbers
+		Animal newAnimal = new Turtle(50, 50, 30, 20);// TODO: change the dummy
+														// numbers
 		myAnimalPaneGUI.addAnimal(newAnimal);
 		addAnimalToGrid(newAnimal);
-		System.out.println("Incremented turtles: "+myAnimalPaneGUI.getAnimalPane().getMyAnimalList());
+		System.out.println("Incremented turtles: " + myAnimalPaneGUI.getAnimalPane().getMyAnimalList());
 	}
 
 	public void decrementNumTurtles() {
@@ -145,15 +150,19 @@ public class Workspace implements Observer {
 			numTurtles--;
 		}
 	}
-	
-	public ArrayList<String> getTurtleIDs(){
+
+	public ArrayList<String> getTurtleIDs() {
 		return turtleIDs;
+	}
+
+	public ComboBox<String> getLanguageComboBox() {
+		return languageComboBox;
 	}
 
 	public void init(SlogoView view) {
 		mainView = view;
 		myRoot = new BorderPane();
-		//createAnimalPaneGUI();
+		// createAnimalPaneGUI();
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
@@ -182,7 +191,7 @@ public class Workspace implements Observer {
 		Text title = new Text(myResources.getString("SLogo"));
 		title.getStyleClass().add("slogo-title");
 
-		ComboBox<String> languageComboBox = createLanguageChooser();
+		this.languageComboBox = createLanguageChooser();
 		languageComboBox.getStyleClass().add("language-button");
 
 		// Button tb = CREATETESTBUTTON();
@@ -328,7 +337,7 @@ public class Workspace implements Observer {
 		renderAnimalGrid();
 	}
 
-	//@Deprecated
+	// @Deprecated
 	public void createAnimal() {
 		Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
 				(myAnimalPaneGUI.getScrollPane().getPrefWidth() - myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
@@ -357,14 +366,13 @@ public class Workspace implements Observer {
 		animalImage.setFitWidth(TURTLE_WIDTH);
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
-		
-		System.out.println("Is animalClick null?"+animalClick);
-		//for multiple turtles
+
+		System.out.println("Is animalClick null?" + animalClick);
+		// for multiple turtles
 		animalClick.setEventListener(animal);
 		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
-	
 
 	private boolean isValidLocation(double x, double y) {
 		return (x > myAnimalPaneGUI.getScrollPane().getLayoutX()) && (y > myAnimalPaneGUI.getScrollPane().getLayoutY())
@@ -375,7 +383,7 @@ public class Workspace implements Observer {
 	public void changeAnimalBackgroundColor(String color) {
 		String hexColor = decodeColor(color);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
-		this.getMyRoot().setStyle("-fx-background-color: "+hexColor+";");
+		this.getMyRoot().setStyle("-fx-background-color: " + hexColor + ";");
 	}
 
 	private String decodeColor(String color) {
@@ -397,6 +405,10 @@ public class Workspace implements Observer {
 			}
 		});
 		return languageSelector;
+	}
+	
+	public void selectLanguageThroughUI(String language){
+		languageComboBox.getSelectionModel().select(language);
 	}
 
 	@Override

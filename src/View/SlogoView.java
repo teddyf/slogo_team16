@@ -80,17 +80,22 @@ public class SlogoView {
 		numWorkspaces++;
 		Tab tab = new Tab();
 		if (stringExists(title)) {
+			tab.setText(numWorkspaces+": "+title);
+			/*
 			if (Character.isLetter(title.charAt(0))){
 				tab.setText(numWorkspaces+" "+title);
 			}else{
 				tab.setText(title);	
 			}
+			(*/
 		} else {
 			tab.setText(/* "Workspace #"+ */Integer.toString(numWorkspaces));
 		}
 		tab.setContent(initWorkspace().getMyRoot());
 		// add tab to tabpane
 		mainView.getTabs().add(tab);
+		//set language
+		getCurrentWorkspaceLeftPane().selectLanguageThroughUI(language);
 	}
 
 	private Workspace initWorkspace() {
