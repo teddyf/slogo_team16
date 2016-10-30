@@ -35,6 +35,12 @@ public class Pen implements Observer {
 //		line.setFill(Color.BLACK);
 	}
 	
+	public Pen(double x, double y, PenColor penColor) {
+		counter = 0;
+		lineList = new ArrayList<>();
+		color = penColor.getComboBox().getValue();
+	}
+	
 	public void createLine(double x, double y) {
 		Line line = new Line(x, y, x, y);
 		line.setStroke(Color.web(color));
