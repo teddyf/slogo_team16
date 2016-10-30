@@ -35,7 +35,7 @@ public class For extends Command {
 		
 		double value = 0;
 		
-		for(int i = (int)start; i < end; i+=increment) {
+		for(int i = (int)start; i <= end; i+=increment) {
 			value = ExpressionTree.getInstance().process(turtle, node);
 			variable.setValue(i+1);
 		}

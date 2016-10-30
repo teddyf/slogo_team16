@@ -1,6 +1,8 @@
 package model.command.control.variable;
 
+import Parsing.ExpressionTree;
 import model.DataSingleton;
+import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 import model.command.control.ControlCommand;
@@ -11,7 +13,7 @@ public class Make extends Command {
 	
 	public Make() {
 		super();
-		numParams = 2;
+		numParams = 3;
 		paramCount = 2;
 	}
 	
@@ -22,7 +24,7 @@ public class Make extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		String variableName = params[0].getName();
+		String variableName = params[1].getNode().toString();
 		double expression = params[1].getValue();
 		DataSingleton data = DataSingleton.getInstance();
 		
