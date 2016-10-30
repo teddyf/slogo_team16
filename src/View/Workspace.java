@@ -94,7 +94,9 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		numTurtles = 0;
+		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
+		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
 
@@ -111,9 +113,12 @@ public class Workspace implements Observer {
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
 		numTurtles = 0;
+		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
 		animalClick = new AnimalClick(myAnimalPaneGUI);
+		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
+
 	}
 
 	public String getCurrentLanguage() {
@@ -136,12 +141,14 @@ public class Workspace implements Observer {
 		this.numTurtles = numTurtles;
 	}
 
+	@Deprecated
 	public void incrementNumTurtles() {
-		numTurtles++;
-		Animal newAnimal = new Turtle(50, 50, 30, 20);// TODO: change the dummy
-														// numbers
-		myAnimalPaneGUI.addAnimal(newAnimal);
-		addAnimalToGrid(newAnimal);
+		// numTurtles++;
+		// Animal newAnimal = new Turtle(50,50,30,20);//TODO: change the dummy
+		// numbers
+		// myAnimalPaneGUI.addAnimal(newAnimal);
+		// addAnimalToGrid(newAnimal);
+		createAnimal();
 		System.out.println("Incremented turtles: " + myAnimalPaneGUI.getAnimalPane().getMyAnimalList());
 	}
 
@@ -151,7 +158,7 @@ public class Workspace implements Observer {
 		}
 	}
 
-	public ArrayList<String> getTurtleIDs() {
+	public List<String> getTurtleIDs() {
 		return turtleIDs;
 	}
 
@@ -173,7 +180,7 @@ public class Workspace implements Observer {
 		myAnimalPaneGUI = new AnimalPaneGUI();
 		myAnimalGUIList.add(myAnimalPaneGUI);
 		myAnimalPaneGUI.getAnimalPane().addObserver(this);
-		// Need to switch? no? yes?
+		createAnimal();
 		myController.setActiveAnimalPaneGUI(myAnimalPaneGUI);
 	}
 
@@ -207,7 +214,7 @@ public class Workspace implements Observer {
 		leftPane.getStyleClass().add("left-pane");
 
 		ScrollPane container = createConsole();
-		populateGridWithAnimals();
+//		populateGridWithAnimals();
 
 		leftPane.getChildren().addAll(myAnimalPaneGUI.getScrollPane(), container);
 		myRoot.setLeft(leftPane);
@@ -338,12 +345,20 @@ public class Workspace implements Observer {
 	}
 
 	// @Deprecated
+	// public void createAnimalOld() {
+	// Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
+	// (myAnimalPaneGUI.getScrollPane().getPrefWidth() -
+	// myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
+	// / 2,
+	// (myAnimalPaneGUI.getScrollPane().getPrefHeight() -
+	// myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
+	// myAnimalPaneGUI.addAnimal(turtle);
+	// }
+
 	public void createAnimal() {
-		Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
-				(myAnimalPaneGUI.getScrollPane().getPrefWidth() - myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
-						/ 2,
-				(myAnimalPaneGUI.getScrollPane().getPrefHeight() - myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
-		myAnimalPaneGUI.addAnimal(turtle);
+		numTurtles++;
+		Animal animal = myAnimalPaneGUI.addAnimal();
+		renderAnimal(animal);
 	}
 
 	public void renderAnimalGrid() {
@@ -356,6 +371,9 @@ public class Workspace implements Observer {
 		if (isValidLocation(animal.getX(), animal.getY())) {
 			addAnimalToGrid(animal);
 		} else {
+			// This should never happen since turtle only is added to center of
+			// frame, but if this does change
+			// we will have a place to handle it here
 			System.out.println("NOT INSIDE ANIMAL PANE");
 		}
 	}
@@ -367,10 +385,10 @@ public class Workspace implements Observer {
 		animalImage.setTranslateX(myAnimalPaneGUI.getScrollPane().getPrefWidth() / 2);
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
 
-		System.out.println("Is animalClick null?" + animalClick);
-		// for multiple turtles
 		animalClick.setEventListener(animal);
-		myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
+		if(!myAnimalPaneGUI.getMyContainer().getChildren().contains(animalImage)) {
+			myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
+		}
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
 	}
 
@@ -387,12 +405,13 @@ public class Workspace implements Observer {
 	}
 
 	private String decodeColor(String color) {
-		for (Colors c : Colors.values()) {
-			if (c.toString().equals(color)) {
-				return c.getHexColor();
-			}
-		}
-		return null;
+		return Colors.BLACK.getColorMap().get(color);
+//		for (Colors c : Colors.values()) {
+//			if (c.toString().equals(color)) {
+//				return c.getHexColor();
+//			}
+//		}
+//		return null;
 	}
 
 	public ComboBox<String> createLanguageChooser() {
@@ -417,17 +436,8 @@ public class Workspace implements Observer {
 		if (o instanceof AnimalPane) {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {
-					// for (int animalId :
-					// animalGUI.getAnimalPane().getMyAnimalMap().keySet()) {
-
-					// for(Animal animal :
-					// animalGUI.getAnimalPane().getMyAnimalList()) {
-					// if(animal.getSelected()) {
-					System.out.println("BEGINNING ANIMATION in UPDATE");
+					// System.out.println("BEGINNING ANIMATION in UPDATE");
 					animation.beginAnimation(animalGUI);
-					// }
-					// }
-					// }
 				}
 			}
 		}

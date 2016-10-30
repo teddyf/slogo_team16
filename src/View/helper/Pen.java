@@ -63,6 +63,10 @@ public class Pen implements Observer {
 		counter++;
 	}
 	
+	public void resetCounter() {
+		counter = 0;
+	}
+	
 	public List<Line> getLineList() {
 		return lineList;
 	}
