@@ -4,7 +4,6 @@ import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 import model.command.control.ControlCommand;
-import model.command.control.selection.SelectionCommand;
 import model.command.turtle.TurtleCommand;
 
 public class MethodExpression extends Expression{
@@ -34,13 +33,14 @@ public class MethodExpression extends Expression{
 		int paramIndex = 0;
 		int endIndex = node.getChildren().size();
 		
-		if (command instanceof TurtleCommand || command instanceof ControlCommand) {
-			parameters[0] = new Parameter(turtle);
-			paramIndex++;
-		}
+		//if (command instanceof TurtleCommand || command instanceof ControlCommand) {
+			//parameters[0] = new Parameter(turtle);
+			//paramIndex++;
+		//}
 		//if (command instanceof SelectionCommand) {
 			//command.run()
 		//} else {
+		parameters[0] = new Parameter(turtle);
 		for (int c = 0; c < endIndex; c++) {
 			/*if (command instanceof SelectionCommand && c != 0) {
 				parameters[paramIndex] = new Parameter(node.getChildren().get(c));
@@ -48,8 +48,9 @@ public class MethodExpression extends Expression{
 				System.out.println(c + " " + node.getChildren().get(c));
 				parameters[paramIndex] = new Parameter(ExpressionTree.getInstance().process(turtle, node.getChildren().get(c)));
 			}*/
-			parameters[paramIndex] = new Parameter(node.getChildren().get(c));
-			paramIndex++;
+			System.out.println("c " + c + " " + node.getChildren().get(c));
+			parameters[c+1] = new Parameter(node.getChildren().get(c));
+			//paramIndex++;
 		}
 		System.out.println("DONE!!!");
 		value = command.run(parameters);

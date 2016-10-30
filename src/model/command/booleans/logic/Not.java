@@ -1,5 +1,7 @@
 package model.command.booleans.logic;
 
+import Parsing.ExpressionTree;
+import model.animal.Animal;
 import model.command.Parameter;
 
 public class Not extends BooleanLogic {
@@ -7,7 +9,7 @@ public class Not extends BooleanLogic {
 	
 	public Not() {
 		super();
-		numParams = 1;
+		numParams = 2;
 		paramCount = 1;
 	}
 
@@ -18,7 +20,8 @@ public class Not extends BooleanLogic {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double test = params[0].getValue();
+		Animal turtle = params[0].getAnimal();
+		double test = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 		return not(test);
 	}
 }

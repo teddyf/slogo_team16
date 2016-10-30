@@ -1,5 +1,7 @@
 package model.command.booleans.comparison;
 
+import Parsing.ExpressionTree;
+import model.animal.Animal;
 import model.command.Parameter;
 
 public class Equal extends BooleanComparison {
@@ -7,7 +9,7 @@ public class Equal extends BooleanComparison {
 	
 	public Equal() {
 		super();
-		numParams = 2;
+		numParams = 3;
 		paramCount = 2;
 	}
 
@@ -18,8 +20,9 @@ public class Equal extends BooleanComparison {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double expression1 = params[0].getValue();
-		double expression2 = params[1].getValue();
+		Animal turtle = params[0].getAnimal();
+		double expression1 = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double expression2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 		return equal(expression1, expression2);
 	}
 }

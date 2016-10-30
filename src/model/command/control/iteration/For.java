@@ -14,7 +14,7 @@ public class For extends Command {
 	public For() {
 		super();
 		numParams = 6;
-		paramCount = 5;
+		paramCount = Double.POSITIVE_INFINITY; //5
 	}
 	
 	/**
@@ -25,12 +25,12 @@ public class For extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		Variable variable = new Variable(params[1].getName());
+		Variable variable = new Variable(params[1].getNode().toString());
 		DataSingleton data = DataSingleton.getInstance();
 		data.addVariable(variable);
-		double start = params[2].getValue();
-		double end = params[3].getValue();
-		double increment = params[4].getValue();
+		double start = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		double end = ExpressionTree.getInstance().process(turtle, params[3].getNode());
+		double increment = ExpressionTree.getInstance().process(turtle, params[4].getNode());
 		TreeNode node = params[5].getNode();
 		
 		double value = 0;

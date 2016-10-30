@@ -14,7 +14,7 @@ public class DoTimes extends Command {
 	public DoTimes() {
 		super();
 		numParams = 4;
-		paramCount = 3;
+		paramCount = Double.POSITIVE_INFINITY; //was 3
 	}
 	
 	/**
@@ -25,10 +25,10 @@ public class DoTimes extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		Variable variable = new Variable(params[1].getName());
+		Variable variable = new Variable(params[1].getNode().toString());
 		DataSingleton data = DataSingleton.getInstance();
 		data.addVariable(variable);
-		double limit = params[2].getValue();
+		double limit = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 		TreeNode node = params[3].getNode();
 		
 		double value = 0;

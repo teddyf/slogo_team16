@@ -1,5 +1,6 @@
 package model.command.turtle.movement;
 
+import Parsing.ExpressionTree;
 import model.animal.Animal;
 import model.command.Parameter;
 
@@ -20,8 +21,8 @@ public class SetXY extends TurtleMovement {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double x = params[1].getValue();
-		double y = params[2].getValue();
+		double x = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double y = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 		return moveTo(turtle, x, y);
 	}
 }

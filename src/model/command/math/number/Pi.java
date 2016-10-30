@@ -8,7 +8,7 @@ public class Pi extends Command {
 	
 	public Pi() {
 		super();
-		numParams = 0;
+		numParams = 1;
 		paramCount = 0;
 	}
 

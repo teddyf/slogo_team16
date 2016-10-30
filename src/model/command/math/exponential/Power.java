@@ -1,5 +1,7 @@
 package model.command.math.exponential;
 
+import Parsing.ExpressionTree;
+import model.animal.Animal;
 import model.command.Parameter;
 
 public class Power extends MathExponential {
@@ -7,7 +9,7 @@ public class Power extends MathExponential {
 	
 	public Power() {
 		super();
-		numParams = 2;
+		numParams = 3;
 		paramCount = 2;
 	}
 
@@ -18,8 +20,9 @@ public class Power extends MathExponential {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double base = params[0].getValue();
-		double exponent = params[1].getValue();
+		Animal turtle = params[0].getAnimal();
+		double base = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double exponent = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 		return power(base, exponent);
 	}
 }
