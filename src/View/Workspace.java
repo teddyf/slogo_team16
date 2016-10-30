@@ -61,6 +61,7 @@ public class Workspace implements Observer {
 	private final String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
 			"Spanish" };
 
+	private String currentLanguage;
 	private BorderPane myRoot;
 	// private AnimalPane myAnimalPane;
 	private List<AnimalPaneGUI> myAnimalGUIList;
@@ -72,6 +73,8 @@ public class Workspace implements Observer {
 	private GenericPane<String> historyPane;
 	private int workSpaceID;
 	private SlogoView mainView;
+
+	private ComboBox<String> languageComboBox;
 
 	// support for multiple turtles
 	private int numTurtles;
@@ -94,6 +97,9 @@ public class Workspace implements Observer {
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
+		animalClick = new AnimalClick(myAnimalPaneGUI);
+		currentLanguage = languages[0];
+
 	}
 
 	public Workspace(int workspaceID, String color) {
@@ -109,8 +115,18 @@ public class Workspace implements Observer {
 		numTurtles = 0;
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
+		animalClick = new AnimalClick(myAnimalPaneGUI);
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
+		currentLanguage = languages[0];
 
+	}
+
+	public String getCurrentLanguage() {
+		return currentLanguage;
+	}
+
+	public void setCurrentLanguage(String newLanguage) {
+		this.currentLanguage = newLanguage;
 	}
 
 	public int getNumTurtles() {
@@ -146,6 +162,10 @@ public class Workspace implements Observer {
 		return turtleIDs;
 	}
 
+	public ComboBox<String> getLanguageComboBox() {
+		return languageComboBox;
+	}
+
 	public void init(SlogoView view) {
 		mainView = view;
 		myRoot = new BorderPane();
@@ -178,7 +198,7 @@ public class Workspace implements Observer {
 		Text title = new Text(myResources.getString("SLogo"));
 		title.getStyleClass().add("slogo-title");
 
-		ComboBox<String> languageComboBox = createLanguageChooser();
+		this.languageComboBox = createLanguageChooser();
 		languageComboBox.getStyleClass().add("language-button");
 
 		// Button tb = CREATETESTBUTTON();
@@ -400,9 +420,14 @@ public class Workspace implements Observer {
 		languageSelector.valueProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				myController.setParsingLanguage(newValue);
+				setCurrentLanguage(newValue);
 			}
 		});
 		return languageSelector;
+	}
+	
+	public void selectLanguageThroughUI(String language){
+		languageComboBox.getSelectionModel().select(language);
 	}
 
 	@Override

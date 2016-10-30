@@ -52,6 +52,9 @@ public class ParserRunner {
                 if(isNumber(s)){
                     names.add(s);
                 }
+                else if(isVariable(s)){
+                    names.add(s);
+                }
                 
                 else if(s.equals("[") || s.equals("]")){
                     names.add(s);
@@ -63,6 +66,7 @@ public class ParserRunner {
         ArrayList<String> combined = mergeSymbols(names, symbols);
         String[] sol1 = symbols.toArray(new String[symbols.size()]);
         String[] sol2 = names.toArray(new String[names.size()]);
+        //String[] sol3 = combined.toArray(new String[combined.size()]);
         String[][] sol = {sol1,sol2};
         return sol;
     }
@@ -139,6 +143,9 @@ public class ParserRunner {
         ArrayList<String> sol = new ArrayList<String>();
         for (int i = 0; i < a.size(); i++) {
             if (a.get(i).equals("NO MATCH")) {
+                if(b.get(i).equals("Variable")){
+                    sol.add(a.get(i));
+                }
                 sol.add(i, b.get(i));
             }
             else {
@@ -227,5 +234,9 @@ public class ParserRunner {
             }
         }
         return ERROR;
+    }
+    
+    public boolean isVariable(String input){
+        return parser.getLabel(input).equals("Variable");
     }
 }

@@ -1,6 +1,6 @@
 package Parsing;
 
-import model.DataSingleton;
+import model.Data;
 import model.animal.Animal;
 import model.variable.Variable;
 
@@ -18,7 +18,7 @@ public class VariableExpression extends Expression{
     
     @Override
     public double run(Animal turtle, TreeNode node) {
-    	Variable variable = DataSingleton.getInstance().getVariable(name);
+    	Variable variable = Data.getInstance().getVariable(name);
     	return variable.getValue();
     }
 }
