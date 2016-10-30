@@ -13,6 +13,7 @@ import View.helper.Buttons;
 import View.helper.Colors;
 import View.helper.Console;
 import View.helper.Graphics;
+import View.helper.UIDataUpdate;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
@@ -75,6 +76,8 @@ public class Workspace implements Observer {
 	private SlogoView mainView;
 
 	private ComboBox<String> languageComboBox;
+	
+	private UIDataUpdate UIUpdate;
 
 	// support for multiple turtles
 	private int numTurtles;
@@ -99,6 +102,7 @@ public class Workspace implements Observer {
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
+		UIUpdate = new UIDataUpdate(this);
 
 	}
 
@@ -118,6 +122,7 @@ public class Workspace implements Observer {
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
+		UIUpdate = new UIDataUpdate(this);
 
 	}
 	

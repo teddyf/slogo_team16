@@ -91,6 +91,7 @@ public class Data extends Observable {
 		if (colors.containsKey(index)) {
 			this.backgroundColor = colors.get(index);
 			setChanged();
+			notifyObservers();
 		} else {
 			// ERROR HANDLING
 		}
