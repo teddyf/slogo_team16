@@ -81,13 +81,6 @@ public class SlogoView {
 		Tab tab = new Tab();
 		if (stringExists(title)) {
 			tab.setText(numWorkspaces+": "+title);
-			/*
-			if (Character.isLetter(title.charAt(0))){
-				tab.setText(numWorkspaces+" "+title);
-			}else{
-				tab.setText(title);	
-			}
-			(*/
 		} else {
 			tab.setText(/* "Workspace #"+ */Integer.toString(numWorkspaces));
 		}

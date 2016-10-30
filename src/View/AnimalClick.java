@@ -28,8 +28,6 @@ public class AnimalClick {
 	public void setEventListener(Animal animal) {
 		animal.getImageView().setOnMouseClicked(event -> {
 			updateAnimal(animal);
-			System.out.println("Clicked! Active animals: ");
-			System.out.println(activeTurtles);
 		});
 	}
 
