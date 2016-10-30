@@ -1,5 +1,7 @@
 package model.command.math.arithmetic;
 
+import Parsing.ExpressionTree;
+import model.animal.Animal;
 import model.command.Parameter;
 
 public class Product extends MathArithmetic {
@@ -7,7 +9,7 @@ public class Product extends MathArithmetic {
 	
 	public Product() {
 		super();
-		numParams = 2;
+		numParams = 3;
 		paramCount = 2;
 	}
 
@@ -17,8 +19,9 @@ public class Product extends MathArithmetic {
 	 * @return the product
 	 */
 	public double run(Parameter[] params) {
-		double expression1 = params[0].getValue();
-		double expression2 = params[1].getValue();
+		Animal turtle = params[0].getAnimal();
+		double expression1 = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double expression2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 		return product(expression1, expression2);
 	}
 }

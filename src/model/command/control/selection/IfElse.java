@@ -4,8 +4,9 @@ import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import model.animal.Animal;
 import model.command.Parameter;
+import model.command.control.ControlCommand;
 
-public class IfElse extends SelectionCommand {
+public class IfElse extends ControlCommand {
 	private final double paramCount;
 	
 	public IfElse() {
@@ -22,7 +23,7 @@ public class IfElse extends SelectionCommand {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double expression = params[1].getValue();
+		double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 		TreeNode trueNode = params[2].getNode();
 		TreeNode falseNode = params[3].getNode();
 		
