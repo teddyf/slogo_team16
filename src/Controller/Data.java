@@ -12,22 +12,22 @@ public class Data extends Observable {
 	private HashMap<String, Command> commands;
 	private HashMap<Integer, String> colors;
 	private String backgroundColor;
-/*
-	private Data() {
-		variables = new HashMap<String, Variable>();
-		commands = new HashMap<String, Command>();
-		colors = new HashMap<Integer, String>();
-	}
-*/
 	private String penColor;
-
-	private Data() {
-		variables = new HashMap<String, Variable>();
-		commands = new HashMap<String, Command>();
-		colors = new HashMap<Integer, String>();
-
+	private int penSize;
+	
+	private Data(){
+		variables = new HashMap<String,Variable>();
+		commands = new HashMap<String,Command>();
+		colors = new HashMap<Integer,String>();
+		colors.put(0, "WHITE");
+		colors.put(1, "BLACK");
+		colors.put(2, "BLUE");
+		colors.put(3, "GREEN");
+		colors.put(4, "RED");
 		backgroundColor = "WHITE";
 		penColor = "BLACK";
+		penSize = 1;
+		
 	}
 
 	public static Data getInstance() {
@@ -110,7 +110,10 @@ public class Data extends Observable {
 	public String getPenColor() {
 		return penColor;
 	}
-
+	public int getPenSize() {
+		return penSize;
+	}
+	
 	public void setBackgroundColor(int index) {
 		if (colors.containsKey(index)) {
 			this.backgroundColor = colors.get(index);
@@ -127,5 +130,9 @@ public class Data extends Observable {
 		} else {
 			// ERROR HANDLING
 		}
+	}
+	
+	public void setPenSize(int pixels) {
+		this.penSize = pixels;
 	}
 }

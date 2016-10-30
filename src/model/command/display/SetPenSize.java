@@ -6,25 +6,25 @@ import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 
-public class SetPenColor extends Command {
+public class SetPenSize extends Command {
 	private final double paramCount;
 	
-	public SetPenColor() {
+	public SetPenSize() {
 		super();
 		numParams = 2;
 		paramCount = 1;
 	}
 	
 	/**
-	 * Sets the pen color to the color corresponding to a given index
+	 * Sets the size of the pen to be a certain thickness in pixels
 	 * @param params - array of parameters
-	 * @return the color index
+	 * @return the pen thickness in pixels
 	 */
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double index = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-		Data.getInstance().setPenColor((int)index);
-		return index;
+		double pixels = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		Data.getInstance().setPenSize((int)pixels);
+		return pixels;
 	}
 }
