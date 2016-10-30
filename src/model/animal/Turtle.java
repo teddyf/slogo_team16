@@ -1,8 +1,8 @@
 package model.animal;
 
-import View.AnimatedGif.AnimatedAnimal;
 import View.helper.Graphics;
 import View.helper.Pen;
+import View.helper.PenColor;
 import javafx.animation.Animation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,9 +18,8 @@ public class Turtle extends Animal {
 	
 	
 	
-	public Turtle() {
+	public Turtle(PenColor penColor) {
 		super();
-		
 		
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
@@ -32,13 +31,15 @@ public class Turtle extends Animal {
 		AnimatedAnimal animal = new AnimatedAnimal();
 		animalGif=animal.getAnimation();
 		*/
-		
-		actualPen = new Pen(getX(), getY());
+//		penColor = new PenColor();
+		actualPen = new Pen(getX(), getY(), penColor);
+//		penColor.addObserver(actualPen);
 //		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
 //		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
 
 	}
 	
+	@Deprecated
 	public Turtle(double width, double height) {
 		super(width, height);
 		setImagePath("turtleLogo.png");
@@ -49,12 +50,15 @@ public class Turtle extends Animal {
 		AnimatedAnimal animal = new AnimatedAnimal();
 		animalGif=animal.getAnimation();
 		*/
+//		penColor = new PenColor();
 		actualPen = new Pen(getX(), getY());
+//		penColor.addObserver(actualPen);
 //		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
 //		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
 
 	}
 
+	@Deprecated
 	public Turtle(double width, double height, double x, double y) {
 		super(width, height, x, y);
 		setImagePath("turtleLogo.png");
@@ -65,7 +69,9 @@ public class Turtle extends Animal {
 		AnimatedAnimal animal = new AnimatedAnimal();
 		animalGif=animal.getAnimation();
 		*/
+//		penColor = new PenColor();
 		actualPen = new Pen(getX(), getY());
+//		penColor.addObserver(actualPen);
 //		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
 //		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
 

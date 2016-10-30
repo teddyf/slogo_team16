@@ -92,7 +92,7 @@ public class SlogoView {
 		//set language
 		getCurrentWorkspaceLeftPane().selectLanguageThroughUI(language);
 		//set number of turtles
-		createNumTurtles();
+//		createNumTurtles();
 	}
 	
 	private void createNumTurtles(){

@@ -57,21 +57,20 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		graphics = new Graphics();
 		content = new ListView<>();
 		this.workspace=workspace;
-		createAllOptions();
+		createAllOptions(animalPaneGUI);
 		populateColorHexVals();
 	}
 	
 	private void populateColorHexVals(){
 		for(Colors c : Colors.values() ){ 
 			colorHexVals.put(c.toString(), c.getHexColor());
-		}
-			
+		}		
 	}
-	private void createAllOptions() {
+	
+	private void createAllOptions(AnimalPaneGUI animalPaneGUI) {
 
-		PenColor penColor = new PenColor();
-		penColor.addObserver(animalPaneGUI.getAnimalPane().getMyAnimalList().get(0).getActualPen());
-
+		PenColor penColor = animalPaneGUI.getAnimalPane().getPenColor();
+		
 		HBox backgroundColor = createBackgroundColorOptions();
 		content.getItems().addAll(penColor.getContainer(), backgroundColor);
 		addToPane(addButtonsToHBox(createButtons()));

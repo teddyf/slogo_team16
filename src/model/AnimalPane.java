@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import View.helper.Coordinate;
+import View.helper.PenColor;
 import model.animal.Animal;
 import model.animal.Turtle;
 
@@ -23,6 +24,8 @@ public class AnimalPane extends Observable implements Observer {
 	// Map of string ID to List of CoordinatePair<double x, double y>
 	private Map<Integer, List<Coordinate>> coordinateMap;
 	private List<Coordinate> coordinateList;
+	
+	private PenColor penColor;
 
 	private int animalID;
 	
@@ -43,6 +46,8 @@ public class AnimalPane extends Observable implements Observer {
 		//list of Animal ID and Coordinate Lists for translation rendering
 		coordinateList = new ArrayList<Coordinate>();
 		coordinateMap = new HashMap<Integer, List<Coordinate>>();
+		
+		penColor = new PenColor();
 
 		}
 
@@ -69,7 +74,9 @@ public class AnimalPane extends Observable implements Observer {
 	
 	public Animal addAnimal() {
 		animalID++;
-		Animal animal = new Turtle();
+		Animal animal = new Turtle(penColor);
+		
+		penColor.addObserver(animal.getActualPen());
 		
 		myAnimalMap.put(animalID, animal);
 		myAnimalList.add(animal);
@@ -93,6 +100,9 @@ public class AnimalPane extends Observable implements Observer {
 		
 		System.out.println("Added animal in backend AnimalPane");
 		animalID++;
+		
+		penColor.addObserver(animal.getActualPen());
+
 		
 		myAnimalMap.put(animalID, animal);
 		myAnimalList.add(animal);
@@ -200,5 +210,13 @@ public class AnimalPane extends Observable implements Observer {
 
 	public void setMyAnimalList(List<Animal> myAnimalList) {
 		this.myAnimalList = myAnimalList;
+	}
+
+	public PenColor getPenColor() {
+		return penColor;
+	}
+
+	public void setPenColor(PenColor penColor) {
+		this.penColor = penColor;
 	}
 }
