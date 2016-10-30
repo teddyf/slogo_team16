@@ -115,7 +115,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Button newWkspc=buttons.newWorkspaceFromFileButton();
 		//Button decTurtle = buttons.createDecrementNumTurtlesButton(workspace);
 		
-		Button[] buttons = {wkspc, saveWkspc, addTurtle, clearAll, newWkspc};
+		Button[] buttons = {wkspc, saveWkspc, newWkspc, addTurtle, clearAll};
 		return buttons;
 	}
 	
