@@ -4,8 +4,9 @@ import java.util.List;
 
 import View.AnimalPaneGUI;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import model.animal.Animal;
 
@@ -18,39 +19,44 @@ import model.animal.Animal;
  */
 public class Animate {
 
-	private List<Coordinate> coordinatePairs;
+//	private List<Coordinate> coordinatePairs;
 	private AnimalPaneGUI animalPaneGUI;
-	private Pen pen;
-	private int counter;
+	// private Pen pen;
+	// private int counter;
 
 	// decrease this to speed up, increase to slow down
 	private double SPEED = 1;
 
 	public void beginAnimation(AnimalPaneGUI animalPaneGUI) {
 		this.animalPaneGUI = animalPaneGUI;
-		coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
-		counter = 0;
+		final List<Coordinate> coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
+		// counter = 0;
 
-		// TODO: will this work with multiple turtles
 		for (Animal animal : animalPaneGUI.getAnimalPane().getMyAnimalList()) {
-			pen = animal.getActualPen();
-			translateAnimation(coordinatePairs.get(counter), animal);
+			IntegerProperty counter = new SimpleIntegerProperty();
+			// issue is that pen is getting overriden while translatetransition
+			// is moving haha
+			Pen pen = animal.getActualPen();
+			pen.getLineList().clear();
+			pen.resetCounter();
+			translateAnimation(coordinatePairs.get(counter.get()), animal, pen, counter, coordinatePairs);
 		}
 	}
 
-	private void translateAnimation(Coordinate coordinate, Animal animal) {
+	private void translateAnimation(Coordinate coordinate, Animal animal, Pen pen, IntegerProperty counter, List<Coordinate> coordinatePairs) {
 		ImageView animalImage = animal.getImageView();
-		bindPenToAnimal(animalImage, coordinate);
+		bindPenToAnimal(animalImage, coordinate, pen);
 		changeAnimalVisibility(animalImage, coordinate);
-		handleRotation(coordinate, animalImage);
-		handleMovement(coordinate, animal, animalImage);
+		changeAnimalHeading(coordinate, animalImage);
+		changeAnimalPosition(coordinate, animal, animalImage, pen, counter, coordinatePairs);
 	}
-	
+
 	public void changeAnimalVisibility(ImageView animalImage, Coordinate coordinate) {
 		animalImage.setVisible(coordinate.getShowing() != 0);
 	}
 
-	private void handleMovement(Coordinate point, Animal animal, ImageView animalImage) {
+	private void changeAnimalPosition(Coordinate point, Animal animal, ImageView animalImage, Pen pen,
+			IntegerProperty counter, List<Coordinate> coordinatePairs) {
 		TranslateTransition translation = new TranslateTransition(Duration.millis(getTranslateTime(point, animalImage)),
 				animalImage);
 
@@ -58,10 +64,10 @@ public class Animate {
 
 		translation.setOnFinished(e -> {
 			updateAnimalCoordinates(point, animal);
-			unbindPen(point);
-			incrementCounters(point);
-			if (counter < coordinatePairs.size()) {
-				translateAnimation(coordinatePairs.get(counter), animal);
+			unbindPen(point, pen);
+			incrementCounters(point, pen, counter);
+			if (counter.get() < coordinatePairs.size()) {
+				translateAnimation(coordinatePairs.get(counter.get()), animal, pen, counter, coordinatePairs);
 			}
 		});
 		translation.play();
@@ -74,11 +80,11 @@ public class Animate {
 		translation.setToY(point.getY());
 	}
 
-	private void incrementCounters(Coordinate coordinate) {
+	private void incrementCounters(Coordinate coordinate, Pen pen, IntegerProperty counter) {
 		if (coordinate.getPen() == 1) {
 			pen.incrementCounter();
 		}
-		counter++;
+		counter.set(counter.get() + 1);
 	}
 
 	private void updateAnimalCoordinates(Coordinate point, Animal animal) {
@@ -86,18 +92,18 @@ public class Animate {
 		animal.setY(point.getY());
 	}
 
-	private void unbindPen(Coordinate coordinate) {
-		if (coordinate.getPen() == 1) {
+	private void unbindPen(Coordinate coordinate, Pen pen) {
+		if (coordinate.getPen() == 1 && (pen.getLineList().size() - 1 >= pen.getCounter())) {
 			pen.getLineList().get(pen.getCounter()).endXProperty().unbind();
 			pen.getLineList().get(pen.getCounter()).endYProperty().unbind();
 		}
 	}
 
-	private void handleRotation(Coordinate coordinate, ImageView animalImage) {
+	private void changeAnimalHeading(Coordinate coordinate, ImageView animalImage) {
 		animalImage.setRotate(coordinate.getHeading());
 	}
 
-	private void bindPenToAnimal(ImageView animalImage, Coordinate coordinate) {
+	private void bindPenToAnimal(ImageView animalImage, Coordinate coordinate, Pen pen) {
 		if (coordinate.getPen() == 1) {
 			pen.createLine(animalImage.getTranslateX(), animalImage.getTranslateY());
 			animalPaneGUI.getMyContainer().getChildren().add(pen.getLineList().get(pen.getCounter()));
