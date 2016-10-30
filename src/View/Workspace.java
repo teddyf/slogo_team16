@@ -173,7 +173,7 @@ public class Workspace implements Observer {
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
-		mainView.setBackgroundColor(defaultBackgroundColor);
+		changeAnimalBackgroundColor(defaultBackgroundColor);
 	}
 
 	public void createAnimalPaneGUI() {
