@@ -54,6 +54,8 @@ public class AnimalController implements Controller {
 			for (int t = 0; t < activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().size(); t++) {
 				runCommands(activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(t));
 			}
+			activeAnimalPaneGUI.getAnimalPane().signalAnimation();
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,6 +125,7 @@ public class AnimalController implements Controller {
 		
 //		activeAnimalPaneGUI.getAnimalPane().setCoordinateList(points);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(mapPoints);
+//		return mapPoints;
 
 	}
 

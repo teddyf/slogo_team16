@@ -175,6 +175,9 @@ public class AnimalPane extends Observable implements Observer {
 		for(Integer id : coordinateMap.keySet()) {
 				this.coordinateMap.put(id, coordinateMap.get(id));
 		}
+	}
+	
+	public void signalAnimation() {
 		setChanged();
 		notifyObservers();
 	}
