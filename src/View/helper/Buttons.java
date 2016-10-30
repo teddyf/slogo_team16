@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Observable;
 
 import Controller.Controller;
+import Controller.Data;
 import Controller.DataSetup.DataOutput;
 import View.AnimalPaneGUI;
 import View.HomeSelection;
@@ -44,7 +45,7 @@ public class Buttons extends Observable {
 
 	}
 
-	public VBox createConsoleInputButtons(Console console, GenericPane<String> pane, SlogoView slogoView) {
+	public VBox createConsoleInputButtons(Console console, GenericPane<String> pane, SlogoView slogoView, Workspace wkspc) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
 		Button clear = createClearConsoleButton(console, slogoView);
@@ -83,6 +84,7 @@ public class Buttons extends Observable {
 	}
 
 	private void updateObservers(String input) {
+		Data.getInstance().getBackgroundColor();
 		currentCommand = input;
 		setChanged();
 		notifyObservers();

@@ -316,7 +316,7 @@ public class Workspace implements Observer {
 	}
 
 	private VBox createButtons() {
-		VBox container = buttons.createConsoleInputButtons(console, historyPane, mainView);
+		VBox container = buttons.createConsoleInputButtons(console, historyPane, mainView, this);
 		return container;
 	}
 
@@ -406,7 +406,7 @@ public class Workspace implements Observer {
 	public void changeAnimalBackgroundColor(String color) {
 		String hexColor = decodeColor(color);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
-		this.getMyRoot().setStyle("-fx-background-color: " + hexColor + ";");
+		//this.getMyRoot().setStyle("-fx-background-color: " + hexColor + ";");
 	}
 
 	private String decodeColor(String color) {
