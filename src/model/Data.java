@@ -4,17 +4,17 @@ import java.util.HashMap;
 import model.command.Command;
 import model.variable.Variable;
 
-public class DataSingleton {
-	private static final DataSingleton instance = new DataSingleton();
+public class Data {
+	private static final Data instance = new Data();
 	private HashMap<String,Variable> variables;
 	private HashMap<String,Command> commands;
 	
-	private DataSingleton(){
+	private Data(){
 		variables = new HashMap<String,Variable>();
 		commands = new HashMap<String,Command>();
 	}
 	
-	public static DataSingleton getInstance() {
+	public static Data getInstance() {
 		return instance;
 	}
 	

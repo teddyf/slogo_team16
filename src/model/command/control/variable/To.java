@@ -1,7 +1,8 @@
 package model.command.control.variable;
 
+import Parsing.ExpressionTree;
 import Parsing.TreeNode;
-import model.DataSingleton;
+import model.Data;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.NewCommand;
@@ -25,8 +26,8 @@ public class To extends ControlCommand {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		DataSingleton data = DataSingleton.getInstance();
-		String commandName = params[1].getName();
+		Data data = Data.getInstance();
+		String commandName = params[1].getNode().toString();
 		if (data.containsCommand(commandName)) {
 			return 0; //IMPLEMENT ERROR CHECKING
 		}

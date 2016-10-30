@@ -120,17 +120,6 @@ public class ExpressionTree {
         }
     }
     
-    /*public void dfs(){
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        st.addAll(root.getNeighbors());
-        System.out.println(root.getChildren());
-        while(!st.isEmpty()){
-            TreeNode temp = st.pop();
-            System.out.println(temp.getChildren());
-            st.addAll(temp.getChildren());
-        }
-    }*/
-    
     private boolean match (String text, Pattern regex) {
         // THIS IS THE KEY LINE
         return regex.matcher(text).matches();
@@ -146,19 +135,11 @@ public class ExpressionTree {
         return ERROR;
     }
     
-    /*public ArrayList<TreeNode> reverse(ArrayList<TreeNode> a){
-        ArrayList<TreeNode> rev = new ArrayList<TreeNode>();
-        for(int i = a.size()-1; i >= 0; i--){
-            rev.add(a.get(i));
-        }
-        return rev;
-    }*/
-    
     public double process(Animal turtle, TreeNode node) {
-        double value = 0;
-        Expression nodeExpression = node.expression;
-        value = nodeExpression.run(turtle, node);
-        return value;
+    	//dfs();
+    	double value = 0;
+    	Expression nodeExpression = node.expression;
+    	value = nodeExpression.run(turtle, node);
+    	return value;
     }
 }
-

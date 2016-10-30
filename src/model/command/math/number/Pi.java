@@ -14,6 +14,7 @@ public class Pi extends Command {
 
 	/**
 	 * Reports the number pi
+	 * @param params - array of parameters
 	 * @return pi
 	 */
 	@Override
