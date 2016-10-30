@@ -1,9 +1,1 @@
-<<<<<<< HEAD
-
-repeat 5 [ fd 100 rt 144 ]
-
-right 90 fd 100
-
-=======
-fd 50
->>>>>>> Aninda
+setbackground 3

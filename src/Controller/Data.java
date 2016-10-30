@@ -14,6 +14,7 @@ public class Data extends Observable {
 	private String backgroundColor;
 	private String penColor;
 	private int penSize;
+	private String shape;
 	
 	private Data(){
 		variables = new HashMap<String,Variable>();
@@ -27,7 +28,7 @@ public class Data extends Observable {
 		backgroundColor = "WHITE";
 		penColor = "BLACK";
 		penSize = 1;
-		
+		shape = "";
 	}
 
 	public static Data getInstance() {
@@ -112,6 +113,10 @@ public class Data extends Observable {
 	}
 	public int getPenSize() {
 		return penSize;
+	}
+	
+	public String getShape() {
+		return shape;
 	}
 	
 	public void setBackgroundColor(int index) {
