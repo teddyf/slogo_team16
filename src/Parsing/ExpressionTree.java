@@ -73,15 +73,13 @@ public class ExpressionTree {
         Object obj;
         if (label.equals("Command")) {
             obj = getCommand(name);
-        }
-        else if (label.equals("Constant")) {
+        } else if (label.equals("Constant")) {
             obj = Double.parseDouble(name);
-        }
-        
-        else if (label.equals("ListStart")){
+        } else if (label.equals("ListStart")){
             obj = 0;
-        }
-        else {
+        } else if (label.equals("Variable")) {
+        	obj = name;
+        } else {
             throw new InvalidLabelException("Invalid user input");
         }
         Expression e = factory.getInfo(name, label, obj);
