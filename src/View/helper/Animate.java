@@ -47,11 +47,14 @@ public class Animate {
 		
 		for(Integer id : coordinatePairs.keySet()) {
 			Animal animal = animalPaneGUI.getAnimalPane().getMyAnimalMap().get(id);
+			if (!animal.getSelected()) {
+				continue;
+			}
 			IntegerProperty counter = new SimpleIntegerProperty();
 			Pen pen = animal.getActualPen();
 			pen.getLineList().clear();
 			pen.resetCounter();
-			
+
 			Coordinate coordinatePoint = animalPaneGUI.getAnimalPane().getCoordinateMap().get(animal.getId()).get(counter.get());
 			translateAnimation(coordinatePoint, animal, pen, counter, coordinatePairs.get(animal.getId()));
 			
