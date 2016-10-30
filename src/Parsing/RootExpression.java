@@ -1,5 +1,9 @@
 package Parsing;
 
+import java.util.List;
+import java.util.Map;
+
+import View.helper.Coordinate;
 import model.animal.Animal;
 
 public class RootExpression extends Expression{

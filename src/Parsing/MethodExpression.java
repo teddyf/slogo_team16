@@ -1,5 +1,10 @@
 package Parsing;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import View.helper.Coordinate;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
@@ -52,6 +57,8 @@ public class MethodExpression extends Expression{
 			//paramIndex++;
 		}
 		value = command.run(parameters);
+		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
+		ExpressionTree.getInstance().addPoint(coordinates);
 		System.out.println("DONE!!!");
 		return value;
     }

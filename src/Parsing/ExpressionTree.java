@@ -1,5 +1,6 @@
 package Parsing;
 import ErrorHandling.*;
+import View.helper.Coordinate;
 import model.animal.Animal;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
@@ -14,11 +15,12 @@ public class ExpressionTree {
     private TreeNode root;
     private List<Entry<String, Pattern>> methodPaths;
     private ExpressionFactory factory;
-    //private Stack<Expression> expressions;
+    private List<Coordinate> points;
+    
     private ExpressionTree(){
         methodPaths = new ArrayList<>();
-        //expressions  = new Stack<Expression>();
         factory = new ExpressionFactory();
+        points = new ArrayList<Coordinate>();
         addPatterns(RESOURCE_PATH);
     }
     
@@ -141,5 +143,13 @@ public class ExpressionTree {
     	Expression nodeExpression = node.expression;
     	value = nodeExpression.run(turtle, node);
     	return value;
+    }
+    
+    public void setPoints(List<Coordinate> points) {
+    	this.points = points;
+    }
+    
+    public void addPoint(Coordinate coordinate) {
+    	points.add(coordinate);
     }
 }

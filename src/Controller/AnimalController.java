@@ -96,6 +96,9 @@ public class AnimalController implements Controller {
 		String[][] line = myParserRunner.combineAllLines();
 		String[][] markedLine = myParserRunner.markDepth(line);
 		TreeNode root = ExpressionTree.getInstance().buildTree(markedLine);
+		
+		List<Coordinate> points = new ArrayList<Coordinate>();
+		ExpressionTree.getInstance().setPoints(points);
 		value = ExpressionTree.getInstance().process(turtle, root);
 		/*CommandProcessor processor = new CommandProcessor();
 		processor.run(turtle);
@@ -112,16 +115,12 @@ public class AnimalController implements Controller {
 			activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
 		}*/
 		System.out.println("VALUE " + value);
-		System.out.println("TURTLE " + turtle.getX());
+		/*System.out.println("TURTLE " + turtle.getX());
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
 		List<Coordinate> points = new ArrayList<Coordinate>();
-		points.add(coordinates);
-
+		points.add(coordinates);*/
 		Map<Integer, List<Coordinate>> mapPoints = new HashMap<>();
 		mapPoints.put(turtle.getId(), points);
-		
-		
-//		activeAnimalPaneGUI.getAnimalPane().setCoordinateList(points);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(mapPoints);
 
 	}
