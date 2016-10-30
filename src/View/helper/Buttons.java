@@ -101,6 +101,7 @@ public class Buttons extends Observable {
 			console.clearConsole();
 			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
 			animalPane.resetMyAnimalList();
+			//check if this add is necessary
 			pane.createAnimal();
 			pane.resetLeftPane();
 		});
@@ -140,7 +141,7 @@ public class Buttons extends Observable {
 		Button addTurtle = graphic.createButton("Add one annoying turtle");
 		addTurtle.setPrefWidth(Workspace.BUTTON_WIDTH);
 		addTurtle.setOnAction(e -> {
-			wkspc.incrementNumTurtles();
+			wkspc.createAnimal();
 		});
 		return addTurtle;
 	}

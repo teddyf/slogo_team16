@@ -3,7 +3,10 @@ package Controller;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import ErrorHandling.InvalidLabelException;
 import Parsing.ExpressionTree;
 import Parsing.ParserRunner;
@@ -113,7 +116,14 @@ public class AnimalController implements Controller {
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
 		List<Coordinate> points = new ArrayList<Coordinate>();
 		points.add(coordinates);
-		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
+
+		Map<Integer, List<Coordinate>> mapPoints = new HashMap<>();
+		mapPoints.put(turtle.getId(), points);
+		
+		
+//		activeAnimalPaneGUI.getAnimalPane().setCoordinateList(points);
+		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(mapPoints);
+
 	}
 
 	// Could have this listening to the main view, and when user switches

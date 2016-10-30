@@ -1,12 +1,8 @@
 package View;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import View.helper.Graphics;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import model.animal.Animal;
 
 public class AnimalClick {
@@ -17,30 +13,34 @@ public class AnimalClick {
 	// private Map<Animal, String> activeTurtles = new HashMap<Animal,
 	// String>();
 	private Graphics graphic = new Graphics();
-	private ArrayList<Animal> activeTurtles; // = new ArrayList<Animal>();
+	private List<Animal> activeTurtles; // = new ArrayList<Animal>();
 	private AnimalPaneGUI animalPane;
 
 	public AnimalClick(AnimalPaneGUI animalPane) {
 		this.animalPane = animalPane;
-		activeTurtles = (ArrayList<Animal>) animalPane.getMyAnimalList();
+//		activeTurtles = animalPane.getMyAnimalList();
+	}
+	
+	public AnimalClick() {
+		
 	}
 
 	public void setEventListener(Animal animal) {
 		animal.getImageView().setOnMouseClicked(event -> {
 			updateAnimal(animal);
-			System.out.println("Clicked! Active animals: ");
-			System.out.println(activeTurtles);
 		});
 	}
 
 	private void updateAnimal(Animal animal) {
-		if (isActiveAnimal(animal)) { // it's already active, so deactivate it
+		if (animal.getSelected()) { // it's already active, so deactivate it
 			// activeTurtles.remove(animal);
-			animalPane.removeAnimal(animal);
+//			animalPane.removeAnimal(animal);
+			animal.setSelected(false);
 			animal.getImageView().setStyle("-fx-image: url(\"" + DEADTURTLE + "\");");
 		} else {
 			// setActiveAnimal(animal);
-			animalPane.addAnimal(animal);
+//			animalPane.addAnimal(animal);
+			animal.setSelected(true);
 			animal.getImageView().setStyle("-fx-image: url(\"" + WEIRDTURTLE + "\");");
 			// setNewImage("turtleLogo.png",animal);
 		}
@@ -48,12 +48,12 @@ public class AnimalClick {
 		// "\");");
 	}
 
-	public ArrayList<Animal> getActiveTurtles() {
-		animalPane.setMyAnimalList(activeTurtles);
+	public List<Animal> getActiveTurtles() {
+//		animalPane.setMyAnimalList(activeTurtles);
 		return activeTurtles;
 	}
 
-	public void setActiveTurtles(ArrayList<Animal> activeTurtles) {
+	public void setActiveTurtles(List<Animal> activeTurtles) {
 		this.activeTurtles = activeTurtles;
 	}
 
