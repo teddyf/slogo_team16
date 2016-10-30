@@ -114,8 +114,8 @@
 						</div>
 					</TD>
 					<TD>these brackets enclose a list of zero or more commands or
-						variables<br /> note, to make parsing easier, these will always be
-						separated from other tokens by spaces
+						variables<br /> note, to make parsing easier, these will always
+						be separated from other tokens by spaces
 					</TD>
 					<TD>
 						<div align="right">
@@ -266,7 +266,8 @@
 					<TH>Description</TH>
 				</TR>
 				<TR>
-					<TD>SUM <em>expr1</em> <em>expr2</em><br /> + <em>expr1</em> <em>expr2</em></TD>
+					<TD>SUM <em>expr1</em> <em>expr2</em><br /> + <em>expr1</em>
+						<em>expr2</em></TD>
 					<TD>returns sum of the values of <i>expr1</i> and <i>expr2</i></TD>
 				</TR>
 				<TR>
@@ -415,8 +416,8 @@
 					<TD>REPEAT <em>expr</em> [ <em>command(s)</em> ]
 					</TD>
 					<TD>runs <em>command(s</em>) given in the list the value of <i></i>
-						<em></em> <em>expr</em> number of times<br /> returns the value of
-						the final command executed (or 0 if no commands are executed)<br />
+						<em></em> <em>expr</em> number of times<br /> returns the value
+						of the final command executed (or 0 if no commands are executed)<br />
 						note, the value of the current iteration, starting at 1, is
 						automatically assigned to the variable <em>:repcount</em> so that
 						it can be accessed by the <em>command(s)</em></TD>
@@ -524,8 +525,7 @@
 					<tr>
 						<td><code>
 								PENCOLOR<br>
-							</code>
-							<code>PC</code></td>
+							</code> <code>PC</code></td>
 						<td>returns turtle's current color index</td>
 					</tr>
 					<tr>
@@ -555,6 +555,11 @@
 					is deactivated, it will become a penguin head. When it is
 					activated, it'll be a green turtle. To activate, just click on the
 					penguin head again.</li>
+				<li>In the options pane, you can also change the images of the
+					dead and active turtles by adding their urls. We decided that using
+					a file chooser was too restrictive. What if a specific image
+					doesn't suit the user's taste? They should be able to choose any
+					image from online to replace the turtle.</li>
 
 			</ul>
 
