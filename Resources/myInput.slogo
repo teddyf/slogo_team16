@@ -1,5 +1,5 @@
-<<<<<<< HEAD
+
 repeat 5 [ fd 100 rt 144 ]
-=======
+
 right 90 fd 100
->>>>>>> 68f3ea668ba3d71973bace5180f31ab35f184497
+
