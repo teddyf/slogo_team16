@@ -119,10 +119,10 @@ public class Data extends Observable {
 	
 	public void setBackgroundColor(int index) {
 		System.out.println("setting background");
-		setChanged();
-		notifyObservers();
 		if (colors.containsKey(index)) {
 			this.backgroundColor = colors.get(index);
+			setChanged();
+			notifyObservers();
 		} else {
 			// ERROR HANDLING
 		}
