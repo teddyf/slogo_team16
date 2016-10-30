@@ -9,6 +9,7 @@ import View.SlogoView;
 import View.Workspace;
 import View.helper.Buttons;
 import View.helper.Colors;
+import View.helper.Console;
 import View.helper.Graphics;
 import View.helper.PenColor;
 import javafx.collections.ObservableList;
@@ -108,9 +109,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Button wkspc = buttons.createNewWorkspaceButton(slogoView);
 		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
 		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
+		Button clearAll = buttons.resetAndClearScreenButton(workspace.getConsole(), slogoView, animalPaneGUI);
 		//Button decTurtle = buttons.createDecrementNumTurtlesButton(workspace);
 		
-		Button[] buttons = {wkspc, saveWkspc, addTurtle};
+		Button[] buttons = {wkspc, saveWkspc, addTurtle, clearAll};
 		return buttons;
 	}
 	

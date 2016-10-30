@@ -1,16 +1,20 @@
 package View.helper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
 import Controller.Controller;
 import Controller.DataSetup.DataOutput;
+import View.AnimalPaneGUI;
 import View.SlogoView;
 import View.Workspace;
 import View.helpscreen.HelpScreen;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import model.animal.Animal;
 
 /**
  * Handles buttons
@@ -40,7 +44,7 @@ public class Buttons extends Observable {
 	public VBox createConsoleInputButtons(Console console, GenericPane<String> pane, SlogoView slogoView) {
 		VBox container = new VBox(5);
 		Button run = createRunButton(console, pane);
-		Button clear = createClearButton(console, slogoView);
+		Button clear = createClearConsoleButton(console, slogoView);
 		Button help = createHTMLHelpButton();
 		container.getChildren().addAll(run, clear, help);
 		return container;
@@ -81,14 +85,24 @@ public class Buttons extends Observable {
 		notifyObservers();
 	}
 
-	private Button createClearButton(Console console, SlogoView slogoView) {
-		Button clear = graphic.createButton("Clear");
+	private Button createClearConsoleButton(Console console, SlogoView slogoView) {
+		Button clear = graphic.createButton("Clear Console");
+		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
+		clear.setOnAction(e -> {
+			console.clearConsole();
+		});
+		return clear;
+	}
+	
+	public Button resetAndClearScreenButton(Console console, SlogoView slogoView, AnimalPaneGUI animalPane){
+		Button clear = graphic.createButton("Reset Screen");
 		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
 		clear.setOnAction(e -> {
 			console.clearConsole();
 			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
+			animalPane.resetMyAnimalList();
+			pane.createAnimal();
 			pane.resetLeftPane();
-
 		});
 		return clear;
 	}

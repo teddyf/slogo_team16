@@ -1,21 +1,17 @@
 package model.command.control.selection;
 
-import java.util.ArrayList;
-
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import model.animal.Animal;
-import model.command.Command;
-import model.command.CommandProcessor;
 import model.command.Parameter;
 
-public class If extends Command {
+public class If extends SelectionCommand {
 	private final double paramCount;
 	
 	public If() {
 		super();
-		numParams = 2;
-		paramCount = 2;
+		numParams = 3;
+		paramCount = Double.POSITIVE_INFINITY; //was 2
 	}
 	
 	/**
@@ -25,8 +21,8 @@ public class If extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double expression = params[0].getValue();
-		Animal turtle = params[1].getAnimal();
+		Animal turtle = params[0].getAnimal();
+		double expression = params[1].getValue();
 		TreeNode node = params[2].getNode();
 		
 		double value = 0;

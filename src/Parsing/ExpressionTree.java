@@ -1,23 +1,20 @@
 package Parsing;
-
 import ErrorHandling.*;
 import model.animal.Animal;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
-
 public class ExpressionTree {
-	
+        
     private static final ExpressionTree instance = new ExpressionTree();
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
-    private Expression ROOT = new RootExpression("root");
-    private TreeNode root = new TreeNode(ROOT, null);
+    private final Expression ROOT = new RootExpression("root");
+    private TreeNode root;
     private List<Entry<String, Pattern>> methodPaths;
     private ExpressionFactory factory;
     //private Stack<Expression> expressions;
-
     private ExpressionTree(){
         methodPaths = new ArrayList<>();
         //expressions  = new Stack<Expression>();
@@ -26,7 +23,7 @@ public class ExpressionTree {
     }
     
     public static ExpressionTree getInstance() {
-    	return instance;
+        return instance;
     }
     
     /**
@@ -38,18 +35,17 @@ public class ExpressionTree {
      * @throws InvalidLabelException
      */
     public TreeNode buildTree (String[][] a) throws ClassNotFoundException, InvalidLabelException {
+        root = new TreeNode(ROOT, null);
         TreeNode parent = root;
         TreeNode curr = root;
-
         for (int i = 0; i < a[0].length; i++) {
-            //System.out.println(a[0][i]);
             if(a[0][i].equals("{")){
                 parent = curr;
             }
             else if(a[0][i].equals("}")){
                 parent = parent.getParent();
             }
-            else if(a[0][i].equals("[")){  
+            else if(a[0][i].equals("[")){ 
                 curr = buildNode(parent,a[0][i],a[1][i]); 
                 parent = curr;
             }
@@ -63,19 +59,16 @@ public class ExpressionTree {
         
         return root;
     }
-
     public Class<?> getCommand (String input) throws ClassNotFoundException {
         String inputWithPath = getLabel(input);
         //System.out.println(input);
         Class<?> c = Class.forName(inputWithPath);
         return c;
     }
-
     public int getParamCount (Class<?> c) throws NoSuchFieldException, SecurityException {
         Object obj = c.getField(PARAM_COUNT);
         return (int) obj;
     }
-
     public TreeNode buildNode (TreeNode parent, String name, String label) throws ClassNotFoundException, InvalidLabelException {
         Object obj;
         if (label.equals("Command")) {
@@ -92,7 +85,6 @@ public class ExpressionTree {
             throw new InvalidLabelException("Invalid user input");
         }
         Expression e = factory.getInfo(name, label, obj);
-        //System.out.println(label);
         return new TreeNode(e, parent);
     }
     
@@ -129,8 +121,8 @@ public class ExpressionTree {
                            Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
     }
-    /*
-    public void dfs(){
+    
+    /*public void dfs(){
         Stack<TreeNode> st = new Stack<TreeNode>();
         st.addAll(root.getNeighbors());
         System.out.println(root.getChildren());
@@ -139,8 +131,7 @@ public class ExpressionTree {
             System.out.println(temp.getChildren());
             st.addAll(temp.getChildren());
         }
-    }
-    */
+    }*/
     
     private boolean match (String text, Pattern regex) {
         // THIS IS THE KEY LINE
@@ -166,12 +157,10 @@ public class ExpressionTree {
     }*/
     
     public double process(Animal turtle, TreeNode node) {
-    	double value = 0;
-    	Expression nodeExpression = node.expression;
-    	System.out.println("EXPRESSION: " + nodeExpression.toString());
-    	value = nodeExpression.run(turtle, node);
-    	return value;
+        double value = 0;
+        Expression nodeExpression = node.expression;
+        value = nodeExpression.run(turtle, node);
+        return value;
     }
 }
-
 

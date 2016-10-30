@@ -109,6 +109,7 @@ public class AnimalController implements Controller {
 			activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
 		}*/
 		System.out.println("VALUE " + value);
+		System.out.println("TURTLE " + turtle.getX());
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
 		List<Coordinate> points = new ArrayList<Coordinate>();
 		points.add(coordinates);

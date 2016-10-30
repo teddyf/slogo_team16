@@ -1,6 +1,9 @@
 package model.command.control.iteration;
 
+import Parsing.ExpressionTree;
+import Parsing.TreeNode;
 import model.DataSingleton;
+import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 import model.variable.Variable;
@@ -10,8 +13,8 @@ public class Repeat extends Command {
 	
 	public Repeat() {
 		super();
-		numParams = 2;
-		paramCount = 2;
+		numParams = 3;
+		paramCount = Double.POSITIVE_INFINITY; //was 2
 	}
 	
 	/**
@@ -21,21 +24,17 @@ public class Repeat extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double expression = params[0].getValue();
-		Command[] commands = (Command[])params[1].getList();
-		Parameter[][] parameters = (Parameter[][])params[2].getList();
+		Animal turtle = params[0].getAnimal();
+		double expression = params[1].getValue();
+		TreeNode node = params[2].getNode();
 		
-		Command command;
 		double value = 0;
 		DataSingleton data = DataSingleton.getInstance();
 		Variable repCount = new Variable("repcount");
 		data.addVariable(repCount);
 		
 		for(int i = 0; i < expression; i++) {
-			for(int c = 0; c < commands.length; c++) {
-				command = commands[c];
-				value = command.run(parameters[c]);
-			}
+			value = ExpressionTree.getInstance().process(turtle, node);
 			repCount.setValue(i+1);
 		}
 		
