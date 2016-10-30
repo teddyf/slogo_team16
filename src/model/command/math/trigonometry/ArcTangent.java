@@ -1,5 +1,7 @@
 package model.command.math.trigonometry;
 
+import Parsing.ExpressionTree;
+import model.animal.Animal;
 import model.command.Parameter;
 
 public class ArcTangent extends MathTrigonometry {
@@ -7,7 +9,7 @@ public class ArcTangent extends MathTrigonometry {
 	
 	public ArcTangent() {
 		super();
-		numParams = 1;
+		numParams = 2;
 		paramCount = 1;
 	}
 
@@ -18,7 +20,8 @@ public class ArcTangent extends MathTrigonometry {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double degrees = params[0].getValue();
+		Animal turtle = params[0].getAnimal();
+		double degrees = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 		return atan(degrees);
 	}
 }

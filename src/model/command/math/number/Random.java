@@ -1,5 +1,7 @@
 package model.command.math.number;
 
+import Parsing.ExpressionTree;
+import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 
@@ -8,7 +10,7 @@ public class Random extends Command {
 	
 	public Random() {
 		super();
-		numParams = 1;
+		numParams = 2;
 		paramCount = 1;
 	}
 
@@ -19,7 +21,8 @@ public class Random extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double max = params[0].getValue();
+		Animal turtle = params[0].getAnimal();
+		double max = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 		return Math.random()*max;
 	}
 }

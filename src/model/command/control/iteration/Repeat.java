@@ -25,7 +25,7 @@ public class Repeat extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double expression = params[1].getValue();
+		double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 		TreeNode node = params[2].getNode();
 		
 		double value = 0;

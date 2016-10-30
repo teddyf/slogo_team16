@@ -1,5 +1,6 @@
 package model.command.turtle.rotation;
 
+import Parsing.ExpressionTree;
 import model.animal.Animal;
 import model.command.Parameter;
 
@@ -20,7 +21,7 @@ public class SetHeading extends TurtleRotation {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double heading = params[1].getValue();
+		double heading = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 		return turnTo(turtle, heading);
 	}
 }

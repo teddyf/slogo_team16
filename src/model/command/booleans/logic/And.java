@@ -1,5 +1,7 @@
 package model.command.booleans.logic;
 
+import Parsing.ExpressionTree;
+import model.animal.Animal;
 import model.command.Parameter;
 
 public class And extends BooleanLogic {
@@ -7,7 +9,7 @@ public class And extends BooleanLogic {
 	
 	public And() {
 		super();
-		numParams = 2;
+		numParams = 3;
 		paramCount = 2;
 	}
 
@@ -18,8 +20,9 @@ public class And extends BooleanLogic {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		double test1 = params[0].getValue();
-		double test2 = params[1].getValue();
+		Animal turtle = params[0].getAnimal();
+		double test1 = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double test2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 		return and(test1, test2);
 	}
 }

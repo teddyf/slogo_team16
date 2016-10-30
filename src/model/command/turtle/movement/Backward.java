@@ -1,5 +1,6 @@
 package model.command.turtle.movement;
 
+import Parsing.ExpressionTree;
 import model.animal.Animal;
 import model.command.Parameter;
 
@@ -20,7 +21,7 @@ public class Backward extends TurtleMovement {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double pixels = params[1].getValue();
+		double pixels = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 		return move(turtle, pixels * -1)*-1;
 	}
 }
