@@ -96,7 +96,7 @@ public class SlogoView {
 	}
 	
 	private void createNumTurtles(){
-		for (int i=0; i<numTurtles; i++){
+		for (int i=0; i<numTurtles-1; i++){
 			getCurrentWorkspaceLeftPane().createAnimal();
 		}
 	}
