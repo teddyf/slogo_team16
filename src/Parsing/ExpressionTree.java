@@ -1,14 +1,12 @@
 package Parsing;
-
 import ErrorHandling.*;
 import model.animal.Animal;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
-
 public class ExpressionTree {
-	
+        
     private static final ExpressionTree instance = new ExpressionTree();
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
@@ -17,7 +15,6 @@ public class ExpressionTree {
     private List<Entry<String, Pattern>> methodPaths;
     private ExpressionFactory factory;
     //private Stack<Expression> expressions;
-
     private ExpressionTree(){
         methodPaths = new ArrayList<>();
         //expressions  = new Stack<Expression>();
@@ -26,7 +23,7 @@ public class ExpressionTree {
     }
     
     public static ExpressionTree getInstance() {
-    	return instance;
+        return instance;
     }
     
     /**
@@ -38,10 +35,9 @@ public class ExpressionTree {
      * @throws InvalidLabelException
      */
     public TreeNode buildTree (String[][] a) throws ClassNotFoundException, InvalidLabelException {
-    	root = new TreeNode(ROOT, null);
-    	TreeNode parent = root;
+        root = new TreeNode(ROOT, null);
+        TreeNode parent = root;
         TreeNode curr = root;
-
         for (int i = 0; i < a[0].length; i++) {
             if(a[0][i].equals("{")){
                 parent = curr;
@@ -63,19 +59,16 @@ public class ExpressionTree {
         
         return root;
     }
-
     public Class<?> getCommand (String input) throws ClassNotFoundException {
         String inputWithPath = getLabel(input);
         //System.out.println(input);
         Class<?> c = Class.forName(inputWithPath);
         return c;
     }
-
     public int getParamCount (Class<?> c) throws NoSuchFieldException, SecurityException {
         Object obj = c.getField(PARAM_COUNT);
         return (int) obj;
     }
-
     public TreeNode buildNode (TreeNode parent, String name, String label) throws ClassNotFoundException, InvalidLabelException {
         Object obj;
         if (label.equals("Command")) {
@@ -85,7 +78,7 @@ public class ExpressionTree {
         } else if (label.equals("ListStart")){
             obj = 0;
         } else if (label.equals("Variable")) {
-        	obj = name;
+        	obj = label;
         } else {
             throw new InvalidLabelException("Invalid user input");
         }
