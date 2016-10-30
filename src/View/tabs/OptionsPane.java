@@ -12,6 +12,7 @@ import View.helper.Colors;
 import View.helper.Console;
 import View.helper.Graphics;
 import View.helper.PenColor;
+import View.helper.TextInput;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -35,6 +36,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	private Workspace workspace;
 	private SlogoView slogoView;
 	private Buttons buttons = new Buttons();
+	private TextInput textInput = new TextInput();
 
 	private static final String X_COORDINATE = "x: ";
 	private static final String Y_COORDINATE = "y: ";
@@ -44,7 +46,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	private static final Map<String,String> colorHexVals = new HashMap<String,String>();
 	private static final String[] BACKGROUND_COLORS = { Colors.WHITE.toString(), Colors.BLACK.toString(), Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
 
-
+	
 	public OptionsPane(){
 		
 	}
@@ -63,48 +65,26 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		for(Colors c : Colors.values() ){ 
 			colorHexVals.put(c.toString(), c.getHexColor());
 		}
-		
-//		colorHexVals.put(Colors.BLACK.toString(), Colors.BLACK.getColor());
-//		colorHexVals.put(Colors.BLUE.toString(), Colors.BLUE.getColor());
-//		colorHexVals.put(Colors.GREEN.toString(), Colors.GREEN.getColor());
-//		colorHexVals.put(Colors.RED.toString(),Colors.RED.getColor());
-		
+			
 	}
 	private void createAllOptions() {
-//		HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
+
 		PenColor penColor = new PenColor();
 		penColor.addObserver(animalPaneGUI.getAnimalPane().getMyAnimalList().get(0).getActualPen());
-		
-		//HBox penColor = createComboBoxOption(PEN_COLOR, COLORS);
+
 		HBox backgroundColor = createBackgroundColorOptions();
-				//createComboBoxOption(BACKGROUND_COLOR, COLORS);
-				// DisplayVariable displayX =
-		// graphics.createDisplayVariable(X_COORDINATE, animal.getXProperty());
-		// DisplayVariable displayY =
-		// graphics.createDisplayVariable(Y_COORDINATE, animal.getYProperty());
-
-//		content.getItems().addAll(penColor, backgroundColor);
-//		content.getItems().addAll(/*penColor,*/ backgroundColor);
-		// content.getItems().addAll(penColor, backgroundColor,
-		// displayX.getContainer(), displayY.getContainer());
-		
-		//TODO: make this more efficient
-		/*
-		HBox btn1 = new HBox();
-		Button wkspc = buttons.createNewWorkspaceButton(slogoView);
-		btn1.getChildren().add(wkspc);
-		HBox btn2 = new HBox();
-		Button saveWkspc = buttons.createSaveWorkspaceButton(slogoView);
-		btn2.getChildren().add(saveWkspc);
-		
-		HBox btn3 = new HBox();
-		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
-		btn3.getChildren().add(btn3);
-		*/
-
 		content.getItems().addAll(penColor.getContainer(), backgroundColor);
 		addToPane(addButtonsToHBox(createButtons()));
 		
+		addToPane(createTextInputImages());
+		
+	}
+	
+	private HBox[] createTextInputImages(){
+		HBox box1 = textInput.getTextInputBox(workspace.getAnimalClick(), "Image URL for active turtle", true);
+		HBox box2 = textInput.getTextInputBox(workspace.getAnimalClick(), "Image URL for dead turtle", false);
+		HBox[] input= {box1, box2};
+		return input;
 	}
 	
 	private Button[] createButtons(){

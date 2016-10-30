@@ -8,27 +8,20 @@ import javafx.scene.layout.HBox;
 
 public class TextInput {
 
-	private TextField text;
-	private HBox box;
 	private Graphics graphics = new Graphics();
 
 	public TextInput() {
-		text = new TextField();
 	}
 
-	public TextField getText() {
-		return text;
-	}
-
-	private String getInput() {
+	private String getInput(TextField text) {
 		return text.getText();
 	}
 
-	private void createGoButton(HBox box, AnimalClick animalClick, boolean liveTurtle) {
+	private void createGoButton(HBox box, AnimalClick animalClick, boolean liveTurtle, TextField text) {
 		Button button = graphics.createButton("Go");
 		box.getChildren().add(button);
 		button.setOnAction(e -> {
-			String input = getInput();
+			String input = getInput(text);
 			if (liveTurtle) {
 				animalClick.setWeirdTurtle(input);
 			} else {
@@ -39,11 +32,12 @@ public class TextInput {
 
 	}
 
-	public HBox getTextInputBox(AnimalClick animalClick, Label label) {
-		this.box = new HBox();
-		box.getChildren().addAll(label, text);
-		createGoButton(box, animalClick, true);
-		createGoButton(box, animalClick, false);
+	public HBox getTextInputBox(AnimalClick animalClick, String label, boolean liveTurtle) {
+		TextField text = new TextField();
+		HBox box = new HBox();
+		text.setPromptText(label);
+		box.getChildren().add(text);
+		createGoButton(box, animalClick, liveTurtle, text);
 		return box;
 
 	}

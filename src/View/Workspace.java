@@ -120,6 +120,10 @@ public class Workspace implements Observer {
 		currentLanguage = languages[0];
 
 	}
+	
+	public AnimalClick getAnimalClick(){
+		return animalClick;
+	}
 
 	public String getCurrentLanguage() {
 		return currentLanguage;
