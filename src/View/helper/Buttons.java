@@ -8,12 +8,15 @@ import java.util.Observable;
 import Controller.Controller;
 import Controller.DataSetup.DataOutput;
 import View.AnimalPaneGUI;
+import View.HomeSelection;
 import View.SlogoView;
 import View.Workspace;
 import View.helpscreen.HelpScreen;
 import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import main.Main;
 import model.animal.Animal;
 
 /**
@@ -153,6 +156,17 @@ public class Buttons extends Observable {
 			wkspc.decrementNumTurtles();
 		});
 		return minusTurtle;
+	}
+	
+	public Button newWorkspaceFromFileButton() {
+		Button newWkspc = graphic.createButton("New Workspace from file");
+		newWkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
+		newWkspc.setOnAction(e -> {
+			Stage s = new Stage();
+			HomeSelection home = new HomeSelection(s);
+			home.initHomeScreen();
+		});
+		return newWkspc;
 	}
 
 	@Deprecated

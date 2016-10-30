@@ -14,13 +14,19 @@ public class Main extends Application {
 
 	public static final String TITLE = "Slogo";
 	private SlogoView slogoView;
+	private Stage stage;
 
 //	public SlogoView getSlogoView(){
 //		return slogoView;
 //	}
+	
+	public Stage getStage(){
+		return stage;
+	}
 
 	@Override
 	public void start(Stage s){
+		this.stage = s;
 		HomeSelection home = new HomeSelection(s);
 		home.initHomeScreen();
 		/*

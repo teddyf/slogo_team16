@@ -24,6 +24,10 @@ public class HomeSelection {
 	public HomeSelection(Stage s) {
 		this.s = s;
 	}
+	
+	public HomeSelection() {
+		
+	}
 
 	/**
 	 * Creates the file directory to choose an xml simulation file to run
