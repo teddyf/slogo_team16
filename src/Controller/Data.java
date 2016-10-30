@@ -3,6 +3,7 @@ package Controller;
 import java.util.HashMap;
 import java.util.Observable;
 
+import View.helper.UIDataUpdate;
 import model.command.Command;
 import model.variable.Variable;
 
@@ -105,6 +106,7 @@ public class Data extends Observable {
 	/***** GUI METHODS *****/
 
 	public String getBackgroundColor() {
+		System.out.println("Get background: "+backgroundColor);
 		return backgroundColor;
 	}
 
@@ -120,6 +122,7 @@ public class Data extends Observable {
 	}
 	
 	public void setBackgroundColor(int index) {
+		System.out.println("setting background");
 		if (colors.containsKey(index)) {
 			this.backgroundColor = colors.get(index);
 			setChanged();
