@@ -22,7 +22,7 @@ public class DataOutput {
 	
 	private Map<String, String> data;
 	public DataOutput(String outputFileName, Map<String, String> data) {
-		this.outputFileName=outputFileName;
+		this.outputFileName=outputFileName.replaceAll(" ", "_");
 		this.data = data;
 		writeXML();
 	}
@@ -40,7 +40,7 @@ public class DataOutput {
 
 			// root elements
 			Document doc = docBuilder.newDocument();
-			Element rootElement = doc.createElement("Workspace");
+			Element rootElement = doc.createElement("root");
 			doc.appendChild(rootElement);
 			
 			for (int i=0; i<DataSetup.generalInfo.length; i++){

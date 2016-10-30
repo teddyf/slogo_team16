@@ -60,7 +60,8 @@ public class Workspace implements Observer {
 	private final String EN_RESRC_PATH = "resources/languages/English";
 	private final String[] languages = { "English", "Chinese", "French", "German", "Italian", "Portuguese", "Russian",
 	"Spanish" };
-
+	
+	private String currentLanguage;
 	private BorderPane myRoot;
 	// private AnimalPane myAnimalPane;
 	private List<AnimalPaneGUI> myAnimalGUIList;
@@ -93,6 +94,7 @@ public class Workspace implements Observer {
 		numTurtles = 0;
 		createAnimalPaneGUI();
 		animalClick= new AnimalClick(myAnimalPaneGUI);
+		currentLanguage = languages[0];
 
 	}
 
@@ -109,8 +111,16 @@ public class Workspace implements Observer {
 		numTurtles = 0;
 		createAnimalPaneGUI();
 		animalClick= new AnimalClick(myAnimalPaneGUI);
+		currentLanguage = languages[0];
 	}
 
+	public String getCurrentLanguage(){
+		return currentLanguage;
+	}
+	
+	public void setCurrentLanguage(String newLanguage){
+		this.currentLanguage=newLanguage;
+	}
 	public int getNumTurtles() {
 		return numTurtles;
 	}
@@ -383,6 +393,7 @@ public class Workspace implements Observer {
 		languageSelector.valueProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				myController.setParsingLanguage(newValue);
+				setCurrentLanguage(newValue);
 			}
 		});
 		return languageSelector;

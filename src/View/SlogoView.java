@@ -64,6 +64,7 @@ public class SlogoView {
 		int wkspcID = Integer.parseInt(String.valueOf(currentTab.getText().charAt(0))) - 1;
 		return workspaces.get(wkspcID);
 	}
+	
 
 	private void setCurrentWorkspaceTitle() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
@@ -79,7 +80,11 @@ public class SlogoView {
 		numWorkspaces++;
 		Tab tab = new Tab();
 		if (stringExists(title)) {
-			tab.setText(numWorkspaces+" "+title);
+			if (Character.isLetter(title.charAt(0))){
+				tab.setText(numWorkspaces+" "+title);
+			}else{
+				tab.setText(title);	
+			}
 		} else {
 			tab.setText(/* "Workspace #"+ */Integer.toString(numWorkspaces));
 		}
@@ -111,9 +116,9 @@ public class SlogoView {
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("title", title);
 		data.put("background_color", backgroundColor);
-		data.put("language", "current language here"); // TODO: add the correct
+		data.put("language", getCurrentWorkspaceLeftPane().getCurrentLanguage()); // TODO: add the correct
 														// values
-		data.put("numTurtles", "some number");
+		data.put("numTurtles", Integer.toString(getCurrentWorkspaceLeftPane().getNumTurtles()));
 		return data;
 	}
 
