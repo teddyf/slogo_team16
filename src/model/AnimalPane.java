@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +8,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import View.helper.Coordinate;
-import javafx.geometry.Point2D;
 import model.animal.Animal;
 import model.animal.Turtle;
 
@@ -23,8 +21,8 @@ public class AnimalPane extends Observable implements Observer {
 	private Map<String, String> myVariables;
 
 	// Map of string ID to List of CoordinatePair<double x, double y>
-	//private Map<String, List<CoordinatePair>> coordinateMap;
-	private List<Coordinate> coordinateMap;
+	private Map<Integer, List<Coordinate>> coordinateMap;
+	private List<Coordinate> coordinateList;
 
 	private int animalID;
 	
@@ -43,7 +41,8 @@ public class AnimalPane extends Observable implements Observer {
 		myCommandHistory = new ArrayList<String>();
 		
 		//list of Animal ID and Coordinate Lists for translation rendering
-		coordinateMap = new ArrayList<Coordinate>();
+		coordinateList = new ArrayList<Coordinate>();
+		coordinateMap = new HashMap<Integer, List<Coordinate>>();
 
 		}
 
@@ -63,8 +62,8 @@ public class AnimalPane extends Observable implements Observer {
 		myCommandHistory = new ArrayList<String>();
 
 		//list of Animal ID and Coordinate Lists for translation rendering
-		coordinateMap = new ArrayList<Coordinate>();
-
+		coordinateList = new ArrayList<Coordinate>();
+		coordinateMap = new HashMap<Integer, List<Coordinate>>();
 //		addAnimal(animal);
 	}
 	
@@ -147,12 +146,12 @@ public class AnimalPane extends Observable implements Observer {
 		return myVariables;
 	}
 
-//	public Map<String, List<CoordinatePair>> getCoordinateMap() {
-//		return coordinateMap;
-//	}
-	
-	public List<Coordinate> getCoordinateMap() {
+	public Map<Integer, List<Coordinate>> getCoordinateMap() {
 		return coordinateMap;
+	}
+	
+	public List<Coordinate> getCoordinateList() {
+		return coordinateList;
 	}
 
 	public int getAnimalID() {
@@ -171,11 +170,18 @@ public class AnimalPane extends Observable implements Observer {
 		this.myVariables = myVariables;
 	}
 
-//	public void setCoordinateMap(Map<String, List<CoordinatePair>> coordinateMap) {
+	public void setCoordinateMap(Map<Integer, List<Coordinate>> coordinateMap) {
 //		this.coordinateMap = coordinateMap;
-//	}
-	public void setCoordinateMap(List<Coordinate> coordinateMap) {
-		this.coordinateMap = coordinateMap;
+		for(Integer id : coordinateMap.keySet()) {
+				this.coordinateMap.put(id, coordinateMap.get(id));
+		}
+		setChanged();
+		notifyObservers();
+	}
+	
+	@Deprecated
+	public void setCoordinateList(List<Coordinate> coordinateList) {
+		this.coordinateList = coordinateList;
 		//System.out.println("set changed, notify observers");
 		setChanged();
 		notifyObservers();
