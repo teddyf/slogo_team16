@@ -78,7 +78,7 @@ public class ExpressionTree {
         } else if (label.equals("ListStart")){
             obj = 0;
         } else if (label.equals("Variable")) {
-        	obj = name;
+        	obj = label;
         } else {
             throw new InvalidLabelException("Invalid user input");
         }
