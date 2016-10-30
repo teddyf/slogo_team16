@@ -2,7 +2,7 @@ package model.command.control.iteration;
 
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
-import model.DataSingleton;
+import model.Data;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
@@ -29,7 +29,7 @@ public class Repeat extends Command {
 		TreeNode node = params[2].getNode();
 		
 		double value = 0;
-		DataSingleton data = DataSingleton.getInstance();
+		Data data = Data.getInstance();
 		Variable repCount = new Variable("repcount");
 		data.addVariable(repCount);
 		

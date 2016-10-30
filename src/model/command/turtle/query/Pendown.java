@@ -1,28 +1,27 @@
 package model.command.turtle.query;
 
-import View.Workspace;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 
-public class YCor extends Command {
+public class Pendown extends Command {
 	private final double paramCount;
 	
-	public YCor() {
+	public Pendown() {
 		super();
 		numParams = 1;
 		paramCount = 0;
 	}
 	
 	/**
-	 * Gets the turtle's y coordinate from the center of the screen
+	 * Determines if the turtle's pen is down
 	 * @param params - array of parameters
-	 * @return the y coordinate
+	 * @return 1 if pendown, 0 otherwise
 	 */
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		return Workspace.LEFT_PANE_HEIGHT/2 - turtle.getY();
+		return turtle.getPen();
 		
 	}
 }

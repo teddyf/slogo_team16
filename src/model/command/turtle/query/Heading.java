@@ -1,28 +1,27 @@
 package model.command.turtle.query;
 
-import View.Workspace;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
 
-public class YCor extends Command {
+public class Heading extends Command {
 	private final double paramCount;
 	
-	public YCor() {
+	public Heading() {
 		super();
 		numParams = 1;
 		paramCount = 0;
 	}
 	
 	/**
-	 * Gets the turtle's y coordinate from the center of the screen
+	 * Gets the turtle's heading in degrees
 	 * @param params - array of parameters
-	 * @return the y coordinate
+	 * @return the heading
 	 */
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		return Workspace.LEFT_PANE_HEIGHT/2 - turtle.getY();
+		return turtle.getHeading();
 		
 	}
 }

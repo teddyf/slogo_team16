@@ -136,7 +136,7 @@ public class ExpressionTree {
     }
     
     public double process(Animal turtle, TreeNode node) {
-    	dfs();
+    	//dfs();
     	double value = 0;
     	Expression nodeExpression = node.expression;
     	value = nodeExpression.run(turtle, node);

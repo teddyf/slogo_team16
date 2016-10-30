@@ -1,7 +1,7 @@
 package model.command.control.variable;
 
 import Parsing.ExpressionTree;
-import model.DataSingleton;
+import model.Data;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
@@ -24,16 +24,17 @@ public class Make extends Command {
 	 */
 	@Override
 	public double run(Parameter[] params) {
+		Animal turtle = params[0].getAnimal();
 		String variableName = params[1].getNode().toString();
-		double expression = params[1].getValue();
-		DataSingleton data = DataSingleton.getInstance();
+		double expression = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		Data data = Data.getInstance();
 		
 		if (data.containsVariable(variableName)) {
 			data.changeVariable(variableName, expression);
 		} else {
 			data.addVariable(new Variable(variableName, expression));
 		}
-		
+		System.out.println("returning " + expression);
 		return expression;
 	}
 }

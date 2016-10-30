@@ -2,7 +2,7 @@ package model.command.control.iteration;
 
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
-import model.DataSingleton;
+import model.Data;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
@@ -26,7 +26,7 @@ public class For extends Command {
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
 		Variable variable = new Variable(params[1].getNode().toString());
-		DataSingleton data = DataSingleton.getInstance();
+		Data data = Data.getInstance();
 		data.addVariable(variable);
 		double start = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 		double end = ExpressionTree.getInstance().process(turtle, params[3].getNode());

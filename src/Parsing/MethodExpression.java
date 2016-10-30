@@ -51,8 +51,8 @@ public class MethodExpression extends Expression{
 			parameters[c+1] = new Parameter(node.getChildren().get(c));
 			//paramIndex++;
 		}
-		System.out.println("DONE!!!");
 		value = command.run(parameters);
+		System.out.println("DONE!!!");
 		return value;
     }
 }
