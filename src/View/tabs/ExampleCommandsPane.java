@@ -48,7 +48,8 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 
 	public void populateContent() {
 		addItem("repeat 5 [ fd 100 rt 144 ]");
-		addItem("repeat 4 [ fd :100 rt 90 ]");
+		addItem("repeat 4 [ fd 100 rt 90 ]");
+		addItem("repeat 72 [ fd 155 rt 95 ]");
 	}
 
 	@Override

@@ -276,7 +276,7 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createVariablesTab() {
-		this.variablesPane = new VariablesPane();
+		this.variablesPane = new VariablesPane(console);
 		Tab tab = createTab(this.variablesPane);
 		return tab;
 	}

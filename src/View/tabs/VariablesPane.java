@@ -2,9 +2,12 @@ package View.tabs;
 
 import java.util.Observable;
 
+import Controller.Data;
+import View.helper.Console;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
+import model.variable.Variable;
 /**
  * 
  * @author Jordan Frazier
@@ -14,8 +17,10 @@ public class VariablesPane implements ListViewPane, GenericPane<String> {
 
 	private String displayName = "Variables";
 	private ListView<String> content;
+	private Console myConsole;
 
-	public VariablesPane() {
+	public VariablesPane(Console console) {
+		myConsole = console;
 		initializeListView();
 		makeClickable();
 	}
@@ -36,8 +41,11 @@ public class VariablesPane implements ListViewPane, GenericPane<String> {
 		content.setOnMouseClicked(e -> {
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
-					// TODO: Jordan - Add run functionality to clicking
-					System.out.println("clicked on " + content.getSelectionModel().getSelectedItem());
+					String[] split = content.getSelectionModel().getSelectedItem().split("=");
+					split[1] = split[1].trim();
+//					Variable var = Data.getInstance().getVariable(split[0]);
+					System.out.println(split[1]);
+					myConsole.getConsoleArea().setText(myConsole.getConsoleArea().getText() + split[1]);
 				}
 			}
 		});
