@@ -1,1 +1,1 @@
-MAKE :blah 40
+left 90 fd 100 back 50 fd 100
