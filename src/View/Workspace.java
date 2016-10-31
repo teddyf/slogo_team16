@@ -1,6 +1,7 @@
 package View;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -8,6 +9,7 @@ import java.util.ResourceBundle;
 
 import Controller.AnimalController;
 import Controller.Controller;
+import Controller.Data;
 import View.helper.Animate;
 import View.helper.Buttons;
 import View.helper.Colors;
@@ -79,7 +81,7 @@ public class Workspace implements Observer {
 	
 	private UIDataUpdate UIUpdate;
 	private GenericPane<String> variablesPane;
-
+	private HashMap<String, Integer> colors;
 	// support for multiple turtles
 	private int numTurtles;
 	private ArrayList<String> turtleIDs = new ArrayList<String>();
@@ -117,6 +119,8 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
+		populateDataToColorMap();
+		Data.getInstance().setBackgroundColor(colors.get(color));
 		numTurtles = 0;
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
@@ -125,6 +129,16 @@ public class Workspace implements Observer {
 		currentLanguage = languages[0];
 	
 
+	}
+	
+	private HashMap<String, Integer> populateDataToColorMap(){
+		colors = new HashMap<String, Integer>();
+		colors.put("WHITE",0);
+		colors.put("BLACK",1);
+		colors.put("BLUE",2);
+		colors.put("GREEN",3);
+		colors.put("RED",4);
+		return colors;
 	}
 	
 	public AnimalClick getAnimalClick(){
