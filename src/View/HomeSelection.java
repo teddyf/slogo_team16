@@ -13,6 +13,7 @@ import Controller.DataSetup.DataSetup;
 
 public class HomeSelection {
 	private final File INITIAL_DIRECTORY = new File("data");
+	private final File IMAGE_DIRECTORY = new File("Resources");
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	private String fileName;
@@ -33,7 +34,11 @@ public class HomeSelection {
 	 * Creates the file directory to choose an xml simulation file to run
 	 */
 	public void initHomeScreen() {
-		createFileDirectory();
+		createFileDirectory(INITIAL_DIRECTORY);
+	}
+	
+	public void initImageChooser(){
+		createFileDirectory(IMAGE_DIRECTORY);
 	}
 
 	/**
@@ -43,19 +48,17 @@ public class HomeSelection {
 		return fileName;
 	}
 
-	private void createFileDirectory() {
+	private void createFileDirectory(File directory) {
 		FileChooser chooser = new FileChooser();
-		chooser.setInitialDirectory(INITIAL_DIRECTORY);
+		chooser.setInitialDirectory(directory);
 		chooser.setTitle("Choose File");
 		File temp = chooser.showOpenDialog(new Stage());
-		if (temp != null) {
-			System.out.println("Here is temp: ");
-			System.out.println(temp.toString());
+		if (temp != null & directory.equals(INITIAL_DIRECTORY)) {
 			fileName = temp.toString();
 			data = new DataSetup(fileName);
 			createWorkspaceFromXML(fileName);
-			System.out.println("Data: " + data);
-			System.out.println(fileName);
+		}else if (temp != null & directory.equals(IMAGE_DIRECTORY)){
+			//TODO: change turtle image
 		}
 	}
 
@@ -69,7 +72,6 @@ public class HomeSelection {
 		s.setTitle(Main.TITLE);
 		s.setScene(scene);
 		s.show();
-		System.out.println(generalInfo);
 		return null;
 	}
 }
