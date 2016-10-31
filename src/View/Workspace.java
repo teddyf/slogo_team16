@@ -211,9 +211,6 @@ public class Workspace implements Observer {
 		this.languageComboBox = createLanguageChooser();
 		languageComboBox.getStyleClass().add("language-button");
 
-		// Button tb = CREATETESTBUTTON();
-
-		// container.getChildren().addAll(title, languageComboBox, tb);
 		container.getChildren().addAll(title, languageComboBox);
 
 		myRoot.setTop(container);
@@ -224,14 +221,12 @@ public class Workspace implements Observer {
 		leftPane.getStyleClass().add("left-pane");
 
 		ScrollPane container = createConsole();
-//		populateGridWithAnimals();
 
 		leftPane.getChildren().addAll(myAnimalPaneGUI.getScrollPane(), container);
 		myRoot.setLeft(leftPane);
 	}
 
 	public void resetLeftPane() {
-		// myRoot.setLeft(null);
 		ScrollPane newPane = new ScrollPane();
 		Pane myContainer = new Pane();
 		myAnimalPaneGUI.setScrollPane(newPane);
@@ -291,26 +286,17 @@ public class Workspace implements Observer {
 
 	private Tab createOptionsTab() {
 		GenericPane<HBox> pane = new OptionsPane(myAnimalPaneGUI, this, mainView);
-		// if (defaultBackgroundColor != null &&
-		// !defaultBackgroundColor.isEmpty()){
-		// System.out.println("default background color:
-		// "+defaultBackgroundColor);
-		// ((OptionsPane) pane).changeBackgroundColor(defaultBackgroundColor);
-		// }
-		// to make custom ID buttons
 		Tab tab = createTab(pane);
 		return tab;
 	}
 
 	public ScrollPane createConsole() {
 		ScrollPane consolePane = new ScrollPane();
-		// TextArea consoleArea = createConsoleArea();
 		VBox buttons = createButtons();
 		HBox consoleContainer = new HBox(5);
 		consoleContainer.getChildren().addAll(console.getConsoleArea(), buttons);
 		consolePane.setContent(consoleContainer);
 		return consolePane;
-		// return consoleContainer;
 	}
 
 	@Deprecated
@@ -350,20 +336,8 @@ public class Workspace implements Observer {
 	// }
 
 	public void populateGridWithAnimals() {
-		// createAnimal();
 		renderAnimalGrid();
 	}
-
-	// @Deprecated
-	// public void createAnimalOld() {
-	// Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
-	// (myAnimalPaneGUI.getScrollPane().getPrefWidth() -
-	// myAnimalPaneGUI.getScrollPane().getLayoutX() - 15)
-	// / 2,
-	// (myAnimalPaneGUI.getScrollPane().getPrefHeight() -
-	// myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
-	// myAnimalPaneGUI.addAnimal(turtle);
-	// }
 
 	public void createAnimal() {
 		numTurtles++;
@@ -382,9 +356,6 @@ public class Workspace implements Observer {
 		if (isValidLocation(animal.getX(), animal.getY())) {
 			addAnimalToGrid(animal);
 		} else {
-			// This should never happen since turtle only is added to center of
-			// frame, but if this does change
-			// we will have a place to handle it here
 			System.out.println("NOT INSIDE ANIMAL PANE");
 		}
 	}
@@ -418,12 +389,6 @@ public class Workspace implements Observer {
 
 	private String decodeColor(String color) {
 		return Colors.BLACK.getColorMap().get(color);
-//		for (Colors c : Colors.values()) {
-//			if (c.toString().equals(color)) {
-//				return c.getHexColor();
-//			}
-//		}
-//		return null;
 	}
 
 	public ComboBox<String> createLanguageChooser() {
