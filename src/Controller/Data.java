@@ -14,7 +14,8 @@ public class Data extends Observable {
 	private HashMap<Integer, String> colors;
 	private String backgroundColor;
 	private String penColor;
-	private int penSize;
+	private double penSize;
+	private double dashValue;
 	private String shape;
 	
 	private Data(){
@@ -28,7 +29,8 @@ public class Data extends Observable {
 		colors.put(4, "RED");
 		backgroundColor = "WHITE";
 		penColor = "BLACK";
-		penSize = 1;
+		penSize = 1d;
+		dashValue = 1d;
 		shape = "";
 	}
 
@@ -113,12 +115,16 @@ public class Data extends Observable {
 	public String getPenColor() {
 		return penColor;
 	}
-	public int getPenSize() {
+	public double getPenSize() {
 		return penSize;
 	}
 	
 	public String getShape() {
 		return shape;
+	}
+	
+	public double getDashValue() {
+		return dashValue;
 	}
 	
 	public void setBackgroundColor(int index) {
@@ -142,5 +148,9 @@ public class Data extends Observable {
 	
 	public void setPenSize(int pixels) {
 		this.penSize = pixels;
+	}
+	
+	public void setDashValue(double dashValue) {
+		this.dashValue = dashValue;
 	}
 }

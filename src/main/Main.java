@@ -34,7 +34,6 @@ public class Main extends Application {
 		Scene scene = slogoView.init();
 		scene.getStylesheets().add(this.getClass().getResource("SLogoStyle.css").toExternalForm());
 		
-		
 		s.setTitle(title);
 		s.setScene(scene);
 		s.show();

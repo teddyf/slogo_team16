@@ -8,7 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import View.helper.Coordinate;
-import View.helper.PenColor;
+import View.helper.PenContainer;
 import model.animal.Animal;
 import model.animal.Turtle;
 
@@ -25,7 +25,7 @@ public class AnimalPane extends Observable implements Observer {
 	private Map<Integer, List<Coordinate>> coordinateMap;
 	private List<Coordinate> coordinateList;
 	
-	private PenColor penColor;
+	private PenContainer penColor;
 
 	private int animalID;
 	
@@ -47,7 +47,7 @@ public class AnimalPane extends Observable implements Observer {
 		coordinateList = new ArrayList<Coordinate>();
 		coordinateMap = new HashMap<Integer, List<Coordinate>>();
 		
-		penColor = new PenColor();
+		penColor = new PenContainer();
 
 		}
 
@@ -212,11 +212,11 @@ public class AnimalPane extends Observable implements Observer {
 		this.myAnimalList = myAnimalList;
 	}
 
-	public PenColor getPenColor() {
+	public PenContainer getPenColor() {
 		return penColor;
 	}
 
-	public void setPenColor(PenColor penColor) {
+	public void setPenColor(PenContainer penColor) {
 		this.penColor = penColor;
 	}
 }

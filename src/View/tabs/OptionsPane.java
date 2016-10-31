@@ -11,7 +11,7 @@ import View.helper.Buttons;
 import View.helper.Colors;
 import View.helper.Console;
 import View.helper.Graphics;
-import View.helper.PenColor;
+import View.helper.PenContainer;
 import View.helper.TextInput;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -38,9 +38,6 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	private Buttons buttons = new Buttons();
 	private TextInput textInput = new TextInput();
 
-	private static final String X_COORDINATE = "x: ";
-	private static final String Y_COORDINATE = "y: ";
-	private static final String PEN_COLOR = "Pen Color: ";
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 
 	private static final Map<String,String> colorHexVals = new HashMap<String,String>();
@@ -69,10 +66,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	
 	private void createAllOptions(AnimalPaneGUI animalPaneGUI) {
 
-		PenColor penColor = animalPaneGUI.getAnimalPane().getPenColor();
+		PenContainer penColor = animalPaneGUI.getAnimalPane().getPenColor();
 		
 		HBox backgroundColor = createBackgroundColorOptions();
-		content.getItems().addAll(penColor.getContainer(), backgroundColor);
+		content.getItems().addAll(penColor.getColorContainer(), backgroundColor);
 		addToPane(addButtonsToHBox(createButtons()));
 		
 		addToPane(createTextInputImages());

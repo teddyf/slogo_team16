@@ -2,7 +2,7 @@ package model.animal;
 
 import View.helper.Graphics;
 import View.helper.Pen;
-import View.helper.PenColor;
+import View.helper.PenContainer;
 import javafx.animation.Animation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +18,7 @@ public class Turtle extends Animal {
 	
 	
 	
-	public Turtle(PenColor penColor) {
+	public Turtle(PenContainer penColor) {
 		super();
 		
 		setImagePath("turtleLogo.png");

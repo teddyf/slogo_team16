@@ -271,7 +271,7 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createExampleCommandsTab() {
-		GenericPane<String> pane = new ExampleCommandsPane();
+		GenericPane<String> pane = new ExampleCommandsPane(console);
 		Tab tab = createTab(pane);
 		return tab;
 	}

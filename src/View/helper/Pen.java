@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import Controller.Data;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 /**
@@ -14,36 +15,50 @@ import javafx.scene.shape.Line;
  */
 public class Pen implements Observer {
 	
-//	private Line line;
+	private Line line;
 	private List<Line> lineList;
 	private int counter;
 	private String color;
+	private double strokeWidth;
+	private double dashValue;
+	
+	private static final String PEN_COLOR = "Pen Color: ";
+	private static final String PEN_WIDTH = "Pen Width: ";
+	private static final String PEN_DASH = "Pen Dash: ";
 	
 	public Pen() {
-		counter = 0;
-		lineList = new ArrayList<>();
+		initializeVariables();
 		color = decodeColor(Colors.BLACK.getAllColors()[0]);
+		
 //		line = new Line();
 //		line.setFill(Color.BLACK);
 	}
 	
 	public Pen(double x, double y){
-		counter = 0;
-		lineList = new ArrayList<>();
+		initializeVariables();
 		color = decodeColor(Colors.BLACK.getAllColors()[0]);
 //		line = new Line(x, y, x, y);
 //		line.setFill(Color.BLACK);
 	}
 	
-	public Pen(double x, double y, PenColor penColor) {
+	public Pen(double x, double y, PenContainer penColor) {
+		initializeVariables();
+		color = penColor.getComboBox().getValue();
+	}
+
+	private void initializeVariables() {
 		counter = 0;
 		lineList = new ArrayList<>();
-		color = penColor.getComboBox().getValue();
+		strokeWidth = Data.getInstance().getPenSize();
+		dashValue = Data.getInstance().getDashValue();
 	}
 	
 	public void createLine(double x, double y) {
 		Line line = new Line(x, y, x, y);
 		line.setStroke(Color.web(color));
+		line.setStrokeWidth(strokeWidth);
+		line.getStrokeDashArray().add(dashValue);
+		
 		lineList.add(line);
 		
 	}
@@ -79,19 +94,22 @@ public class Pen implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof PenColor) {
+		if (o instanceof PenContainer) {
 			// TODO: convert string to hex
-			color = decodeColor(((PenColor) o).getComboBox().getValue());
+			color = decodeColor(((PenContainer) o).getComboBox().getValue());
+			strokeWidth = Data.getInstance().getPenSize();
+			dashValue = Data.getInstance().getDashValue();
 		}
 	}
 	
 	public String decodeColor(String color) { 
-		for(Colors c : Colors.values()) {
-			if(c.toString().equals(color)) {
-				return c.getHexColor();
-			}
-		}
-		return null;
+		return Colors.BLACK.getColorMap().get(color);
+//		for(Colors c : Colors.values()) {
+//			if(c.toString().equals(color)) {
+//				return c.getHexColor();
+//			}
+//		}
+//		return null;
 	}
 	
 }

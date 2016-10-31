@@ -2,6 +2,7 @@ package View.tabs;
 
 import java.util.Observable;
 
+import View.helper.Console;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
@@ -14,8 +15,10 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 
 	private String displayName = "Examples";
 	private ListView<String> content;
+	private Console myConsole;
 
-	public ExampleCommandsPane() {
+	public ExampleCommandsPane(Console console) {
+		myConsole = console;
 		initializeListView();
 		makeClickable();
 	}
@@ -24,6 +27,7 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 	public void initializeListView() {
 		content = new ListView<>();
 		content.setStyle("-fx-background:white");
+		populateContent();
 	}
 	
 	@Override
@@ -36,11 +40,15 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 		content.setOnMouseClicked(e -> {
 			if (e.getButton().equals(MouseButton.PRIMARY)) {
 				if (e.getClickCount() == 2) {
-					//TODO: Jordan - Add run functionality to clicking
-					System.out.println("clicked on " + content.getSelectionModel().getSelectedItem());
+					myConsole.getConsoleArea().setText(content.getSelectionModel().getSelectedItem());
 				}
 			}
 		});	
+	}
+	
+	public void populateContent() {
+		addItem("repeat 5 [ fd 100 rt 144 ]");
+		addItem("repeat 4 [ fd :100 rt 90 ]");	
 	}
 
 	@Override
