@@ -78,6 +78,7 @@ public class Workspace implements Observer {
 	private ComboBox<String> languageComboBox;
 	
 	private UIDataUpdate UIUpdate;
+	private GenericPane<String> variablesPane;
 
 	// support for multiple turtles
 	private int numTurtles;
@@ -150,17 +151,6 @@ public class Workspace implements Observer {
 		this.numTurtles = numTurtles;
 	}
 
-	@Deprecated
-	public void incrementNumTurtles() {
-		// numTurtles++;
-		// Animal newAnimal = new Turtle(50,50,30,20);//TODO: change the dummy
-		// numbers
-		// myAnimalPaneGUI.addAnimal(newAnimal);
-		// addAnimalToGrid(newAnimal);
-		createAnimal();
-		System.out.println("Incremented turtles: " + myAnimalPaneGUI.getAnimalPane().getMyAnimalList());
-	}
-
 	public void decrementNumTurtles() {
 		if (numTurtles > 1) {
 			numTurtles--;
@@ -183,7 +173,7 @@ public class Workspace implements Observer {
 		populateLeftPane();
 		populateRightPane();
 		changeAnimalBackgroundColor(defaultBackgroundColor);
-		UIUpdate = new UIDataUpdate(this);
+		UIUpdate = new UIDataUpdate(this, (VariablesPane)this.variablesPane);
 	}
 
 	public void createAnimalPaneGUI() {
@@ -272,8 +262,8 @@ public class Workspace implements Observer {
 	}
 
 	private Tab createVariablesTab() {
-		GenericPane<String> pane = new VariablesPane();
-		Tab tab = createTab(pane);
+		this.variablesPane = new VariablesPane();
+		Tab tab = createTab(this.variablesPane);
 		return tab;
 	}
 

@@ -54,11 +54,15 @@ public class Data extends Observable {
 
 	public void addVariable(Variable variable) {
 		variables.put(variable.getName(), variable);
+		setChanged();
+		notifyObservers();
 	}
 
 	public void changeVariable(String variableName, double value) {
 		Variable variable = variables.get(variableName);
 		variable.setValue(value);
+		setChanged();
+		notifyObservers();
 	}
 
 	/***** COMMAND METHODS *****/
