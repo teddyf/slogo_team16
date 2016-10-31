@@ -4,8 +4,10 @@ import java.util.Observable;
 
 import View.helper.Console;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
+
 /**
  * 
  * @author Jordan Frazier
@@ -29,7 +31,7 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 		content.setStyle("-fx-background:white");
 		populateContent();
 	}
-	
+
 	@Override
 	public String getTabName() {
 		return displayName;
@@ -38,17 +40,15 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 	@Override
 	public void makeClickable() {
 		content.setOnMouseClicked(e -> {
-			if (e.getButton().equals(MouseButton.PRIMARY)) {
-				if (e.getClickCount() == 2) {
-					myConsole.getConsoleArea().setText(content.getSelectionModel().getSelectedItem());
-				}
+			if (e.getClickCount() == 2) {
+				myConsole.getConsoleArea().setText(content.getSelectionModel().getSelectedItem());
 			}
-		});	
+		});
 	}
-	
+
 	public void populateContent() {
 		addItem("repeat 5 [ fd 100 rt 144 ]");
-		addItem("repeat 4 [ fd :100 rt 90 ]");	
+		addItem("repeat 4 [ fd :100 rt 90 ]");
 	}
 
 	@Override
@@ -69,8 +69,7 @@ public class ExampleCommandsPane implements ListViewPane, GenericPane<String> {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
 
 }
