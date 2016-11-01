@@ -65,5 +65,16 @@ public enum Colors {
 		}
 		return map;
 	}
+	
+	public Map<String, Integer> getColorIdMap() {
+		Map<String, Integer> map = new HashMap<>();
+		for(Colors c : Colors.values()) {
+			map.put(c.toString(), c.getId());
+		}
+		return map;
+	}
+	
+	
+	
 
 }

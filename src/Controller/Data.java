@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import View.helper.Colors;
@@ -11,11 +12,11 @@ import model.variable.Variable;
 public class Data extends Observable {
 	private static final Data instance = new Data();
 	private int numTurtles;
-	private HashMap<String, Variable> variables;
-	private HashMap<String, Variable> localVariables;
-	private HashMap<String, Command> commands;
-	private HashMap<Integer, String> colors;
-	private HashMap<Integer, String> shapes;
+	private Map<String, Variable> variables;
+	private Map<String, Variable> localVariables;
+	private Map<String, Command> commands;
+	private Map<Integer, String> colors;
+	private Map<Integer, String> shapes;
 	private String backgroundColor;
 	private String penColor;
 	private double penSize;
@@ -28,11 +29,7 @@ public class Data extends Observable {
 		localVariables = new HashMap<String,Variable>();
 		commands = new HashMap<String,Command>();
 		colors = new HashMap<Integer,String>();
-		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
-		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
-		colors.put(Colors.BLUE.getId(), Colors.BLUE.toString());
-		colors.put(Colors.GREEN.getId(), Colors.GREEN.toString());
-		colors.put(Colors.RED.getId(), Colors.RED.toString());
+		populateColorsMap();
 		shapes = new HashMap<Integer,String>();
 		shapes.put(0, "turtle");
 		backgroundColor = Colors.WHITE.toString();
@@ -40,6 +37,14 @@ public class Data extends Observable {
 		penSize = 1d;
 		dashValue = 1d;
 		shape = "";
+	}
+
+	private void populateColorsMap() {
+		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
+		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
+		colors.put(Colors.BLUE.getId(), Colors.BLUE.toString());
+		colors.put(Colors.GREEN.getId(), Colors.GREEN.toString());
+		colors.put(Colors.RED.getId(), Colors.RED.toString());
 	}
 
 	public static Data getInstance() {
@@ -60,7 +65,7 @@ public class Data extends Observable {
 		return variables.get(variableName);
 	}
 
-	public HashMap<String, Variable> getVariables() {
+	public Map<String, Variable> getVariables() {
 		return variables;
 	}
 
@@ -87,7 +92,7 @@ public class Data extends Observable {
 		return localVariables.get(variableName);
 	}
 
-	public HashMap<String, Variable> getLocalVariables() {
+	public Map<String, Variable> getLocalVariables() {
 		return localVariables;
 	}
 
@@ -114,7 +119,7 @@ public class Data extends Observable {
 		return commands.get(commandName);
 	}
 
-	public HashMap<String, Command> getCommands() {
+	public Map<String, Command> getCommands() {
 		return commands;
 	}
 
@@ -136,7 +141,7 @@ public class Data extends Observable {
 		return colors.get(index);
 	}
 
-	public HashMap<Integer, String> getColors() {
+	public Map<Integer, String> getColors() {
 		return colors;
 	}
 
@@ -158,7 +163,7 @@ public class Data extends Observable {
 		return shapes.get(index);
 	}
 
-	public HashMap<Integer, String> getShapes() {
+	public Map<Integer, String> getShapes() {
 		return shapes;
 	}
 
