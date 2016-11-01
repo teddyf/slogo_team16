@@ -387,6 +387,7 @@ public class Workspace implements Observer {
 		String hexColor = decodeColor(color);
 		System.out.println("Decoded hex: "+hexColor);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
+		Data.getInstance().setBackgroundColor(Colors.BLACK.getColorIdMap().get(color));
 	}
 
 	private String decodeColor(String color) {
