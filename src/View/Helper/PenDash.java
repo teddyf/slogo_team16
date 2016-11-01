@@ -3,8 +3,8 @@ package View.helper;
 public enum PenDash {
 	
 	SOLID("Solid", 1),
-	DASHED("Dashed", 7),
-	DOTTED("Dotted", 2);
+	DASHED("Dashed", 13),
+	DOTTED("Dotted", 5);
 	
 	private String name;
 	private int val;
