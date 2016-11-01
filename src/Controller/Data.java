@@ -3,6 +3,8 @@ package Controller;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Observable;
+
+import View.helper.Colors;
 import model.command.Command;
 import model.variable.Variable;
 
@@ -26,11 +28,11 @@ public class Data extends Observable {
 		localVariables = new HashMap<String,Variable>();
 		commands = new HashMap<String,Command>();
 		colors = new HashMap<Integer,String>();
-		colors.put(0, "WHITE");
-		colors.put(1, "BLACK");
-		colors.put(2, "BLUE");
-		colors.put(3, "GREEN");
-		colors.put(4, "RED");
+		colors.put(Colors.WHITE.getId(), Colors.WHITE.getColor());
+		colors.put(Colors.BLACK.getId(), Colors.BLACK.getColor());
+		colors.put(Colors.BLUE.getId(), Colors.BLUE.getColor());
+		colors.put(Colors.GREEN.getId(), Colors.GREEN.getColor());
+		colors.put(Colors.RED.getId(), Colors.RED.getColor());
 		shapes = new HashMap<Integer,String>();
 		shapes.put(0, "turtle");
 		backgroundColor = "WHITE";

@@ -72,7 +72,6 @@ public class Animate {
 		inputTranslationCoordinates(point, animalImage, translation);
 
 		translation.setOnFinished(e -> {
-			System.out.println(animal.getId());
 			updateAnimalCoordinates(point, animal);
 			unbindPen(point, pen);
 			incrementCounters(point, pen, counter);

@@ -212,11 +212,11 @@ public class AnimalPane extends Observable implements Observer {
 		this.myAnimalList = myAnimalList;
 	}
 
-	public PenContainer getPenColor() {
+	public PenContainer getPenContainer() {
 		return penColor;
 	}
 
-	public void setPenColor(PenContainer penColor) {
+	public void setPenContainer(PenContainer penColor) {
 		this.penColor = penColor;
 	}
 }

@@ -66,7 +66,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	
 	private void createAllOptions(AnimalPaneGUI animalPaneGUI) {
 
-		PenContainer penColor = animalPaneGUI.getAnimalPane().getPenColor();
+		PenContainer penColor = animalPaneGUI.getAnimalPane().getPenContainer();
 		
 		HBox backgroundColor = createBackgroundColorOptions();
 		content.getItems().add(penColor.getColorContainer());
