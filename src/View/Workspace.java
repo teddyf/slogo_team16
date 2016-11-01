@@ -3,6 +3,7 @@ package View;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -38,7 +39,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.AnimalPane;
 import model.animal.Animal;
-import model.animal.Turtle;
 
 /**
  * Main SLogo interface
@@ -81,7 +81,7 @@ public class Workspace implements Observer {
 	
 	private UIDataUpdate UIUpdate;
 	private GenericPane<String> variablesPane;
-	private HashMap<String, Integer> colors;
+	private Map<String, Integer> colors;
 	// support for multiple turtles
 	private int numTurtles;
 	private ArrayList<String> turtleIDs = new ArrayList<String>();
@@ -118,26 +118,25 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
-		populateDataToColorMap();
-		Data.getInstance().setBackgroundColor(colors.get(color));
+//		populateDataToColorMap();
+		Data.getInstance().setBackgroundColor(Colors.BLACK.getColorIdMap().get(color));
 		numTurtles = 0;
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
-	
-
 	}
 	
-	private HashMap<String, Integer> populateDataToColorMap(){
+	@Deprecated
+	private void populateDataToColorMap(){
 		colors = new HashMap<String, Integer>();
 		colors.put("WHITE",0);
 		colors.put("BLACK",1);
 		colors.put("BLUE",2);
 		colors.put("GREEN",3);
 		colors.put("RED",4);
-		return colors;
+//		return colors;
 	}
 	
 	public AnimalClick getAnimalClick(){

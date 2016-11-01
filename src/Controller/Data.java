@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import View.helper.Colors;
@@ -26,11 +27,7 @@ public class Data extends Observable {
 		variables = new HashMap<String,Variable>();
 		commands = new HashMap<String,UserCommand>();
 		colors = new HashMap<Integer,String>();
-		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
-		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
-		colors.put(Colors.BLUE.getId(), Colors.BLUE.toString());
-		colors.put(Colors.GREEN.getId(), Colors.GREEN.toString());
-		colors.put(Colors.RED.getId(), Colors.RED.toString());
+		populateColorsMap();
 		shapes = new HashMap<Integer,String>();
 		shapes.put(0, "turtle");
 		backgroundColor = Colors.WHITE.toString();
@@ -38,6 +35,14 @@ public class Data extends Observable {
 		penSize = 1d;
 		dashValue = 1d;
 		shape = "";
+	}
+
+	private void populateColorsMap() {
+		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
+		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
+		colors.put(Colors.BLUE.getId(), Colors.BLUE.toString());
+		colors.put(Colors.GREEN.getId(), Colors.GREEN.toString());
+		colors.put(Colors.RED.getId(), Colors.RED.toString());
 	}
 
 	public static Data getInstance() {
@@ -58,7 +63,7 @@ public class Data extends Observable {
 		return variables.get(variableName);
 	}
 
-	public HashMap<String, Variable> getVariables() {
+	public Map<String, Variable> getVariables() {
 		return variables;
 	}
 
@@ -83,6 +88,10 @@ public class Data extends Observable {
 
 	public Command getCommand(String commandName) {
 		return commands.get(commandName).getCommand();
+	}
+	
+	public HashMap<String,UserCommand> getCommands() {
+		return commands;
 	}
 
 	public boolean containsCommand(String commandName) {
@@ -130,7 +139,7 @@ public class Data extends Observable {
 		return colors.get(index);
 	}
 
-	public HashMap<Integer, String> getColors() {
+	public Map<Integer, String> getColors() {
 		return colors;
 	}
 
@@ -152,7 +161,7 @@ public class Data extends Observable {
 		return shapes.get(index);
 	}
 
-	public HashMap<Integer, String> getShapes() {
+	public Map<Integer, String> getShapes() {
 		return shapes;
 	}
 
