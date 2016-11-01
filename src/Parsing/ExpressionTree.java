@@ -72,8 +72,7 @@ public class ExpressionTree {
             return c;
         }
         catch(ClassNotFoundException e){
-            Object obj = Data.getInstance().getCommand(input);
-            return obj.getClass();
+            return NewCommand.class;
         }
     }
     public int getParamCount (Class<?> c) throws NoSuchFieldException, SecurityException {
