@@ -3,10 +3,10 @@ package model.command.control.selection;
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import model.animal.Animal;
+import model.command.Command;
 import model.command.Parameter;
-import model.command.control.ControlCommand;
 
-public class IfElse extends ControlCommand {
+public class IfElse extends Command {
 	private final double paramCount;
 	
 	public IfElse() {
