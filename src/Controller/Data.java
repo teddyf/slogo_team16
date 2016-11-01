@@ -2,6 +2,7 @@ package Controller;
 
 import java.awt.Color;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import View.helper.Colors;
@@ -11,11 +12,11 @@ import model.variable.Variable;
 public class Data extends Observable {
 	private static final Data instance = new Data();
 	private int numTurtles;
-	private HashMap<String, Variable> variables;
-	private HashMap<String, Variable> localVariables;
-	private HashMap<String, Command> commands;
-	private HashMap<Integer, String> colors;
-	private HashMap<Integer, String> shapes;
+	private Map<String, Variable> variables;
+	private Map<String, Variable> localVariables;
+	private Map<String, Command> commands;
+	private Map<Integer, String> colors;
+	private Map<Integer, String> shapes;
 	private String backgroundColor;
 	private String penColor;
 	private double penSize;
@@ -60,7 +61,7 @@ public class Data extends Observable {
 		return variables.get(variableName);
 	}
 
-	public HashMap<String, Variable> getVariables() {
+	public Map<String, Variable> getVariables() {
 		return variables;
 	}
 
@@ -87,7 +88,7 @@ public class Data extends Observable {
 		return localVariables.get(variableName);
 	}
 
-	public HashMap<String, Variable> getLocalVariables() {
+	public Map<String, Variable> getLocalVariables() {
 		return localVariables;
 	}
 
@@ -114,7 +115,7 @@ public class Data extends Observable {
 		return commands.get(commandName);
 	}
 
-	public HashMap<String, Command> getCommands() {
+	public Map<String, Command> getCommands() {
 		return commands;
 	}
 
@@ -136,7 +137,7 @@ public class Data extends Observable {
 		return colors.get(index);
 	}
 
-	public HashMap<Integer, String> getColors() {
+	public Map<Integer, String> getColors() {
 		return colors;
 	}
 
@@ -158,7 +159,7 @@ public class Data extends Observable {
 		return shapes.get(index);
 	}
 
-	public HashMap<Integer, String> getShapes() {
+	public Map<Integer, String> getShapes() {
 		return shapes;
 	}
 
