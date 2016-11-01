@@ -29,7 +29,9 @@ public class Make extends Command {
 		Data data = Data.getInstance();
 		
 		if (data.containsVariable(variableName)) {
-			data.changeVariable(variableName, expression);
+			if (data.getVariable(variableName).getValue() != expression) {
+				data.changeVariable(variableName, expression);
+			}
 		} else {
 			data.addVariable(new Variable(variableName, expression));
 		}
