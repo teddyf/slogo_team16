@@ -422,7 +422,7 @@ public class Workspace implements Observer {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {
 					// System.out.println("BEGINNING ANIMATION in UPDATE");
-					animation.beginAnimation(animalGUI);
+					animation.beginAnimation(animalGUI, buttons.getRunButton());
 				}
 			}
 			
@@ -435,7 +435,7 @@ public class Workspace implements Observer {
 		}
 	}
 	/*
-	 * public Button CREATETESTBUTTON() { Button button = new Button("TESTER");
+	 * public Button CREATETESTBUTON() { Button button = new Button("TESTER");
 	 * button.setOnMouseClicked(e -> {
 	 * System.out.println("setting coordinate map"); Random random = new
 	 * Random(); List<Coordinate> list = new ArrayList<Point2D>(); list.add(new
