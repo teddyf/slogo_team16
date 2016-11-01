@@ -80,7 +80,7 @@ public class ExpressionTree {
         } else if (label.equals("ListStart")){
             obj = 0;
         } else if (label.equals("Variable")) {
-        	obj = label;
+                obj = label;
         } else {
             throw new InvalidLabelException("Invalid user input");
         }
@@ -138,18 +138,18 @@ public class ExpressionTree {
     }
     
     public double process(Animal turtle, TreeNode node) {
-    	//dfs();
-    	double value = 0;
-    	Expression nodeExpression = node.expression;
-    	value = nodeExpression.run(turtle, node);
-    	return value;
+        //dfs();
+        double value = 0;
+        Expression nodeExpression = node.expression;
+        value = nodeExpression.run(turtle, node);
+        return value;
     }
     
     public void setPoints(List<Coordinate> points) {
-    	this.points = points;
+        this.points = points;
     }
     
     public void addPoint(Coordinate coordinate) {
-    	points.add(coordinate);
+        points.add(coordinate);
     }
 }
