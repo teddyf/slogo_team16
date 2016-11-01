@@ -20,7 +20,7 @@ import model.animal.Animal;
  */
 public class Animate {
 
-//	private List<Coordinate> coordinatePairs;
+	// private List<Coordinate> coordinatePairs;
 	private AnimalPaneGUI animalPaneGUI;
 	// private Pen pen;
 	// private int counter;
@@ -30,26 +30,29 @@ public class Animate {
 
 	public void beginAnimation(AnimalPaneGUI animalPaneGUI) {
 		this.animalPaneGUI = animalPaneGUI;
-		
+
 		Map<Integer, List<Coordinate>> coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
-		
-		for(Integer id : coordinatePairs.keySet()) {
+
+		for (Integer id : coordinatePairs.keySet()) {
 			Animal animal = animalPaneGUI.getAnimalPane().getMyAnimalMap().get(id);
 			if (!animal.getSelected()) {
 				continue;
-			}
-			IntegerProperty counter = new SimpleIntegerProperty();
-			Pen pen = animal.getActualPen();
-			pen.getLineList().clear();
-			pen.resetCounter();
+			} else {
+				IntegerProperty counter = new SimpleIntegerProperty();
+				Pen pen = animal.getActualPen();
+				pen.getLineList().clear();
+				pen.resetCounter();
 
-			Coordinate coordinatePoint = animalPaneGUI.getAnimalPane().getCoordinateMap().get(animal.getId()).get(counter.get());
-			translateAnimation(coordinatePoint, animal, pen, counter, coordinatePairs.get(animal.getId()));
-			
+				Coordinate coordinatePoint = coordinatePairs.get(animal.getId())
+						.get(counter.get());
+				translateAnimation(coordinatePoint, animal, pen, counter, coordinatePairs.get(animal.getId()));
+			}
+
 		}
 	}
 
-	private void translateAnimation(Coordinate coordinate, Animal animal, Pen pen, IntegerProperty counter, List<Coordinate> coordinatePairs) {
+	private void translateAnimation(Coordinate coordinate, Animal animal, Pen pen, IntegerProperty counter,
+			List<Coordinate> coordinatePairs) {
 		ImageView animalImage = animal.getImageView();
 		bindPenToAnimal(animalImage, coordinate, pen);
 		changeAnimalVisibility(animalImage, coordinate);
@@ -69,6 +72,7 @@ public class Animate {
 		inputTranslationCoordinates(point, animalImage, translation);
 
 		translation.setOnFinished(e -> {
+			System.out.println(animal.getId());
 			updateAnimalCoordinates(point, animal);
 			unbindPen(point, pen);
 			incrementCounters(point, pen, counter);
