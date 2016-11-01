@@ -66,6 +66,7 @@ public class ExpressionTree {
     public Class<?> getCommand (String input) throws ClassNotFoundException {
         try{
             String inputWithPath = getLabel(input);
+            System.out.println("TO");
             //System.out.println(input);
             Class<?> c = Class.forName(inputWithPath);
             return c;
