@@ -59,6 +59,9 @@ public class ParserRunner {
                 else if(s.equals("[") || s.equals("]")){
                     names.add(s);
                 }
+                else if(isMethod(s) && lang.getName(s).equals("NO MATCH")){
+                    names.add(s);
+                }
                 else names.add(lang.getName(s));
                 symbols.add(lang.getLabel(s));
             }
@@ -179,7 +182,7 @@ public class ParserRunner {
             return count;
         }
         catch(Exception e){
-            return 0;
+            return Double.POSITIVE_INFINITY;
         }
         
     }
@@ -219,7 +222,7 @@ public class ParserRunner {
         
         catch(Exception e){
                 
-                return 0;
+                return Double.POSITIVE_INFINITY;
         }
        
 

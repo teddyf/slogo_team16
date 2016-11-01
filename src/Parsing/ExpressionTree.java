@@ -2,6 +2,7 @@ package Parsing;
 import ErrorHandling.*;
 import View.helper.Coordinate;
 import model.animal.Animal;
+import model.command.*;
 import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
@@ -62,10 +63,16 @@ public class ExpressionTree {
         return root;
     }
     public Class<?> getCommand (String input) throws ClassNotFoundException {
-        String inputWithPath = getLabel(input);
-        //System.out.println(input);
-        Class<?> c = Class.forName(inputWithPath);
-        return c;
+        try{
+            String inputWithPath = getLabel(input);
+            //System.out.println(input);
+            Class<?> c = Class.forName(inputWithPath);
+            return c;
+        }
+        catch(ClassNotFoundException e){
+            Object obj = new NewCommand();
+            return obj.getClass();
+        }
     }
     public int getParamCount (Class<?> c) throws NoSuchFieldException, SecurityException {
         Object obj = c.getField(PARAM_COUNT);
