@@ -29,11 +29,7 @@ public class Data extends Observable {
 		localVariables = new HashMap<String,Variable>();
 		commands = new HashMap<String,Command>();
 		colors = new HashMap<Integer,String>();
-		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
-		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
-		colors.put(Colors.BLUE.getId(), Colors.BLUE.toString());
-		colors.put(Colors.GREEN.getId(), Colors.GREEN.toString());
-		colors.put(Colors.RED.getId(), Colors.RED.toString());
+		populateColorsMap();
 		shapes = new HashMap<Integer,String>();
 		shapes.put(0, "turtle");
 		backgroundColor = Colors.WHITE.toString();
@@ -41,6 +37,14 @@ public class Data extends Observable {
 		penSize = 1d;
 		dashValue = 1d;
 		shape = "";
+	}
+
+	private void populateColorsMap() {
+		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
+		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
+		colors.put(Colors.BLUE.getId(), Colors.BLUE.toString());
+		colors.put(Colors.GREEN.getId(), Colors.GREEN.toString());
+		colors.put(Colors.RED.getId(), Colors.RED.toString());
 	}
 
 	public static Data getInstance() {

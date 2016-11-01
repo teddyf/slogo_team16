@@ -84,7 +84,7 @@ public class Buttons extends Observable {
 	}
 
 	private void updateObservers(String input) {
-		Data.getInstance().getBackgroundColor();
+//		Data.getInstance().getBackgroundColor();
 		currentCommand = input;
 		setChanged();
 		notifyObservers();
