@@ -42,7 +42,7 @@ public class UIDataUpdate implements Observer {
 	public void update(Observable o, Object arg) {
 		addAllVarsToPane((Map<String, Variable>)Data.getInstance().getVariables());
 		wkspc.changeAnimalBackgroundColor(Data.getInstance().getBackgroundColor());
-
+		
 	}
 
 }
