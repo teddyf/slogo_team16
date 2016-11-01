@@ -1,9 +1,10 @@
 package model.command.turtle.movement;
 
+import Controller.Data;
 import model.animal.Animal;
 import model.command.Parameter;
 
-public class ClearScreen extends TurtleMovement {
+public class ClearScreen extends TurtleMovement{
 	private final double paramCount;
 	
 	public ClearScreen() {
@@ -20,6 +21,7 @@ public class ClearScreen extends TurtleMovement {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
+		Data.getInstance().setClearScreen(true);
 		return moveTo(turtle, 0,0);
 	}
 }

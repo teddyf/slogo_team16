@@ -407,6 +407,10 @@ public class Workspace implements Observer {
 	public void selectLanguageThroughUI(String language){
 		languageComboBox.getSelectionModel().select(language);
 	}
+	
+	public void clearAndResetScreen(){
+		buttons.getResetButton().fire();
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {

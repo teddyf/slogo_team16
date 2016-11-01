@@ -35,6 +35,7 @@ public class Buttons extends Observable {
 	private Controller myController;
 
 	private String currentCommand;
+	private Button resetButton;
 
 	public Buttons(Controller controller) {
 		myController = controller;
@@ -43,6 +44,10 @@ public class Buttons extends Observable {
 
 	public Buttons() {
 
+	}
+	
+	public Button getResetButton(){
+		return this.resetButton;
 	}
 
 	public VBox createConsoleInputButtons(Console console, GenericPane<String> pane, SlogoView slogoView, Workspace wkspc) {
@@ -100,9 +105,9 @@ public class Buttons extends Observable {
 	}
 
 	public Button resetAndClearScreenButton(Console console, SlogoView slogoView, AnimalPaneGUI animalPane) {
-		Button clear = graphic.createButton("Reset Screen");
-		clear.setPrefWidth(Workspace.BUTTON_WIDTH);
-		clear.setOnAction(e -> {
+		this.resetButton = graphic.createButton("Reset Screen");
+		resetButton.setPrefWidth(Workspace.BUTTON_WIDTH);
+		resetButton.setOnAction(e -> {
 			console.clearConsole();
 			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
 			animalPane.resetMyAnimalList();
@@ -110,7 +115,7 @@ public class Buttons extends Observable {
 			pane.createAnimal();
 			pane.resetLeftPane();
 		});
-		return clear;
+		return resetButton;
 	}
 
 	private Button createHTMLHelpButton() {

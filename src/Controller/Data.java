@@ -21,6 +21,7 @@ public class Data extends Observable {
 	private double penSize;
 	private double dashValue;
 	private String shape;
+	private boolean clearScreen;
 	
 	private Data(){
 		numTurtles = 1;
@@ -35,6 +36,7 @@ public class Data extends Observable {
 		penSize = 1d;
 		dashValue = 1d;
 		shape = "";
+		this.clearScreen = false;
 	}
 
 	private void populateColorsMap() {
@@ -45,6 +47,13 @@ public class Data extends Observable {
 		colors.put(Colors.RED.getId(), Colors.RED.toString());
 	}
 
+	public void setClearScreen(boolean bool){
+		this.clearScreen = bool;
+	}
+	
+	public boolean getClearScreen(){
+		return this.clearScreen;
+	}
 	public static Data getInstance() {
 		return instance;
 	}
