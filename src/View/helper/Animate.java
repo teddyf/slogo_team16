@@ -7,6 +7,7 @@ import View.AnimalPaneGUI;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import model.animal.Animal;
@@ -22,18 +23,20 @@ public class Animate {
 
 	// private List<Coordinate> coordinatePairs;
 	private AnimalPaneGUI animalPaneGUI;
+	private Button runButton;
 	// private Pen pen;
 	// private int counter;
 
 	// decrease this to speed up, increase to slow down
 	private double SPEED = 1;
 
-	public void beginAnimation(AnimalPaneGUI animalPaneGUI) {
+	public void beginAnimation(AnimalPaneGUI animalPaneGUI, Button runButton) {
 		this.animalPaneGUI = animalPaneGUI;
-
+		this.runButton = runButton;
 		Map<Integer, List<Coordinate>> coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
 
 		for (Integer id : coordinatePairs.keySet()) {
+			this.runButton.setDisable(true);
 			Animal animal = animalPaneGUI.getAnimalPane().getMyAnimalMap().get(id);
 			if (!animal.getSelected()) {
 				continue;
@@ -43,8 +46,7 @@ public class Animate {
 				pen.getLineList().clear();
 				pen.resetCounter();
 
-				Coordinate coordinatePoint = coordinatePairs.get(animal.getId())
-						.get(counter.get());
+				Coordinate coordinatePoint = coordinatePairs.get(animal.getId()).get(counter.get());
 				translateAnimation(coordinatePoint, animal, pen, counter, coordinatePairs.get(animal.getId()));
 			}
 
@@ -77,6 +79,8 @@ public class Animate {
 			incrementCounters(point, pen, counter);
 			if (counter.get() < coordinatePairs.size()) {
 				translateAnimation(coordinatePairs.get(counter.get()), animal, pen, counter, coordinatePairs);
+			} else {
+				runButton.setDisable(false);
 			}
 		});
 		translation.play();

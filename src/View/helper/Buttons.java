@@ -1,12 +1,9 @@
 package View.helper;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
 import Controller.Controller;
-import Controller.Data;
 import Controller.DataSetup.DataOutput;
 import View.AnimalPaneGUI;
 import View.HomeSelection;
@@ -17,8 +14,6 @@ import View.tabs.GenericPane;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.Main;
-import model.animal.Animal;
 
 /**
  * Handles buttons
@@ -33,6 +28,7 @@ public class Buttons extends Observable {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
 	private Controller myController;
+	private Button run;
 
 	private String currentCommand;
 
@@ -42,12 +38,12 @@ public class Buttons extends Observable {
 	}
 
 	public Buttons() {
-
+		
 	}
 
 	public VBox createConsoleInputButtons(Console console, GenericPane<String> pane, SlogoView slogoView, Workspace wkspc) {
 		VBox container = new VBox(5);
-		Button run = createRunButton(console, pane);
+		run = createRunButton(console, pane);
 		Button clear = createClearConsoleButton(console, slogoView);
 		Button help = createHTMLHelpButton();
 		container.getChildren().addAll(run, clear, help);
@@ -170,5 +166,9 @@ public class Buttons extends Observable {
 
 	public String getCurrentCommand() {
 		return currentCommand;
+	}
+	
+	public Button getRunButton() {
+		return run;
 	}
 }
