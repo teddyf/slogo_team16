@@ -1,15 +1,17 @@
 package model.command.control.variable;
 
+import java.util.ArrayList;
+
 import Controller.Data;
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import model.animal.Animal;
 import model.command.Command;
+import model.command.ListCommand;
 import model.command.NewCommand;
 import model.command.Parameter;
-import model.command.control.ControlCommand;
 
-public class To extends ControlCommand {
+public class To extends ListCommand {
 	private final double paramCount;
 	
 	public To() {
@@ -31,10 +33,13 @@ public class To extends ControlCommand {
 		if (data.containsCommand(commandName)) {
 			return 0; //IMPLEMENT ERROR CHECKING
 		}
-		String[] variableNames = (String[])params[2].getVariables();
-		TreeNode node = params[3].getNode();
-		
-		Command newCommand = new NewCommand(commandName, variableNames, node);
+		ArrayList<String> variableNames = new ArrayList<String>();
+		ArrayList<TreeNode> variableNodes = params[2].getNodes();
+		for (int n = 0; n < variableNodes.size(); n++) {
+			variableNames.add(variableNodes.get(n).toString());
+		}
+		ArrayList<TreeNode> commands = params[3].getNodes();
+		Command newCommand = new NewCommand(commandName, variableNames, commands);
 		data.addCommand(newCommand);
 		
 		return 1;

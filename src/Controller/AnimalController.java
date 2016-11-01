@@ -74,7 +74,10 @@ public class AnimalController implements Controller {
 		
 		List<Coordinate> points = new ArrayList<Coordinate>();
 		ExpressionTree.getInstance().setPoints(points);
-		value = ExpressionTree.getInstance().process(turtle, root);
+		Data.getInstance().setNumTurtles(activeAnimalPaneGUI.getAnimalPane().getMyAnimalList().size());
+		if (turtle.getSelected()) {
+			value = ExpressionTree.getInstance().process(turtle, root);
+		}
 		/*CommandProcessor processor = new CommandProcessor();
 		processor.run(turtle);
 		ArrayList<Command> commands = processor.getCommands();

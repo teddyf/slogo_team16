@@ -5,7 +5,6 @@ import Parsing.ExpressionTree;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
-import model.command.control.ControlCommand;
 import model.variable.Variable;
 
 public class Make extends Command {

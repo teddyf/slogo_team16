@@ -1,53 +1,56 @@
 package model.command;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-public class NewCommand extends Command {
+import Controller.Data;
+import Parsing.ExpressionTree;
+import Parsing.TreeNode;
+import model.animal.Animal;
+import model.variable.Variable;
+
+public class NewCommand extends ListCommand {
 	private final double paramCount;
 	private String commandName;
-	private String[] variableNames;
-	private Command[] commands;
-	private Parameter[][] parameters;
-	private Parameter[][] parameterValues;
+	private ArrayList<String> variableNames;
+	private ArrayList<TreeNode> commands;
 	
 	public NewCommand() {
 		super();
-		numParams = 1;
+		numParams = 2;
 		paramCount = 1;
 	}
 	
-	public NewCommand(String commandName, String[] variableNames, Command[] commands, Parameter[][] parameters) {
+	public NewCommand(String commandName, ArrayList<String> variableNames, ArrayList<TreeNode> commands) {
 		this.commandName = commandName;
 		this.variableNames = variableNames;
 		this.commands = commands;
-		this.parameters = parameters;
-		this.parameterValues = parameters;
-		numParams = 1;
+		numParams = 2;
 		paramCount = 1;
 	}
 	
-	private void setParameterValues(Double[] variables) {
-		for (int v = 0; v < variableNames.length; v++) {
-			for (int p = 0; p < parameters.length; p++) {
-				for (int i = 0; i < parameters[p].length; i++) {
-					if (Arrays.asList(parameters[p]).contains(variableNames[v])) {
-						parameterValues[p][i].setValue(variables[v]);
-					}
-					
-				}
-			}
+	private void setParameterValues(Animal turtle, ArrayList<TreeNode> variableNodes) {
+		double value = 0;
+		Variable newVariable;
+		for (int v = 0; v < variableNodes.size(); v++) {
+			value = ExpressionTree.getInstance().process(turtle, variableNodes.get(v));
+			newVariable = new Variable(variableNames.get(v), value);
+			Data.getInstance().addLocalVariable(newVariable);
 		}
 	}
 	
 	@Override
 	public double run(Parameter[] params) {
-		Double[] variables = (Double[])params[0].getList();
-		setParameterValues(variables);
-		Command command;
+		Animal turtle = params[0].getAnimal();
+		ArrayList<TreeNode> variableNodes = params[1].getNodes();
+		if (variableNodes.size() == variableNames.size()) {
+			setParameterValues(turtle, variableNodes);
+		} else {
+			// ERROR HANDLING
+		}
+		
 		double value = 0;
-		for(int c = 0; c < commands.length; c++) {
-			command = commands[c];
-			value = command.run(parameterValues[c]);
+		for(int c = 0; c < commands.size(); c++) {
+			value = ExpressionTree.getInstance().process(turtle, commands.get(c));
 		}
 		return value;
 	}
