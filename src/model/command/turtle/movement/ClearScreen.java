@@ -22,6 +22,7 @@ public class ClearScreen extends TurtleMovement{
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
 		Data.getInstance().setClearScreen(true);
+		System.out.println("Singleton clear screen bool: "+Data.getInstance().getClearScreen());
 		return moveTo(turtle, 0,0);
 	}
 }

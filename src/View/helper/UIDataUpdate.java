@@ -57,10 +57,14 @@ public class UIDataUpdate implements Observer {
 	public void update(Observable o, Object arg) {
 		addAllVarsToPane(Data.getInstance().getVariables());
 		wkspc.changeAnimalBackgroundColor(Data.getInstance().getBackgroundColor());
+		
+		/*
 		if (Data.getInstance().getClearScreen()){
+			System.out.println("OK TO CLEAR AND RESET SCREEN");
 			//clear screen!
 			wkspc.clearAndResetScreen();
 		}
+		*/
 
 	}
 

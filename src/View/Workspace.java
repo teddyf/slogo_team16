@@ -409,7 +409,10 @@ public class Workspace implements Observer {
 	}
 	
 	public void clearAndResetScreen(){
-		buttons.getResetButton().fire();
+		console.clearConsole();
+		myAnimalPaneGUI.resetMyAnimalList();
+		this.createAnimal();
+		this.resetLeftPane();
 	}
 
 	@Override
@@ -421,6 +424,13 @@ public class Workspace implements Observer {
 					// System.out.println("BEGINNING ANIMATION in UPDATE");
 					animation.beginAnimation(animalGUI);
 				}
+			}
+			
+			if (Data.getInstance().getClearScreen()){
+				System.out.println("OK TO CLEAR AND RESET SCREEN");
+				System.out.println("In update in UIUpdate clear screen bool: "+Data.getInstance().getClearScreen());
+				//clear screen!
+				this.clearAndResetScreen();
 			}
 		}
 	}
