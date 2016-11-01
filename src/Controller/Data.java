@@ -12,8 +12,7 @@ public class Data extends Observable {
 	private static final Data instance = new Data();
 	private int numTurtles;
 	private HashMap<String, Variable> variables;
-	private HashMap<String, Variable> localVariables;
-	private HashMap<String, Command> commands;
+	private HashMap<String, UserCommand> commands;
 	private HashMap<Integer, String> colors;
 	private HashMap<Integer, String> shapes;
 	private String backgroundColor;
@@ -25,8 +24,7 @@ public class Data extends Observable {
 	private Data(){
 		numTurtles = 1;
 		variables = new HashMap<String,Variable>();
-		localVariables = new HashMap<String,Variable>();
-		commands = new HashMap<String,Command>();
+		commands = new HashMap<String,UserCommand>();
 		colors = new HashMap<Integer,String>();
 		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
 		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
@@ -80,42 +78,11 @@ public class Data extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
-	/***** LOCAL VARIABLE METHODS *****/
-
-	public Variable getLocalVariable(String variableName) {
-		return localVariables.get(variableName);
-	}
-
-	public HashMap<String, Variable> getLocalVariables() {
-		return localVariables;
-	}
-
-	public boolean containsLocalVariable(String variableName) {
-		return localVariables.containsKey(variableName);
-	}
-
-	public void addLocalVariable(Variable variable) {
-		localVariables.put(variable.getName(), variable);
-	}
-
-	public void changeLocalVariable(String variableName, double value) {
-		Variable variable = localVariables.get(variableName);
-		variable.setValue(value);
-	}
-	
-	public void clearLocalVariables() {
-		localVariables = new HashMap<String,Variable>();
-	}
 
 	/***** COMMAND METHODS *****/
 
 	public Command getCommand(String commandName) {
-		return commands.get(commandName);
-	}
-
-	public HashMap<String, Command> getCommands() {
-		return commands;
+		return commands.get(commandName).getCommand();
 	}
 
 	public boolean containsCommand(String commandName) {
@@ -123,13 +90,40 @@ public class Data extends Observable {
 	}
 
 	public void addCommand(Command command) {
-		commands.put(command.getName(), command);
+		commands.put(command.getName(), new UserCommand(command));
 	}
 
 	public void changeCommand(String commandName, Command command) {
-		commands.put(commandName, command);
+		commands.put(commandName, new UserCommand(command));
+	}
+	
+	/***** LOCAL VARIABLE METHODS *****/
+
+	public Variable getLocalVariable(String commandName, String variableName) {
+		return commands.get(commandName).getLocalVariables().get(variableName);
 	}
 
+	public HashMap<String, Variable> getLocalVariables(String commandName) {
+		return commands.get(commandName).getLocalVariables();
+	}
+
+	public boolean containsLocalVariable(String commandName, String variableName) {
+		return commands.get(commandName).getLocalVariables().containsKey(variableName);
+	}
+
+	public void addLocalVariable(String commandName, Variable variable) {
+		commands.get(commandName).getLocalVariables().put(variable.getName(), variable);
+	}
+
+	public void changeLocalVariable(String commandName, String variableName, double value) {
+		Variable variable = commands.get(commandName).getLocalVariables().get(variableName);
+		variable.setValue(value);
+	}
+	
+	public void clearLocalVariables(String commandName) {
+		commands.get(commandName).setLocalVariables(new HashMap<String,Variable>());
+	}
+	
 	/***** COLOR METHODS *****/
 
 	public String getColor(int index) {

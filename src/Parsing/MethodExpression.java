@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import Controller.Data;
 import View.helper.Coordinate;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.ListCommand;
+import model.command.NewCommand;
 import model.command.Parameter;
 import model.command.control.variable.To;
 
@@ -34,8 +36,12 @@ public class MethodExpression extends Expression{
 			e.printStackTrace();
 		}
 		Command command = (Command)obj;
-		System.out.println(command.getName());
+		if (command instanceof NewCommand) {
+			command = Data.getInstance().getCommand(node.toString());
+		}
+		System.out.println("command " + command.getName());
 		Parameter[] parameters = new Parameter[(int)command.getNumParams()];
+		//System.out.println("NUM " + command.getNumParams());
 		//int paramIndex = 0;
 		int endIndex = node.getChildren().size();
 		
@@ -50,12 +56,15 @@ public class MethodExpression extends Expression{
 		if (command instanceof To) {
 			node = node.getChildren().get(0); //node containing command name
 			parameters[1] = new Parameter(node.toString());
+			endIndex = node.getChildren().size();
+			System.out.println("end " + endIndex);
 		}
 		for (int c = 0; c < endIndex; c++) {
 			if (command instanceof ListCommand) {
 				TreeNode listNode = node.getChildren().get(c);
 				ArrayList<TreeNode> list = createChildrenNodeList(listNode);
 				parameters[c+2] = new Parameter(list);
+				System.out.println(c);
 			} else {
 				//System.out.println("c " + c + " " + node.getChildren().get(c));
 				parameters[c+1] = new Parameter(node.getChildren().get(c));

@@ -30,11 +30,13 @@ public class NewCommand extends ListCommand {
 	
 	private void setParameterValues(Animal turtle, ArrayList<TreeNode> variableNodes) {
 		double value = 0;
+		String variableName;
 		Variable newVariable;
 		for (int v = 0; v < variableNodes.size(); v++) {
+			variableName = variableNames.get(v);
 			value = ExpressionTree.getInstance().process(turtle, variableNodes.get(v));
-			newVariable = new Variable(variableNames.get(v), value);
-			Data.getInstance().addLocalVariable(newVariable);
+			newVariable = new Variable(variableName, value);
+			Data.getInstance().addLocalVariable(commandName, newVariable);
 		}
 	}
 	
