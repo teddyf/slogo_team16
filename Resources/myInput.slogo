@@ -1,1 +1,1 @@
-make :var 0
+to thing [ :var1] [ fd :var1 ]
