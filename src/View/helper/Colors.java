@@ -9,18 +9,20 @@ import java.util.Map;
  *
  */
 public enum Colors {
-	BLACK("Black", "#000000"),
-	WHITE("White", "#FFFFFF"),
-	BLUE("Blue", "#0000FF"), 
-	RED("Red", "#FF0000"), 
-	GREEN("Green", "#00FF00");
+	BLACK("Black", "#000000", 0),
+	WHITE("White", "#FFFFFF", 1),
+	BLUE("Blue", "#0000FF", 2), 
+	RED("Red", "#FF0000", 3), 
+	GREEN("Green", "#00FF00", 4);
 
 	private String color;
 	private String hexColor;
+	private int ID;
 
-	Colors(String color, String hexColor ) {
+	Colors(String color, String hexColor, int id ) {
 		this.color = color;
 		this.hexColor = hexColor;
+		this.ID = id;
 	}
 	
 	public String getColor() {
@@ -29,6 +31,21 @@ public enum Colors {
 	
 	public String getHexColor() {
 		return this.hexColor;
+	}
+	
+	public int getId() {
+		return this.ID;
+	}
+	
+	public void setId(int id) {
+			for(Colors c : Colors.values()) {
+				if(c.getId() == id) {
+					System.out.println("Can't have two Color IDs the same");
+					// throw exception error
+					break;
+				}
+			}	
+			this.setId(id);
 	}
 	
 	public String[] getAllColors() {

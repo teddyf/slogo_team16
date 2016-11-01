@@ -43,7 +43,6 @@ public class VariablesPane implements ListViewPane, GenericPane<String> {
 				if (e.getClickCount() == 2) {
 					String[] split = content.getSelectionModel().getSelectedItem().split("=");
 					split[1] = split[1].trim();
-//					Variable var = Data.getInstance().getVariable(split[0]);
 					System.out.println(split[1]);
 					myConsole.getConsoleArea().setText(myConsole.getConsoleArea().getText() + split[1]);
 				}

@@ -1,5 +1,7 @@
 package View.helper;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import Controller.Data;
@@ -9,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
+// Added as Observable in AnimalPane.addAnimal();
 public class PenContainer extends Observable {
 	
 	private static final String PEN_COLOR = "Pen Color: ";
@@ -20,14 +23,28 @@ public class PenContainer extends Observable {
 	private HBox widthContainer;
 	private HBox dashContainer;
 	
-	private String[] dashValues = {"Solid", "Dotted", "Dashed"};
+	private Integer[] widthValues = {1, 2, 3, 4, 5};
+	private String[] dashValues = {PenDash.SOLID.getName(), PenDash.DOTTED.getName(), PenDash.DASHED.getName()};
+	private Map<String, Integer> dashMap;
 	
-	private ComboBox<String> combobox;
+	private ComboBox<String> dashCombobox;
+	private ComboBox<Integer> widthCombobox;
+	private ComboBox<String> colorCombobox;
+
 	// private static final String[] COLORS = { Colors.BLACK.toString(),
 	// Colors.BLUE.toString(), Colors.GREEN.toString(), Colors.RED.toString() };
 
 	public PenContainer() {
 		createColorContainer();
+		createDashContainer();
+		createWidthContainer();
+	}
+	// Jordan - Code Review : How to do this better
+	public void populateDashMap() {
+		dashMap = new HashMap<>();
+		dashMap.put(PenDash.SOLID.getName(), PenDash.SOLID.getVal());
+		dashMap.put(PenDash.DOTTED.getName(), PenDash.DOTTED.getVal());
+		dashMap.put(PenDash.DASHED.getName(), PenDash.DASHED.getVal());
 	}
 	
 	private void createContainer(HBox container, String label, ComboBox<String> selector) {
@@ -54,7 +71,7 @@ public class PenContainer extends Observable {
 //		ObservableList<String> optionList = FXCollections.observableArrayList(Colors.BLACK.getAllColors());
 //		ComboBox<String> combobox = new ComboBox<>(optionList);
 //		combobox.setValue(Colors.BLACK.getAllColors()[0]);
-		createContainer(widthContainer, label, combobox);
+//		createContainer(widthContainer, label, combobox);
 	}
 	
 	private void createDashBox() {
@@ -64,22 +81,53 @@ public class PenContainer extends Observable {
 		combobox.setValue(dashValues[0]);
 		createContainer(widthContainer, label, combobox);
 	}
+	
+	private void createWidthContainer() {
+		widthContainer = new HBox(10);
+		Label lbl = new Label(PEN_WIDTH);
 
+		ObservableList<Integer> optionList = FXCollections.observableArrayList(widthValues);
+		widthCombobox = new ComboBox<>(optionList);
+		widthCombobox.setValue(widthValues[0]);
+		widthCombobox.valueProperty().addListener(e -> {
+			Data.getInstance().setPenSize(widthCombobox.getValue());
+			setChanged();
+			notifyObservers();
+		});
+		
+		colorContainer.getChildren().addAll(lbl, widthCombobox);
+	}
+	
+	private void createDashContainer() {
+		populateDashMap();
+		dashContainer = new HBox(10);
+		Label lbl = new Label(PEN_DASH);
+
+		ObservableList<String> optionList = FXCollections.observableArrayList(dashValues);
+		dashCombobox = new ComboBox<>(optionList);
+		dashCombobox.setValue(dashValues[0]);
+		dashCombobox.valueProperty().addListener(e -> {
+			Data.getInstance().setDashValue(dashMap.get(dashCombobox.getValue()));
+			setChanged();
+			notifyObservers();
+		});
+		
+		colorContainer.getChildren().addAll(lbl, dashCombobox);
+	}
 
 	private void createColorContainer() {
 		colorContainer = new HBox(10);
 		Label lbl = new Label(PEN_COLOR);
 
 		ObservableList<String> optionList = FXCollections.observableArrayList(Colors.BLACK.getAllColors());
-		combobox = new ComboBox<>(optionList);
-		combobox.setValue(Colors.BLACK.getAllColors()[0]);
-		combobox.valueProperty().addListener(e -> {
-//			Data.getInstance().setPenColor();
+		colorCombobox = new ComboBox<>(optionList);
+		colorCombobox.setValue(Colors.BLACK.getAllColors()[0]);
+		colorCombobox.valueProperty().addListener(e -> {
+			Data.getInstance().setPenColor(Colors.valueOf(colorCombobox.getValue()).getId());
 			setChanged();
 			notifyObservers();
 		});
-		
-		colorContainer.getChildren().addAll(lbl, combobox);
+		colorContainer.getChildren().addAll(lbl, colorCombobox);
 	}
 	
 	public HBox getColorContainer() {
@@ -94,8 +142,5 @@ public class PenContainer extends Observable {
 		return dashContainer;
 	}
 	
-	public ComboBox<String> getComboBox() {
-		return combobox;
-	}
 
 }

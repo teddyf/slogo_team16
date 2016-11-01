@@ -102,7 +102,6 @@ public class Workspace implements Observer {
 		numTurtles = 0;
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
-		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
 		

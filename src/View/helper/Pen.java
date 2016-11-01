@@ -36,14 +36,16 @@ public class Pen implements Observer {
 	
 	public Pen(double x, double y){
 		initializeVariables();
-		color = decodeColor(Colors.BLACK.getAllColors()[0]);
+		color = Data.getInstance().getPenColor();
+
+//		color = decodeColor(Colors.BLACK.getAllColors()[0]);
 //		line = new Line(x, y, x, y);
 //		line.setFill(Color.BLACK);
 	}
 	
 	public Pen(double x, double y, PenContainer penColor) {
 		initializeVariables();
-		color = penColor.getComboBox().getValue();
+		color = Data.getInstance().getPenColor();
 	}
 
 	private void initializeVariables() {
@@ -96,7 +98,8 @@ public class Pen implements Observer {
 	public void update(Observable o, Object arg) {
 		if (o instanceof PenContainer) {
 			// TODO: convert string to hex
-			color = decodeColor(((PenContainer) o).getComboBox().getValue());
+//			color = decodeColor(((PenContainer) o).getComboBox().getValue());
+			color = Data.getInstance().getPenColor();
 			strokeWidth = Data.getInstance().getPenSize();
 			dashValue = Data.getInstance().getDashValue();
 		}

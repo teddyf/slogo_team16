@@ -26,13 +26,16 @@ public class Turtle extends Animal {
 		setImageView(new ImageView(turtleAppearance));
 		turtleImageView = graphic.createImageView(turtleAppearance);
 		
+		
+		actualPen = new Pen(getX(), getY());
+
 		/*
 		//testing gif
 		AnimatedAnimal animal = new AnimatedAnimal();
 		animalGif=animal.getAnimation();
 		*/
 //		penColor = new PenColor();
-		actualPen = new Pen(getX(), getY(), penColor);
+//		actualPen = new Pen(getX(), getY(), penColor);
 //		penColor.addObserver(actualPen);
 //		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
 //		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
