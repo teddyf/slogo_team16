@@ -36,25 +36,18 @@ public class UIDataUpdate implements Observer {
 	}
 
 	private void addAllVarsToPane(Map<String, Variable> vars) {
-		// vars = (HashMap<String, Variable>) vars;
-		// key is ":var"
-		// varSet contains "var"
 		for (String key : vars.keySet()) {
 			if (variablesSet.contains(key.substring(1))) {
 				for(int i = 0; i < varPane.getAllItems().size(); i++) {
-//					if((varPane.getAllItems().get(i).charAt(0) .equals(key.charAt(1))) {
 					String[] split = varPane.getAllItems().get(i).split("=");
 					String var = split[0].trim();
 					if(var.equals(key.substring(1))) {
 						varPane.getAllItems().remove(i);
 					}
-//					}
 				}
-//				varPane.getAllItems().remove(key.substring(1) + " = " + vars.get(key).getValue());
 			} else {
 				variablesSet.add(key.substring(1));
 			}
-			// variablesMap.put(key, value)
 			varPane.addItem(key.substring(1) + " = " + vars.get(key).getValue());
 		}
 
