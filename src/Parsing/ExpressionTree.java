@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
+import Controller.Data;
 public class ExpressionTree {
         
     private static final ExpressionTree instance = new ExpressionTree();
@@ -70,7 +71,7 @@ public class ExpressionTree {
             return c;
         }
         catch(ClassNotFoundException e){
-            Object obj = new NewCommand();
+            Object obj = Data.getInstance().getCommand(input);
             return obj.getClass();
         }
     }
@@ -82,6 +83,7 @@ public class ExpressionTree {
         Object obj;
         if (label.equals("Command")) {
             obj = getCommand(name);
+            System.out.println(obj);
         } else if (label.equals("Constant")) {
             obj = Double.parseDouble(name);
         } else if (label.equals("ListStart")){
