@@ -300,16 +300,25 @@ public class Data extends Observable {
 		return shape;
 	}
 	
+<<<<<<< HEAD
 	public void setShape(int index) {
 		if (shapes.containsKey(index)) {
 			this.shape = shapes.get(index);
 			setChanged();
+=======
+	public void setBackgroundColor(int index) {
+		if (colors.containsKey(index)) {
+			System.out.println("setbackgroundcolor contains key");
+			this.backgroundColor = colors.get(index);
+			//setChanged();
+>>>>>>> 1f8b20ff1b08aba08cce2c4cc3f343201c2e6289
 			notifyObservers();
 		} else {
 			Errors.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
 		}
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Gets the pen type (solid, dashed, or dotted)
 	 * @return pen type
@@ -318,8 +327,28 @@ public class Data extends Observable {
 		return dashValue;
 	}
 	
+=======
+	public void setPenColor(int index) {
+		if (colors.containsKey(index)) {
+			this.penColor = colors.get(index);
+			setChanged();
+			notifyObservers();
+		} else {
+			// ERROR HANDLING
+		}
+	}
+	
+	public void setPenSize(int pixels) {
+		this.penSize = pixels;
+		setChanged();
+		notifyObservers();
+	}
+
+>>>>>>> 1f8b20ff1b08aba08cce2c4cc3f343201c2e6289
 	public void setDashValue(double dashValue) {
 		this.dashValue = dashValue;
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
