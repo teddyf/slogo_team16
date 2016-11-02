@@ -64,28 +64,14 @@ public class Buttons extends Observable {
 			if (input.isEmpty()) {
 				return;
 			}
-
-			System.out.println(input);
-			// Add command to history, move this to only after its been checked
-			// for errors
-			// addCommandToHistory(pane, input);
-
 			myController.writeInputToFile(input);
 			myController.handleInput();
-			// myController.checkForPrintCommand("print", console); // testing
-			// the print
-			// myController.checkForPrintCommand("print", console); // testing
-			// the print
-			// command
-
-			// Updating Command History Pane with command
 			updateObservers(input);
 		});
 		return run;
 	}
 
 	private void updateObservers(String input) {
-//		Data.getInstance().getBackgroundColor();
 		currentCommand = input;
 		setChanged();
 		notifyObservers();
@@ -104,7 +90,7 @@ public class Buttons extends Observable {
 		this.resetButton = graphic.createButton("Reset Screen");
 		resetButton.setPrefWidth(Workspace.BUTTON_WIDTH);
 		resetButton.setOnAction(e -> {
-			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
+			Workspace pane = slogoView.getCurrentWorkspace();
 			pane.clearAndResetScreen();
 		});
 		return resetButton;
@@ -123,7 +109,6 @@ public class Buttons extends Observable {
 		Button wkspc = graphic.createButton("New Workspace");
 		wkspc.setPrefWidth(Workspace.BUTTON_WIDTH);
 		wkspc.setOnAction(e -> {
-			// System.out.println("main.getSlogoView(): "+main.getSlogoView());
 			slogoView.createNewWorkSpace();
 		});
 		return wkspc;
@@ -158,11 +143,6 @@ public class Buttons extends Observable {
 			home.initHomeScreen();
 		});
 		return newWkspc;
-	}
-
-	@Deprecated
-	private void addCommandToHistory(final GenericPane<String> pane, String input) {
-		pane.getAllItems().add(input);
 	}
 
 	public String getCurrentCommand() {
