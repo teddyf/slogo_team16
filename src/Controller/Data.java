@@ -1,3 +1,9 @@
+/**
+ * This is the Data class that holds all data and is a singleton so that all classes can access the data.
+ * 
+ * @author Aninda Manocha
+ */
+
 package Controller;
 
 import java.awt.Color;
@@ -5,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
+
+import ErrorHandling.Errors;
 import View.helper.Colors;
 import model.animal.Animal;
 import model.command.Command;
@@ -45,6 +53,17 @@ public class Data extends Observable {
 		this.clearScreen = false;
 	}
 
+	/**
+	 * Instance of the data class
+	 * @return the instance
+	 */
+	public static Data getInstance() {
+		return instance;
+	}
+	
+	/**
+	 * Set default colors for palette
+	 */
 	private void populateColorsMap() {
 		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
 		colors.put(Colors.BLACK.getId(), Colors.BLACK.toString());
@@ -52,19 +71,18 @@ public class Data extends Observable {
 		colors.put(Colors.GREEN.getId(), Colors.GREEN.toString());
 		colors.put(Colors.RED.getId(), Colors.RED.toString());
 	}
-
-	public void setClearScreen(boolean bool){
-		this.clearScreen = bool;
-	}
+	
+	/***** CLEAR SCREEN METHODS *****/
 	
 	public boolean getClearScreen(){
 		return this.clearScreen;
 	}
-	public static Data getInstance() {
-		return instance;
+	
+	public void setClearScreen(boolean bool){
+		this.clearScreen = bool;
 	}
 	
-	/***** NUMBER OF TURTLES *****/
+	/***** NUMBER OF TURTLES METHODS *****/
 	
 	public int getNumTurtles() {
     	return numTurtles;
@@ -74,7 +92,7 @@ public class Data extends Observable {
     	this.numTurtles = numTurtles;
     }
     
-    /****** WORKSPACE ID *****/
+    /****** WORKSPACE ID METHODS *****/
     
     public int getWorkspaceID() {
     	return workspaceID;
@@ -229,11 +247,34 @@ public class Data extends Observable {
 		System.out.println("Get background: "+backgroundColor);
 		return backgroundColor;
 	}
+	
+	public void setBackgroundColor(int index) {
+		if (colors.containsKey(index)) {
+			System.out.println("setbackgroundcolor contains key");
+			this.backgroundColor = colors.get(index);
+			notifyObservers();
+		} else {
+			Errors.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
+		}
+	}
 
 	public String getPenColor() {
 		return penColor;
 	}
+	
+	public void setPenColor(int index) {
+		if (colors.containsKey(index)) {
+			this.penColor = colors.get(index);
+		} else {
+			Errors.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
+		}
+	}
 
+	/**
+	 * Gets the index in the map (palette) of pen colors pertaining to a specific color
+	 * @param color - color of pen
+	 * @return index of pen 
+	 */
 	public int getPenColorIndex(String color) {
 		for (int i = 0; i < colors.size(); i++) {
 			if (color.equals(colors.get(i))) {
@@ -247,14 +288,45 @@ public class Data extends Observable {
 		return penSize;
 	}
 	
+	public void setPenSize(int pixels) {
+		this.penSize = pixels;
+	}
+	
+	/**
+	 * Gets the shape of the turtle
+	 * @return shape
+	 */
 	public String getShape() {
 		return shape;
 	}
+	
+	public void setShape(int index) {
+		if (shapes.containsKey(index)) {
+			this.shape = shapes.get(index);
+			setChanged();
+			notifyObservers();
+		} else {
+			Errors.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
+		}
+	}
 
+	/**
+	 * Gets the pen type (solid, dashed, or dotted)
+	 * @return pen type
+	 */
 	public double getDashValue() {
 		return dashValue;
 	}
 	
+	public void setDashValue(double dashValue) {
+		this.dashValue = dashValue;
+	}
+	
+	/**
+	 * Gets the index in the map of shapes pertaining to a specific shape
+	 * @param shape - the specified shape
+	 * @return the index
+	 */
 	public int getShapeIndex(String shape) {
 		for (int i = 0; i < shapes.size(); i++) {
 			if (shape.equals(shapes.get(i))) {
@@ -264,42 +336,13 @@ public class Data extends Observable {
 		return -1;
 	}
 	
-	public void setBackgroundColor(int index) {
-		if (colors.containsKey(index)) {
-			System.out.println("setbackgroundcolor contains key");
-			this.backgroundColor = colors.get(index);
-			notifyObservers();
-		} else {
-			// ERROR HANDLING
-		}
-	}
-
-	public void setPenColor(int index) {
-		if (colors.containsKey(index)) {
-			this.penColor = colors.get(index);
-		} else {
-			// ERROR HANDLING
-		}
-	}
-	
-	public void setPenSize(int pixels) {
-		this.penSize = pixels;
-	}
-
-	public void setDashValue(double dashValue) {
-		this.dashValue = dashValue;
-	}
-	
-	public void setShape(int index) {
-		if (shapes.containsKey(index)) {
-			this.shape = shapes.get(index);
-			setChanged();
-			notifyObservers();
-		} else {
-			// ERROR HANDLING
-		}
-	}
-	
+	/**
+	 * Sets the color at an index to a color with given amounts of red, green, and blue
+	 * @param index - index in color map (palette)
+	 * @param r - amount of red
+	 * @param g - amount of green
+	 * @param b - amount of blue
+	 */
 	public void setPalette(int index, int r, int g, int b) {
 		Color color = new Color(r, g, b);
 		String colorName = color.toString();

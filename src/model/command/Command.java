@@ -1,3 +1,9 @@
+/**
+ * This is the class for a general command, which all command classes extend
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command;
 
 public abstract class Command {

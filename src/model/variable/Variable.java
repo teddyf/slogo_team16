@@ -1,3 +1,9 @@
+/**
+ * This is the Variable class, which holds data and attributes pertaining to a variable, which can be either global or local (to 
+ * a command)
+ * 
+ * @author Aninda Manocha
+ */
 package model.variable;
 
 public class Variable {

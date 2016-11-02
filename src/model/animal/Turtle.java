@@ -1,3 +1,9 @@
+/**
+ * This is the Turtle class, which extends the Animal class, but contains an image for the turtle
+ * 
+ * @author Aninda Manocha
+ * @author Teddy Franceschi
+ */
 package model.animal;
 
 import View.helper.Graphics;
@@ -16,30 +22,13 @@ public class Turtle extends Animal {
 	private String imagePath;
 	private Animation animalGif;
 	
-	
-	
 	public Turtle(PenContainer penColor) {
 		super();
-		
 		setImagePath("turtleLogo.png");
 		turtleAppearance = graphic.createImage(imagePath);
 		setImageView(new ImageView(turtleAppearance));
-		turtleImageView = graphic.createImageView(turtleAppearance);
-		
-		
+		turtleImageView = graphic.createImageView(turtleAppearance);	
 		actualPen = new Pen(getX(), getY());
-
-		/*
-		//testing gif
-		AnimatedAnimal animal = new AnimatedAnimal();
-		animalGif=animal.getAnimation();
-		*/
-//		penColor = new PenColor();
-//		actualPen = new Pen(getX(), getY(), penColor);
-//		penColor.addObserver(actualPen);
-//		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
-//		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
-
 	}
 	
 	@Deprecated
@@ -49,16 +38,7 @@ public class Turtle extends Animal {
 		turtleAppearance = graphic.createImage(imagePath);
 		setImageView(new ImageView(turtleAppearance));
 		turtleImageView = graphic.createImageView(turtleAppearance);
-		/*
-		AnimatedAnimal animal = new AnimatedAnimal();
-		animalGif=animal.getAnimation();
-		*/
-//		penColor = new PenColor();
 		actualPen = new Pen(getX(), getY());
-//		penColor.addObserver(actualPen);
-//		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
-//		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
-
 	}
 
 	@Deprecated
@@ -68,16 +48,7 @@ public class Turtle extends Animal {
 		turtleAppearance = graphic.createImage(imagePath);
 		setImageView(new ImageView(turtleAppearance));
 		turtleImageView = graphic.createImageView(turtleAppearance);
-		/*
-		AnimatedAnimal animal = new AnimatedAnimal();
-		animalGif=animal.getAnimation();
-		*/
-//		penColor = new PenColor();
 		actualPen = new Pen(getX(), getY());
-//		penColor.addObserver(actualPen);
-//		actualPen.getLine().endXProperty().bind(this.getImageView().translateXProperty());
-//		actualPen.getLine().endYProperty().bind(this.getImageView().translateYProperty());
-
 	}
 
 	public Animation getGif(){

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ErrorHandling.Errors;
 import ErrorHandling.InvalidLabelException;
 import Parsing.ExpressionTree;
 import Parsing.ParserRunner;
@@ -57,7 +58,8 @@ public class AnimalController implements Controller {
 				} catch (FileNotFoundException | NoSuchMethodException | SecurityException | ClassNotFoundException
 						| InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NoSuchFieldException | InvalidLabelException e) {
-					displayErrorDialog(e.getMessage());
+					//displayErrorDialog(e.getMessage());
+					Errors.getInstance().displayError("Parsing error!", "Invalid input displayed", "Invalid input: " + e.getMessage());
 				}
 			}
 			activeAnimalPaneGUI.getAnimalPane().signalAnimation(); 
@@ -111,13 +113,13 @@ public class AnimalController implements Controller {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
 	}
 
-	public void displayErrorDialog(String error) {
+	/*public void displayErrorDialog(String error) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Parsing error!");
 		alert.setHeaderText("Invalid input displayed");
 		alert.setContentText("Invalid input: " + error);
 		alert.showAndWait();
-	}
+	}*/
 	
 	public void setParsingLanguage(String language) {
 		myProgramParser = new ProgramParser();

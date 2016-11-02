@@ -1,3 +1,9 @@
+/**
+ * This is the Parameter class, which holds data and attributes pertaining to a parameter for a command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command;
 
 import java.util.ArrayList;
@@ -12,6 +18,7 @@ public class Parameter {
 	private TreeNode node;
 	private ArrayList<TreeNode> nodes;
 	
+	//Default constructor
 	public Parameter() {
 		this.turtle = null;
 		this.name = null;
@@ -19,6 +26,8 @@ public class Parameter {
 		this.node = null;
 		this.nodes = null;
 	}
+	
+	/*****CONSTRUCTORS*****/
 	
 	public Parameter(Animal turtle) {
 		this.turtle = turtle;

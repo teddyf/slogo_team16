@@ -1,8 +1,15 @@
+/**
+ * This is the class for a user-defined command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command;
 
 import java.util.ArrayList;
 
 import Controller.Data;
+import ErrorHandling.Errors;
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
 import model.animal.Animal;
@@ -28,6 +35,11 @@ public class NewCommand extends ListCommand {
 		paramCount = 1;
 	}
 	
+	/**
+	 * Sets the values of variables to the values that are inputted
+	 * @param turtle - the turtle the commands are running on
+	 * @param variableNodes - the list of variable values
+	 */
 	private void setParameterValues(Animal turtle, ArrayList<TreeNode> variableNodes) {
 		double value = 0;
 		String variableName;
@@ -40,6 +52,11 @@ public class NewCommand extends ListCommand {
 		}
 	}
 	
+	/**
+	 * Runs the defined command with the values that are inputted
+	 * @param params - array of parameters
+	 * @return the value of the last command run
+	 */
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
@@ -47,7 +64,8 @@ public class NewCommand extends ListCommand {
 		if (variableNodes.size() == variableNames.size()) {
 			setParameterValues(turtle, variableNodes);
 		} else {
-			// ERROR HANDLING
+			Errors.getInstance().displayError("Argument Mismath Error!", "Invalid Number of Arguments Entered", 
+					"The number of arguments entered does not match the number of arguments for this command.");
 		}
 		
 		double value = 0;

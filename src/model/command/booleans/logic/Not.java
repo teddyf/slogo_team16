@@ -1,6 +1,15 @@
+/**
+ * This is the class for the NOT command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.booleans.logic;
 
+import ErrorHandling.Errors;
+import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
+import Parsing.VariableExpression;
 import model.animal.Animal;
 import model.command.Parameter;
 
@@ -21,7 +30,13 @@ public class Not extends BooleanLogic {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double test = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-		return not(test);
+		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
+			double test = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+			return not(test);
+		} else {
+			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
+					"The wrong type of input has been entered into the not command.");
+			return -1;
+		}
 	}
 }

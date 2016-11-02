@@ -1,9 +1,6 @@
 package Parsing;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import Controller.Data;
 import View.helper.Coordinate;
 import model.animal.Animal;
