@@ -1,3 +1,9 @@
+/**
+ * This is the class for the HIDETURTLE command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.visibility;
 
 import model.animal.Animal;

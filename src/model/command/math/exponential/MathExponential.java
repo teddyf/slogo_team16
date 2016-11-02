@@ -1,3 +1,9 @@
+/**
+ * This is the MathExponential class which contains methods for exponential calculations
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.math.exponential;
 
 import model.command.Command;

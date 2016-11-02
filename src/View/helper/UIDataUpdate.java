@@ -11,11 +11,15 @@ import View.Workspace;
 import View.tabs.VariablesPane;
 import model.variable.Variable;
 
+/**
+ * 
+ * @author lucyzhang
+ *
+ */
 public class UIDataUpdate implements Observer {
 
 	private Workspace wkspc;
 	private VariablesPane varPane;
-	// private Map<String, Integer> variablesMap;
 	private Set<String> variablesSet;
 
 	public UIDataUpdate(Workspace wkspc) {
@@ -27,21 +31,16 @@ public class UIDataUpdate implements Observer {
 		this.wkspc = wkspc;
 		this.varPane = varPane;
 		this.variablesSet = new HashSet<>();
-		// this.variablesMap = new HashMap<>();
 		Data.getInstance().addObserver(this);
-	}
-
-	public void checkForChange() {
-
 	}
 
 	private void addAllVarsToPane(Map<String, Variable> vars) {
 		for (String key : vars.keySet()) {
 			if (variablesSet.contains(key.substring(1))) {
-				for(int i = 0; i < varPane.getAllItems().size(); i++) {
+				for (int i = 0; i < varPane.getAllItems().size(); i++) {
 					String[] split = varPane.getAllItems().get(i).split("=");
 					String var = split[0].trim();
-					if(var.equals(key.substring(1))) {
+					if (var.equals(key.substring(1))) {
 						varPane.getAllItems().remove(i);
 					}
 				}
@@ -55,21 +54,11 @@ public class UIDataUpdate implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		addAllVarsToPane(Data.getInstance().getVariables());
-		wkspc.changeAnimalBackgroundColor(Data.getInstance().getBackgroundColor());
-		
-		/*
-		if (Data.getInstance().getClearScreen()){
-			System.out.println("OK TO CLEAR AND RESET SCREEN");
-			//clear screen!
-			wkspc.clearAndResetScreen();
+		if (o instanceof Data) {
+			addAllVarsToPane(Data.getInstance().getVariables());
+			wkspc.changeAnimalBackgroundColor(Data.getInstance().getBackgroundColor());
 		}
-		*/
 
 	}
-
-//	public Map<String, Integer> getVariablesMap() {
-//		return variablesMap;
-//	}
 
 }

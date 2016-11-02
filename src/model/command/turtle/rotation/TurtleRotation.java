@@ -1,3 +1,9 @@
+/**
+ * This is the TurtleRotation class, which contains methods for rotating the turtle
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.rotation;
 
 import View.Workspace;
@@ -9,6 +15,13 @@ public abstract class TurtleRotation extends TurtleCommand {
 		super();
 	}
 
+	/**
+	 * Turns the turtle a given number of degrees
+	 * @param turtle - the turtle to be rotated
+	 * @param degrees - the number of degrees
+	 * @param left - whether to rotate left
+	 * @return the number of degrees turned
+	 */
 	public double turn(Animal turtle, double degrees, double left) {
 		turtle.setHeading(turtle.getHeading() + degrees);
 		turtle.setHeading(turtle.getHeading() % 360);
@@ -20,6 +33,12 @@ public abstract class TurtleRotation extends TurtleCommand {
 		return degrees;
 	}
 
+	/**
+	 * Turns the turtle to a given heading
+	 * @param turtle - the turtle to be rotated
+	 * @param heading - the given heading
+	 * @return - the number of degrees turned
+	 */
 	public double turnTo(Animal turtle, double heading) {
 		heading = heading % 360;
 		double diff = Math.abs(turtle.getHeading() - heading);
@@ -31,6 +50,13 @@ public abstract class TurtleRotation extends TurtleCommand {
 		}
 	}
 
+	/**
+	 * Turns the turtle to a given point
+	 * @param turtle - the turtle to be rotated
+	 * @param x - the x coordinate of the point
+	 * @param y - the y coordinate of the point
+	 * @return the number of degrees turned
+	 */
 	public double turnTo(Animal turtle, double x, double y) {
 		double x_diff = x - (turtle.getX() - Workspace.LEFT_PANE_WIDTH/2);
 		double y_diff = y - (Workspace.LEFT_PANE_HEIGHT/2 - turtle.getY());

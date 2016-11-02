@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 /**
  * 
  * @author Jordan Frazier
+ * @author lucyzhang
  *
  */
 public class AnimalPaneGUI implements Observer {
@@ -26,19 +27,11 @@ public class AnimalPaneGUI implements Observer {
 
 		myAnimalPane = new AnimalPane();
 		myAnimalPane.addObserver(this);
-//		myAnimalPane.addAnimal();
 		
 		myScrollPane = new ScrollPane();
 		myContainer = new Pane();
 		styleScrollPane();
 		styleMyContainer();
-	}
-	@Deprecated
-	public AnimalPaneGUI(AnimalPane animalPane) {
-		myAnimalPane = animalPane;
-		myScrollPane = new ScrollPane();
-		myAnimalList = new ArrayList<>();
-		styleScrollPane();
 	}	
 	
 	public void styleScrollPane() {
@@ -58,11 +51,6 @@ public class AnimalPaneGUI implements Observer {
 		return animal;
 	}
 	
-//	@Deprecated
-//	public void addAnimal(Animal animal) {
-//		myAnimalList.add(animal);
-//		getAnimalPane().addAnimal(animal);
-//	}
 	
 	public void removeAnimal(Animal animal) {
 		myAnimalList.remove(animal);
@@ -94,8 +82,6 @@ public class AnimalPaneGUI implements Observer {
 	}
 	
 	public void resetMyAnimalList(){
-//		List<Animal> newList = new ArrayList<Animal>();
-//		setMyAnimalList(newList);
 		myAnimalList.clear();
 		getAnimalPane().clearAnimals();
 	}
@@ -108,11 +94,9 @@ public class AnimalPaneGUI implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (o instanceof AnimalPane) {
-			System.out.println("animalGUI updating to reflect new animal list");
 			for(Animal an : ((AnimalPane) o).getMyAnimalList()) {
 				System.out.println("ANIMAL ID: " + an.getId());
 			}
-//			setMyAnimalList(((AnimalPane) o).getMyAnimalList());
 		}
 		
 	}

@@ -1,3 +1,9 @@
+/**
+ * This is the class for the SHOWING command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.query;
 
 import model.animal.Animal;

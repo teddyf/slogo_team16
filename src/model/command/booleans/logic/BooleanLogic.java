@@ -1,3 +1,9 @@
+/**
+ * This is the BooleanLogic class that contains methods for logical comparisons
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.booleans.logic;
 
 import model.command.Command;

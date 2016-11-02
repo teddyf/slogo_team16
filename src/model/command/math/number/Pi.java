@@ -1,3 +1,9 @@
+/**
+ * This is the class for the PI command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.math.number;
 
 import model.command.Command;

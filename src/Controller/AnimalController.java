@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ErrorHandling.Errors;
 import ErrorHandling.InvalidLabelException;
 import Parsing.ExpressionTree;
 import Parsing.ParserRunner;
@@ -22,6 +23,7 @@ import model.animal.Animal;
 /**
  * 
  * @author Jordan Frazier
+ * @author Aninda Manocha
  * @author Lucy Zhang
  */
 
@@ -56,13 +58,28 @@ public class AnimalController implements Controller {
 				} catch (FileNotFoundException | NoSuchMethodException | SecurityException | ClassNotFoundException
 						| InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NoSuchFieldException | InvalidLabelException e) {
-					displayErrorDialog(e.getMessage());
+					//displayErrorDialog(e.getMessage());
+					Errors.getInstance().displayError("Parsing error!", "Invalid input displayed", "Invalid input: " + e.getMessage());
 				}
 			}
 			activeAnimalPaneGUI.getAnimalPane().signalAnimation(); 
 
 	}
 
+	/**
+	 * Runs the commands on a turtle and produces a set of points that map the results of the commands for animation
+	 * @param turtle - the turtle to run the commands on
+	 * @throws FileNotFoundException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws ClassNotFoundException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchFieldException
+	 * @throws InvalidLabelException
+	 */
 	private void runCommands(Animal turtle) throws FileNotFoundException, NoSuchMethodException, SecurityException,
 			ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchFieldException, InvalidLabelException {
@@ -78,30 +95,9 @@ public class AnimalController implements Controller {
 		if (turtle.getSelected()) {
 			value = ExpressionTree.getInstance().process(turtle, root);
 		}
-		/*CommandProcessor processor = new CommandProcessor();
-		processor.run(turtle);
-		ArrayList<Command> commands = processor.getCommands();
-		ArrayList<Parameter[]> parameters = processor.getParameters();
-		Command command;
-		for (int i = 0; i < commands.size(); i++) {
-			command = commands.get(i);
-			value = command.run(parameters.get(i));
-			
-			Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
-			List<Coordinate> points = new ArrayList<Coordinate>();
-			points.add(coordinates);
-			activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
-		}*/
-		System.out.println("VALUE " + value);
-		/*System.out.println("TURTLE " + turtle.getX());
-		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
-		List<Coordinate> points = new ArrayList<Coordinate>();
-		points.add(coordinates);*/
 		Map<Integer, List<Coordinate>> mapPoints = new HashMap<>();
 		mapPoints.put(turtle.getId(), points);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(mapPoints);
-//		return mapPoints;
-
 	}
 
 	// Could have this listening to the main view, and when user switches
@@ -117,26 +113,16 @@ public class AnimalController implements Controller {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
 	}
 
-	public void displayErrorDialog(String error) {
+	/*public void displayErrorDialog(String error) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Parsing error!");
 		alert.setHeaderText("Invalid input displayed");
 		alert.setContentText("Invalid input: " + error);
 		alert.showAndWait();
-	}
+	}*/
 	
 	public void setParsingLanguage(String language) {
 		myProgramParser = new ProgramParser();
 		myParserRunner = new ParserRunner(language, myProgramParser);
 	}
-
-	// public void addAnimalPane(Workspace workspace) {
-	// AnimalPane pane = new AnimalPane();
-	// myAnimalPanes.add(pane);
-	// workspace.add
-	//
-	// }
-
-	// Evaluate expression, handle errors
-
 }

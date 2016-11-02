@@ -24,38 +24,15 @@ public class AnimalPane extends Observable implements Observer {
 	// Map of string ID to List of CoordinatePair<double x, double y>
 	private Map<Integer, List<Coordinate>> coordinateMap;
 	private List<Coordinate> coordinateList;
-	
+
 	private PenContainer penColor;
 
 	private int animalID;
-	
+
 	public AnimalPane() {
 		// this increments when adding new animals
 		animalID = 0;
-		
-		// map of AnimalPane ID to Animal (for multiple animals on same pane)
-		myAnimalMap = new HashMap<Integer, Animal>();
-		myAnimalList = new ArrayList<Animal>();
-		
-		//Map of variable names and expressions
-		myVariables = new HashMap<String, String>();
-		
-		//list of all executed commands
-		myCommandHistory = new ArrayList<String>();
-		
-		//list of Animal ID and Coordinate Lists for translation rendering
-		coordinateList = new ArrayList<Coordinate>();
-		coordinateMap = new HashMap<Integer, List<Coordinate>>();
-		
-		penColor = new PenContainer();
 
-		}
-
-	@Deprecated
-	public AnimalPane(Animal animal) {
-		// this increments when adding new animals
-		animalID = 0;
-		
 		// map of AnimalPane ID to Animal (for multiple animals on same pane)
 		myAnimalMap = new HashMap<Integer, Animal>();
 		myAnimalList = new ArrayList<Animal>();
@@ -66,28 +43,25 @@ public class AnimalPane extends Observable implements Observer {
 		// list of all executed commands
 		myCommandHistory = new ArrayList<String>();
 
-		//list of Animal ID and Coordinate Lists for translation rendering
+		// list of Animal ID and Coordinate Lists for translation rendering
 		coordinateList = new ArrayList<Coordinate>();
 		coordinateMap = new HashMap<Integer, List<Coordinate>>();
-//		addAnimal(animal);
+
+		penColor = new PenContainer();
+
 	}
-	
+
 	public Animal addAnimal() {
 		animalID++;
 		Animal animal = new Turtle(penColor);
-		
+
 		penColor.addObserver(animal.getActualPen());
-		
+
 		myAnimalMap.put(animalID, animal);
 		myAnimalList.add(animal);
 
 		animal.setId(animalID);
 		animal.addObserver(this);
-		
-		// notify SLogoView that a new turtle was added, and needs to update the view to include new turtle
-//		setChanged();
-//		notifyObservers();
-		
 		return animal;
 	}
 
@@ -97,31 +71,26 @@ public class AnimalPane extends Observable implements Observer {
 	 * @param animal
 	 */
 	public void addAnimal(Animal animal) {
-		
+
 		System.out.println("Added animal in backend AnimalPane");
 		animalID++;
-		
+
 		penColor.addObserver(animal.getActualPen());
 
-		
 		myAnimalMap.put(animalID, animal);
 		myAnimalList.add(animal);
-		
+
 		animal.setId(animalID);
 		animal.addObserver(this);
 
-		// notify SLogoView that a new turtle was added, and needs to update the
-		// view to include new turtle
-//		setChanged();
-//		notifyObservers();
 	}
 
-	//for removing non active animals
+	// for removing non active animals
 	public void removeAnimal(Animal animal) {
 		myAnimalMap.remove(animal.getId());
 		myAnimalList.remove(animal);
 	}
-	
+
 	@Deprecated
 	@Override
 	public void update(Observable o, Object arg) {
@@ -159,7 +128,7 @@ public class AnimalPane extends Observable implements Observer {
 	public Map<Integer, List<Coordinate>> getCoordinateMap() {
 		return coordinateMap;
 	}
-	
+
 	public List<Coordinate> getCoordinateList() {
 		return coordinateList;
 	}
@@ -181,28 +150,19 @@ public class AnimalPane extends Observable implements Observer {
 	}
 
 	public void setCoordinateMap(Map<Integer, List<Coordinate>> coordinateMap) {
-//		this.coordinateMap = coordinateMap;
-		for(Integer id : coordinateMap.keySet()) {
-				this.coordinateMap.put(id, coordinateMap.get(id));
+		for (Integer id : coordinateMap.keySet()) {
+			this.coordinateMap.put(id, coordinateMap.get(id));
 		}
 	}
-	
+
 	public void signalAnimation() {
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	public void clearAnimals() {
 		myAnimalList.clear();
 		myAnimalMap.clear();
-	}
-	
-	@Deprecated
-	public void setCoordinateList(List<Coordinate> coordinateList) {
-		this.coordinateList = coordinateList;
-		//System.out.println("set changed, notify observers");
-		setChanged();
-		notifyObservers();
 	}
 
 	public void setAnimalID(int animalID) {

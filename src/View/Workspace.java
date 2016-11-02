@@ -88,7 +88,7 @@ public class Workspace implements Observer {
 	private ArrayList<String> turtleIDs = new ArrayList<String>();
 	private AnimalClick animalClick;
 
-	// There is only one instance of an AnimalPaneGUI per workspace
+	//one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
 
 	public Workspace(int workspaceID) {
@@ -119,20 +119,17 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		this.defaultBackgroundColor = color;
-//		populateDataToColorMap();
 		Data.getInstance().setBackgroundColor(Colors.BLACK.getColorIdMap().get(color));
 		numTurtles = 0;
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
 		animalClick = new AnimalClick(myAnimalPaneGUI);
-		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
 	}
 
 	public void init(SlogoView view) {
 		mainView = view;
 		myRoot = new BorderPane();
-		// createAnimalPaneGUI();
 		populateTopPane();
 		populateLeftPane();
 		populateRightPane();
@@ -150,7 +147,6 @@ public class Workspace implements Observer {
 
 	public AnimalPane createAnimalPane() {
 		AnimalPane animalPane = new AnimalPane();
-		// myController.setActiveAnimalPane(animalPane);
 		animalPane.addObserver(this);
 		return animalPane;
 	}
@@ -181,24 +177,8 @@ public class Workspace implements Observer {
 	}
 
 	public void resetLeftPane() {	
-//		AnimalPane animalPane = new AnimalPane();
-//		myAnimalPaneGUI.setAnimalPane(animalPane);
-//		myAnimalPaneGUI.getAnimalPane().addObserver(myAnimalPaneGUI);
-//		leftPane.getChildren().remove(myAnimalPaneGUI.getScrollPane());
-
 		AnimalPaneGUI animalGUI = new AnimalPaneGUI();
 		myAnimalPaneGUI = animalGUI;
-		
-//		leftPane.getChildren().add(myAnimalPaneGUI.getScrollPane());
-		
-//		myAnimalPaneGUI.resetMyAnimalList();
-//		
-//		ScrollPane newPane = new ScrollPane();
-//		Pane myContainer = new Pane();
-//		myAnimalPaneGUI.setScrollPane(newPane);
-//		myAnimalPaneGUI.styleScrollPane();
-//		myAnimalPaneGUI.setMyContainer(myContainer);
-//		myAnimalPaneGUI.styleMyContainer();
 		populateLeftPane();
 			
 	}
@@ -266,41 +246,11 @@ public class Workspace implements Observer {
 		return consolePane;
 	}
 
-	@Deprecated
-	public TextArea createConsoleArea() {
-		TextArea consoleArea = graphics.createConsoleTextArea(LEFT_PANE_WIDTH - BUTTON_WIDTH, SCENE_HEIGHT / 6);
-		console = new Console(consoleArea);
-		console.initConsole();
-		return consoleArea;
-	}
 
 	private VBox createButtons() {
 		VBox container = buttons.createConsoleInputButtons(console, historyPane, mainView, this);
 		return container;
 	}
-
-	// Maybe specific animal buttons that call this, which adds to animallist,
-	// then the list is completely rendered by calling populateGridWithAnimals()
-	// private void addAnimal(Animal animal) {
-	// getActiveAnimalPane().addAnimal(animal);
-	// renderAnimalGrid();
-	// }
-
-	// private void fillAnimalList(int numAnimals) {
-	// for (int i = 0; i < numAnimals; i++) {
-	// Animal turtle = new Turtle(TURTLE_WIDTH, TURTLE_HEIGHT,
-	// (myAnimalPaneGUI.getScrollPane().getPrefWidth() -
-	// myAnimalPaneGUI.getScrollPane().getLayoutX() - 15) / 2,
-	// (myAnimalPaneGUI.getScrollPane().getPrefHeight() -
-	// myAnimalPaneGUI.getScrollPane().getLayoutY()) / 2);
-	// myAnimalPaneGUI.addAnimal(turtle);
-	// }
-	// }
-	//
-	// public void populateGridWithAnimals() {
-	// fillAnimalList(NUM_ANIMALS);
-	// renderAnimalGrid();
-	// }
 
 	public void populateGridWithAnimals() {
 		renderAnimalGrid();
@@ -308,8 +258,8 @@ public class Workspace implements Observer {
 
 	public void createAnimal() {
 		numTurtles++;
-		System.out.println("Number of turtles: "+numTurtles);
 		Animal animal = myAnimalPaneGUI.addAnimal();
+		Data.getInstance().addTurtle(animal);
 		renderAnimal(animal);
 	}
 
@@ -385,49 +335,15 @@ public class Workspace implements Observer {
 		if (o instanceof AnimalPane) {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {
-					// System.out.println("BEGINNING ANIMATION in UPDATE");
 					animation.beginAnimation(animalGUI, buttons.getRunButton());
 				}
 			}
-			
 			if (Data.getInstance().getClearScreen()){
-				System.out.println("OK TO CLEAR AND RESET SCREEN");
-				System.out.println("In update in UIUpdate clear screen bool: "+Data.getInstance().getClearScreen());
-				//clear screen!
 				this.clearAndResetScreen();
 			}
 		}
 	}
-	/*
-	 * public Button CREATETESTBUTON() { Button button = new Button("TESTER");
-	 * button.setOnMouseClicked(e -> {
-	 * System.out.println("setting coordinate map"); Random random = new
-	 * Random(); List<Coordinate> list = new ArrayList<Point2D>(); list.add(new
-	 * Coordinate(random.nextInt(LEFT_PANE_WIDTH - 15),
-	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
-	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
-	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
-	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
-	 * random.nextInt(SCENE_HEIGHT*3/4 - 20))); list.add(new
-	 * Point2D(random.nextInt(LEFT_PANE_WIDTH - 15),
-	 * random.nextInt(SCENE_HEIGHT*3/4 - 20)));
-	 * myAnimalPaneGUI.getAnimalPane().setCoordinateMap(list);
-	 * myAnimalPaneGUI.getAnimalPane().getMyAnimalList().get(0).setHeading(40);
-	 * }); return button; }
-	 */
 
-
-	
-	@Deprecated
-	private void populateDataToColorMap(){
-		colors = new HashMap<String, Integer>();
-		colors.put("WHITE",0);
-		colors.put("BLACK",1);
-		colors.put("BLUE",2);
-		colors.put("GREEN",3);
-		colors.put("RED",4);
-//		return colors;
-	}
 	
 	public AnimalClick getAnimalClick(){
 		return animalClick;

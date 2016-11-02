@@ -1,3 +1,9 @@
+/**
+ * This is the class for the TURTLES command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.multiple;
 
 import Controller.Data;

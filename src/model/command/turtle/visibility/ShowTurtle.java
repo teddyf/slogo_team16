@@ -1,3 +1,9 @@
+/**
+ * This is the class for the SHOWTURTLE command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.visibility;
 
 import model.animal.Animal;

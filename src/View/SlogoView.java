@@ -30,7 +30,6 @@ public class SlogoView {
 	private String title;
 	private String backgroundColor;
 	private String language;
-	private int numTurtles;
 
 	public SlogoView() {
 		numWorkspaces = 0;
@@ -39,12 +38,10 @@ public class SlogoView {
 
 	public SlogoView(String title, String backgroundColor, String language, int numTurtles) {
 		this.title = title;
-		System.out.println("There is a title! 1st: " + this.title);
 		this.backgroundColor = backgroundColor;
 		this.language = language;
 		numWorkspaces = 0;
 		mainView = new TabPane();
-		this.numTurtles = numTurtles;
 	}
 
 	public Scene init() {
@@ -61,17 +58,15 @@ public class SlogoView {
 		this.backgroundColor = color;
 	}
 
-	public Workspace getCurrentWorkspaceLeftPane() {
+	public Workspace getCurrentWorkspace() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
 		int wkspcID = Integer.parseInt(String.valueOf(currentTab.getText().charAt(0))) - 1;
 		return workspaces.get(wkspcID);
 	}
-	
 
 	private void setCurrentWorkspaceTitle() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
 		title = currentTab.getText();
-		//return Integer.parseInt(currentTab.getText());
 	}
 
 	private void initScene() {
@@ -82,23 +77,14 @@ public class SlogoView {
 		numWorkspaces++;
 		Tab tab = new Tab();
 		if (stringExists(title)) {
-			tab.setText(numWorkspaces+": "+title);
+			tab.setText(numWorkspaces + ": " + title);
 		} else {
-			tab.setText(/* "Workspace #"+ */Integer.toString(numWorkspaces));
+			tab.setText(Integer.toString(numWorkspaces));
 		}
 		tab.setContent(initWorkspace().getMyRoot());
-		// add tab to tabpane
 		mainView.getTabs().add(tab);
-		//set language
-		getCurrentWorkspaceLeftPane().selectLanguageThroughUI(language);
-		//set number of turtles
-//		createNumTurtles();
-	}
-	
-	private void createNumTurtles(){
-		for (int i=0; i<numTurtles-1; i++){
-			getCurrentWorkspaceLeftPane().createAnimal();
-		}
+		getCurrentWorkspace().selectLanguageThroughUI(language);
+
 	}
 
 	private Workspace initWorkspace() {
@@ -109,7 +95,6 @@ public class SlogoView {
 			slogo = new Workspace(numWorkspaces);
 		}
 		if (stringExists(language)) {
-			System.out.println("Language: " + language);
 			slogo.setResources(ResourceBundle.getBundle(LANGUAGEPATH + language));
 		}
 		workspaces.add(slogo);
@@ -118,14 +103,12 @@ public class SlogoView {
 	}
 
 	public Map<String, String> parseWorkspaceData() {
-		System.out.println("There is a title!2: " + this.title);
 		setCurrentWorkspaceTitle();
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("title", title);
 		data.put("background_color", backgroundColor);
-		data.put("language", getCurrentWorkspaceLeftPane().getCurrentLanguage()); // TODO: add the correct
-														// values
-		data.put("numTurtles", Integer.toString(getCurrentWorkspaceLeftPane().getNumTurtles()));
+		data.put("language", getCurrentWorkspace().getCurrentLanguage());
+		data.put("numTurtles", Integer.toString(getCurrentWorkspace().getNumTurtles()));
 		return data;
 	}
 

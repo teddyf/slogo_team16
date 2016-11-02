@@ -1,5 +1,5 @@
 /**
- * This is the class for the TELL command
+ * This is the class for the ASK command
  * 
  * @author Aninda Manocha
  */
@@ -15,13 +15,13 @@ import model.animal.Animal;
 import model.command.ListCommand;
 import model.command.Parameter;
 
-public class Tell extends ListCommand {
+public class Ask extends ListCommand {
 	private final double paramCount;
 	
-	public Tell() {
+	public Ask() {
 		super();
-		numParams = 2;
-		paramCount = 1;
+		numParams = 3;
+		paramCount = 2;
 	}
 	
 	/**
@@ -33,6 +33,7 @@ public class Tell extends ListCommand {
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
 		ArrayList<TreeNode> turtles = params[1].getNodes();
+		TreeNode node = params[2].getNode();
 		ArrayList<Double> IDs = new ArrayList<Double>();
 		for (int t = 0; t < turtles.size(); t++) {
 			IDs.add(ExpressionTree.getInstance().process(turtle, turtles.get(t)));
@@ -46,7 +47,7 @@ public class Tell extends ListCommand {
 				Data.getInstance().getTurtles().get(t).setSelected(false);
 			}
 		}
-		return IDs.get(IDs.size()-1);
+		return ExpressionTree.getInstance().process(turtle, node);
 	}
 	
 	@Override

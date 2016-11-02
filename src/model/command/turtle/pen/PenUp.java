@@ -1,3 +1,9 @@
+/**
+ * This is the class for the PENUP command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.pen;
 
 import model.animal.Animal;

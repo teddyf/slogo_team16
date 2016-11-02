@@ -16,9 +16,6 @@ public class Main extends Application {
 	private SlogoView slogoView;
 	private Stage stage;
 
-//	public SlogoView getSlogoView(){
-//		return slogoView;
-//	}
 	
 	public Stage getStage(){
 		return stage;

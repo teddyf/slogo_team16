@@ -1,3 +1,9 @@
+/**
+ * This is the MathArithmetic class, which contains methods for arithmetic calculations
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.math.arithmetic;
 
 import model.command.Command;
