@@ -25,7 +25,7 @@ public class For extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		Variable variable = new Variable(params[1].getNode().toString());
+		Variable variable = new Variable(params[1].getNode().toString(), false);
 		Data data = Data.getInstance();
 		data.addVariable(variable);
 		double start = ExpressionTree.getInstance().process(turtle, params[2].getNode());

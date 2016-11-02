@@ -1,1 +1,1 @@
-to new [ :var ] [ fd :var ]
+square [ 40 ]

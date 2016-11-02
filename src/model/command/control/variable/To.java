@@ -29,9 +29,6 @@ public class To extends ListCommand {
 		Animal turtle = params[0].getAnimal();
 		Data data = Data.getInstance();
 		String commandName = params[1].getName();
-		if (data.containsCommand(commandName)) {
-			return 0; //IMPLEMENT ERROR CHECKING
-		}
 		ArrayList<String> variableNames = new ArrayList<String>();
 		ArrayList<TreeNode> variableNodes = params[2].getNodes();
 		for (int n = 0; n < variableNodes.size(); n++) {

@@ -33,7 +33,7 @@ public class Make extends Command {
 				data.changeVariable(variableName, expression);
 			}
 		} else {
-			data.addVariable(new Variable(variableName, expression));
+			data.addVariable(new Variable(variableName, expression, false));
 		}
 		System.out.println("returning " + expression);
 		return expression;
