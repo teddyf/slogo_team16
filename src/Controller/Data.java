@@ -30,6 +30,7 @@ public class Data extends Observable {
 		numTurtles = 1;
 		workspaceID = 1;
 		turtles = new HashMap<Integer,ArrayList<Animal>>();
+		turtles.put(1, new ArrayList<Animal>());
 		variables = new HashMap<String,Variable>();
 		commands = new HashMap<String,UserCommand>();
 		colors = new HashMap<Integer,String>();
@@ -63,6 +64,8 @@ public class Data extends Observable {
 		return instance;
 	}
 	
+	/***** NUMBER OF TURTLES *****/
+	
 	public int getNumTurtles() {
     	return numTurtles;
     }
@@ -71,6 +74,8 @@ public class Data extends Observable {
     	this.numTurtles = numTurtles;
     }
     
+    /****** WORKSPACE ID *****/
+    
     public int getWorkspaceID() {
     	return workspaceID;
     }
@@ -78,6 +83,8 @@ public class Data extends Observable {
     public void setWorkspaceID(int workspaceID) {
     	this.workspaceID = workspaceID;
     }
+    
+    /***** TURTLE METHODS *****/
     
     public Animal getTurtle(int id) {
     	for (int t = 0; t < turtles.size(); t++) {
