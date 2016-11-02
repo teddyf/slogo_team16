@@ -1,3 +1,9 @@
+/**
+ * This is the class for the ASK command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.multiple;
 
 import java.util.ArrayList;

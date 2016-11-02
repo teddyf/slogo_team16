@@ -1,3 +1,9 @@
+/**
+ * This is the class for the XCOR command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.query;
 
 import View.Workspace;

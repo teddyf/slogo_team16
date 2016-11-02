@@ -1,3 +1,9 @@
+/**
+ * This is the class for the ID command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.multiple;
 
 import model.animal.Animal;

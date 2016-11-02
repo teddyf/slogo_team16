@@ -1,3 +1,9 @@
+/**
+ * This is the class for the HOME command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.movement;
 
 import model.animal.Animal;

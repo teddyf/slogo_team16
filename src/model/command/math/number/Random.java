@@ -1,6 +1,15 @@
+/**
+ * This is the class for the RANDOM command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.math.number;
 
+import ErrorHandling.Errors;
+import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
+import Parsing.VariableExpression;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
@@ -22,7 +31,13 @@ public class Random extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double max = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-		return Math.random()*max;
+		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
+			double max = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+			return Math.random()*max;
+		} else {
+			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
+					"The wrong type of input has been entered into the random command.");
+			return -1;
+		}
 	}
 }

@@ -1,3 +1,9 @@
+/**
+ * This is the MathTrigonometry class for trig calculations
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.math.trigonometry;
 
 import model.command.Command;

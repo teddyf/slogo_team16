@@ -1,3 +1,9 @@
+/**
+ * This is the TurtlePen class that controls the pen of the turtle
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.turtle.pen;
 
 import model.animal.Animal;
