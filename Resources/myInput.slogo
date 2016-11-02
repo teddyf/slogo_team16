@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-fd 100
-=======
-square [ 40 ]
->>>>>>> Aninda
+make :var id

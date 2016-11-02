@@ -79,7 +79,7 @@ public class MethodExpression extends Expression{
 		value = command.run(parameters);
 		if (ExpressionTree.getInstance().getCurrentCommand() != null && !ExpressionTree.getInstance().getCurrentCommand().equals(prevCurrentCommand) 
 				&& command instanceof NewCommand) {
-			System.out.println("changing current command " + command.getName());
+			//System.out.println("changing current command " + command.getName());
 			ExpressionTree.getInstance().setCurrentCommand(prevCurrentCommand); //reset so that a local variable isn't always returned
 		}
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());

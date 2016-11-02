@@ -1,17 +1,20 @@
 package Controller;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
-
 import View.helper.Colors;
+import model.animal.Animal;
 import model.command.Command;
 import model.variable.Variable;
 
 public class Data extends Observable {
 	private static final Data instance = new Data();
 	private int numTurtles;
+	private int workspaceID;
+	private HashMap<Integer,ArrayList<Animal>> turtles;
 	private HashMap<String, Variable> variables;
 	private HashMap<String, UserCommand> commands;
 	private HashMap<Integer, String> colors;
@@ -25,6 +28,8 @@ public class Data extends Observable {
 	
 	private Data(){
 		numTurtles = 1;
+		workspaceID = 1;
+		turtles = new HashMap<Integer,ArrayList<Animal>>();
 		variables = new HashMap<String,Variable>();
 		commands = new HashMap<String,UserCommand>();
 		colors = new HashMap<Integer,String>();
@@ -64,6 +69,31 @@ public class Data extends Observable {
     
     public void setNumTurtles(int numTurtles) {
     	this.numTurtles = numTurtles;
+    }
+    
+    public int getWorkspaceID() {
+    	return workspaceID;
+    }
+    
+    public void setWorkspaceID(int workspaceID) {
+    	this.workspaceID = workspaceID;
+    }
+    
+    public Animal getTurtle(int id) {
+    	for (int t = 0; t < turtles.size(); t++) {
+    		if (turtles.get(workspaceID).get(t).getId() == id) {
+    			return turtles.get(workspaceID).get(t);
+    		}
+    	}
+    	return null;
+    }
+    
+    public ArrayList<Animal> getTurtles() {
+    	return this.turtles.get(workspaceID);
+    }
+    
+    public void addTurtle(Animal turtle) {
+    	this.turtles.get(workspaceID).add(turtle);
     }
 
 	/***** VARIABLE METHODS *****/
