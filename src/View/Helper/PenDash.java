@@ -1,5 +1,8 @@
 package View.helper;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum PenDash {
 	
 	SOLID("Solid", 1),
@@ -7,9 +10,14 @@ public enum PenDash {
 	DOTTED("Dotted", 5);
 	
 	private String name;
-	private int val;
+	private double val;
+//	private Map<Double, String> idMap;
 	
-	PenDash(String name, int val) {
+//	PenDash() {
+//		setIdMap();
+//	}
+	
+	PenDash(String name, double val) {
 		this.name= name;
 		this.val = val;
 	}
@@ -18,8 +26,20 @@ public enum PenDash {
 		return name;
 	}
 
-	public int getVal() {
+	public double getVal() {
 		return val;
 	}
+	
+	public Map<Double, String> getIdMap() {
+		Map<Double, String> idMap = new HashMap<>();
+		for(PenDash p : PenDash.values()) {
+			idMap.put(p.getVal(), p.getName());
+		}
+		return idMap;
+	}
+	
+//	public Map<Double, String> getIdMap() {
+//		return idMap;
+//	}
 
 }

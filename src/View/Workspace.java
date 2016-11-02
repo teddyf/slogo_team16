@@ -1,7 +1,6 @@
 package View;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -30,11 +29,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.AnimalPane;
@@ -331,7 +328,6 @@ public class Workspace implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-
 		if (o instanceof AnimalPane) {
 			for (AnimalPaneGUI animalGUI : myAnimalGUIList) {
 				if (animalGUI.getAnimalPane() == o) {

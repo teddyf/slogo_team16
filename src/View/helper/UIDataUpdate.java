@@ -57,6 +57,7 @@ public class UIDataUpdate implements Observer {
 		if (o instanceof Data) {
 			addAllVarsToPane(Data.getInstance().getVariables());
 			wkspc.changeAnimalBackgroundColor(Data.getInstance().getBackgroundColor());
+			
 		}
 
 	}
