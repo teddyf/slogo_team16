@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-fd 100
-=======
-square [ 40 ]
->>>>>>> Aninda
+repeat 72 [ fd 155 rt 95 ]

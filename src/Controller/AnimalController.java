@@ -78,29 +78,10 @@ public class AnimalController implements Controller {
 		if (turtle.getSelected()) {
 			value = ExpressionTree.getInstance().process(turtle, root);
 		}
-		/*CommandProcessor processor = new CommandProcessor();
-		processor.run(turtle);
-		ArrayList<Command> commands = processor.getCommands();
-		ArrayList<Parameter[]> parameters = processor.getParameters();
-		Command command;
-		for (int i = 0; i < commands.size(); i++) {
-			command = commands.get(i);
-			value = command.run(parameters.get(i));
-			
-			Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
-			List<Coordinate> points = new ArrayList<Coordinate>();
-			points.add(coordinates);
-			activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(points);
-		}*/
-		System.out.println("VALUE " + value);
-		/*System.out.println("TURTLE " + turtle.getX());
-		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
-		List<Coordinate> points = new ArrayList<Coordinate>();
-		points.add(coordinates);*/
+
 		Map<Integer, List<Coordinate>> mapPoints = new HashMap<>();
 		mapPoints.put(turtle.getId(), points);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(mapPoints);
-//		return mapPoints;
 
 	}
 
@@ -129,14 +110,5 @@ public class AnimalController implements Controller {
 		myProgramParser = new ProgramParser();
 		myParserRunner = new ParserRunner(language, myProgramParser);
 	}
-
-	// public void addAnimalPane(Workspace workspace) {
-	// AnimalPane pane = new AnimalPane();
-	// myAnimalPanes.add(pane);
-	// workspace.add
-	//
-	// }
-
-	// Evaluate expression, handle errors
 
 }

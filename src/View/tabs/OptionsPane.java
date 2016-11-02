@@ -89,8 +89,6 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Button addTurtle = buttons.createAddNumTurtlesButton(workspace);
 		Button clearAll = buttons.resetAndClearScreenButton(workspace.getConsole(), slogoView, animalPaneGUI);
 		Button newWkspc=buttons.newWorkspaceFromFileButton();
-		//Button decTurtle = buttons.createDecrementNumTurtlesButton(workspace);
-		
 		Button[] buttons = {wkspc, saveWkspc, newWkspc, addTurtle, clearAll};
 		return buttons;
 	}
@@ -119,10 +117,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	}
 
 	private ComboBox<String> createComboBoxOption(String[] options) {
-		
-		//ObservableList<String> optionList = FXCollections.observableArrayList(options);
 		ComboBox<String> combobox = graphic.createComboBox(options);
-		// Sets default value to first value in list
 		combobox.setValue(options[0]);
 		return combobox;
 	}
@@ -134,16 +129,6 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		return container;
 	}
 	
-//	public void changeBackgroundColor(String color){
-//		slogoView.setBackgroundColor(color);
-//		//change the color to the selected one
-//		System.out.println("CHange to this color: "+colorHexVals.get(color));
-//		//animalPaneGUI.getMyContainer().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-//		animalPaneGUI.getScrollPane().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-//		workspace.getMyRoot().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-//		//animalPaneGUI.getScrollPane().getContent().setStyle("-fx-background-color: "+colorHexVals.get(color)+";");
-//	}
-
 	@Override
 	public String getTabName() {
 		return displayName;
