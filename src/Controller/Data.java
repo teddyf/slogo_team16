@@ -268,6 +268,7 @@ public class Data extends Observable {
 		if (colors.containsKey(index)) {
 			System.out.println("setbackgroundcolor contains key");
 			this.backgroundColor = colors.get(index);
+			//setChanged();
 			notifyObservers();
 		} else {
 			// ERROR HANDLING
@@ -277,6 +278,7 @@ public class Data extends Observable {
 	public void setPenColor(int index) {
 		if (colors.containsKey(index)) {
 			this.penColor = colors.get(index);
+			setChanged();
 			notifyObservers();
 		} else {
 			// ERROR HANDLING
@@ -285,11 +287,13 @@ public class Data extends Observable {
 	
 	public void setPenSize(int pixels) {
 		this.penSize = pixels;
+		setChanged();
 		notifyObservers();
 	}
 
 	public void setDashValue(double dashValue) {
 		this.dashValue = dashValue;
+		setChanged();
 		notifyObservers();
 	}
 	

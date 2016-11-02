@@ -37,10 +37,10 @@ public class UIDataUpdate implements Observer {
 	private void addAllVarsToPane(Map<String, Variable> vars) {
 		for (String key : vars.keySet()) {
 			if (variablesSet.contains(key.substring(1))) {
-				for(int i = 0; i < varPane.getAllItems().size(); i++) {
+				for (int i = 0; i < varPane.getAllItems().size(); i++) {
 					String[] split = varPane.getAllItems().get(i).split("=");
 					String var = split[0].trim();
-					if(var.equals(key.substring(1))) {
+					if (var.equals(key.substring(1))) {
 						varPane.getAllItems().remove(i);
 					}
 				}
@@ -54,11 +54,11 @@ public class UIDataUpdate implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		addAllVarsToPane(Data.getInstance().getVariables());
-		wkspc.changeAnimalBackgroundColor(Data.getInstance().getBackgroundColor());
-
+		if (o instanceof Data) {
+			addAllVarsToPane(Data.getInstance().getVariables());
+			wkspc.changeAnimalBackgroundColor(Data.getInstance().getBackgroundColor());
+		}
 
 	}
-
 
 }
