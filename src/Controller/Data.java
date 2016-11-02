@@ -270,6 +270,7 @@ public class Data extends Observable {
 	public void setPenColor(int index) {
 		if (colors.containsKey(index)) {
 			this.penColor = colors.get(index);
+			notifyObservers();
 		} else {
 			// ERROR HANDLING
 		}
@@ -277,10 +278,12 @@ public class Data extends Observable {
 	
 	public void setPenSize(int pixels) {
 		this.penSize = pixels;
+		notifyObservers();
 	}
 
 	public void setDashValue(double dashValue) {
 		this.dashValue = dashValue;
+		notifyObservers();
 	}
 	
 	public void setShape(int index) {
