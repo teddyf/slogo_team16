@@ -76,6 +76,7 @@ public class Workspace implements Observer {
 	private GenericPane<String> historyPane;
 	private int workSpaceID;
 	private SlogoView mainView;
+	private VBox leftPane;
 
 	private ComboBox<String> languageComboBox;
 	
@@ -127,55 +128,6 @@ public class Workspace implements Observer {
 		// animalClick= new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
 	}
-	
-	@Deprecated
-	private void populateDataToColorMap(){
-		colors = new HashMap<String, Integer>();
-		colors.put("WHITE",0);
-		colors.put("BLACK",1);
-		colors.put("BLUE",2);
-		colors.put("GREEN",3);
-		colors.put("RED",4);
-//		return colors;
-	}
-	
-	public AnimalClick getAnimalClick(){
-		return animalClick;
-	}
-
-	public String getCurrentLanguage() {
-		return currentLanguage;
-	}
-
-	public void setCurrentLanguage(String newLanguage) {
-		this.currentLanguage = newLanguage;
-	}
-
-	public int getNumTurtles() {
-		return numTurtles;
-	}
-
-	public Console getConsole() {
-		return this.console;
-	}
-
-	public void setNumTurtles(int numTurtles) {
-		this.numTurtles = numTurtles;
-	}
-
-	public void decrementNumTurtles() {
-		if (numTurtles > 1) {
-			numTurtles--;
-		}
-	}
-
-	public List<String> getTurtleIDs() {
-		return turtleIDs;
-	}
-
-	public ComboBox<String> getLanguageComboBox() {
-		return languageComboBox;
-	}
 
 	public void init(SlogoView view) {
 		mainView = view;
@@ -219,7 +171,7 @@ public class Workspace implements Observer {
 	}
 
 	private void populateLeftPane() {
-		VBox leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);
+		leftPane = graphics.createVBoxPane(LEFT_PANE_WIDTH, SCENE_HEIGHT);
 		leftPane.getStyleClass().add("left-pane");
 
 		ScrollPane container = createConsole();
@@ -228,14 +180,27 @@ public class Workspace implements Observer {
 		myRoot.setLeft(leftPane);
 	}
 
-	public void resetLeftPane() {
-		ScrollPane newPane = new ScrollPane();
-		Pane myContainer = new Pane();
-		myAnimalPaneGUI.setScrollPane(newPane);
-		myAnimalPaneGUI.styleScrollPane();
-		myAnimalPaneGUI.setMyContainer(myContainer);
-		myAnimalPaneGUI.styleMyContainer();
+	public void resetLeftPane() {	
+//		AnimalPane animalPane = new AnimalPane();
+//		myAnimalPaneGUI.setAnimalPane(animalPane);
+//		myAnimalPaneGUI.getAnimalPane().addObserver(myAnimalPaneGUI);
+//		leftPane.getChildren().remove(myAnimalPaneGUI.getScrollPane());
+
+		AnimalPaneGUI animalGUI = new AnimalPaneGUI();
+		myAnimalPaneGUI = animalGUI;
+		
+//		leftPane.getChildren().add(myAnimalPaneGUI.getScrollPane());
+		
+//		myAnimalPaneGUI.resetMyAnimalList();
+//		
+//		ScrollPane newPane = new ScrollPane();
+//		Pane myContainer = new Pane();
+//		myAnimalPaneGUI.setScrollPane(newPane);
+//		myAnimalPaneGUI.styleScrollPane();
+//		myAnimalPaneGUI.setMyContainer(myContainer);
+//		myAnimalPaneGUI.styleMyContainer();
 		populateLeftPane();
+			
 	}
 
 	private void populateRightPane() {
@@ -410,9 +375,9 @@ public class Workspace implements Observer {
 	
 	public void clearAndResetScreen(){
 		console.clearConsole();
-		myAnimalPaneGUI.resetMyAnimalList();
-		this.createAnimal();
 		this.resetLeftPane();
+		this.createAnimal();
+
 	}
 
 	@Override
@@ -452,6 +417,56 @@ public class Workspace implements Observer {
 	 * }); return button; }
 	 */
 
+
+	
+	@Deprecated
+	private void populateDataToColorMap(){
+		colors = new HashMap<String, Integer>();
+		colors.put("WHITE",0);
+		colors.put("BLACK",1);
+		colors.put("BLUE",2);
+		colors.put("GREEN",3);
+		colors.put("RED",4);
+//		return colors;
+	}
+	
+	public AnimalClick getAnimalClick(){
+		return animalClick;
+	}
+
+	public String getCurrentLanguage() {
+		return currentLanguage;
+	}
+
+	public void setCurrentLanguage(String newLanguage) {
+		this.currentLanguage = newLanguage;
+	}
+
+	public int getNumTurtles() {
+		return numTurtles;
+	}
+
+	public Console getConsole() {
+		return this.console;
+	}
+
+	public void setNumTurtles(int numTurtles) {
+		this.numTurtles = numTurtles;
+	}
+
+	public void decrementNumTurtles() {
+		if (numTurtles > 1) {
+			numTurtles--;
+		}
+	}
+
+	public List<String> getTurtleIDs() {
+		return turtleIDs;
+	}
+
+	public ComboBox<String> getLanguageComboBox() {
+		return languageComboBox;
+	}
 	public void setWorkspaceID(int id) {
 		this.workSpaceID = id;
 	}

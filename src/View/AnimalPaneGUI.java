@@ -94,8 +94,10 @@ public class AnimalPaneGUI implements Observer {
 	}
 	
 	public void resetMyAnimalList(){
-		List<Animal> newList = new ArrayList<Animal>();
-		setMyAnimalList(newList);
+//		List<Animal> newList = new ArrayList<Animal>();
+//		setMyAnimalList(newList);
+		myAnimalList.clear();
+		getAnimalPane().clearAnimals();
 	}
 	public Pane getMyContainer() {
 		return myContainer;

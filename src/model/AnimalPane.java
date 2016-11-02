@@ -192,6 +192,11 @@ public class AnimalPane extends Observable implements Observer {
 		notifyObservers();
 	}
 	
+	public void clearAnimals() {
+		myAnimalList.clear();
+		myAnimalMap.clear();
+	}
+	
 	@Deprecated
 	public void setCoordinateList(List<Coordinate> coordinateList) {
 		this.coordinateList = coordinateList;
