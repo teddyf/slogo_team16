@@ -90,7 +90,7 @@ public class Buttons extends Observable {
 		this.resetButton = graphic.createButton("Reset Screen");
 		resetButton.setPrefWidth(Workspace.BUTTON_WIDTH);
 		resetButton.setOnAction(e -> {
-			Workspace pane = slogoView.getCurrentWorkspaceLeftPane();
+			Workspace pane = slogoView.getCurrentWorkspace();
 			pane.clearAndResetScreen();
 		});
 		return resetButton;

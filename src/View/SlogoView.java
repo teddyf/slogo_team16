@@ -58,7 +58,7 @@ public class SlogoView {
 		this.backgroundColor = color;
 	}
 
-	public Workspace getCurrentWorkspaceLeftPane() {
+	public Workspace getCurrentWorkspace() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
 		int wkspcID = Integer.parseInt(String.valueOf(currentTab.getText().charAt(0))) - 1;
 		return workspaces.get(wkspcID);
@@ -83,7 +83,7 @@ public class SlogoView {
 		}
 		tab.setContent(initWorkspace().getMyRoot());
 		mainView.getTabs().add(tab);
-		getCurrentWorkspaceLeftPane().selectLanguageThroughUI(language);
+		getCurrentWorkspace().selectLanguageThroughUI(language);
 
 	}
 
@@ -107,8 +107,8 @@ public class SlogoView {
 		Map<String, String> data = new HashMap<String, String>();
 		data.put("title", title);
 		data.put("background_color", backgroundColor);
-		data.put("language", getCurrentWorkspaceLeftPane().getCurrentLanguage());
-		data.put("numTurtles", Integer.toString(getCurrentWorkspaceLeftPane().getNumTurtles()));
+		data.put("language", getCurrentWorkspace().getCurrentLanguage());
+		data.put("numTurtles", Integer.toString(getCurrentWorkspace().getNumTurtles()));
 		return data;
 	}
 
