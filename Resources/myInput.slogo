@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-make :var id
-=======
-repeat 72 [ fd 155 rt 95 ]
->>>>>>> e8a73e3de59055ef197dbbc53a9019f11f6c0487
+tell [ 2 
