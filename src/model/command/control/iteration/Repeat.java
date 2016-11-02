@@ -30,7 +30,7 @@ public class Repeat extends Command {
 		
 		double value = 0;
 		Data data = Data.getInstance();
-		Variable repCount = new Variable("repcount");
+		Variable repCount = new Variable("repcount", false);
 		data.addVariable(repCount);
 		
 		for(int i = 0; i < expression; i++) {

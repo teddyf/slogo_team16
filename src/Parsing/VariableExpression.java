@@ -10,6 +10,7 @@ import model.variable.Variable;
 
 public class VariableExpression extends Expression{
     private String name;
+    private boolean local;
     
 	public VariableExpression (String name) {
         super(name);
@@ -22,7 +23,18 @@ public class VariableExpression extends Expression{
     
     @Override
     public double run(Animal turtle, TreeNode node) {
-    	Variable variable = Data.getInstance().getVariable(name);
-    	return variable.getValue();
+    	System.out.println("variable name = " + name);
+    	String commandName = ExpressionTree.getInstance().getCurrentCommand();
+    	System.out.println("current command = " + commandName);
+    	Variable variable;
+    	if (Data.getInstance().containsCommand(commandName) && Data.getInstance().containsLocalVariable(commandName, name)) { 
+    		//running user-defined command
+    		System.out.println("LOCAL VARIABLE");
+    		variable = Data.getInstance().getLocalVariable(commandName, name);
+    		return variable.getValue();
+    	} else {
+    		variable = Data.getInstance().getVariable(name);
+    		return variable.getValue();
+    	}
     }
 }

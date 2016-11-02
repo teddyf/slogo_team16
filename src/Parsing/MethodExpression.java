@@ -36,13 +36,17 @@ public class MethodExpression extends Expression{
 			e.printStackTrace();
 		}
 		Command command = (Command)obj;
+		String prevCurrentCommand = null;
 		if (command instanceof NewCommand) {
 			command = Data.getInstance().getCommand(node.toString());
+			prevCurrentCommand = ExpressionTree.getInstance().getCurrentCommand();
+			ExpressionTree.getInstance().setCurrentCommand(command.getName());
+			//System.out.println("CURRENT COMMAND = " + ExpressionTree.getInstance().getCurrentCommand());
 		}
 		System.out.println("command " + command.getName());
 		Parameter[] parameters = new Parameter[(int)command.getNumParams()];
 		//System.out.println("NUM " + command.getNumParams());
-		//int paramIndex = 0;
+		int paramIndex = 1;
 		int endIndex = node.getChildren().size();
 		
 		//if (command instanceof TurtleCommand || command instanceof ControlCommand) {
@@ -56,21 +60,28 @@ public class MethodExpression extends Expression{
 		if (command instanceof To) {
 			node = node.getChildren().get(0); //node containing command name
 			parameters[1] = new Parameter(node.toString());
+			paramIndex++;
 			endIndex = node.getChildren().size();
-			System.out.println("end " + endIndex);
+			//System.out.println("end " + endIndex);
 		}
 		for (int c = 0; c < endIndex; c++) {
 			if (command instanceof ListCommand) {
 				TreeNode listNode = node.getChildren().get(c);
 				ArrayList<TreeNode> list = createChildrenNodeList(listNode);
-				parameters[c+2] = new Parameter(list);
-				System.out.println(c);
+				parameters[paramIndex] = new Parameter(list);
+				paramIndex++;
+				//System.out.println(c);
 			} else {
 				//System.out.println("c " + c + " " + node.getChildren().get(c));
 				parameters[c+1] = new Parameter(node.getChildren().get(c));
 			}
 		}
 		value = command.run(parameters);
+		if (ExpressionTree.getInstance().getCurrentCommand() != null && !ExpressionTree.getInstance().getCurrentCommand().equals(prevCurrentCommand) 
+				&& command instanceof NewCommand) {
+			System.out.println("changing current command " + command.getName());
+			ExpressionTree.getInstance().setCurrentCommand(prevCurrentCommand); //reset so that a local variable isn't always returned
+		}
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
 		ExpressionTree.getInstance().addPoint(coordinates);
 		System.out.println("DONE!!!");
@@ -83,5 +94,9 @@ public class MethodExpression extends Expression{
 			nodes.add(listNode.getChildren().get(n));
 		}
     	return nodes;
+    }
+    
+    public String getMethodType() {
+    	return method.getSimpleName();
     }
 }

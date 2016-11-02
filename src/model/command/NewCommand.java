@@ -35,7 +35,7 @@ public class NewCommand extends ListCommand {
 		for (int v = 0; v < variableNodes.size(); v++) {
 			variableName = variableNames.get(v);
 			value = ExpressionTree.getInstance().process(turtle, variableNodes.get(v));
-			newVariable = new Variable(variableName, value);
+			newVariable = new Variable(variableName, value, true);
 			Data.getInstance().addLocalVariable(commandName, newVariable);
 		}
 	}
@@ -60,5 +60,10 @@ public class NewCommand extends ListCommand {
 	@Override
 	public String getName() {
 		return commandName;
+	}
+	
+	@Override 
+	public double getNumParams() {
+		return numParams;
 	}
 }

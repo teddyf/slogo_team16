@@ -18,6 +18,7 @@ public class ExpressionTree {
     private List<Entry<String, Pattern>> methodPaths;
     private ExpressionFactory factory;
     private List<Coordinate> points;
+    private String currentCommand;
     
     private ExpressionTree(){
         methodPaths = new ArrayList<>();
@@ -151,6 +152,15 @@ public class ExpressionTree {
         Expression nodeExpression = node.expression;
         value = nodeExpression.run(turtle, node);
         return value;
+    }
+    
+    
+    public String getCurrentCommand() {
+    	return currentCommand;
+    }
+    
+    public void setCurrentCommand(String currentCommand) {
+    	this.currentCommand = currentCommand;
     }
     
     public void setPoints(List<Coordinate> points) {
