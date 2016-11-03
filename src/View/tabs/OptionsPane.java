@@ -1,9 +1,11 @@
 package View.tabs;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 
+import Controller.Data;
 import View.AnimalPaneGUI;
 import View.SlogoView;
 import View.Workspace;
@@ -26,7 +28,7 @@ import javafx.scene.layout.HBox;
  * @author lucyzhang
  *
  */
-public class OptionsPane extends Observable implements GenericPane<HBox>  {
+public class OptionsPane extends Observable implements GenericPane<HBox>, Observer  {
 
 	private String displayName = "Options";
 	private ListView<HBox> content;
@@ -37,6 +39,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	private SlogoView slogoView;
 	private Buttons buttons = new Buttons();
 	private TextInput textInput = new TextInput();
+	private ComboBox<String> colors;
 
 	private static final String BACKGROUND_COLOR = "Background Color: ";
 
@@ -49,6 +52,7 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	}
 	
 	public OptionsPane(AnimalPaneGUI animalPaneGUI, Workspace workspace, SlogoView mainView) {
+		Data.getInstance().addObserver(this);
 		this.slogoView = mainView;
 		this.animalPaneGUI = animalPaneGUI;
 		graphics = new Graphics();
@@ -110,16 +114,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 	}
 	
 	private HBox createBackgroundColorOptions(){
-		ComboBox<String> colors = createComboBoxOption(BACKGROUND_COLORS);
+		colors = createComboBoxOption(BACKGROUND_COLORS);
 		colors.valueProperty().addListener((o, oldValue, newValue) -> workspace.changeAnimalBackgroundColor(newValue));
 		HBox backgroundColor = setComboBoxInContainer(colors, BACKGROUND_COLOR);
 		return backgroundColor;
-	}
-
-	private ComboBox<String> createComboBoxOption(String[] options) {
-		ComboBox<String> combobox = graphic.createComboBox(options);
-		combobox.setValue(options[0]);
-		return combobox;
 	}
 
 	private HBox setComboBoxInContainer(ComboBox<String> box, String name){
@@ -127,6 +125,12 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 		Label lbl = new Label(name);
 		container.getChildren().addAll(lbl, box);
 		return container;
+	}
+
+	private ComboBox<String> createComboBoxOption(String[] options) {
+		ComboBox<String> combobox = graphic.createComboBox(options);
+		combobox.setValue(options[0]);
+		return combobox;
 	}
 	
 	@Override
@@ -151,7 +155,9 @@ public class OptionsPane extends Observable implements GenericPane<HBox>  {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		if(o instanceof Data) {
+			colors.setValue(Data.getInstance().getBackgroundColor());
+		}
 		
 	}
 
