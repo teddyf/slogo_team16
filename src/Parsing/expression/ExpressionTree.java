@@ -1,5 +1,13 @@
-package Parsing;
+/**
+ * This is the class that builds the tree of expressions and builds tree nodes
+ * 
+ * @author Teddy Franceschi
+ * @author Aninda Manocha
+ */
+
+package Parsing.expression;
 import ErrorHandling.*;
+import Parsing.TreeNode;
 import View.helper.Coordinate;
 import model.animal.Animal;
 import model.command.*;
@@ -64,6 +72,7 @@ public class ExpressionTree {
         
         return root;
     }
+    
     public Class<?> getCommand (String input) throws ClassNotFoundException {
         try{
             String inputWithPath = getLabel(input);
@@ -75,10 +84,12 @@ public class ExpressionTree {
             return NewCommand.class;
         }
     }
+    
     public int getParamCount (Class<?> c) throws NoSuchFieldException, SecurityException {
         Object obj = c.getField(PARAM_COUNT);
         return (int) obj;
     }
+    
     public TreeNode buildNode (TreeNode parent, String name, String label) throws ClassNotFoundException, InvalidLabelException {
         Object obj;
         if (label.equals("Command")) {
@@ -118,7 +129,6 @@ public class ExpressionTree {
         return data;
     }
     
-    
     public void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
@@ -146,27 +156,51 @@ public class ExpressionTree {
         return ERROR;
     }
     
+    /**
+     * Processes a tree node to determine what type of node it is and return a value
+     * @param turtle - the turtle to run the command on
+     * @param node - the tree node
+     * @return the value from the tree node (either from a parameter or command)
+     */
     public double process(Animal turtle, TreeNode node) {
-        //dfs();
         double value = 0;
         Expression nodeExpression = node.expression;
         value = nodeExpression.run(turtle, node);
         return value;
     }
     
+    /***** CURRENT COMMAND *****/
     
+    /**
+     * Gets the user-defined command that is running
+     * @return current command
+     */
     public String getCurrentCommand() {
     	return currentCommand;
     }
     
+    /**
+     * Sets the user-defined command that is running
+     * @param currentCommand - the new user-define command name
+     */
     public void setCurrentCommand(String currentCommand) {
     	this.currentCommand = currentCommand;
     }
     
+    /***** POINTS *****/
+    
+    /**
+     * Changes the list of points to a specified list of points
+     * @param points - the new list of points 
+     */
     public void setPoints(List<Coordinate> points) {
         this.points = points;
     }
     
+    /**
+     * Adds a point to the list of points to be mapped (and animated)
+     * @param coordinate - the new point
+     */
     public void addPoint(Coordinate coordinate) {
         points.add(coordinate);
     }

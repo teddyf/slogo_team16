@@ -2,6 +2,7 @@ package Parsing;
 
 import java.util.*;
 
+import Parsing.expression.MethodExpression;
 import model.animal.*;
 
 import java.lang.reflect.*;

@@ -6,9 +6,9 @@
 
 package model.command.math.arithmetic;
 
-import Parsing.ConstantExpression;
-import Parsing.ExpressionTree;
-import Parsing.VariableExpression;
+import Parsing.expression.ConstantExpression;
+import Parsing.expression.ExpressionTree;
+import Parsing.expression.VariableExpression;
 import model.animal.Animal;
 import model.command.Parameter;
 

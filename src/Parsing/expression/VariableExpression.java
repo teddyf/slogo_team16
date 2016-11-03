@@ -1,10 +1,15 @@
-package Parsing;
+/**
+ * This is the VariableExpression class, which extends the expression class and is used to process variables that are entered as
+ * parameters
+ * 
+ * @author Teddy Franceschi
+ * @author Aninda Manocha
+ */
 
-import java.util.List;
-import java.util.Map;
+package Parsing.expression;
 
 import Controller.Data;
-import View.helper.Coordinate;
+import Parsing.TreeNode;
 import model.animal.Animal;
 import model.variable.Variable;
 

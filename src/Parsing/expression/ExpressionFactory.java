@@ -1,4 +1,4 @@
-package Parsing;
+package Parsing.expression;
 
 public class ExpressionFactory {
 

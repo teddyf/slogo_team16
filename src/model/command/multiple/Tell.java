@@ -9,8 +9,8 @@ package model.command.multiple;
 import java.util.ArrayList;
 
 import Controller.Data;
-import Parsing.ExpressionTree;
 import Parsing.TreeNode;
+import Parsing.expression.ExpressionTree;
 import model.animal.Animal;
 import model.command.ListCommand;
 import model.command.Parameter;

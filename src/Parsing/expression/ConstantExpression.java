@@ -1,9 +1,14 @@
-package Parsing;
+/**
+ * This is the ConstantExpression class, which extends the expression class and is used to process constants that are entered as
+ * parameters
+ * 
+ * @author Teddy Franceschi
+ * @author Aninda Manocha
+ */
 
-import java.util.List;
-import java.util.Map;
+package Parsing.expression;
 
-import View.helper.Coordinate;
+import Parsing.TreeNode;
 import model.animal.Animal;
 
 public class ConstantExpression extends Expression{

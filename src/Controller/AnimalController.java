@@ -9,10 +9,10 @@ import java.util.Map;
 
 import ErrorHandling.Errors;
 import ErrorHandling.InvalidLabelException;
-import Parsing.ExpressionTree;
 import Parsing.ParserRunner;
 import Parsing.ProgramParser;
 import Parsing.TreeNode;
+import Parsing.expression.ExpressionTree;
 import View.AnimalPaneGUI;
 import View.helper.Coordinate;
 import javafx.scene.control.Alert;

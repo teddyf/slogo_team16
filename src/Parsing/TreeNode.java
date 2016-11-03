@@ -1,5 +1,7 @@
 package Parsing;
 import java.util.*;
+
+import Parsing.expression.Expression;
 public class TreeNode {
     
     public Expression expression;

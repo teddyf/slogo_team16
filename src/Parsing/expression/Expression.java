@@ -1,9 +1,14 @@
-package Parsing;
+/**
+ * This is the Expression class, which is a property of a tree node and determines what type the node is (command, bracket, 
+ * variable, root, or constant)
+ * 
+ * @author Teddy Franceschi
+ * @author Aninda Manocha
+ */
 
-import java.util.List;
-import java.util.Map;
+package Parsing.expression;
 
-import View.helper.Coordinate;
+import Parsing.TreeNode;
 import model.animal.Animal;
 
 public abstract class Expression {

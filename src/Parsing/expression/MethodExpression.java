@@ -1,7 +1,16 @@
-package Parsing;
+/**
+ * This is the MethodExpression class, which extends the expression class and is used to process commands that are entered so that 
+ * their parameters are entered appropriately
+ * 
+ * @author Teddy Franceschi
+ * @author Aninda Manocha
+ */
+
+package Parsing.expression;
 
 import java.util.ArrayList;
 import Controller.Data;
+import Parsing.TreeNode;
 import View.helper.Coordinate;
 import model.animal.Animal;
 import model.command.Command;
@@ -77,6 +86,10 @@ public class MethodExpression extends Expression{
     	return nodes;
     }
     
+    /**
+     * 
+     * @return command name
+     */
     public String getMethodType() {
     	return method.getSimpleName();
     }

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 import Controller.Data;
 import ErrorHandling.Errors;
-import Parsing.ExpressionTree;
 import Parsing.TreeNode;
+import Parsing.expression.ExpressionTree;
 import model.animal.Animal;
 import model.variable.Variable;
 
