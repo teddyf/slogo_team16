@@ -10,6 +10,7 @@ package Parsing.expression;
 
 import java.util.ArrayList;
 import Controller.Data;
+import ErrorHandling.Errors;
 import Parsing.TreeNode;
 import View.helper.Coordinate;
 import model.animal.Animal;
@@ -44,9 +45,15 @@ public class MethodExpression extends Expression{
 		Command command = (Command)obj;
 		String prevCurrentCommand = null;
 		if (command instanceof NewCommand) {
-			command = Data.getInstance().getCommand(node.toString());
-			prevCurrentCommand = ExpressionTree.getInstance().getCurrentCommand();
-			ExpressionTree.getInstance().setCurrentCommand(command.getName());
+			if (Data.getInstance().containsCommand(node.toString())) {
+				command = Data.getInstance().getCommand(node.toString());
+				prevCurrentCommand = ExpressionTree.getInstance().getCurrentCommand();
+				ExpressionTree.getInstance().setCurrentCommand(command.getName());
+			} else {
+				Errors.getInstance().displayError("Invalid Input Error!", "Invalid Command Name", 
+						"You have entered a command name that does not exist.");
+				return -1;
+			}
 		}
 		Parameter[] parameters = new Parameter[(int)command.getNumParams()];
 		int paramIndex = 1;
