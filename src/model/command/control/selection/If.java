@@ -1,7 +1,15 @@
+/**
+ * This is the class for the IF command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.control.selection;
 
+import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
+import Parsing.VariableExpression;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
@@ -23,15 +31,19 @@ public class If extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-		TreeNode node = params[2].getNode();
-		
-		double value = 0;
-		if (expression != 0) {
-			value = ExpressionTree.getInstance().process(turtle, node);
-			return value;
+		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
+			double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+			TreeNode node = params[2].getNode();
+			double value = 0;
+			if (expression != 0) {
+				value = ExpressionTree.getInstance().process(turtle, node);
+				return value;
+			} else {
+				return 0;
+			}
 		} else {
-			return 0;
+			super.commandInputError(this.getName());
+			return -1;
 		}
 	}
 }

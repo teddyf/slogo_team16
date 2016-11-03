@@ -1,3 +1,9 @@
+/**
+ * This is the class for the SHAPE command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.display;
 
 import Controller.Data;

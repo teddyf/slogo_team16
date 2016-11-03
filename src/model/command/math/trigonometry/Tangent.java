@@ -6,7 +6,6 @@
 
 package model.command.math.trigonometry;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -40,8 +39,7 @@ public class Tangent extends MathTrigonometry {
 			}
 			return sin(degrees)/cos(degrees);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the tangent command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

@@ -6,7 +6,6 @@
 
 package model.command.turtle.rotation;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -34,8 +33,7 @@ public class Right extends TurtleRotation {
 			double degrees = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 			return turn(turtle, degrees, 0);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the right command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

@@ -1,7 +1,15 @@
+/**
+ * This is the class for the IFELSE command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.control.selection;
 
+import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.TreeNode;
+import Parsing.VariableExpression;
 import model.animal.Animal;
 import model.command.Command;
 import model.command.Parameter;
@@ -23,17 +31,21 @@ public class IfElse extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-		TreeNode trueNode = params[2].getNode();
-		TreeNode falseNode = params[3].getNode();
-		
-		double value = 0;
-		if (expression != 0) {
-			value = ExpressionTree.getInstance().process(turtle, trueNode);
-			return value;
+		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
+			double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+			TreeNode trueNode = params[2].getNode();
+			TreeNode falseNode = params[3].getNode();
+			double value = 0;
+			if (expression != 0) {
+				value = ExpressionTree.getInstance().process(turtle, trueNode);
+				return value;
+			} else {
+				value = ExpressionTree.getInstance().process(turtle, falseNode);
+				return value;
+			}
 		} else {
-			value = ExpressionTree.getInstance().process(turtle, falseNode);
-			return value;
+			super.commandInputError(this.getName());
+			return -1;
 		}
 	}
 }

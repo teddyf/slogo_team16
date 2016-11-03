@@ -6,7 +6,6 @@
 
 package model.command.turtle.rotation;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -36,8 +35,7 @@ public class Towards extends TurtleRotation {
 			double y = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 			return turnTo(turtle, x, y);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the towards command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

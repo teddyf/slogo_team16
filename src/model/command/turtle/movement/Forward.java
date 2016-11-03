@@ -5,7 +5,6 @@
  */
 package model.command.turtle.movement;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -33,8 +32,7 @@ public class Forward extends TurtleMovement {
 			double pixels = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 			return move(turtle, pixels);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the forward command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

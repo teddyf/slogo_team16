@@ -6,7 +6,6 @@
 
 package model.command.math.trigonometry;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -34,8 +33,7 @@ public class Cosine extends MathTrigonometry {
 			double degrees = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 			return cos(degrees);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the cosine command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

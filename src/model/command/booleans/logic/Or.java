@@ -6,7 +6,6 @@
 
 package model.command.booleans.logic;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -36,8 +35,7 @@ public class Or extends BooleanLogic {
 			double test2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 			return or(test1, test2);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the or command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

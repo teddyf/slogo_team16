@@ -6,7 +6,6 @@
 
 package model.command.math.exponential;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -34,8 +33,7 @@ public class Log extends MathExponential {
 			double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 			return log(expression);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the log command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

@@ -1,6 +1,5 @@
 package model.command.math.arithmetic;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -28,8 +27,7 @@ public class Minus extends MathArithmetic {
 			double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 			return sum(0, -expression);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the minus command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

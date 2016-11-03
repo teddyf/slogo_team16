@@ -6,7 +6,6 @@
 
 package model.command.turtle.movement;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -34,8 +33,7 @@ public class Backward extends TurtleMovement {
 			double pixels = ExpressionTree.getInstance().process(turtle, params[1].getNode());
 			return move(turtle, pixels * -1)*-1;
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the backward command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}

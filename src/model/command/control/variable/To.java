@@ -1,8 +1,15 @@
+/**
+ * This is the class for the TO command
+ * 
+ * @author Aninda Manocha
+ */
+
 package model.command.control.variable;
 
 import java.util.ArrayList;
 
 import Controller.Data;
+import ErrorHandling.Errors;
 import Parsing.TreeNode;
 import model.animal.Animal;
 import model.command.Command;
@@ -26,14 +33,14 @@ public class To extends ListCommand {
 	 */
 	@Override
 	public double run(Parameter[] params) {
-		Animal turtle = params[0].getAnimal();
 		Data data = Data.getInstance();
 		String commandName = params[1].getName();
 		ArrayList<String> variableNames = new ArrayList<String>();
 		ArrayList<TreeNode> variableNodes = params[2].getNodes();
 		for (int n = 0; n < variableNodes.size(); n++) {
 			if (variableNames.contains(variableNodes.get(n).toString())) {
-				//ERROR CHECKING
+				Errors.getInstance().displayError("Variables Error!", "Duplicate Variable Entered", 
+						"You have entered the same variable name more than once.");
 			} else {
 				variableNames.add(variableNodes.get(n).toString());
 			}

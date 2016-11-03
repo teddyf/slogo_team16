@@ -1,1 +1,1 @@
-setbackground 2
+to new [ :var :var ] [ fd :var ]

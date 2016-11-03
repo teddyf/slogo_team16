@@ -6,7 +6,6 @@
 
 package model.command.math.arithmetic;
 
-import ErrorHandling.Errors;
 import Parsing.ConstantExpression;
 import Parsing.ExpressionTree;
 import Parsing.VariableExpression;
@@ -35,8 +34,7 @@ public class Product extends MathArithmetic {
 			double expression2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
 			return product(expression1, expression2);
 		} else {
-			Errors.getInstance().displayError("Data Type Error!", "Invalid Data Entered", 
-					"The wrong type of input has been entered into the product command.");
+			super.commandInputError(this.getName());
 			return -1;
 		}
 	}
