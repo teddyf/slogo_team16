@@ -29,12 +29,7 @@ public class Not extends BooleanLogic {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double test = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			return not(test);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double test = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		return not(test);
 	}
 }

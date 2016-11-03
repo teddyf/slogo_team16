@@ -31,19 +31,11 @@ public class SetPalette extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))
-				&& ((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression))
-				&& ((params[3].getNode().expression instanceof ConstantExpression) || (params[3].getNode().expression instanceof VariableExpression))
-				&& ((params[4].getNode().expression instanceof ConstantExpression) || (params[4].getNode().expression instanceof VariableExpression))) {
-			double index = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			double r = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			double g = ExpressionTree.getInstance().process(turtle, params[3].getNode());
-			double b = ExpressionTree.getInstance().process(turtle, params[4].getNode());
-			Data.getInstance().setPalette((int)index, (int)r, (int)g, (int)b);
-			return index;
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double index = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double r = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		double g = ExpressionTree.getInstance().process(turtle, params[3].getNode());
+		double b = ExpressionTree.getInstance().process(turtle, params[4].getNode());
+		Data.getInstance().setPalette((int)index, (int)r, (int)g, (int)b);
+		return index;
 	}
 }

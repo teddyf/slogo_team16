@@ -28,12 +28,7 @@ public class Forward extends TurtleMovement {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double pixels = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			return move(turtle, pixels);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double pixels = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		return move(turtle, pixels);
 	}
 }

@@ -36,23 +36,15 @@ public class For extends Command {
 		Variable variable = new Variable(params[1].getNode().toString(), false);
 		Data data = Data.getInstance();
 		data.addVariable(variable);
-		
-		if (((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression))
-				&& ((params[3].getNode().expression instanceof ConstantExpression) || (params[3].getNode().expression instanceof VariableExpression))
-				&& ((params[4].getNode().expression instanceof ConstantExpression) || (params[4].getNode().expression instanceof VariableExpression))) {
-			double start = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			double end = ExpressionTree.getInstance().process(turtle, params[3].getNode());
-			double increment = ExpressionTree.getInstance().process(turtle, params[4].getNode());
-			TreeNode node = params[5].getNode();
-			double value = 0;
-			for(int i = (int)start; i <= end; i+=increment) {
-				value = ExpressionTree.getInstance().process(turtle, node);
-				variable.setValue(i+1);
-			}
-			return value;
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
+		double start = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		double end = ExpressionTree.getInstance().process(turtle, params[3].getNode());
+		double increment = ExpressionTree.getInstance().process(turtle, params[4].getNode());
+		TreeNode node = params[5].getNode();
+		double value = 0;
+		for(int i = (int)start; i <= end; i+=increment) {
+			value = ExpressionTree.getInstance().process(turtle, node);
+			variable.setValue(i+1);
 		}
+		return value;
 	}
 }

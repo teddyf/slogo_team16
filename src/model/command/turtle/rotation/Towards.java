@@ -29,14 +29,8 @@ public class Towards extends TurtleRotation {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression)) 
-				&& ((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression))) {
-			double x = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			double y = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			return turnTo(turtle, x, y);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double x = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double y = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		return turnTo(turtle, x, y);
 	}
 }

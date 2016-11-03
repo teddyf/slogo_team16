@@ -31,19 +31,14 @@ public class If extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			TreeNode node = params[2].getNode();
-			double value = 0;
-			if (expression != 0) {
-				value = ExpressionTree.getInstance().process(turtle, node);
-				return value;
-			} else {
-				return 0;
-			}
+		double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		TreeNode node = params[2].getNode();
+		double value = 0;
+		if (expression != 0) {
+			value = ExpressionTree.getInstance().process(turtle, node);
+			return value;
 		} else {
-			super.commandInputError(this.getName());
-			return -1;
+			return 0;
 		}
 	}
 }

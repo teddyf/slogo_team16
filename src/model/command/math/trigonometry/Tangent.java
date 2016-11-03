@@ -29,18 +29,13 @@ public class Tangent extends MathTrigonometry {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double degrees = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			if (degrees == 90) {
-				return Double.POSITIVE_INFINITY;
-			}
-			if (degrees == 270) {
-				return Double.NEGATIVE_INFINITY;
-			}
-			return sin(degrees)/cos(degrees);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
+		double degrees = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		if (degrees == 90) {
+			return Double.POSITIVE_INFINITY;
 		}
+		if (degrees == 270) {
+			return Double.NEGATIVE_INFINITY;
+		}
+		return sin(degrees)/cos(degrees);
 	}
 }

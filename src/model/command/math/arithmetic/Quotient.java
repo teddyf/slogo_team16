@@ -28,14 +28,8 @@ public class Quotient extends MathArithmetic {
 	 */
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression)) 
-				&& ((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression))) {
-			double expression1 = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			double expression2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			return product(expression1, 1.0/expression2);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double expression1 = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double expression2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		return product(expression1, 1.0/expression2);
 	}
 }

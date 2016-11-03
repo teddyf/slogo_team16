@@ -29,14 +29,8 @@ public class Power extends MathExponential {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression)) 
-				&& ((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression))) {
-			double base = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			double exponent = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			return power(base, exponent);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double base = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double exponent = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		return power(base, exponent);
 	}
 }

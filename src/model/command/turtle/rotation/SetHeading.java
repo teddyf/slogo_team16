@@ -29,12 +29,7 @@ public class SetHeading extends TurtleRotation {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double heading = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			return turnTo(turtle, heading);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double heading = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		return turnTo(turtle, heading);
 	}
 }

@@ -31,13 +31,8 @@ public class SetBackground extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double index = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			Data.getInstance().setBackgroundColor((int)index);
-			return index;
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double index = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		Data.getInstance().setBackgroundColor((int)index);
+		return index;
 	}
 }

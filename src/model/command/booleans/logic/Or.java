@@ -29,14 +29,8 @@ public class Or extends BooleanLogic {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression)) 
-				&& ((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression))) {
-			double test1 = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			double test2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			return or(test1, test2);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double test1 = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		double test2 = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		return or(test1, test2);
 	}
 }

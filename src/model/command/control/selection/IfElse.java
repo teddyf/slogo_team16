@@ -31,21 +31,16 @@ public class IfElse extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			TreeNode trueNode = params[2].getNode();
-			TreeNode falseNode = params[3].getNode();
-			double value = 0;
-			if (expression != 0) {
-				value = ExpressionTree.getInstance().process(turtle, trueNode);
-				return value;
-			} else {
-				value = ExpressionTree.getInstance().process(turtle, falseNode);
-				return value;
-			}
+		double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		TreeNode trueNode = params[2].getNode();
+		TreeNode falseNode = params[3].getNode();
+		double value = 0;
+		if (expression != 0) {
+			value = ExpressionTree.getInstance().process(turtle, trueNode);
+			return value;
 		} else {
-			super.commandInputError(this.getName());
-			return -1;
+			value = ExpressionTree.getInstance().process(turtle, falseNode);
+			return value;
 		}
 	}
 }

@@ -33,21 +33,16 @@ public class Repeat extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			TreeNode node = params[2].getNode();
-			double value = 0;
-			Data data = Data.getInstance();
-			Variable repCount = new Variable("repcount", false);
-			data.addVariable(repCount);
-			for(int i = 0; i < expression; i++) {
-				value = ExpressionTree.getInstance().process(turtle, node);
-				repCount.setValue(i+1);
-			}
-			return value;
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
+		double expression = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		TreeNode node = params[2].getNode();
+		double value = 0;
+		Data data = Data.getInstance();
+		Variable repCount = new Variable("repcount", false);
+		data.addVariable(repCount);
+		for(int i = 0; i < expression; i++) {
+			value = ExpressionTree.getInstance().process(turtle, node);
+			repCount.setValue(i+1);
 		}
+		return value;
 	}
 }

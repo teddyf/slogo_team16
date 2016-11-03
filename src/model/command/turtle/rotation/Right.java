@@ -29,12 +29,7 @@ public class Right extends TurtleRotation {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double degrees = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			return turn(turtle, degrees, 0);
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double degrees = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		return turn(turtle, degrees, 0);
 	}
 }

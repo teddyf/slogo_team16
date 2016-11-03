@@ -33,21 +33,16 @@ public class DoTimes extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if ((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression)) {
-			Variable variable = new Variable(params[1].getNode().toString(), false);
-			Data data = Data.getInstance();
-			data.addVariable(variable);
-			double limit = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			TreeNode node = params[3].getNode();
-			double value = 0;
-			for(int i = 0; i < limit; i++) {
-				value = ExpressionTree.getInstance().process(turtle, node);
-				variable.setValue(i+1);
-			}
-			return value;
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
+		Variable variable = new Variable(params[1].getNode().toString(), false);
+		Data data = Data.getInstance();
+		data.addVariable(variable);
+		double limit = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		TreeNode node = params[3].getNode();
+		double value = 0;
+		for(int i = 0; i < limit; i++) {
+			value = ExpressionTree.getInstance().process(turtle, node);
+			variable.setValue(i+1);
 		}
+		return value;
 	}
 }

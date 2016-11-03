@@ -30,12 +30,7 @@ public class Random extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		if (((params[1].getNode().expression instanceof ConstantExpression) || (params[1].getNode().expression instanceof VariableExpression))) {
-			double max = ExpressionTree.getInstance().process(turtle, params[1].getNode());
-			return Math.random()*max;
-		} else {
-			super.commandInputError(this.getName());
-			return -1;
-		}
+		double max = ExpressionTree.getInstance().process(turtle, params[1].getNode());
+		return Math.random()*max;
 	}
 }

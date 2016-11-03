@@ -33,20 +33,15 @@ public class Make extends Command {
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
 		String variableName = params[1].getNode().toString();
-		if (((params[2].getNode().expression instanceof ConstantExpression) || (params[2].getNode().expression instanceof VariableExpression))) {
-			double expression = ExpressionTree.getInstance().process(turtle, params[2].getNode());
-			Data data = Data.getInstance();
-			if (data.containsVariable(variableName)) {
-				if (data.getVariable(variableName).getValue() != expression) {
-					data.changeVariable(variableName, expression);
-				}
-			} else {
-				data.addVariable(new Variable(variableName, expression, false));
+		double expression = ExpressionTree.getInstance().process(turtle, params[2].getNode());
+		Data data = Data.getInstance();
+		if (data.containsVariable(variableName)) {
+			if (data.getVariable(variableName).getValue() != expression) {
+				data.changeVariable(variableName, expression);
 			}
-			return expression;
 		} else {
-			super.commandInputError(this.getName());
-			return -1;
+			data.addVariable(new Variable(variableName, expression, false));
 		}
+		return expression;
 	}
 }
