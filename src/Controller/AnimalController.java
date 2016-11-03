@@ -86,6 +86,7 @@ public class AnimalController implements Controller {
 
 		double value = 0;
 		String[][] line = myParserRunner.combineAllLines();
+		line = myParserRunner.parseWithGroups(line);
 		String[][] markedLine = myParserRunner.markDepth(line);
 		TreeNode root = ExpressionTree.getInstance().buildTree(markedLine);
 		
