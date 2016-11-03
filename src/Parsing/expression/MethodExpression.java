@@ -87,7 +87,7 @@ public class MethodExpression extends Expression{
     }
     
     /**
-     * 
+     * Gets the name of the command corresponding to this node
      * @return command name
      */
     public String getMethodType() {
