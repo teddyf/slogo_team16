@@ -11,6 +11,7 @@ import model.variable.Variable;
 /**
  * 
  * @author Jordan Frazier
+ * @author lucyzhang
  *
  */
 public class VariablesPane implements ListViewPane, GenericPane<String> {
