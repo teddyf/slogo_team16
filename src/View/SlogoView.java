@@ -1,7 +1,6 @@
 // This entire file is part of my masterpiece.
 // Lucy Zhang
 
-
 package View;
 
 import java.util.ArrayList;
