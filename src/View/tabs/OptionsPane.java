@@ -116,7 +116,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>, Observ
 	
 	private HBox createBackgroundColorOptions(){
 		colors = createComboBoxOption(BACKGROUND_COLORS);
-		colors.valueProperty().addListener((o, oldValue, newValue) -> workspace.changeAnimalBackgroundColor(newValue));
+		colors.valueProperty().addListener((o, oldValue, newValue) -> {
+			workspace.changeAnimalBackgroundColor(newValue);
+			Data.getInstance().setBackgroundColor(Colors.BLACK.getColorIdMap().get(newValue));
+		});
 		HBox backgroundColor = setComboBoxInContainer(colors, BACKGROUND_COLOR);
 		return backgroundColor;
 	}
