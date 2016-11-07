@@ -12,7 +12,15 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-// Added as Observable in AnimalPane.addAnimal();
+/**
+ * The PenContainer is the container for the front end objects created that pertain to the Pen.
+ * Currently, it houses the Pen Color, Pen Size/Width, and Pen Dash properties.
+ * It is added as an observable to an animal in AnimalPane.
+ * It is an observer of Data, which updates the properties of color, width/size, and dash value, whenever
+ * backend updates Data class.
+ * @author Jordan Frazier
+ *
+ */
 public class PenContainer extends Observable implements Observer {
 
 	private static final String PEN_COLOR = "Pen Color: ";

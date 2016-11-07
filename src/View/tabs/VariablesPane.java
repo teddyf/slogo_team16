@@ -9,7 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import model.variable.Variable;
 /**
- * 
+ * The variables pane updates with a new item when the user creates a new variable
  * @author Jordan Frazier
  *
  */

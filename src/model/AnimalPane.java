@@ -11,7 +11,15 @@ import View.helper.Coordinate;
 import View.helper.PenContainer;
 import model.animal.Animal;
 import model.animal.Turtle;
-
+/**
+ * This class represents the back end aspect of the pane that the animal is displayed in. 
+ * It's corresponding front end class is AnimalPaneGUI, and one AnimalPane should be created
+ * for each AnimalPaneGUI that is created. 
+ * This class is an observable, for when a coordinate map is set for animation to follow. 
+ * Deprecated: Observer/update methods. 
+ * @author Jordan Frazier
+ *
+ */
 public class AnimalPane extends Observable implements Observer {
 
 	private Map<Integer, Animal> myAnimalMap = new HashMap<>();

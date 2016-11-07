@@ -9,7 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 
 /**
- * 
+ * This pane holds example commands the user can click on and run
  * @author Jordan Frazier
  *
  */

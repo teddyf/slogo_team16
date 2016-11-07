@@ -23,9 +23,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
 /**
- * 
+ * This pane implements GenericPane and houses the contents of the options pane. 
+ * Several buttons are present, including all the Pen options. 
  * @author Jordan Frazier
- * @author lucyzhang
+ * @author Lucy Zhang
  *
  */
 public class OptionsPane extends Observable implements GenericPane<HBox>, Observer  {

@@ -1,9 +1,3 @@
-/**
- * This is the Turtle class, which extends the Animal class, but contains an image for the turtle
- * 
- * @author Aninda Manocha
- * @author Teddy Franceschi
- */
 package model.animal;
 
 import View.helper.Graphics;
@@ -13,6 +7,14 @@ import javafx.animation.Animation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * This is the Turtle class, which extends the Animal class, but contains an image for the turtle
+
+ * 
+ * @author Aninda Manocha
+ * @author Teddy Franceschi
+ * @author Jordan Frazier
+ */
 public class Turtle extends Animal {
 	private ImageView turtleImageView;
 	private Graphics graphic = new Graphics();

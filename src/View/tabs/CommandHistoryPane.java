@@ -1,7 +1,5 @@
 package View.tabs;
 
-
-
 import java.util.Observable;
 
 import View.helper.Buttons;
@@ -10,7 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 /**
- * 
+ * The pane which holds the command history input into the console
  * @author Jordan Frazier
  *
  */

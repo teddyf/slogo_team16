@@ -1,6 +1,7 @@
 package View.helper;
 /**
- * 
+ * This class is used as the data structure that holds points a turtle should animate to. 
+ * It is sent from the backend to the AnimalPane in a map of ID's to Coordinates. 
  * @author Jordan Frazier
  *
  */

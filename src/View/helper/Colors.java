@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 
+ * This enum creates the color options for the pen and background
  * @author Jordan Frazier
  *
  */

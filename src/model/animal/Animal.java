@@ -1,10 +1,3 @@
-/**
- * This is the Animal class which holds all data and attributes pertaining to an animal
- * 
- * @author Aninda Manocha
- * @autho Teddy Franceschi
- */
-
 package model.animal;
 
 import java.util.Observable;
@@ -16,7 +9,16 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+/**
+ * This is the Animal class which holds all data and attributes pertaining to an animal. 
+ * This class is set as an observable, so that when this class is updated, it will
+ * notify all observers of the new position or heading the animal should move to.
+ * 
+ * @author Aninda Manocha
+ * @author Teddy Franceschi
+ * @author Jordan Frazier
+ * 
+ */
 public abstract class Animal extends Observable {
 	private double width;
 	private double height;
