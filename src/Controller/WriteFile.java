@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Writes content to an XML file
+ * Writes content to a text file
  * 
  * @author Lucy Zhang
  */

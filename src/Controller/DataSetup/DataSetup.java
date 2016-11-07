@@ -10,7 +10,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
+/**
+ * Sets up the data from a xml file, readying it to be used to initialize a workspace
+ * @author lucyzhang
+ *
+ */
 public class DataSetup {
 	public static final String[] generalInfo = { "title", "numTurtles", "background_color", "language" };
 	private String dataFilePath;
@@ -32,7 +36,7 @@ public class DataSetup {
 	}
 
 	/**
-	 * read in Document from xml
+	 * Read in Document from xml
 	 */
 	public Document setUpDocumentToParse() throws ParserConfigurationException, SAXException, IOException {
 		File file = new File(dataFilePath);
@@ -45,7 +49,7 @@ public class DataSetup {
 	}
 
 	/**
-	 * read info by each tag name
+	 * Read info by each tag name
 	 */
 	public String readFileForTag(String tagName) {
 		try {
