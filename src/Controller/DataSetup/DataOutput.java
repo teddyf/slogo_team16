@@ -15,7 +15,11 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
+/**
+ * Outputs data to an xml file
+ * @author lucyzhang
+ *
+ */
 public class DataOutput {
 	
 	private String outputFileName; 
@@ -29,8 +33,8 @@ public class DataOutput {
 	
 
 	/**
-	 * create a new xml in data folder 
-	 * write the current workspace into xml file created
+	 * Creates a new xml in data folder 
+	 * Write the current workspace into xml file created
 	 */
 	public void writeXML(){
 		try {

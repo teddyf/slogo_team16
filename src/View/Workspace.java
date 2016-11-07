@@ -38,7 +38,10 @@ import model.AnimalPane;
 import model.animal.Animal;
 
 /**
- * Main SLogo interface
+ * Main SLogo view.
+ * This class servers as the main view for the workspace. A SLogo program can have several workspaces running
+ * simultaneously. This class creates and displays all of the GUI, and observes AnimalPane, so that is triggers
+ * animation when AnimalPane notifies its observers.
  *
  * @author Lucy Zhang
  * @author Jordan Frazier
@@ -76,7 +79,7 @@ public class Workspace implements Observer {
 	private VBox leftPane;
 
 	private ComboBox<String> languageComboBox;
-	
+
 	private UIDataUpdate UIUpdate;
 	private GenericPane<String> variablesPane;
 	private Map<String, Integer> colors;
@@ -85,7 +88,7 @@ public class Workspace implements Observer {
 	private ArrayList<String> turtleIDs = new ArrayList<String>();
 	private AnimalClick animalClick;
 
-	//one instance of an AnimalPaneGUI per workspace
+	// one instance of an AnimalPaneGUI per workspace
 	private AnimalPaneGUI myAnimalPaneGUI;
 
 	public Workspace(int workspaceID) {
@@ -102,7 +105,6 @@ public class Workspace implements Observer {
 		createAnimalPaneGUI();
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
-		
 
 	}
 
@@ -124,6 +126,12 @@ public class Workspace implements Observer {
 		currentLanguage = languages[0];
 	}
 
+	/**
+	 * Initializes a workspace
+	 * 
+	 * @param view
+	 *            The main SlogoView
+	 */
 	public void init(SlogoView view) {
 		mainView = view;
 		myRoot = new BorderPane();
@@ -131,9 +139,12 @@ public class Workspace implements Observer {
 		populateLeftPane();
 		populateRightPane();
 		changeAnimalBackgroundColor(defaultBackgroundColor);
-		UIUpdate = new UIDataUpdate(this, (VariablesPane)this.variablesPane);
+		UIUpdate = new UIDataUpdate(this, (VariablesPane) this.variablesPane);
 	}
 
+	/**
+	 * Creates the animal Pane GUI
+	 */
 	public void createAnimalPaneGUI() {
 		myAnimalPaneGUI = new AnimalPaneGUI();
 		myAnimalGUIList.add(myAnimalPaneGUI);
@@ -142,6 +153,11 @@ public class Workspace implements Observer {
 		myController.setActiveAnimalPaneGUI(myAnimalPaneGUI);
 	}
 
+	/**
+	 * Creates the animal pane that talks to the controller
+	 * 
+	 * @return the animal pane
+	 */
 	public AnimalPane createAnimalPane() {
 		AnimalPane animalPane = new AnimalPane();
 		animalPane.addObserver(this);
@@ -173,11 +189,11 @@ public class Workspace implements Observer {
 		myRoot.setLeft(leftPane);
 	}
 
-	public void resetLeftPane() {	
+	public void resetLeftPane() {
 		AnimalPaneGUI animalGUI = new AnimalPaneGUI();
 		myAnimalPaneGUI = animalGUI;
 		populateLeftPane();
-			
+
 	}
 
 	private void populateRightPane() {
@@ -234,6 +250,11 @@ public class Workspace implements Observer {
 		return tab;
 	}
 
+	/**
+	 * Creates the console textarea to input slogo code
+	 * 
+	 * @return the console pane
+	 */
 	public ScrollPane createConsole() {
 		ScrollPane consolePane = new ScrollPane();
 		VBox buttons = createButtons();
@@ -243,16 +264,21 @@ public class Workspace implements Observer {
 		return consolePane;
 	}
 
-
 	private VBox createButtons() {
 		VBox container = buttons.createConsoleInputButtons(console, historyPane, mainView, this);
 		return container;
 	}
 
+	/**
+	 * Populates the slogo grid with turtle(s)
+	 */
 	public void populateGridWithAnimals() {
 		renderAnimalGrid();
 	}
 
+	/**
+	 * Creates the turtle animal
+	 */
 	public void createAnimal() {
 		numTurtles++;
 		Animal animal = myAnimalPaneGUI.addAnimal();
@@ -260,6 +286,9 @@ public class Workspace implements Observer {
 		renderAnimal(animal);
 	}
 
+	/**
+	 * Renders the animal grid with all the animals
+	 */
 	public void renderAnimalGrid() {
 		for (Animal animal : myAnimalPaneGUI.getMyAnimalList()) {
 			renderAnimal(animal);
@@ -282,7 +311,7 @@ public class Workspace implements Observer {
 		animalImage.setTranslateY(myAnimalPaneGUI.getScrollPane().getPrefHeight() / 2);
 
 		animalClick.setEventListener(animal);
-		if(!myAnimalPaneGUI.getMyContainer().getChildren().contains(animalImage)) {
+		if (!myAnimalPaneGUI.getMyContainer().getChildren().contains(animalImage)) {
 			myAnimalPaneGUI.getMyContainer().getChildren().add(animalImage);
 		}
 		myAnimalPaneGUI.getScrollPane().setContent(myAnimalPaneGUI.getMyContainer());
@@ -294,6 +323,12 @@ public class Workspace implements Observer {
 				&& (y < myAnimalPaneGUI.getScrollPane().getPrefHeight());
 	}
 
+	/**
+	 * Changes the background color
+	 * 
+	 * @param color
+	 *            The color as a string
+	 */
 	public void changeAnimalBackgroundColor(String color) {
 		String hexColor = decodeColor(color);
 		myAnimalPaneGUI.getMyContainer().setStyle("-fx-background-color: " + hexColor);
@@ -303,6 +338,11 @@ public class Workspace implements Observer {
 		return Colors.BLACK.getColorMap().get(color);
 	}
 
+	/**
+	 * Creates the language chooser drop down
+	 * 
+	 * @return
+	 */
 	public ComboBox<String> createLanguageChooser() {
 		ComboBox<String> languageSelector = graphics.createComboBox(languages);
 		languageSelector.setValue(languages[0]);
@@ -314,12 +354,21 @@ public class Workspace implements Observer {
 		});
 		return languageSelector;
 	}
-	
-	public void selectLanguageThroughUI(String language){
+
+	/**
+	 * Selects a language using the dropdown through code
+	 * 
+	 * @param language
+	 *            the language as a string
+	 */
+	public void selectLanguageThroughUI(String language) {
 		languageComboBox.getSelectionModel().select(language);
 	}
-	
-	public void clearAndResetScreen(){
+
+	/**
+	 * Clears and resets entire grid
+	 */
+	public void clearAndResetScreen() {
 		console.clearConsole();
 		this.resetLeftPane();
 		this.createAnimal();
@@ -334,14 +383,13 @@ public class Workspace implements Observer {
 					animation.beginAnimation(animalGUI, buttons.getRunButton());
 				}
 			}
-			if (Data.getInstance().getClearScreen()){
+			if (Data.getInstance().getClearScreen()) {
 				this.clearAndResetScreen();
 			}
 		}
 	}
 
-	
-	public AnimalClick getAnimalClick(){
+	public AnimalClick getAnimalClick() {
 		return animalClick;
 	}
 
@@ -365,12 +413,6 @@ public class Workspace implements Observer {
 		this.numTurtles = numTurtles;
 	}
 
-	public void decrementNumTurtles() {
-		if (numTurtles > 1) {
-			numTurtles--;
-		}
-	}
-
 	public List<String> getTurtleIDs() {
 		return turtleIDs;
 	}
@@ -378,6 +420,7 @@ public class Workspace implements Observer {
 	public ComboBox<String> getLanguageComboBox() {
 		return languageComboBox;
 	}
+
 	public void setWorkspaceID(int id) {
 		this.workSpaceID = id;
 	}

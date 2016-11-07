@@ -6,18 +6,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ * Writes content to a text file
  * 
  * @author Lucy Zhang
  */
 public class WriteFile {
-	
+
 	String filePath;
-	
-	public WriteFile(){
-		
+
+	public WriteFile() {
+
 	}
 
-	public void writeToFile(String filePath, String content){
+	/**
+	 * Writes content to a file
+	 * 
+	 * @param filePath
+	 *            The file path as a string
+	 * @param content
+	 *            The content as a string
+	 */
+	public void writeToFile(String filePath, String content) {
 		try {
 
 			File file = new File(filePath);

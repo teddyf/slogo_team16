@@ -13,10 +13,9 @@ import javafx.util.Duration;
 import model.animal.Animal;
 
 /**
- * Handles animation
- */
-/**
- * @author Lucy Zhang, Jordan Frazier
+ * This class handles all of the animation of the turtle that the front end needs to display graphically. 
+ * @author Lucy Zhang
+ * @author Joradn Frazier
  *
  */
 public class Animate {

@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	public static final String TITLE = "Slogo";
-	private SlogoView slogoView;
 	private Stage stage;
 
 	
@@ -26,15 +25,6 @@ public class Main extends Application {
 		this.stage = s;
 		HomeSelection home = new HomeSelection(s);
 		home.initHomeScreen();
-		/*
-		slogoView = new SlogoView();
-		Scene scene = slogoView.init();
-		scene.getStylesheets().add(this.getClass().getResource("SLogoStyle.css").toExternalForm());
-		
-		s.setTitle(title);
-		s.setScene(scene);
-		s.show();
-		*/
 	}
 
 	public static void main(String[] args) {

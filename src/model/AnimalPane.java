@@ -11,17 +11,27 @@ import View.helper.Coordinate;
 import View.helper.PenContainer;
 import model.animal.Animal;
 import model.animal.Turtle;
-
+/**
+ * This class represents the back end aspect of the pane that the animal is displayed in. 
+ * It's corresponding front end class is AnimalPaneGUI, and one AnimalPane should be created
+ * for each AnimalPaneGUI that is created. 
+ * This class is an observable, for when a coordinate map is set for animation to follow. 
+ * Deprecated: Observer/update methods. 
+ * AnimalPane is the backend implementation of AnimalPane GUI and holds all of
+ * the information needed to populate the turtle grid on the front end
+ * 
+ * @author Jordan Frazier
+ * @author lucyzhang
+ *
+ */
 public class AnimalPane extends Observable implements Observer {
 
 	private Map<Integer, Animal> myAnimalMap = new HashMap<>();
 	private List<Animal> myAnimalList;
 	private List<String> myCommandHistory;
 
-	// <string = name of variable, string/other? = value / expression>
 	private Map<String, String> myVariables;
 
-	// Map of string ID to List of CoordinatePair<double x, double y>
 	private Map<Integer, List<Coordinate>> coordinateMap;
 	private List<Coordinate> coordinateList;
 
@@ -33,17 +43,13 @@ public class AnimalPane extends Observable implements Observer {
 		// this increments when adding new animals
 		animalID = 0;
 
-		// map of AnimalPane ID to Animal (for multiple animals on same pane)
 		myAnimalMap = new HashMap<Integer, Animal>();
 		myAnimalList = new ArrayList<Animal>();
 
-		// Map of variable names and expressions
 		myVariables = new HashMap<String, String>();
 
-		// list of all executed commands
 		myCommandHistory = new ArrayList<String>();
 
-		// list of Animal ID and Coordinate Lists for translation rendering
 		coordinateList = new ArrayList<Coordinate>();
 		coordinateMap = new HashMap<Integer, List<Coordinate>>();
 
@@ -51,6 +57,11 @@ public class AnimalPane extends Observable implements Observer {
 
 	}
 
+	/**
+	 * Adds an animal on the backend and sets it up with observer
+	 * 
+	 * @return the animal
+	 */
 	public Animal addAnimal() {
 		animalID++;
 		Animal animal = new Turtle(penColor);
@@ -85,7 +96,11 @@ public class AnimalPane extends Observable implements Observer {
 
 	}
 
-	// for removing non active animals
+	/**
+	 * Remove non active animals
+	 * 
+	 * @param animal
+	 */
 	public void removeAnimal(Animal animal) {
 		myAnimalMap.remove(animal.getId());
 		myAnimalList.remove(animal);
@@ -94,8 +109,6 @@ public class AnimalPane extends Observable implements Observer {
 	@Deprecated
 	@Override
 	public void update(Observable o, Object arg) {
-		// updates values of animals, object arg is the value that is changing
-		// or just update everything why not with a complete re renderingR
 
 		if (o instanceof Animal) {
 			Animal cur = (Animal) o;
@@ -155,11 +168,17 @@ public class AnimalPane extends Observable implements Observer {
 		}
 	}
 
+	/**
+	 * Signals animation to update
+	 */
 	public void signalAnimation() {
 		setChanged();
 		notifyObservers();
 	}
 
+	/**
+	 * Clears all of the stored animals
+	 */
 	public void clearAnimals() {
 		myAnimalList.clear();
 		myAnimalMap.clear();

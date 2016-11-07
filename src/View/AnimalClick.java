@@ -5,6 +5,13 @@ import java.util.List;
 import View.helper.Graphics;
 import model.animal.Animal;
 
+/**
+ * This class is responsible for the functionality behind clicking a turtle and
+ * activating or deactivating it.
+ * 
+ * @author lucyzhang
+ *
+ */
 public class AnimalClick {
 
 	private String WEIRDTURTLE = "http://images.clipartpanda.com/turtle-clip-art-turtle6.png";
@@ -12,25 +19,41 @@ public class AnimalClick {
 	private String DEADTURTLE = "http://vignette4.wikia.nocookie.net/penguindrum/images/e/ee/Mawaru_penguindrum_peng_head_by_gintabro-d3lj8vt.png/revision/latest?cb=20120304141806";
 
 	private Graphics graphic = new Graphics();
-	private List<Animal> activeTurtles; 
+	private List<Animal> activeTurtles;
 	private AnimalPaneGUI animalPane;
 
 	public AnimalClick(AnimalPaneGUI animalPane) {
 		this.animalPane = animalPane;
 	}
-	
+
 	public AnimalClick() {
-		
+
 	}
-	
-	public void setWeirdTurtle(String url){
+
+	/**
+	 * Set the url of the active turtle image
+	 * 
+	 * @param url
+	 */
+	public void setWeirdTurtle(String url) {
 		WEIRDTURTLE = url;
 	}
-	
-	public void setDeadTurtle(String url){
+
+	/**
+	 * Set the url of the inactive turtle image
+	 * 
+	 * @param url
+	 */
+	public void setDeadTurtle(String url) {
 		DEADTURTLE = url;
 	}
 
+	/**
+	 * Set the event listener of the image
+	 * 
+	 * @param animal
+	 *            the animal object
+	 */
 	public void setEventListener(Animal animal) {
 		animal.getImageView().setOnMouseClicked(event -> {
 			updateAnimal(animal);
@@ -55,6 +78,12 @@ public class AnimalClick {
 		this.activeTurtles = activeTurtles;
 	}
 
+	/**
+	 * Check if the animal is active
+	 * 
+	 * @param animal
+	 * @return true if active, false if inactive
+	 */
 	public boolean isActiveAnimal(Animal animal) {
 		return (activeTurtles.contains(animal));
 	}

@@ -2,7 +2,11 @@ package View.helper;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * An enum housing the options of the dash values for the pen
+ * @author Jordan Frazier
+ *
+ */
 public enum PenDash {
 	
 	SOLID("Solid", 1),
