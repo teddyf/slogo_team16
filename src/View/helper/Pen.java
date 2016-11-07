@@ -8,42 +8,38 @@ import java.util.Observer;
 import Controller.Data;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+
+//This entire file is part of my masterpiece.
+//Jordan Frazier (jrf30)
 /**
- * 
+ * A new Pen instance should be created for every new instance of Animal that is created.
+ * The Pen will determine the properties of the line that follows the animal, should
+ * the user decide to display the line on the GUI. 
+ * This class utilizes a new design pattern, Observer / Observable. When the Data class is 
+ * updated, it will trigger the Pen to update its properties accordingly. 
  * @author Jordan Frazier
  *
  */
 public class Pen implements Observer {
 	
-	private Line line;
 	private List<Line> lineList;
-	private int counter;
 	private String color;
 	private double strokeWidth;
 	private double dashValue;
+	private int counter;
 	
-	private static final String PEN_COLOR = "Pen Color: ";
-	private static final String PEN_WIDTH = "Pen Width: ";
-	private static final String PEN_DASH = "Pen Dash: ";
-	
+	/**
+	 * Creates a new Pen, initializes the colors to the current global color setting in Data, and
+	 * adds Pen as an Observer of Data
+	 */
 	public Pen() {
 		initializeVariables();
 		color = decodeColor(Colors.BLACK.getAllColors()[0]);
 		Data.getInstance().addObserver(this);
-//		line = new Line();
-//		line.setFill(Color.BLACK);
 	}
-	
+
+	@Deprecated
 	public Pen(double x, double y){
-		initializeVariables();
-		color = Data.getInstance().getPenColor();
-		Data.getInstance().addObserver(this);
-//		color = decodeColor(Colors.BLACK.getAllColors()[0]);
-//		line = new Line(x, y, x, y);
-//		line.setFill(Color.BLACK);
-	}
-	
-	public Pen(double x, double y, PenContainer penColor) {
 		initializeVariables();
 		color = Data.getInstance().getPenColor();
 		Data.getInstance().addObserver(this);
@@ -56,31 +52,39 @@ public class Pen implements Observer {
 		dashValue = Data.getInstance().getDashValue();
 	}
 	
+	/**
+	 * Creates a new line and adds it to the list of lines
+	 * @param x - the x coordinate of the line
+	 * @param y - the y coordinate of the line
+	 */
 	public void createLine(double x, double y) {
+		Line line = initializeLineProperties(x, y);
+		lineList.add(line);	
+	}
+
+	private Line initializeLineProperties(double x, double y) {
 		Line line = new Line(x, y, x, y);
 		line.setStroke(Color.web(color));
 		line.setStrokeWidth(strokeWidth);
 		line.getStrokeDashArray().add(dashValue);
-		
-		lineList.add(line);
-		
+		return line;
 	}
 
-//	@Override
-//	public void update(Observable o, Object arg) {
-//		System.out.println("PEN IS OBSERVING");
-//		if (o instanceof Animal) {
-//			line.setEndX(((Animal) o).getX());
-//			line.setEndX(((Animal) o).getY());
-//		}
-//	}
-//	
-//	public Line getLine() {
-//		return line;
-//	}
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof Data) {
+			updatePenProperties();
+		}
+	}
+
+	private void updatePenProperties() {
+		color = Data.getInstance().getPenColor();
+		strokeWidth = Data.getInstance().getPenSize();
+		dashValue = Data.getInstance().getDashValue();
+	}
 	
-	public int getCounter() {
-		return counter;
+	private String decodeColor(String color) { 
+		return Colors.BLACK.getColorMap().get(color);
 	}
 	
 	public void incrementCounter() {
@@ -95,25 +99,8 @@ public class Pen implements Observer {
 		return lineList;
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		if (o instanceof PenContainer || o instanceof Data) {
-			// TODO: convert string to hex
-//			color = decodeColor(((PenContainer) o).getComboBox().getValue());
-			color = Data.getInstance().getPenColor();
-			strokeWidth = Data.getInstance().getPenSize();
-			dashValue = Data.getInstance().getDashValue();
-		}
-	}
-	
-	public String decodeColor(String color) { 
-		return Colors.BLACK.getColorMap().get(color);
-//		for(Colors c : Colors.values()) {
-//			if(c.toString().equals(color)) {
-//				return c.getHexColor();
-//			}
-//		}
-//		return null;
+	public int getCounter() {
+		return counter;
 	}
 	
 }
