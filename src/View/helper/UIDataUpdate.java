@@ -12,7 +12,7 @@ import View.tabs.VariablesPane;
 import model.variable.Variable;
 
 /**
- * 
+ * This class uses the data singleton to update the UI based on slogo code
  * @author lucyzhang
  *
  */
