@@ -12,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
 /**
+ * The main slogo view class. This class holds all of the workspaces and acts as
+ * the overseer of all of the slogo IDE.
  * 
  * @author Lucy Zhang
  * @author Jordan Frazier
@@ -44,6 +46,11 @@ public class SlogoView {
 		mainView = new TabPane();
 	}
 
+	/**
+	 * Initializes the scene
+	 * 
+	 * @return the scene
+	 */
 	public Scene init() {
 		initScene();
 		createNewWorkSpace();
@@ -58,6 +65,9 @@ public class SlogoView {
 		this.backgroundColor = color;
 	}
 
+	/*
+	 * Gets the current workspace
+	 */
 	public Workspace getCurrentWorkspace() {
 		Tab currentTab = mainView.getSelectionModel().getSelectedItem();
 		int wkspcID = Integer.parseInt(String.valueOf(currentTab.getText().charAt(0))) - 1;
@@ -73,6 +83,9 @@ public class SlogoView {
 		myScene = new Scene(mainView, SCENE_WIDTH, SCENE_HEIGHT, Color.WHITE);
 	}
 
+	/**
+	 * Create a new workspace
+	 */
 	public void createNewWorkSpace() {
 		numWorkspaces++;
 		Tab tab = new Tab();
@@ -87,6 +100,9 @@ public class SlogoView {
 
 	}
 
+	/*
+	 * Initializes the workspace by adding it to the slogo view
+	 */
 	private Workspace initWorkspace() {
 		Workspace slogo;
 		if (stringExists(backgroundColor)) {
@@ -102,6 +118,11 @@ public class SlogoView {
 		return slogo;
 	}
 
+	/**
+	 * Parse the workspace data
+	 * 
+	 * @return the map of workspace data
+	 */
 	public Map<String, String> parseWorkspaceData() {
 		setCurrentWorkspaceTitle();
 		Map<String, String> data = new HashMap<String, String>();

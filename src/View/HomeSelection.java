@@ -10,7 +10,12 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import Controller.DataSetup.DataSetup;
-
+/**
+ * This class takes care of opening a computer's file chooser on the initial run of the program, and allows the user to
+ * choose an xml file for the user to read to create a slogoView based on the file settins
+ * @author lucyzhang
+ *
+ */
 public class HomeSelection {
 	private final File INITIAL_DIRECTORY = new File("data");
 	private final File IMAGE_DIRECTORY = new File("Resources");
@@ -36,10 +41,7 @@ public class HomeSelection {
 	public void initHomeScreen() {
 		createFileDirectory(INITIAL_DIRECTORY);
 	}
-	
-	public void initImageChooser(){
-		createFileDirectory(IMAGE_DIRECTORY);
-	}
+
 
 	/**
 	 * @return the file name
