@@ -9,7 +9,9 @@ import Controller.Data;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 /**
- * 
+ * This class holds the properties of the line that is created when the turtle is animated and moved. 
+ * It should observe the Data class in order to get updates when instructions to change the properties
+ * of the pen are sent by the user through the console. 
  * @author Jordan Frazier
  *
  */

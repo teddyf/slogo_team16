@@ -38,7 +38,10 @@ import model.AnimalPane;
 import model.animal.Animal;
 
 /**
- * Main SLogo interface
+ * Main SLogo view.
+ * This class servers as the main view for the workspace. A SLogo program can have several workspaces running
+ * simultaneously. This class creates and displays all of the GUI, and observes AnimalPane, so that is triggers
+ * animation when AnimalPane notifies its observers.
  *
  * @author Lucy Zhang
  * @author Jordan Frazier

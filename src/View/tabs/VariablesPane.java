@@ -11,8 +11,7 @@ import model.variable.Variable;
 /**
  * This class is responsible for creating the variables pane that stores all slogo variables. 
  * It is updated by the Data Singleton and UIUpdate class, which detect when the stored variables map is changed, and adds 
- * the variables to the pane acccordingly.
- * 
+ * the variables to the pane accordingly.
  * @author Jordan Frazier
  * @author lucyzhang
  *

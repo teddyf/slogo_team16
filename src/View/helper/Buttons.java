@@ -16,14 +16,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Handles buttons
- */
-/**
+ * This class creates all of the buttons viewable on the main workspace and creates event handlers for them
+ * 
  * @author Jordan Frazier
  * @author Lucy Zhang
  *
  */
-
 public class Buttons extends Observable {
 	private Graphics graphic = new Graphics();
 	private HelpScreen helpPage = new HelpScreen();
