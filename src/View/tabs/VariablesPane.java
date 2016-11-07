@@ -9,8 +9,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import model.variable.Variable;
 /**
- * The variables pane updates with a new item when the user creates a new variable
+ * This class is responsible for creating the variables pane that stores all slogo variables. 
+ * It is updated by the Data Singleton and UIUpdate class, which detect when the stored variables map is changed, and adds 
+ * the variables to the pane accordingly.
  * @author Jordan Frazier
+ * @author lucyzhang
  *
  */
 public class VariablesPane implements ListViewPane, GenericPane<String> {
