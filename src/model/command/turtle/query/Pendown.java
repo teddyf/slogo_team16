@@ -7,10 +7,10 @@
 package model.command.turtle.query;
 
 import model.animal.Animal;
-import model.command.Command;
 import model.command.Parameter;
+import model.command.turtle.pen.TurtlePen;
 
-public class Pendown extends Command {
+public class Pendown extends TurtlePen {
 	private final double paramCount;
 	
 	public Pendown() {
@@ -27,7 +27,7 @@ public class Pendown extends Command {
 	@Override
 	public double run(Parameter[] params) {
 		Animal turtle = params[0].getAnimal();
-		return turtle.getPen();
+		return penDown(turtle, 1);
 		
 	}
 }

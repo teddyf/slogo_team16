@@ -10,7 +10,10 @@ import model.animal.Animal;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 /**
- * 
+ * This class serves as the front end partner to AnimalPane. This class holds an AnimalPane, and the front end
+ * components necessary to display the data in the AnimalPane, such as a scrollpane and pane. 
+ * This class is an observer of AnimalPane, and should update, but as of now the functionality of updating is
+ * implemented in Workspace.
  * @author Jordan Frazier
  * @author lucyzhang
  *

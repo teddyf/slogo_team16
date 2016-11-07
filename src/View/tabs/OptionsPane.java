@@ -23,9 +23,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
 /**
- * 
+ * This pane implements GenericPane and houses the contents of the options pane. 
+ * Several buttons are present, including all the Pen options. 
  * @author Jordan Frazier
- * @author lucyzhang
+ * @author Lucy Zhang
  *
  */
 public class OptionsPane extends Observable implements GenericPane<HBox>, Observer  {
@@ -115,7 +116,10 @@ public class OptionsPane extends Observable implements GenericPane<HBox>, Observ
 	
 	private HBox createBackgroundColorOptions(){
 		colors = createComboBoxOption(BACKGROUND_COLORS);
-		colors.valueProperty().addListener((o, oldValue, newValue) -> workspace.changeAnimalBackgroundColor(newValue));
+		colors.valueProperty().addListener((o, oldValue, newValue) -> {
+			workspace.changeAnimalBackgroundColor(newValue);
+			Data.getInstance().setBackgroundColor(Colors.BLACK.getColorIdMap().get(newValue));
+		});
 		HBox backgroundColor = setComboBoxInContainer(colors, BACKGROUND_COLOR);
 		return backgroundColor;
 	}

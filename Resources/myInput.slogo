@@ -1,1 +1,1 @@
-to square [ :length ] [ repeat 4 [ fd :length right 90 ] ]
+pendown fd 100
