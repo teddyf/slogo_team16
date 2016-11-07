@@ -23,12 +23,12 @@ Stack Overflow
 Our SLogo is initialized by an XML file. These examples are contained in the Data folder of our project. When prompted, run "example1.xml"
 to begin a basic SLogo interface.
 
-example1.xml: File used to create the IDE according to its settings
-myInput.slogo: File used to write slogo commands to and read commands from
-slogoMethods.properties: A list of all of the slogo commands
-SLOGO_help.html: The html help page
-Language properties files: All of the available languages
-methodMapping.properties: All of the methods and their file locations
+example1.xml: File used to create the IDE according to its settings <br/>
+myInput.slogo: File used to write slogo commands to and read commands from<br/>
+slogoMethods.properties: A list of all of the slogo commands<br/>
+SLOGO_help.html: The html help page<br/>
+Language properties files: All of the available languages<br/>
+methodMapping.properties: All of the methods and their file locations<br/>
 
 ## Extra features
 * Multiple turtles
@@ -42,5 +42,8 @@ methodMapping.properties: All of the methods and their file locations
 * Multiple workspaces share same graphical properties
 
 ## Impressions
-Interesting project. 
+This project proved to be an interesting step up from Cell Society. The integration of the front and back end proved to be a complex problem,
+necesitating the use of the Observer/Observable pattern, which allowed for us to bind elements together and have them automatically update and do things when
+the other is updated. It was not too complicated to where we got lost and had no hope, but just enough to push our design to its limits and ensure
+that we needed at least a hint of good design practices in order to produce a functional program. 
 
