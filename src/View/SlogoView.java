@@ -14,7 +14,11 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
-
+/**
+ * This class oversees the entire IDE and holds all of the workspaces
+ * @author lucyzhang
+ *
+ */
 public class SlogoView {
 
 	public static final int SCENE_WIDTH = 1200;
