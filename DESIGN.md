@@ -1,7 +1,6 @@
 ## Introduction
 The goal of the project is to create a compiler and graphical interface for the SLogo language. The project must be capable of accepting user input and displaying the graphical result of an algorithm coded in SLogo.
 
-
 ## Design Overview
 Syntax Package: Translation/Mapping class, maps commands to another command that is comprehensible by our project  
 Translator: Translates parsed input into   
@@ -14,6 +13,7 @@ ExpressionTree -Takes in data from parser and stuffs it into a tree so we can pe
 Stack - Stores variable values which user declares/stores.  
 Memory - Stores prior positions, animations, etc so we can go back steps if this is an extension
 Library - Stores a list of all classes and all methods so there is easy interaction between external and internal back end
+
 ## User Interface
 DisplayTurtle - displays turtle image in UI  
 TurtleInterface - contract to define turtle behavior  
