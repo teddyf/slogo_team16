@@ -2,6 +2,11 @@ package model.command;
 
 import ErrorHandling.Error;
 
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ */
+
 /**
  * This is the class for a general command. Each individual command has a separate class and all of these subclasses extend this
  * superclass as all commands have a run() method in order for the commands to run.

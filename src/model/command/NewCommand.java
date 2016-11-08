@@ -9,6 +9,11 @@ import Parsing.expression.ExpressionTree;
 import model.animal.Animal;
 import model.variable.Variable;
 
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ */
+
 /**
  * This is the class for a user-defined command. If the user enters the wrong type of data, it is read in as the name of a 
  * command, so error handling is implemented in this class as well to account for when the user enters names that are not the 

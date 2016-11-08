@@ -1,14 +1,19 @@
-/**
- * This is the class for the CLEARSCREEN command
- * 
- * @author Aninda Manocha
- */
-
 package model.command.turtle.movement;
 
 import Controller.Data;
 import model.animal.Animal;
 import model.command.Parameter;
+
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ */
+
+/**
+ * This is the class for the CLEARSCREEN command
+ * 
+ * @author Aninda Manocha
+ */
 
 public class ClearScreen extends TurtleMovement{
 	private final double paramCount;

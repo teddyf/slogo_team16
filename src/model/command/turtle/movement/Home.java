@@ -1,13 +1,18 @@
+package model.command.turtle.movement;
+
+import model.animal.Animal;
+import model.command.Parameter;
+
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ */
+
 /**
  * This is the class for the HOME command
  * 
  * @author Aninda Manocha
  */
-
-package model.command.turtle.movement;
-
-import model.animal.Animal;
-import model.command.Parameter;
 
 public class Home extends TurtleMovement {
 	private final double paramCount;

@@ -1,8 +1,3 @@
-/*
- * Aninda Manocha
- * This entire file is part of my masterpiece.
- */
-
 package Parsing.expression;
 
 import java.util.ArrayList;

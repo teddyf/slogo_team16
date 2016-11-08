@@ -1,14 +1,19 @@
-/**
- * This is the TurtleMovement class containing methods for moving the turtle to certain positions
- * 
- * @author Aninda Manocha
- */
-
 package model.command.turtle.movement;
 
 import View.Workspace;
 import model.animal.Animal;
 import model.command.turtle.TurtleCommand;
+
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ */
+
+/**
+ * This is the TurtleMovement class containing methods for moving the turtle to certain positions
+ * 
+ * @author Aninda Manocha
+ */
 
 public abstract class TurtleMovement extends TurtleCommand {
 	public TurtleMovement() {
