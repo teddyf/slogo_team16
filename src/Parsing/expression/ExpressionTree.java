@@ -18,7 +18,8 @@ import java.util.regex.Pattern;
 import Controller.Data;
 
 /**
- * Masterpiece for Teddy Franceschi
+ * This entire file is part of my masterpiece.
+ * Teddy Franceschi
  * @author Theodore Franceschi & Aninda Manocha
  *
  */
