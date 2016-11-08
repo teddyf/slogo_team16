@@ -1,3 +1,8 @@
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ */
+
 package Parsing.expression;
 
 import java.util.ArrayList;
@@ -33,6 +38,12 @@ public class MethodExpression extends Expression{
         this.method = method;
     }
     
+    /**
+     * Gets the value of the command
+     * @param turtle - the turtle to run the command on
+     * @param node - the node to which the expression corresponds to
+     * @return the value 
+     */
     @Override
     public double run(Animal turtle, TreeNode node) {
     	double value = 0;
@@ -45,9 +56,7 @@ public class MethodExpression extends Expression{
 			Error.getInstance().displayError("Invalid Input Error!", "Invalid Command Name", 
 					"You have entered a command name that does not exist.");
 			return -1;
-		} catch (IllegalAccessException e) {
-			Error.getInstance().displayError("Invalid Input Error!", "Invalid Command Name", 
-					"You have entered a command name that does not exist.");
+		} catch (IllegalAccessException e) { // this should not occur because we are accessing public data
 			return -1;
 		}
 		command = getCommand(obj);
@@ -56,8 +65,8 @@ public class MethodExpression extends Expression{
 		}
 		Parameter[] parameters = createParameters(command);
 		value = command.run(parameters);
-		if (ExpressionTree.getInstance().getCurrentCommand() != null && !ExpressionTree.getInstance().getCurrentCommand().equals(prevCurrentCommand) 
-				&& command instanceof NewCommand) {
+		String currentCommand = ExpressionTree.getInstance().getCurrentCommand();
+		if (currentCommand != null && !currentCommand.equals(prevCurrentCommand) && command instanceof NewCommand) {
 			ExpressionTree.getInstance().setCurrentCommand(prevCurrentCommand); //reset so that a local variable isn't always returned
 		}
 		Coordinate coordinates = new Coordinate(turtle.getX(), turtle.getY(), turtle.getHeading(), turtle.getPen(), turtle.getShowing());
@@ -76,7 +85,7 @@ public class MethodExpression extends Expression{
 		if (command instanceof NewCommand) {
 			if (Data.getInstance().containsCommand(node.toString())) { //check if command exists
 				command = Data.getInstance().getCommand(node.toString());
-				prevCurrentCommand = ExpressionTree.getInstance().getCurrentCommand();
+				prevCurrentCommand = ExpressionTree.getInstance().getCurrentCommand(); //save current command for local variable assignment
 				ExpressionTree.getInstance().setCurrentCommand(command.getName());
 			} else {
 				Error.getInstance().displayError("Invalid Input Error!", "Invalid Command Name", 
@@ -130,13 +139,5 @@ public class MethodExpression extends Expression{
 			nodes.add(listNode.getChildren().get(n));
 		}
     	return nodes;
-    }
-    
-    /**
-     * Gets the name of the command corresponding to this node
-     * @return command name
-     */
-    public String getMethodType() {
-    	return method.getSimpleName();
     }
 }

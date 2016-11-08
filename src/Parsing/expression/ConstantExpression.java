@@ -1,3 +1,8 @@
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ */
+
 package Parsing.expression;
 
 import Parsing.TreeNode;
@@ -20,6 +25,12 @@ public class ConstantExpression extends Expression{
         this.value = value;
     }
     
+    /**
+     * Gets the value of the constant
+     * @param turtle - the turtle to run the command on
+     * @param node - the node to which the expression corresponds to
+     * @return the value 
+     */
     @Override
     public double run(Animal turtle, TreeNode node) {
     	return value;
