@@ -16,12 +16,23 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 import Controller.Data;
+
+/**
+ * Masterpiece for Teddy Franceschi
+ * @author Theodore Franceschi & Aninda Manocha
+ *
+ */
 public class ExpressionTree {
         
     private static final ExpressionTree instance = new ExpressionTree();
     private final String PARAM_COUNT = "knownParams";
     private final String RESOURCE_PATH = "resources/languages/methodMapping";
     private final Expression ROOT = new RootExpression("root");
+    private final String LEFT_BRACKET = "{";  
+    private final String RIGHT_BRACKET = "}"; 
+    private final String LEFT_BRACE = "[";
+    private final String RIGHT_BRACE = "]";
+    
     private TreeNode root;
     private List<Entry<String, Pattern>> methodPaths;
     private ExpressionFactory factory;
@@ -35,14 +46,20 @@ public class ExpressionTree {
         addPatterns(RESOURCE_PATH);
     }
     
+    /**
+     * 
+     * Returns instance of Expression Tree only if there is an instance, otherwise it creates a new one
+     * @return
+     */
     public static ExpressionTree getInstance() {
         return instance;
     }
     
     /**
-     * Returns root of tree
+     * Returns root of tree that was built using user input a
      * 
-     * @param a
+     * @param a This array stores both the values parsed and their depths, but also the label types
+     * for each value
      * @return
      * @throws ClassNotFoundException
      * @throws InvalidLabelException
@@ -52,31 +69,31 @@ public class ExpressionTree {
         TreeNode parent = root;
         TreeNode curr = root;
         for (int i = 0; i < a[0].length; i++) {
-            if(a[0][i].equals("{")){
+            String currInput = a[0][i];
+            String currLabel = a[1][i];
+            if(a[0][i].equals(LEFT_BRACKET)){
                 parent = curr;
             }
-            else if(a[0][i].equals("}")){
+            else if(a[0][i].equals(RIGHT_BRACKET)){
                 parent = parent.getParent();
             }
-            else if(a[0][i].equals("[")){ 
-                curr = buildNode(parent,a[0][i],a[1][i]); 
+            else if(a[0][i].equals(LEFT_BRACE)){ 
+                curr = buildNode(parent,currInput,currLabel); 
                 parent = curr;
             }
-            else if(a[0][i].equals("]")){
+            else if(a[0][i].equals(RIGHT_BRACE)){
                 parent = parent.getParent();
             }
             else{
-                curr = buildNode(parent,a[0][i],a[1][i]); 
+                curr = buildNode(parent,currInput,currLabel); 
             }        
         }
-        
         return root;
     }
     
-    public Class<?> getCommand (String input) throws ClassNotFoundException {
+    private Class<?> getCommand (String input) throws ClassNotFoundException {
         try{
             String inputWithPath = getLabel(input);
-            //System.out.println(input);
             Class<?> c = Class.forName(inputWithPath);
             return c;
         }
@@ -85,12 +102,8 @@ public class ExpressionTree {
         }
     }
     
-    public int getParamCount (Class<?> c) throws NoSuchFieldException, SecurityException {
-        Object obj = c.getField(PARAM_COUNT);
-        return (int) obj;
-    }
     
-    public TreeNode buildNode (TreeNode parent, String name, String label) throws ClassNotFoundException, InvalidLabelException {
+    private TreeNode buildNode (TreeNode parent, String name, String label) throws ClassNotFoundException, InvalidLabelException {
         Object obj;
         if (label.equals("Command")) {
             obj = getCommand(name);
@@ -108,6 +121,10 @@ public class ExpressionTree {
         return new TreeNode(e, parent);
     }
     
+    /**
+     * Performs Depth First Searh on the nodes and returns the pre-order of the tree
+     * @return
+     */
     public ArrayList<TreeNode> dfs(){
         Stack<TreeNode> st = new Stack<TreeNode>();
         st.push(root);
@@ -129,7 +146,7 @@ public class ExpressionTree {
         return data;
     }
     
-    public void addPatterns (String syntax) {
+    private void addPatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         Enumeration<String> iter = resources.getKeys();
         while (iter.hasMoreElements()) {
@@ -142,11 +159,10 @@ public class ExpressionTree {
     }
     
     private boolean match (String text, Pattern regex) {
-        // THIS IS THE KEY LINE
         return regex.matcher(text).matches();
     }
     
-    public String getLabel (String text) {
+    private String getLabel (String text) {
         final String ERROR = "NO MATCH";
         for (Entry<String, Pattern> e : methodPaths) {
             if (match(text, e.getValue())) {
@@ -155,7 +171,8 @@ public class ExpressionTree {
         }
         return ERROR;
     }
-    
+    //Teddy worked on everything above this minus the singleton pattern
+    //Aninda worked on everything below this minus the singleton pattern
     /**
      * Processes a tree node to determine what type of node it is and return a value
      * @param turtle - the turtle to run the command on
@@ -168,6 +185,7 @@ public class ExpressionTree {
         value = nodeExpression.run(turtle, node);
         return value;
     }
+    
     
     /***** CURRENT COMMAND *****/
     
