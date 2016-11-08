@@ -1,25 +1,29 @@
-/**
- * This is the class for a user-defined command
- * 
- * @author Aninda Manocha
- */
-
 package model.command;
 
 import java.util.ArrayList;
 
 import Controller.Data;
-import ErrorHandling.Errors;
+import ErrorHandling.Error;
 import Parsing.TreeNode;
 import Parsing.expression.ExpressionTree;
 import model.animal.Animal;
 import model.variable.Variable;
+
+/**
+ * This is the class for a user-defined command. If the user enters the wrong type of data, it is read in as the name of a 
+ * command, so error handling is implemented in this class as well to account for when the user enters names that are not the 
+ * names of any commands.
+ * 
+ * @author Aninda Manocha
+ */
 
 public class NewCommand extends ListCommand {
 	private final double paramCount;
 	private String commandName;
 	private ArrayList<String> variableNames;
 	private ArrayList<TreeNode> commands;
+	
+	/***** CONSTRUCTORS *****/
 	
 	public NewCommand() {
 		super();
@@ -63,8 +67,8 @@ public class NewCommand extends ListCommand {
 		ArrayList<TreeNode> variableNodes = params[1].getNodes();
 		if (variableNodes.size() == variableNames.size()) {
 			setParameterValues(turtle, variableNodes);
-		} else {
-			Errors.getInstance().displayError("Argument Mismath Error!", "Invalid Number of Arguments Entered", 
+		} else { //throw error if incorrect data types are entered
+			Error.getInstance().displayError("Argument Mismath Error!", "Invalid Number of Arguments Entered", 
 					"The number of arguments entered does not match the number of arguments for this command.");
 		}
 		

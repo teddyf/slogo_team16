@@ -1,7 +1,5 @@
 package Controller;
 
-import java.util.Map;
-import model.AnimalPane;
 import View.AnimalPaneGUI;
 
 /**
@@ -16,11 +14,7 @@ public interface Controller {
 	
 	public void handleInput();
 	
-//	public AnimalPane getActiveAnimalPane();
-	
 	public AnimalPaneGUI getActiveAnimalPaneGUI();
-	
-//	public void setActiveAnimalPane(AnimalPane currentAnimalPane);
 	
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI);
 

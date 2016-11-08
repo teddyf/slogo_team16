@@ -1,5 +1,12 @@
 package model.constant;
 
+/**
+ * This is the Command class, which is a data structure that stores the value of a constant if the user enters a number as a 
+ * parameter.
+ * 
+ * @author Aninda Manocha
+ */
+
 public class Constant {
 	private double value;
 	

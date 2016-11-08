@@ -1,21 +1,24 @@
-/**
- * This class contains methods to create dialog boxes for different types of errors;
- */
-
 package ErrorHandling;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class Errors {
-	private static final Errors instance = new Errors();
-	private Errors() {}
+/**
+ * This class handles errors by displaying an error message that indicates the type of error and where it occurred.
+ * 
+ * @author Jordan Frazier
+ * @author Aninda Manocha
+ */
+
+public class Error {
+	private static final Error instance = new Error();
+	private Error() {}
 	
 	/**
 	 * Get the instance of this error class
 	 * @return the instance
 	 */
-	public static Errors getInstance() {
+	public static Error getInstance() {
 		return instance;
 	}
 	

@@ -1,10 +1,11 @@
+package model.command;
+
 /**
- * This is the class for commands that have lists as parameters
+ * This is the class for commands that have lists as parameters (To, Ask, Tell, and user-defined commands) in order to store lists
+ * of commands, variables, or values.
  * 
  * @author Aninda Manocha
  */
-
-package model.command;
 
 public abstract class ListCommand extends Command {
 	protected double numParams;

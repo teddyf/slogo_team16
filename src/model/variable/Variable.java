@@ -1,10 +1,11 @@
+package model.variable;
+
 /**
- * This is the Variable class, which holds data and attributes pertaining to a variable, which can be either global or local (to 
- * a command)
+ * This is the Variable class, which is a data structure that holds data and attributes pertaining to a variable, which can be 
+ * either a global or local one that corresponds to a user-defined command.
  * 
  * @author Aninda Manocha
  */
-package model.variable;
 
 public class Variable {
 	private String name;

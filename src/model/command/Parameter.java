@@ -1,15 +1,18 @@
-/**
- * This is the Parameter class, which holds data and attributes pertaining to a parameter for a command
- * 
- * @author Aninda Manocha
- */
-
 package model.command;
 
 import java.util.ArrayList;
 
 import Parsing.TreeNode;
 import model.animal.Animal;
+
+/**
+ * This is the Parameter class, which is a data structure that holds data and attributes pertaining to a parameter for a command.
+ * A parameter can be a turtle (the turtle to run a command on), a string (the name of a variable), a node (a command or value), 
+ * or a list of nodes (list of commands, variables, or values). A parameter can be created with only one input and serves to wrap
+ * different types of parameters as Parameter objects in order to create arrays of Parameter objects (for the commands).
+ * 
+ * @author Aninda Manocha
+ */
 
 public class Parameter {
 	private Animal turtle;

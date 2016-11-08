@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import ErrorHandling.Errors;
+import ErrorHandling.Error;
 import ErrorHandling.InvalidLabelException;
 import Parsing.ParserRunner;
 import Parsing.ProgramParser;
@@ -15,12 +14,12 @@ import Parsing.TreeNode;
 import Parsing.expression.ExpressionTree;
 import View.AnimalPaneGUI;
 import View.helper.Coordinate;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import model.AnimalPane;
 import model.animal.Animal;
 
 /**
+ * This class is responsible for communication between the frontend and backend. Once input is entered into the console, it is 
+ * sent to this class to be parsed and processed. This class runs commands and sends the results (turtle information or values)
+ * to the frontend so that the display can be updated accordingly. 
  * 
  * @author Jordan Frazier
  * @author Aninda Manocha
@@ -30,8 +29,6 @@ import model.animal.Animal;
 public class AnimalController implements Controller {
 
 	private WriteFile file;
-	private String error;
-	private List<AnimalPane> myAnimalPanes;
 	private AnimalPaneGUI activeAnimalPaneGUI;
 	private ProgramParser myProgramParser;
 	private ParserRunner myParserRunner;
@@ -39,13 +36,12 @@ public class AnimalController implements Controller {
 	public static final String FILEPATH = "Resources/myInput.slogo";
 	public static final String DEFAULT_LANGUAGE = "English";
 
-
 	public AnimalController() {
 		file = new WriteFile();
-		error = "";
 		setParsingLanguage(DEFAULT_LANGUAGE);
 	}
 
+	@Override
 	public void writeInputToFile(String input) {
 		file.writeToFile(FILEPATH, input);
 	}
@@ -58,12 +54,10 @@ public class AnimalController implements Controller {
 				} catch (FileNotFoundException | NoSuchMethodException | SecurityException | ClassNotFoundException
 						| InstantiationException | IllegalAccessException | IllegalArgumentException
 						| InvocationTargetException | NoSuchFieldException | InvalidLabelException e) {
-					//displayErrorDialog(e.getMessage());
-					Errors.getInstance().displayError("Parsing error!", "Invalid input displayed", "Invalid input: " + e.getMessage());
+					Error.getInstance().displayError("Parsing error!", "Invalid input displayed", "Invalid input: " + e.getMessage());
 				}
 			}
 			activeAnimalPaneGUI.getAnimalPane().signalAnimation(); 
-
 	}
 
 	/**
@@ -80,7 +74,7 @@ public class AnimalController implements Controller {
 	 * @throws NoSuchFieldException
 	 * @throws InvalidLabelException
 	 */
-	private void runCommands(Animal turtle) throws FileNotFoundException, NoSuchMethodException, SecurityException,
+	private double runCommands(Animal turtle) throws FileNotFoundException, NoSuchMethodException, SecurityException,
 			ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException,
 			InvocationTargetException, NoSuchFieldException, InvalidLabelException {
 
@@ -99,29 +93,35 @@ public class AnimalController implements Controller {
 		Map<Integer, List<Coordinate>> mapPoints = new HashMap<>();
 		mapPoints.put(turtle.getId(), points);
 		activeAnimalPaneGUI.getAnimalPane().setCoordinateMap(mapPoints);
+		return value;
 	}
 
 	// Could have this listening to the main view, and when user switches
 	// workspace, the active animal pane gui changes
 
+	/**
+	 * Gets the animal pane interface corresponding to the active window
+	 * @return the active animal pane interface
+	 */
 	@Override
 	public AnimalPaneGUI getActiveAnimalPaneGUI() {
 		return activeAnimalPaneGUI;
 	}
 
+	/**
+	 * Sets the animal pane interface corresponding to the active window
+	 * @return the new active animal pane interface
+	 */
 	@Override
 	public void setActiveAnimalPaneGUI(AnimalPaneGUI currentAnimalPaneGUI) {
 		this.activeAnimalPaneGUI = currentAnimalPaneGUI;
 	}
 
-	/*public void displayErrorDialog(String error) {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Parsing error!");
-		alert.setHeaderText("Invalid input displayed");
-		alert.setContentText("Invalid input: " + error);
-		alert.showAndWait();
-	}*/
-	
+	/**
+	 * Sets the language of SLogo so that commands are read in this command (the default is set as English)
+	 * @param language - the new language 
+	 */
+	@Override
 	public void setParsingLanguage(String language) {
 		myProgramParser = new ProgramParser();
 		myParserRunner = new ParserRunner(language, myProgramParser);

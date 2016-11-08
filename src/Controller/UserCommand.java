@@ -1,14 +1,15 @@
+package Controller;
+
+import java.util.HashMap;
+import model.command.Command;
+import model.variable.Variable;
+
 /**
  * This class is the UserCommand class, which is a data structure that holds both a user-defined command and the local variables
  * pertaining to it. 
  * 
  * @author Aninda Manocha
  */
-package Controller;
-
-import java.util.HashMap;
-import model.command.Command;
-import model.variable.Variable;
 
 public class UserCommand {
 	private Command command;

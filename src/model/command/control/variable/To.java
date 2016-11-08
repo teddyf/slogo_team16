@@ -9,7 +9,7 @@ package model.command.control.variable;
 import java.util.ArrayList;
 
 import Controller.Data;
-import ErrorHandling.Errors;
+import ErrorHandling.Error;
 import Parsing.TreeNode;
 import model.animal.Animal;
 import model.command.Command;
@@ -39,7 +39,7 @@ public class To extends ListCommand {
 		ArrayList<TreeNode> variableNodes = params[2].getNodes();
 		for (int n = 0; n < variableNodes.size(); n++) {
 			if (variableNames.contains(variableNodes.get(n).toString())) {
-				Errors.getInstance().displayError("Variables Error!", "Duplicate Variable Entered", 
+				Error.getInstance().displayError("Variables Error!", "Duplicate Variable Entered", 
 						"You have entered the same variable name more than once.");
 			} else {
 				variableNames.add(variableNodes.get(n).toString());
@@ -49,6 +49,7 @@ public class To extends ListCommand {
 		Command newCommand = new NewCommand(commandName, variableNames, commands);
 		if (data.containsCommand(commandName)) {
 			data.changeCommand(commandName, newCommand);
+			data.clearLocalVariables(commandName);
 		} else {
 			data.addCommand(newCommand);
 		}

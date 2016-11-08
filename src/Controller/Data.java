@@ -1,9 +1,3 @@
-/**
- * This is the Data class that holds all data and is a singleton so that all classes can access the data.
- * 
- * @author Aninda Manocha
- */
-
 package Controller;
 
 import java.awt.Color;
@@ -12,11 +6,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-import ErrorHandling.Errors;
+import ErrorHandling.Error;
 import View.helper.Colors;
 import model.animal.Animal;
 import model.command.Command;
 import model.variable.Variable;
+
+/**
+ * This is the Data class that holds all data:
+ * - turtles
+ * - turtle shape
+ * - global variables
+ * - user-defined commands and their local variables
+ * - colors (for background and pen)
+ * - background color
+ * - pen color, size, dash value
+ * - number of turtles
+ * - workspace ID
+ * - clearscreen
+ * It is accessible to any class.
+ * 
+ * @author Aninda Manocha
+ */
 
 public class Data extends Observable {
 	private static final Data instance = new Data();
@@ -62,7 +73,12 @@ public class Data extends Observable {
 	}
 	
 	/**
-	 * Set default colors for palette
+	 * Set default colors for the palette
+	 * 0: white
+	 * 1: black
+	 * 2: blue
+	 * 3: green
+	 * 4: red
 	 */
 	private void populateColorsMap() {
 		colors.put(Colors.WHITE.getId(), Colors.WHITE.toString());
@@ -121,7 +137,7 @@ public class Data extends Observable {
     	this.turtles.get(workspaceID).add(turtle);
     }
 
-	/***** VARIABLE METHODS *****/
+	/***** GLOBAL VARIABLE METHODS *****/
 
 	public Variable getVariable(String variableName) {
 		return variables.get(variableName);
@@ -224,14 +240,6 @@ public class Data extends Observable {
 	public String getShape(int index) {
 		return shapes.get(index);
 	}
-	
-	public void setShape(int index) {
-		if (shapes.containsKey(index)) {
-			this.shape = shapes.get(index);
-			setChanged();
-			notifyObservers();
-		}
-	}
 
 	public Map<Integer, String> getShapes() {
 		return shapes;
@@ -248,16 +256,38 @@ public class Data extends Observable {
 	public void changeShape(int index, String shape) {
 		addShape(index, shape);
 	}
-	
-	/***** GUI METHODS *****/
 
+	/***** BACKGROUND COLOR METHODS *****/
+	
 	public String getBackgroundColor() {
 		System.out.println("Get background: "+backgroundColor);
 		return backgroundColor;
 	}
+	
+	public void setBackgroundColor(int index) {
+		if (colors.containsKey(index)) {
+			this.backgroundColor = colors.get(index);
+			setChanged();
+			notifyObservers();
+		} else {
+			Error.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
+		}
+	}
 
+	/***** PEN COLOR METHODS *****/
+	
 	public String getPenColor() {
 		return penColor;
+	}
+	
+	public void setPenColor(int index) {
+		if (colors.containsKey(index)) {
+			this.penColor = colors.get(index);
+			setChanged();
+			notifyObservers();
+		} else {
+			Error.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
+		}
 	}
 
 	/**
@@ -268,73 +298,6 @@ public class Data extends Observable {
 	public int getPenColorIndex(String color) {
 		for (int i = 0; i < colors.size(); i++) {
 			if (color.equals(colors.get(i))) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public double getPenSize() {
-		return penSize;
-	}
-	
-	/**
-	 * Gets the shape of the turtle
-	 * @return shape
-	 */
-	public String getShape() {
-		return shape;
-	}
-	
-	public void setBackgroundColor(int index) {
-		if (colors.containsKey(index)) {
-			System.out.println("setbackgroundcolor contains key");
-			this.backgroundColor = colors.get(index);
-			setChanged();
-			notifyObservers();
-		} else {
-			Errors.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
-		}
-	}
-
-	/**
-	 * Gets the pen type (solid, dashed, or dotted)
-	 * @return pen type
-	 */
-	public double getDashValue() {
-		return dashValue;
-	}
-	
-	public void setPenColor(int index) {
-		if (colors.containsKey(index)) {
-			this.penColor = colors.get(index);
-			setChanged();
-			notifyObservers();
-		} else {
-			Errors.getInstance().displayError("Index Error!", "Invalid Index", "There is no color at that index.");
-		}
-	}
-	
-	public void setPenSize(int pixels) {
-		this.penSize = pixels;
-		setChanged();
-		notifyObservers();
-	}
-
-	public void setDashValue(double dashValue) {
-		this.dashValue = dashValue;
-		setChanged();
-		notifyObservers();
-	}
-	
-	/**
-	 * Gets the index in the map of shapes pertaining to a specific shape
-	 * @param shape - the specified shape
-	 * @return the index
-	 */
-	public int getShapeIndex(String shape) {
-		for (int i = 0; i < shapes.size(); i++) {
-			if (shape.equals(shapes.get(i))) {
 				return i;
 			}
 		}
@@ -352,5 +315,59 @@ public class Data extends Observable {
 		Color color = new Color(r, g, b);
 		String colorName = color.toString();
 		changeColor(index, colorName);
+	}
+	
+	/***** PEN SIZE METHODS *****/
+	
+	public double getPenSize() {
+		return penSize;
+	}
+	
+	public void setPenSize(int pixels) {
+		this.penSize = pixels;
+		setChanged();
+		notifyObservers();
+	}
+	
+	/***** PEN DASH VALUE METHODS *****/
+	
+	public double getDashValue() { //solid, dashed, or dotted
+		return dashValue;
+	}
+
+	public void setDashValue(double dashValue) {
+		this.dashValue = dashValue;
+		setChanged();
+		notifyObservers();
+	}
+	
+	/***** TURTLE SHAPE METHODS *****/
+	
+	public String getShape() {
+		return shape;
+	}
+	
+	public void setShape(int index) {
+		if (shapes.containsKey(index)) {
+			this.shape = shapes.get(index);
+			setChanged();
+			notifyObservers();
+		} else {
+			Error.getInstance().displayError("Index Error!", "Invalid Index", "There is no shape at that index.");
+		}
+	}
+	
+	/**
+	 * Gets the index in the map of shapes pertaining to a specific shape
+	 * @param shape - the specified shape
+	 * @return the index
+	 */
+	public int getShapeIndex(String shape) {
+		for (int i = 0; i < shapes.size(); i++) {
+			if (shape.equals(shapes.get(i))) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }
