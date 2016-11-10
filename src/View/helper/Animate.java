@@ -35,11 +35,11 @@ public class Animate {
 		Map<Integer, List<Coordinate>> coordinatePairs = animalPaneGUI.getAnimalPane().getCoordinateMap();
 
 		for (Integer id : coordinatePairs.keySet()) {
-			this.runButton.setDisable(true);
 			Animal animal = animalPaneGUI.getAnimalPane().getMyAnimalMap().get(id);
 			if (!animal.getSelected()) {
 				continue;
 			} else {
+				this.runButton.setDisable(true);
 				IntegerProperty counter = new SimpleIntegerProperty();
 				Pen pen = animal.getActualPen();
 				pen.getLineList().clear();

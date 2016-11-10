@@ -1,1 +1,1 @@
-square [ 40 ]
+repeat 72 [ fd 155 rt 95 ]
