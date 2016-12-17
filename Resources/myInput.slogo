@@ -1,1 +1,1 @@
-repeat 72 [ fd 155 rt 95 ]
+left 90 fd 100

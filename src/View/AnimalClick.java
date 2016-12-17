@@ -2,7 +2,10 @@ package View;
 
 import java.util.List;
 
+import Controller.Controller;
 import View.helper.Graphics;
+import View.image_helper.ImageChooser;
+import javafx.scene.input.MouseButton;
 import model.animal.Animal;
 
 /**
@@ -20,10 +23,10 @@ public class AnimalClick {
 
 	private Graphics graphic = new Graphics();
 	private List<Animal> activeTurtles;
-	private AnimalPaneGUI animalPane;
+	private Controller animalController;
 
-	public AnimalClick(AnimalPaneGUI animalPane) {
-		this.animalPane = animalPane;
+	public AnimalClick(Controller animalPane) {
+		this.animalController = animalPane;
 	}
 
 	public AnimalClick() {
@@ -56,7 +59,11 @@ public class AnimalClick {
 	 */
 	public void setEventListener(Animal animal) {
 		animal.getImageView().setOnMouseClicked(event -> {
+			// if (event.getButton() == MouseButton.SECONDARY) {
+			// openImageChooser();
+			// } else {
 			updateAnimal(animal);
+			// }
 		});
 	}
 

@@ -16,6 +16,7 @@ import View.helper.Colors;
 import View.helper.Console;
 import View.helper.Graphics;
 import View.helper.UIDataUpdate;
+import View.image_helper.ImageChooser;
 import View.tabs.CommandHistoryPane;
 import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
@@ -103,7 +104,7 @@ public class Workspace implements Observer {
 		numTurtles = 0;
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
-		animalClick = new AnimalClick(myAnimalPaneGUI);
+//		animalClick = new AnimalClick(myController);
 		currentLanguage = languages[0];
 
 	}
@@ -122,7 +123,8 @@ public class Workspace implements Observer {
 		numTurtles = 0;
 		animalClick = new AnimalClick();
 		createAnimalPaneGUI();
-		animalClick = new AnimalClick(myAnimalPaneGUI);
+//		animalClick = new AnimalClick(myController);
+
 		currentLanguage = languages[0];
 	}
 
@@ -173,8 +175,10 @@ public class Workspace implements Observer {
 
 		this.languageComboBox = createLanguageChooser();
 		languageComboBox.getStyleClass().add("language-button");
-
-		container.getChildren().addAll(title, languageComboBox);
+		
+		ImageChooser im = new ImageChooser(myController);
+		
+		container.getChildren().addAll(title, languageComboBox, im.getButton());
 
 		myRoot.setTop(container);
 	}

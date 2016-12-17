@@ -91,11 +91,13 @@ public class Turtle extends Animal {
 	@Override
 	public void setImage(Image image) {
 		this.turtleAppearance = image;
+		notifyObservers();
 	}
 	
 	@Override
 	public void setImageView(ImageView imageView) {
 		this.imageView = imageView;
+		notifyObservers();
 	}
 
 	@Override
