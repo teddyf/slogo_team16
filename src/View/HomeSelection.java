@@ -50,7 +50,7 @@ public class HomeSelection {
 		return fileName;
 	}
 
-	private void createFileDirectory(File directory) {
+	public void createFileDirectory(File directory) {
 		FileChooser chooser = new FileChooser();
 		chooser.setInitialDirectory(directory);
 		chooser.setTitle("Choose File");

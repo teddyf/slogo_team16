@@ -21,6 +21,7 @@ import View.tabs.ExampleCommandsPane;
 import View.tabs.GenericPane;
 //import View.tabs.ListeningPane;
 import View.tabs.OptionsPane;
+import View.tabs.TurtleViewPane;
 import View.tabs.VariablesPane;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -32,6 +33,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.AnimalPane;
@@ -249,6 +251,7 @@ public class Workspace implements Observer {
 		Tab tab = createTab(pane);
 		return tab;
 	}
+	
 
 	/**
 	 * Creates the console textarea to input slogo code

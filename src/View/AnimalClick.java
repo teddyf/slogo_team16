@@ -63,7 +63,7 @@ public class AnimalClick {
 	private void updateAnimal(Animal animal) {
 		if (animal.getSelected()) { // it's already active, so deactivate it
 			animal.setSelected(false);
-			animal.getImageView().setStyle("-fx-image: url(\"" + DEADTURTLE + "\");");
+			//animal.getImageView().setStyle("-fx-image: url(\"" + DEADTURTLE + "\");");
 		} else {
 			animal.setSelected(true);
 			animal.getImageView().setStyle("-fx-image: url(\"" + WEIRDTURTLE + "\");");

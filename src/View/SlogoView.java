@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 /**
@@ -99,6 +100,7 @@ public class SlogoView {
 		getCurrentWorkspace().selectLanguageThroughUI(language);
 
 	}
+	
 
 	/*
 	 * Initializes the workspace by adding it to the slogo view
