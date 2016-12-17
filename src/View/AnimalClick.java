@@ -5,6 +5,7 @@ import java.util.List;
 
 import Controller.DataSetup.DataSetup;
 import View.helper.Graphics;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -33,6 +34,10 @@ public class AnimalClick {
 	private AnimalPaneGUI animalPane;
 
 	public AnimalClick(AnimalPaneGUI animalPane) {
+		this.animalPane = animalPane;
+	}
+	
+	public void setAnimalPane(AnimalPaneGUI animalPane){
 		this.animalPane = animalPane;
 	}
 
@@ -82,8 +87,19 @@ public class AnimalClick {
 	}
 
 	private void updateAnimalImage(Animal animal, String fileName) {
-		ImageView image = graphic.createImageView(graphic.createImage(fileName));
+		System.out.println("Is the animal null?" + animal);
+		System.out.println("Is animalPane null?" + animalPane);
+		animalPane.removeAnimal(animal);
+		animal.getImageView().setStyle("-fx-image: url(\"" + fileName +"\");");
+		int index=fileName.lastIndexOf("/")+1;
+		String loc = fileName.substring(index, fileName.length());
+		Image im = graphic.createImage(loc);
+		ImageView image = graphic.createImageView(im);
+		animal.setImagePath(fileName);
+		animal.setImage(im);
 		animal.setImageView(image);
+		System.out.println("New animal: "+animal.getImagePath());
+		animalPane.addAnimal(animal);
 	}
 
 	public List<Animal> getActiveTurtles() {
@@ -111,6 +127,7 @@ public class AnimalClick {
 		File temp = chooser.showOpenDialog(new Stage());
 		if (temp != null & directory.equals(IMAGE_DIRECTORY)) {
 			fileName = temp.toString();
+			System.out.println("FIle name: "+fileName);
 			data = new DataSetup(fileName);
 			updateAnimalImage(animal, fileName);
 		}

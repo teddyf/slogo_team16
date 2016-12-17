@@ -103,7 +103,7 @@ public class Workspace implements Observer {
 		console = new Console();
 		this.workSpaceID = workspaceID;
 		numTurtles = 0;
-		animalClick = new AnimalClick();
+		//animalClick = new AnimalClick();
 		createAnimalPaneGUI();
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
@@ -153,6 +153,7 @@ public class Workspace implements Observer {
 		myAnimalPaneGUI.getAnimalPane().addObserver(this);
 		createAnimal();
 		myController.setActiveAnimalPaneGUI(myAnimalPaneGUI);
+		animalClick.setAnimalPane(myAnimalPaneGUI);
 	}
 
 	/**

@@ -1,1 +1,1 @@
-fd 100
+repeat 4 [ fd 100 rt 90 ]
