@@ -105,23 +105,8 @@ public class AnimalPaneGUI implements Observer {
 		if (o instanceof AnimalPane) {
 			for (Animal an : ((AnimalPane) o).getMyAnimalList()) {
 				System.out.println("ANIMAL ID: " + an.getId());
-				addAnimalToGrid(an);
 			}
 		}
 
-	}
-
-	private void addAnimalToGrid(Animal animal) {
-		ImageView animalImage = animal.getImageView();
-		animalImage.setFitHeight(15);
-		animalImage.setFitWidth(15);
-		animalImage.setTranslateX(animal.getX());
-		animalImage.setTranslateY(animal.getY());
-
-		if (!myContainer.getChildren().contains(animalImage)) {
-			myContainer.getChildren().add(animalImage);
-		}
-
-		myScrollPane.setContent(myContainer);
 	}
 }
