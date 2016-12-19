@@ -4,12 +4,14 @@ import java.io.File;
 import java.util.List;
 
 import Controller.DataSetup.DataSetup;
+import View.helper.Console;
 import View.helper.Graphics;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.animal.Animal;
+
 
 /**
  * This class is responsible for the functionality behind clicking a turtle and
@@ -32,6 +34,9 @@ public class AnimalClick {
 	private Graphics graphic = new Graphics();
 	private List<Animal> activeTurtles;
 	private AnimalPaneGUI animalPane;
+	private int clicked = -1;
+	private Console console;
+	private Animal animal;
 
 	public AnimalClick(AnimalPaneGUI animalPane) {
 		this.animalPane = animalPane;
@@ -43,6 +48,19 @@ public class AnimalClick {
 
 	public AnimalClick() {
 
+	}
+	
+	public int getClicked(){
+		return this.clicked;
+	}
+	
+	public void setClicked(){
+		this.clicked = -1*this.clicked;
+	}
+	
+	public void setConsole(Console cons){
+		System.out.println("cons: "+cons);
+		this.console = cons;
 	}
 
 	/**
@@ -70,27 +88,35 @@ public class AnimalClick {
 	 *            the animal object
 	 */
 	public void setEventListener(Animal animal) {
+		this.animal = animal;
 		animal.getImageView().setOnMouseClicked(event -> {
 			updateAnimal(animal);
 		});
 	}
 
 	private void updateAnimal(Animal animal) {
+		clicked = clicked * -1;
 		if (animal.getSelected()) { // it's already active, so deactivate it
 			animal.setSelected(false);
 			// animal.getImageView().setStyle("-fx-image: url(\"" + DEADTURTLE +
 			// "\");");
 		} else {
 			animal.setSelected(true);
-			createFileDirectory(IMAGE_DIRECTORY, animal);
+			//createFileDirectory(IMAGE_DIRECTORY, animal);
+		
+			promptInConsole();
+			//console.getInput();
 		}
 	}
 
-	private void updateAnimalImage(Animal animal, String fileName) {
+	public void updateAnimalImage(String fileName) {
+		/*
 		System.out.println("Is the animal null?" + animal);
 		System.out.println("Is animalPane null?" + animalPane);
 		animalPane.removeAnimal(animal);
+		*/
 		animal.getImageView().setStyle("-fx-image: url(\"" + fileName +"\");");
+		/*
 		int index=fileName.lastIndexOf("/")+1;
 		String loc = fileName.substring(index, fileName.length());
 		Image im = graphic.createImage(loc);
@@ -100,6 +126,7 @@ public class AnimalClick {
 		animal.setImageView(image);
 		System.out.println("New animal: "+animal.getImagePath());
 		animalPane.addAnimal(animal);
+		*/
 	}
 
 	public List<Animal> getActiveTurtles() {
@@ -119,18 +146,11 @@ public class AnimalClick {
 	public boolean isActiveAnimal(Animal animal) {
 		return (activeTurtles.contains(animal));
 	}
-
-	private void createFileDirectory(File directory, Animal animal) {
-		FileChooser chooser = new FileChooser();
-		chooser.setInitialDirectory(directory);
-		chooser.setTitle("Choose an image");
-		File temp = chooser.showOpenDialog(new Stage());
-		if (temp != null & directory.equals(IMAGE_DIRECTORY)) {
-			fileName = temp.toString();
-			System.out.println("FIle name: "+fileName);
-			data = new DataSetup(fileName);
-			updateAnimalImage(animal, fileName);
-		}
+	
+	public void promptInConsole(){
+		System.out.println("console"+console);
+		this.console.getConsoleArea().setText("Enter a url of an image to change the turtle to");
 	}
+
 
 }

@@ -126,6 +126,7 @@ public class Workspace implements Observer {
 		createAnimalPaneGUI();
 		animalClick = new AnimalClick(myAnimalPaneGUI);
 		currentLanguage = languages[0];
+		
 	}
 
 	/**
@@ -135,6 +136,7 @@ public class Workspace implements Observer {
 	 *            The main SlogoView
 	 */
 	public void init(SlogoView view) {
+		
 		mainView = view;
 		myRoot = new BorderPane();
 		populateTopPane();
@@ -142,6 +144,7 @@ public class Workspace implements Observer {
 		populateRightPane();
 		changeAnimalBackgroundColor(defaultBackgroundColor);
 		UIUpdate = new UIDataUpdate(this, (VariablesPane) this.variablesPane);
+		
 	}
 
 	/**
@@ -265,6 +268,8 @@ public class Workspace implements Observer {
 		HBox consoleContainer = new HBox(5);
 		consoleContainer.getChildren().addAll(console.getConsoleArea(), buttons);
 		consolePane.setContent(consoleContainer);
+		System.out.println("Console? "+console);
+		this.animalClick.setConsole(console);
 		return consolePane;
 	}
 
@@ -389,6 +394,9 @@ public class Workspace implements Observer {
 			}
 			if (Data.getInstance().getClearScreen()) {
 				this.clearAndResetScreen();
+			}
+			if (animalClick.getClicked()>0){
+				animalClick.updateAnimalImage(console.getInput());
 			}
 		}
 	}

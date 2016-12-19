@@ -27,6 +27,7 @@ public class HomeSelection {
 	private Stage s;
 	private ResourceBundle myResources;
 
+
 	public HomeSelection(Stage s) {
 		this.s = s;
 	}
@@ -50,6 +51,7 @@ public class HomeSelection {
 		return fileName;
 	}
 
+	
 	public void createFileDirectory(File directory) {
 		FileChooser chooser = new FileChooser();
 		chooser.setInitialDirectory(directory);
